@@ -9,11 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StatisticsActivity"></activity>
-        <activity android:name=".ReportLocationActivity" />
-        <activity android:name=".HeatmapActivity" />
-        <activity android:name=".ReportSymptomsActivity" />
-        <activity android:name=".StartPageActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login" />
