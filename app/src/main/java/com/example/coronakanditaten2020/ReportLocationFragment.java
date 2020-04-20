@@ -28,8 +28,8 @@ public class ReportLocationFragment extends Fragment {
         btnRlToStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Going to Start Page", Toast.LENGTH_SHORT).show();
-                ((MainActivity)getActivity()).setViewPager(0);
+                Toast.makeText(getActivity(), "Going to Report Symptoms", Toast.LENGTH_SHORT).show();
+                ((MainActivity)getActivity()).setViewPager(3);
             }
         });
         btnRlToRs.setOnClickListener(new View.OnClickListener() {
