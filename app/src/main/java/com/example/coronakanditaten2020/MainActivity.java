@@ -9,6 +9,8 @@ import android.util.Log;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "StartPageActivity";
+    //private Datahandler datahandler = new Datahandler();
+
 
     private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
     private ViewPager mViewPager;
@@ -18,13 +20,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate: Started");
+        //Log.d(TAG, "onCreate: Started");
+        //String tja = new String("tja");
+        //datahandler.save(tja, this);
+
 
         mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
     }
+
+
 
     private void setupViewPager(ViewPager viewPager){
         SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());

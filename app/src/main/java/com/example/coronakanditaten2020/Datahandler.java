@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 public class Datahandler {
      private static final String FILE_NAME = "example.txt";
-     private static final String TAG = "TestaLog";
-
 
     public Datahandler() {
     }
@@ -22,9 +20,10 @@ public class Datahandler {
         try {
             fos = ctx.openFileOutput(FILE_NAME, ctx.MODE_PRIVATE);
             fos.write(textSave.getBytes());
-            Log.d(TAG, "onCreate: Started");
             //Toast.makeText(Context , this, "Saved to " + ctx.getFilesDir() + "/" + FILE_NAME, Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
+
+            
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,8 +49,6 @@ public class Datahandler {
             while((textSave = br.readLine()) != null) {
                 sb.append(textSave).append("\n");
             }
-
-            //textSave.setText(sb.toString());
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

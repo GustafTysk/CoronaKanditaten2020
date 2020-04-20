@@ -12,11 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
+
 public class StatisticsFragment extends Fragment {
     private static final String TAG = "Fragment Statistics";
 
     private Button btnStatisticsToStart;
     private Button btnStatisticsToHeatmap;
+
 
     @Nullable
     @Override
@@ -24,6 +30,22 @@ public class StatisticsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_statistics, container, false);
         btnStatisticsToStart = (Button) view.findViewById(R.id.btnStatisticsToStart);
         btnStatisticsToHeatmap = (Button) view.findViewById(R.id.btnStatisticsToHeatmap);
+
+        GraphView graph = (GraphView) view.findViewById(R.id.graph);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+                new DataPoint(0, 1),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6)
+        });
+        graph.addSeries(series);
+        // activate horizontal zooming and scrolling
+        graph.getViewport().setScalable(true);
+        graph.setTitle("Magic");
+        graph.setTitleTextSize(100);
+        //graph.setTitleColor();
+        series.setDrawDataPoints(true);
 
         btnStatisticsToStart.setOnClickListener(new View.OnClickListener() {
             @Override
