@@ -45,7 +45,7 @@ public class ReportSymptomsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Going to Start Page", Toast.LENGTH_SHORT).show();
-                ((MainActivity)getActivity()).setViewPager(2);
+                ((MainActivity)getActivity()).setViewPager(0);
             }
         });
         btnRsToRl.setOnClickListener(new View.OnClickListener() {
