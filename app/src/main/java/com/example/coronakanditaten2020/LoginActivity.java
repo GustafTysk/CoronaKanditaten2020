@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnToRegister;
+    private Button btnLoginToStartPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +19,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         btnToRegister = (Button) findViewById(R.id.btnToRegister);
+        btnLoginToStartPage = (Button) findViewById(R.id.btnLoginToStartPage);
         btnToRegister.setOnClickListener(this);
+        btnLoginToStartPage.setOnClickListener(this);
     }
 
 
@@ -29,6 +32,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch(view.getId()){
             case R.id.btnToRegister:
                 intent = new Intent(this, RegisterActivity.class);
+                break;
+            case R.id.btnLoginToStartPage:
+                intent = new Intent(this,MainActivity.class);
                 break;
 //            case R.id.btnNextMenu:
 //                intent = new Intent(this, PlayMenu.class);
