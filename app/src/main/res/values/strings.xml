@@ -9,4 +9,14 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="dialog_text">Fever is bad </string>
+    <string name="dialog_cough">Cough is bad </string>
+    <string name="dialog_breathing">Breathing is bad </string>
+    <string name="dialog_sorethroat">Sore Throat is bad </string>
+    <string name="dialog_nasalcongestion">Nasal Congestion is bad </string>
+    <string name="dialog_runnynose">Runny Nose is bad </string>
+    <string name="dialog_tiredness">Tiredness is bad </string>
+    <string name="dialog_headache">Headache is bad </string>
+    <string name="dialog_diarrhea">Diarrhea is bad </string>
+
 </resources>
