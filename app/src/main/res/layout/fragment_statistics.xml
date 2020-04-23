@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StatisticsFragment">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textViewStatistics"
@@ -46,20 +46,89 @@
         android:layout_width="match_parent"
         android:layout_height="200dip"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.175" />
+        app:layout_constraintVertical_bias="0.139" />
 
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graph2"
-        android:layout_width="match_parent"
-        android:layout_height="200dip"
+    <CheckBox
+        android:id="@+id/diarrheaBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="onCheckboxClicked"
+        android:text="Diarrhea"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/graph1" />
+
+    <CheckBox
+        android:id="@+id/runnyNoseBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Runny Nose"
+        app:layout_constraintBaseline_toBaselineOf="@+id/diarrheaBox"
+        app:layout_constraintEnd_toStartOf="@+id/nasalConBox"
+        app:layout_constraintStart_toEndOf="@+id/diarrheaBox" />
+
+    <CheckBox
+        android:id="@+id/throatBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sore Throat"
+        app:layout_constraintBaseline_toBaselineOf="@+id/headacheBox"
+        app:layout_constraintStart_toStartOf="@+id/runnyNoseBox" />
+
+    <CheckBox
+        android:id="@+id/tirednessBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Tiredness"
+        app:layout_constraintStart_toStartOf="@+id/headacheBox"
+        app:layout_constraintTop_toBottomOf="@+id/headacheBox" />
+
+    <CheckBox
+        android:id="@+id/breathingDiffBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Breathing Difficulties"
+        app:layout_constraintBaseline_toBaselineOf="@+id/throatBox"
+        app:layout_constraintStart_toStartOf="@+id/nasalConBox" />
+
+    <CheckBox
+        android:id="@+id/nasalConBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:text="Nasal Congestion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/graph1" />
+
+    <CheckBox
+        android:id="@+id/headacheBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Headache"
+        app:layout_constraintStart_toStartOf="@+id/diarrheaBox"
+        app:layout_constraintTop_toBottomOf="@+id/diarrheaBox" />
+
+    <CheckBox
+        android:id="@+id/feverBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fever"
+        app:layout_constraintBaseline_toBaselineOf="@+id/coughBox"
+        app:layout_constraintStart_toStartOf="@+id/breathingDiffBox" />
+
+    <CheckBox
+        android:id="@+id/coughBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cough"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tirednessBox"
+        app:layout_constraintStart_toStartOf="@+id/throatBox" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

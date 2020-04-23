@@ -5,8 +5,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.CheckBox;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "StartPageActivity";
     //private Datahandler datahandler = new Datahandler();
@@ -45,5 +47,35 @@ public class MainActivity extends AppCompatActivity {
 
     public void setViewPager(int fragmentNumber){
         mViewPager.setCurrentItem(fragmentNumber);
+    }
+
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+
+        switch (view.getId()) {
+            case R.id.diarrheaBox:
+                if (checked) {
+                    System.out.println("hej");
+                    showDiarrheaSeries();
+                }
+                else{
+                    hideDiarrheaSeries();
+                }
+                break;
+        }
+    }
+    private void showDiarrheaSeries () {
+        View v9 = findViewById(R.id.diarrheaBox);
+        v9.setVisibility(View.VISIBLE);
+    }
+    private void hideDiarrheaSeries () {
+        View v9 = findViewById(R.id.diarrheaBox);
+        v9.setVisibility(View.GONE);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
