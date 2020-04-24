@@ -9,6 +9,9 @@ public class User {
     private String gender;
     private String password;
 
+    public User() {
+    }
+
     public User(String username, String email, int age, String gender, String password) {
         this.username = username;
         this.email = email;
@@ -21,4 +24,43 @@ public class User {
         return ("Username: "+this.username + "\n" + "Email: " + this.email + "\n" + "Age: " + this.age + "\n" +"Gender: " + this.gender + "\n" + "Password: " + this.password);
     };
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
