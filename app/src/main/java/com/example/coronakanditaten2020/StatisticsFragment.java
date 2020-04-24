@@ -31,8 +31,10 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private Button btnStatisticsToStart;
     private Button btnStatisticsToHeatmap;
     private Location[] Locations = new Location[12];
-    private CheckBox diarrheaBox, runnyNoseBox, nasalConBox, headacheBox, throatBox, breathingDiffBox, tirednessBox, coughBox, feverBox;
-    private Button show;
+    public CheckBox diarrheaBox, runnyNoseBox, nasalConBox, headacheBox, throatBox, breathingDiffBox, tirednessBox, coughBox, feverBox;
+
+    public GraphView graph;
+    public LineGraphSeries series;
 
     @Nullable
     @Override
@@ -43,6 +45,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         btnStatisticsToStart.setOnClickListener(this);
         btnStatisticsToHeatmap = (Button) view.findViewById(R.id.btnStatisticsToHeatmap);
         btnStatisticsToHeatmap.setOnClickListener(this);
+
+        diarrheaBox = (CheckBox) view.findViewById(R.id.diarrheaBox);
+
 //        addListenerOnRunnyNoseBox();
 //        addListenerOnNasalConBox();
 //        addListenerOnHeadacheBox();
@@ -162,8 +167,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 //        });
 //        graph.addSeries(series);
 
-        GraphView graph = (GraphView) view.findViewById(R.id.graph1);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
+        graph = (GraphView) view.findViewById(R.id.graph1);
+        series = new LineGraphSeries<>(new DataPoint[]{
                 new DataPoint(0, 1),
                 new DataPoint(1, 5),
                 new DataPoint(2, 3),
@@ -186,6 +191,10 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         series2.setDataPointsRadius(10);
         series2.setColor(Color.GREEN);
         series2.setThickness(8);
+        System.out.println("jag är här");
+
+
+
 
 //        series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
 //            @Override
@@ -221,6 +230,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         return view;
     }
 
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -233,11 +244,23 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                 ((MainActivity) getActivity()).setViewPager(0);
                 break;
 
-        }
+            case R.id.diarrheaBox:
+                if(((CheckBox)v).isChecked()) {
+                    Toast.makeText(getActivity(),
+                            "Dog is selected",Toast.LENGTH_LONG).show();
+                }
+                break;
 
+        }
     }
 
-
-
+    public void showDiarrheaSeries() {
+        graph.addSeries(series);
+        System.out.println("kom hit 32");
+    }
+    public void hideDiarrheaSeries () {
+        graph.removeSeries(series);
+        System.out.println("kom hit 33");
+    }
 
 }

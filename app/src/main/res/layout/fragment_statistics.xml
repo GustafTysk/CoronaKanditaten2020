@@ -50,85 +50,93 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.139" />
 
-    <CheckBox
-        android:id="@+id/diarrheaBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:onClick="onCheckboxClicked"
-        android:text="Diarrhea"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="413dp"
+        android:layout_height="276dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/graph1" />
+        app:layout_constraintTop_toBottomOf="@+id/graph1">
 
-    <CheckBox
-        android:id="@+id/runnyNoseBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Runny Nose"
-        app:layout_constraintBaseline_toBaselineOf="@+id/diarrheaBox"
-        app:layout_constraintEnd_toStartOf="@+id/nasalConBox"
-        app:layout_constraintStart_toEndOf="@+id/diarrheaBox" />
+        <CheckBox
+            android:id="@+id/diarrheaBox"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:onClick="onCheckboxClicked"
+            android:text="Diarrhea"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
-        android:id="@+id/throatBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sore Throat"
-        app:layout_constraintBaseline_toBaselineOf="@+id/headacheBox"
-        app:layout_constraintStart_toStartOf="@+id/runnyNoseBox" />
+        <CheckBox
+            android:id="@+id/runnyNoseBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Runny Nose"
+            app:layout_constraintBaseline_toBaselineOf="@+id/diarrheaBox"
+            app:layout_constraintStart_toEndOf="@+id/diarrheaBox" />
 
-    <CheckBox
-        android:id="@+id/tirednessBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Tiredness"
-        app:layout_constraintStart_toStartOf="@+id/headacheBox"
-        app:layout_constraintTop_toBottomOf="@+id/headacheBox" />
+        <CheckBox
+            android:id="@+id/throatBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sore Throat"
+            app:layout_constraintBaseline_toBaselineOf="@+id/feverBox"
+            app:layout_constraintStart_toStartOf="@+id/runnyNoseBox" />
 
-    <CheckBox
-        android:id="@+id/breathingDiffBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Breathing Difficulties"
-        app:layout_constraintBaseline_toBaselineOf="@+id/throatBox"
-        app:layout_constraintStart_toStartOf="@+id/nasalConBox" />
+        <CheckBox
+            android:id="@+id/tirednessBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Tiredness"
+            app:layout_constraintBaseline_toBaselineOf="@+id/runnyNoseBox"
+            app:layout_constraintStart_toEndOf="@+id/runnyNoseBox" />
 
-    <CheckBox
-        android:id="@+id/nasalConBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:text="Nasal Congestion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/graph1" />
+        <CheckBox
+            android:id="@+id/breathingDiffBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Breathing Difficulties"
+            app:layout_constraintBaseline_toBaselineOf="@+id/headacheBox"
+            app:layout_constraintStart_toStartOf="@+id/nasalConBox" />
 
-    <CheckBox
-        android:id="@+id/headacheBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Headache"
-        app:layout_constraintStart_toStartOf="@+id/diarrheaBox"
-        app:layout_constraintTop_toBottomOf="@+id/diarrheaBox" />
+        <CheckBox
+            android:id="@+id/nasalConBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nasal Congestion"
+            app:layout_constraintBaseline_toBaselineOf="@+id/throatBox"
+            app:layout_constraintStart_toStartOf="@+id/tirednessBox" />
 
-    <CheckBox
-        android:id="@+id/feverBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fever"
-        app:layout_constraintBaseline_toBaselineOf="@+id/coughBox"
-        app:layout_constraintStart_toStartOf="@+id/breathingDiffBox" />
+        <CheckBox
+            android:id="@+id/feverBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Fever"
+            app:layout_constraintStart_toStartOf="@+id/diarrheaBox"
+            app:layout_constraintTop_toBottomOf="@+id/diarrheaBox" />
 
-    <CheckBox
-        android:id="@+id/coughBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cough"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tirednessBox"
-        app:layout_constraintStart_toStartOf="@+id/throatBox" />
+        <CheckBox
+            android:id="@+id/coughBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Cough"
+            app:layout_constraintStart_toStartOf="@+id/feverBox"
+            app:layout_constraintTop_toBottomOf="@+id/feverBox" />
 
+        <CheckBox
+            android:id="@+id/headacheBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Headache"
+            app:layout_constraintBaseline_toBaselineOf="@+id/coughBox"
+            app:layout_constraintStart_toStartOf="@+id/throatBox" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
