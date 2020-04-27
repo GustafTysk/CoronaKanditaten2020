@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
-import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -186,63 +186,54 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                 new DataPoint(1, 0),
                 new DataPoint(2, 0),
                 new DataPoint(3, 0),
-                new DataPoint(4, 0)
         });
         series2 = new LineGraphSeries<>(new DataPoint[]{
                 new DataPoint(0, 1),
                 new DataPoint(1, 1),
                 new DataPoint(2, 1),
                 new DataPoint(3, 1),
-                new DataPoint(4, 1)
         });
         series3 = new LineGraphSeries<>(new DataPoint[]{
                 new DataPoint(0, 2),
                 new DataPoint(1, 2),
                 new DataPoint(2, 2),
                 new DataPoint(3, 2),
-                new DataPoint(4, 2)
         });
         series4 = new LineGraphSeries<>(new DataPoint[]{
                 new DataPoint(0, 3),
                 new DataPoint(1, 3),
                 new DataPoint(2, 3),
                 new DataPoint(3, 3),
-                new DataPoint(4, 3)
         });
         series5 = new LineGraphSeries<>(new DataPoint[]{
                 new DataPoint(0, 4),
                 new DataPoint(1, 4),
                 new DataPoint(2, 4),
                 new DataPoint(3, 4),
-                new DataPoint(4, 4)
         });
         series6 = new LineGraphSeries<>(new DataPoint[]{
                 new DataPoint(0, 5),
                 new DataPoint(1, 5),
                 new DataPoint(2, 5),
                 new DataPoint(3, 5),
-                new DataPoint(4, 5)
         });
         series7 = new LineGraphSeries<>(new DataPoint[]{
                 new DataPoint(0, 6),
                 new DataPoint(1, 6),
                 new DataPoint(2, 6),
-                new DataPoint(3, 6),
-                new DataPoint(4, 6)
+                new DataPoint(3, 6)
         });
         series8 = new LineGraphSeries<>(new DataPoint[]{
                 new DataPoint(0, 7),
                 new DataPoint(1, 7),
                 new DataPoint(2, 7),
                 new DataPoint(3, 7),
-                new DataPoint(4, 7)
         });
         series9 = new LineGraphSeries<>(new DataPoint[]{
                 new DataPoint(0, 8),
                 new DataPoint(1, 8),
                 new DataPoint(2, 8),
                 new DataPoint(3, 8),
-                new DataPoint(4, 8)
         });
 
         graph.addSeries(series);
@@ -254,8 +245,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         series2.setDrawDataPoints(true);
         series2.setDataPointsRadius(10);
         series2.setThickness(8);
-        series2.setColor(Color.GREEN);
-
 
         graph.addSeries(series3);
         series3.setDrawDataPoints(true);
@@ -296,13 +285,35 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.setTitleTextSize(80);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMinX(0);
+        graph.getViewport().setMaxX(8);
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setXAxisBoundsManual(true);
         GridLabelRenderer gridLabelX = graph.getGridLabelRenderer();
         gridLabelX.setHorizontalAxisTitle("Severity of symptom");
         GridLabelRenderer gridLabelY = graph.getGridLabelRenderer();
         gridLabelY.setVerticalAxisTitle("Number of people");
-
+        series.setTitle("Diarrhea");
+        series2.setTitle("Runny Nose");
+        series3.setTitle("Tiredness");
+        series4.setTitle("Fever");
+        series5.setTitle("Sore Throat");
+        series6.setTitle("Nasal Congestion");
+        series7.setTitle("Cough");
+        series8.setTitle("Headache");
+        series9.setTitle("Breathing difficulties");
+        series.setColor(Color.BLACK);
+        series2.setColor(Color.GREEN);
+        series3.setColor(Color.YELLOW);
+        series4.setColor(Color.RED);
+        series5.setColor(Color.BLUE);
+        series6.setColor(Color.MAGENTA);
+        series7.setColor(Color.DKGRAY);
+        series8.setColor(Color.CYAN);
+        series9.setColor(Color.GRAY);
+        graph.getLegendRenderer().setVisible(true);
+        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.MIDDLE);
+        graph.getLegendRenderer().setTextSize(35f);
+        //graph.getLegendRenderer().setFixedPosition(0, 0);
         return view;
     }
 
