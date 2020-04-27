@@ -32,6 +32,8 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
@@ -39,10 +41,10 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     private static final String TAG = "Fragment Statistics";
 
 
-    GoogleMap mGoogleMap;
-    MapView mMapView;
+    private GoogleMap mGoogleMap;
+    private MapView mMapView;
 
-    Bundle savedInstance;
+    private Bundle savedInstance;
 
     private Button btnRlToStart;
     private Button btnRlToRs;
@@ -99,24 +101,57 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 mapWindow.setFocusable(true);
                 mapWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+                mMapView.onResume();
+
 
 
         }
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        final LatLng yourLocation = new LatLng(59.8, 17.3);
         mGoogleMap = googleMap;
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(59.8, 17.63), 10));
+
+        Marker reportedLocation = googleMap.addMarker(new MarkerOptions()
+                .position(yourLocation)
+                .title("Your Location")
+                .draggable(true));
+
         System.out.println("kkk");
 
     }
 
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        mMapView.onResume();
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        mMapView.onPause();
+//    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         mMapView.onDestroy();
     }
+
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        mMapView.onSaveInstanceState(outState);
+//    }
+//
+//    @Override
+//    public void onLowMemory() {
+//        super.onLowMemory();
+//        mMapView.onLowMemory();
+//    }
 
 }
