@@ -115,7 +115,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        final LatLng yourLocation = new LatLng(59.8, 17.3);
+        final LatLng yourLocation = new LatLng(59.8, 17.63);
         mGoogleMap = googleMap;
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(59.8, 17.63), 10));
@@ -142,11 +142,11 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         List<Address> addresses = null;
         try {
             addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude, 1);
+            yourLocationString = addresses.get(0).getAddressLine(0);
+            reportedLocation.setTitle(yourLocationString);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        yourLocationString = addresses.get(0).getAddressLine(0);
-        reportedLocation.setTitle(yourLocationString);
     }
 //    @Override
 //    public void onResume() {
