@@ -1,4 +1,7 @@
+/*
 package com.example.coronakanditaten2020;
+
+import com.google.android.gms.common.api.Api;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -41,3 +44,4 @@ public class ClientAPI {
         return response;
     }
 }
+*/

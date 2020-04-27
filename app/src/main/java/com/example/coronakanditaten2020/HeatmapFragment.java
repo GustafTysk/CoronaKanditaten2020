@@ -35,15 +35,16 @@ import java.util.Scanner;
 
 public class HeatmapFragment extends Fragment implements OnMapReadyCallback {
     private static final String TAG = "Fragment Statistics";
-    MapView mMapView;
-    GoogleMap mGoogleMap;
-    HeatmapTileProvider mProvider;
+    private MapView mMapView;
+    private GoogleMap mGoogleMap;
+    private HeatmapTileProvider mProvider;
     Location[] Locations = new Location[12];
     Datahandler datahandler=new Datahandler();
     TileOverlay mOverlay;
 
     private Button btnHeatmapToStatistics;
     private Button btnHeatmapToStart;
+    private Button btnTestChangeDay;
 
 
     @Nullable
@@ -53,6 +54,8 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback {
         View view = inflater.inflate(R.layout.fragment_heatmap, container, false);
         btnHeatmapToStart = (Button) view.findViewById(R.id.btnHeatmapToStart);
         btnHeatmapToStatistics = (Button) view.findViewById(R.id.btnHeatmapToStatistics);
+        btnTestChangeDay = (Button) view.findViewById(R.id.btnTestChangeDay);
+
 
         mMapView = (MapView) view.findViewById(R.id.mapview);
         mMapView.onCreate(savedInstanceState);
@@ -75,6 +78,14 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
+        btnTestChangeDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mProvider.setWeightedData(((ArrayList)GenerateHeatMapCordsList( datahandler.getHeatmaplocations(),"2020-10-16", "placeholder")));
+                mOverlay.clearTileCache();
+            }
+        });
+
         return view;
     }
 
@@ -88,6 +99,8 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback {
         mOverlay = mGoogleMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(59.8, 17.63), 10));
+        System.out.println("jajajaj");
+
 
 
     }
