@@ -44,27 +44,25 @@
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph1"
         android:layout_width="match_parent"
-        android:layout_height="200dip"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="400dip"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.139" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewStatistics" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/relativeLayout"
         android:layout_width="413dp"
-        android:layout_height="276dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="150dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/graph1">
 
         <CheckBox
             android:id="@+id/diarrheaBox"
-            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="Diarrhea"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,10 +70,10 @@
 
         <CheckBox
             android:id="@+id/runnyNoseBox"
-            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="Runny Nose"
             app:layout_constraintBaseline_toBaselineOf="@+id/diarrheaBox"
@@ -83,9 +81,9 @@
 
         <CheckBox
             android:id="@+id/throatBox"
-            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="Sore Throat"
             app:layout_constraintBaseline_toBaselineOf="@+id/feverBox"
@@ -93,10 +91,10 @@
 
         <CheckBox
             android:id="@+id/tirednessBox"
-            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="Tiredness"
             app:layout_constraintBaseline_toBaselineOf="@+id/runnyNoseBox"
@@ -104,9 +102,9 @@
 
         <CheckBox
             android:id="@+id/breathingDiffBox"
-            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="Breathing Difficulties"
             app:layout_constraintBaseline_toBaselineOf="@+id/headacheBox"
@@ -114,9 +112,9 @@
 
         <CheckBox
             android:id="@+id/nasalConBox"
-            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="Nasal Congestion"
             app:layout_constraintBaseline_toBaselineOf="@+id/throatBox"
@@ -124,10 +122,10 @@
 
         <CheckBox
             android:id="@+id/feverBox"
-            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="Fever"
             app:layout_constraintStart_toStartOf="@+id/diarrheaBox"
@@ -135,10 +133,10 @@
 
         <CheckBox
             android:id="@+id/coughBox"
-            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="Cough"
             app:layout_constraintStart_toStartOf="@+id/feverBox"
@@ -146,9 +144,9 @@
 
         <CheckBox
             android:id="@+id/headacheBox"
-            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="Headache"
             app:layout_constraintBaseline_toBaselineOf="@+id/coughBox"
