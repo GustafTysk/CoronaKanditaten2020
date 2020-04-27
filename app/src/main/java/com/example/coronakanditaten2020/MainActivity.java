@@ -12,8 +12,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG = "StartPageActivity";
     //private Datahandler datahandler = new Datahandler()
-    StatisticsFragment statisticsFragment=new StatisticsFragment();
-
+    StatisticsFragment statisticsFragment = new StatisticsFragment();
 
     private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
     private ViewPager mViewPager;
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setupViewPager(ViewPager viewPager){
         adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new StartPageFragment(), "Start Page");             // 0
-        adapter.addFragment(statisticsFragment, "Statistics");            // 1
+        adapter.addFragment(statisticsFragment, "Statistics");                  // 1
         adapter.addFragment(new HeatmapFragment(), "Heatmap");                  // 2
         adapter.addFragment(new ReportSymptomsFragment(), "Report Symptoms");   // 3
         adapter.addFragment(new ReportLocationFragment(), "Report Location");   // 4
@@ -54,19 +53,82 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
-        System.out.println(checked);
+        //System.out.println(checked);
 
         switch (view.getId()) {
             case R.id.diarrheaBox:
                 if (checked) {
-                    System.out.println("hej");
                     statisticsFragment.showDiarrheaSeries();
                 }
                 else{
-                    System.out.println("tjtjtja");
                     statisticsFragment.hideDiarrheaSeries();
                 }
                 break;
+            case R.id.runnyNoseBox:
+                if (checked) {
+                    statisticsFragment.showRunnyNoseSeries();
+                }
+                else {
+                    statisticsFragment.hideRunnyNoseSeries();
+                }
+                break;
+            case R.id.tirednessBox:
+                if (checked) {
+                    statisticsFragment.showTirednessSeries();
+                }
+                else {
+                    statisticsFragment.hideTirednessSeries();
+                }
+                break;
+            case R.id.feverBox:
+                if (checked) {
+                    statisticsFragment.showFeverSeries();
+                }
+                else {
+                    statisticsFragment.hideFeverSeries();
+                }
+                break;
+            case R.id.throatBox:
+                if (checked) {
+                    statisticsFragment.showThroatSeries();
+                }
+                else {
+                    statisticsFragment.hideThroatSeries();
+                }
+                break;
+            case R.id.nasalConBox:
+                if (checked) {
+                    statisticsFragment.showNasalConSeries();
+                }
+                else {
+                    statisticsFragment.hideNasalConSeries();
+                }
+                break;
+            case R.id.coughBox:
+                if (checked) {
+                    statisticsFragment.showCoughSeries();
+                }
+                else {
+                    statisticsFragment.hideCoughSeries();
+                }
+                break;
+            case R.id.headacheBox:
+                if (checked) {
+                    statisticsFragment.showHeadacheSeries();
+                }
+                else {
+                    statisticsFragment.hideHeadacheSeries();
+                }
+                break;
+            case R.id.breathingDiffBox:
+                if (checked) {
+                    statisticsFragment.showBreathingDiffSeries();
+                }
+                else {
+                    statisticsFragment.hideBreathingDiffSeries();
+                }
+                break;
+
         }
     }
     @Override
