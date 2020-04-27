@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter.addFragment(new HeatmapFragment(), "Heatmap");                  // 2
         adapter.addFragment(new ReportSymptomsFragment(), "Report Symptoms");   // 3
         adapter.addFragment(new ReportLocationFragment(), "Report Location");   // 4
+        adapter.addFragment(new ForumFragment(), "Forum");                      // 5
         viewPager.setAdapter(adapter);
     }
 
