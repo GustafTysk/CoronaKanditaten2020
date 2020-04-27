@@ -72,68 +72,84 @@
 
         <CheckBox
             android:id="@+id/runnyNoseBox"
+            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:onClick="onCheckboxClicked"
             android:text="Runny Nose"
             app:layout_constraintBaseline_toBaselineOf="@+id/diarrheaBox"
             app:layout_constraintStart_toEndOf="@+id/diarrheaBox" />
 
         <CheckBox
             android:id="@+id/throatBox"
+            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
             android:text="Sore Throat"
             app:layout_constraintBaseline_toBaselineOf="@+id/feverBox"
             app:layout_constraintStart_toStartOf="@+id/runnyNoseBox" />
 
         <CheckBox
             android:id="@+id/tirednessBox"
+            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:onClick="onCheckboxClicked"
             android:text="Tiredness"
             app:layout_constraintBaseline_toBaselineOf="@+id/runnyNoseBox"
             app:layout_constraintStart_toEndOf="@+id/runnyNoseBox" />
 
         <CheckBox
             android:id="@+id/breathingDiffBox"
+            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
             android:text="Breathing Difficulties"
             app:layout_constraintBaseline_toBaselineOf="@+id/headacheBox"
             app:layout_constraintStart_toStartOf="@+id/nasalConBox" />
 
         <CheckBox
             android:id="@+id/nasalConBox"
+            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
             android:text="Nasal Congestion"
             app:layout_constraintBaseline_toBaselineOf="@+id/throatBox"
             app:layout_constraintStart_toStartOf="@+id/tirednessBox" />
 
         <CheckBox
             android:id="@+id/feverBox"
+            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:onClick="onCheckboxClicked"
             android:text="Fever"
             app:layout_constraintStart_toStartOf="@+id/diarrheaBox"
             app:layout_constraintTop_toBottomOf="@+id/diarrheaBox" />
 
         <CheckBox
             android:id="@+id/coughBox"
+            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:onClick="onCheckboxClicked"
             android:text="Cough"
             app:layout_constraintStart_toStartOf="@+id/feverBox"
             app:layout_constraintTop_toBottomOf="@+id/feverBox" />
 
         <CheckBox
             android:id="@+id/headacheBox"
+            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
             android:text="Headache"
             app:layout_constraintBaseline_toBaselineOf="@+id/coughBox"
             app:layout_constraintStart_toStartOf="@+id/throatBox" />
