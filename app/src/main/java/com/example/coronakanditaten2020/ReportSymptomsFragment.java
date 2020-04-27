@@ -157,7 +157,6 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
         switch (v.getId()){
 
             case R.id.btnRsToRl:
-                Toast.makeText(getActivity(), "Going to Report Location", Toast.LENGTH_SHORT).show();
                 ((MainActivity)getActivity()).setViewPager(4);
 
                 totalSeverityCount = countAllRatings();
@@ -167,7 +166,6 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
                 break;
 
             case R.id.btnRsToStart:
-                Toast.makeText(getActivity(), "Going to Start Page", Toast.LENGTH_SHORT).show();
                 ((MainActivity)getActivity()).setViewPager(0);
                 break;
 

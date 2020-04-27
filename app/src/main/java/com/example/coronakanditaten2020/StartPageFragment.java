@@ -29,24 +29,18 @@ public class StartPageFragment extends Fragment {
         btnStartToHeatmap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Going to Heatmap", Toast.LENGTH_SHORT).show();
-
                 ((MainActivity)getActivity()).setViewPager(2);
             }
         });
         btnStartToStatistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Going to Statistics", Toast.LENGTH_SHORT).show();
-
                 ((MainActivity)getActivity()).setViewPager(1);
             }
         });
         btnStartToRs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Going to Report Symptoms", Toast.LENGTH_SHORT).show();
-
                 ((MainActivity)getActivity()).setViewPager(3);
             }
         });

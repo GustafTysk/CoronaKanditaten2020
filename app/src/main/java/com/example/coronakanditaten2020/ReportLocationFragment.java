@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -37,12 +39,19 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
-public class ReportLocationFragment extends Fragment  implements OnMapReadyCallback, View.OnClickListener{
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
+public class ReportLocationFragment extends Fragment  implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMapClickListener {
     private static final String TAG = "Fragment Statistics";
 
 
     private GoogleMap mGoogleMap;
     private MapView mMapView;
+
+    private Marker reportedLocation;
+    private String yourLocationString;
 
     private Bundle savedInstance;
 
@@ -64,9 +73,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         setLocation1 = (ImageButton) view.findViewById(R.id.setLocation1);
         setLocation1.setOnClickListener(this);
 
-
-
-
         return view;
     }
 
@@ -76,37 +82,37 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         switch (v.getId()) {
 
             case R.id.btnRlToRs:
-                Toast.makeText(getActivity(), "Going to Report Symptoms", Toast.LENGTH_SHORT).show();
                 ((MainActivity) getActivity()).setViewPager(3);
                 break;
             case R.id.btnRlToStart:
-                Toast.makeText(getActivity(), "Going to Start", Toast.LENGTH_SHORT).show();
                 ((MainActivity) getActivity()).setViewPager(0);
                 break;
             case R.id.setLocation1:
-
-                LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-                System.out.println("Kommer in hit");
-                View mapV = inflater.inflate(R.layout.report_location_map, null);
-
-                mMapView = (MapView) mapV.findViewById(R.id.mapViewReport);
-                mMapView.onCreate(savedInstance);
-
-                mMapView.getMapAsync(this);
-                final PopupWindow mapWindow = new PopupWindow(mapV, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                mapWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-
-                mapWindow.setOutsideTouchable(true);
-                mapWindow.setFocusable(true);
-                mapWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-                mMapView.onResume();
-
-
-
+                startReportLocationMap();
         }
     }
+
+    public void startReportLocationMap(){
+        LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        System.out.println("Kommer in hit");
+        View mapV = inflater.inflate(R.layout.report_location_map, null);
+
+        mMapView = (MapView) mapV.findViewById(R.id.mapViewReport);
+        mMapView.onCreate(savedInstance);
+
+        mMapView.getMapAsync(this);
+        final PopupWindow mapWindow = new PopupWindow(mapV, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        mapWindow.showAtLocation(mapV, Gravity.CENTER, 0, 0);
+
+        mapWindow.setOutsideTouchable(true);
+        mapWindow.setFocusable(true);
+        mapWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        mMapView.onResume();
+    }
+
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         final LatLng yourLocation = new LatLng(59.8, 17.3);
@@ -114,16 +120,34 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(59.8, 17.63), 10));
 
-        Marker reportedLocation = googleMap.addMarker(new MarkerOptions()
+        reportedLocation = googleMap.addMarker(new MarkerOptions()
                 .position(yourLocation)
-                .title("Your Location")
+                .title("yourLocation")
                 .draggable(true));
+        googleMap.setOnMapClickListener(this);
+
+
+
 
         System.out.println("kkk");
 
     }
 
+    @Override
+    public void onMapClick(LatLng latLng) {
+        reportedLocation.setPosition(latLng);
 
+        System.out.println(reportedLocation.getPosition());
+        Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        yourLocationString = addresses.get(0).getAddressLine(0);
+        reportedLocation.setTitle(yourLocationString);
+    }
 //    @Override
 //    public void onResume() {
 //        super.onResume();
@@ -153,5 +177,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 //        super.onLowMemory();
 //        mMapView.onLowMemory();
 //    }
+
 
 }

@@ -66,14 +66,12 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback {
         btnHeatmapToStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Going to Start Page", Toast.LENGTH_SHORT).show();
                 ((MainActivity) getActivity()).setViewPager(0);
             }
         });
         btnHeatmapToStatistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Going to Statistics", Toast.LENGTH_SHORT).show();
                 ((MainActivity) getActivity()).setViewPager(1);
             }
         });
