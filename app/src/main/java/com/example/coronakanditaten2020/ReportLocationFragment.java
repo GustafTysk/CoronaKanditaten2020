@@ -65,8 +65,11 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
     private int currentLocationReport;
 
+    private long dateNumberOfDaysAgo = 1209600000; //get date 14 days ago, 14 days = 14 * 24* 60 * 60 * 1000 = 1209600000 ms
     private long location1Date;
+    private String location1DateString;
     private long location2Date;
+    private String location2DateString;
     private LatLng location1;
     private LatLng location2;
 
@@ -165,7 +168,8 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
         dialog.setContentView(R.layout.dialog_calendar_report);
         cal = (CalendarView) dialog.findViewById(R.id.calendarLocation);
-
+        cal.setMaxDate(cal.getDate());
+        cal.setMinDate(cal.getDate() - dateNumberOfDaysAgo);
         cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -175,14 +179,15 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 switch (location){
                     case 1:
                         location1Date = cal.getDate();
-                        System.out.println("Case 1\n\n" + "Location 1 Date: " + location1Date + "\nLocation 2 Date: " + location2Date);
+                        location1DateString = (dayOfMonth +"-" + month + "-" + year);
+                        System.out.println("Case 1\n" + "Location 1 Date: " + location1DateString +"\nLocation 2 Date: " + location2Date);
                         break;
                     case 2:
                         location2Date = cal.getDate();
-                        System.out.println("Case 2\n\n" + "Location 1 Date: " + location1Date + "\nLocation 2 Date: " + location2Date);
+                        location2DateString = (dayOfMonth +"-" + month + "-" + year);
+                        System.out.println("Case 2\n" + "Location 1 Date: " + location1DateString + "\nLocation 2 Date: "+ location2DateString);
                         break;
                 }
-
             }
         });
         dialog.setTitle("Report days at location");
