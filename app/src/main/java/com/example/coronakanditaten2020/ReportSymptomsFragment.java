@@ -61,8 +61,6 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
         btnDiarrheaDialog.setOnClickListener(this);
 
 
-
-
         feverRatingBar = (RatingBar) view.findViewById(R.id.ratingBarFever);
         coughRatingBar = (RatingBar) view.findViewById(R.id.ratingBarCough);
         tirednessRatingBar = (RatingBar) view.findViewById(R.id.ratingBarTiredness);

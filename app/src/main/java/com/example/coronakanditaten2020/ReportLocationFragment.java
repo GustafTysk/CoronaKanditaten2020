@@ -1,52 +1,45 @@
 package com.example.coronakanditaten2020;
 
-import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.util.JsonUtils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.TileOverlayOptions;
-import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class ReportLocationFragment extends Fragment  implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMapClickListener {
     private static final String TAG = "Fragment Statistics";
     private ViewGroup containerThis;
+    private CalendarView cal;
 
 
     private GoogleMap mGoogleMap;
@@ -64,10 +57,16 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     private ImageButton setLocation1;
     private ImageButton setLocation2;
 
+    private ImageButton setCalendarLocation1;
+    private ImageButton setCalendarLocation2;
+
     private TextView textViewLocation1;
     private TextView textViewLocation2;
 
     private int currentLocationReport;
+
+    private long location1Date;
+    private long location2Date;
     private LatLng location1;
     private LatLng location2;
 
@@ -86,6 +85,11 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         setLocation1.setOnClickListener(this);
         setLocation2 = (ImageButton) view.findViewById(R.id.setLocation2);
         setLocation2.setOnClickListener(this);
+
+        setCalendarLocation1 = (ImageButton) view.findViewById(R.id.setCalendarLocation1);
+        setCalendarLocation1.setOnClickListener(this);
+        setCalendarLocation2 = (ImageButton) view.findViewById(R.id.setCalendarLocation2);
+        setCalendarLocation2.setOnClickListener(this);
 
         textViewLocation1 = (TextView) view.findViewById(R.id.textViewLocation1);
         textViewLocation2 = (TextView) view.findViewById(R.id.textViewLocation2);
@@ -113,6 +117,12 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             case R.id.setLocation2:
                 currentLocationReport = 2;
                 startReportLocationMap();
+                break;
+            case R.id.setCalendarLocation1:
+                getCalendarView(1);
+                break;
+            case R.id.setCalendarLocation2:
+                getCalendarView(2);
                 break;
         }
     }
@@ -150,6 +160,35 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         googleMap.setOnMapClickListener(this);
     }
 
+    public void getCalendarView(final Integer location){
+        Dialog dialog = new Dialog(getContext());
+
+        dialog.setContentView(R.layout.dialog_calendar_report);
+        cal = (CalendarView) dialog.findViewById(R.id.calendarLocation);
+
+        cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+
+                Toast.makeText(getContext(),"Selected Date is\n\n" +dayOfMonth+" : "+month+" : "+year , Toast.LENGTH_LONG).show();
+
+                switch (location){
+                    case 1:
+                        location1Date = cal.getDate();
+                        System.out.println("Case 1\n\n" + "Location 1 Date: " + location1Date + "\nLocation 2 Date: " + location2Date);
+                        break;
+                    case 2:
+                        location2Date = cal.getDate();
+                        System.out.println("Case 2\n\n" + "Location 1 Date: " + location1Date + "\nLocation 2 Date: " + location2Date);
+                        break;
+                }
+
+            }
+        });
+        dialog.setTitle("Report days at location");
+        dialog.show();
+    }
+
     @Override
     public void onMapClick(LatLng latLng) {
         reportedLocation.setPosition(latLng);
@@ -178,7 +217,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 textViewLocation2.setText(yourLocationString);
                 break;
         }
-
 
         super.onDestroy();
         mMapView.onDestroy();
