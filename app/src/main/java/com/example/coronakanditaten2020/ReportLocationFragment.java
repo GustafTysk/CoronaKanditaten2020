@@ -25,6 +25,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.util.JsonUtils;
@@ -45,10 +46,12 @@ import java.util.Locale;
 
 public class ReportLocationFragment extends Fragment  implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMapClickListener {
     private static final String TAG = "Fragment Statistics";
+    private ViewGroup containerThis;
 
 
     private GoogleMap mGoogleMap;
     private MapView mMapView;
+    public PopupWindow mapWindow;
 
     private Marker reportedLocation;
     private String yourLocationString;
@@ -59,10 +62,19 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     private Button btnRlToRs;
 
     private ImageButton setLocation1;
+    private ImageButton setLocation2;
+
+    private TextView textViewLocation1;
+    private TextView textViewLocation2;
+
+    private int currentLocationReport;
+    private LatLng location1;
+    private LatLng location2;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        containerThis = container;
         savedInstance = savedInstanceState;
         View view = inflater.inflate(R.layout.fragment_report_location, container, false);
         btnRlToStart = (Button) view.findViewById(R.id.btnRlToStart);
@@ -72,6 +84,13 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
         setLocation1 = (ImageButton) view.findViewById(R.id.setLocation1);
         setLocation1.setOnClickListener(this);
+        setLocation2 = (ImageButton) view.findViewById(R.id.setLocation2);
+        setLocation2.setOnClickListener(this);
+
+        textViewLocation1 = (TextView) view.findViewById(R.id.textViewLocation1);
+        textViewLocation2 = (TextView) view.findViewById(R.id.textViewLocation2);
+
+
 
         return view;
     }
@@ -88,21 +107,26 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 ((MainActivity) getActivity()).setViewPager(0);
                 break;
             case R.id.setLocation1:
+                currentLocationReport = 1;
                 startReportLocationMap();
+                break;
+            case R.id.setLocation2:
+                currentLocationReport = 2;
+                startReportLocationMap();
+                break;
         }
     }
 
     public void startReportLocationMap(){
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        System.out.println("Kommer in hit");
         View mapV = inflater.inflate(R.layout.report_location_map, null);
 
         mMapView = (MapView) mapV.findViewById(R.id.mapViewReport);
         mMapView.onCreate(savedInstance);
 
         mMapView.getMapAsync(this);
-        final PopupWindow mapWindow = new PopupWindow(mapV, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        mapWindow = new PopupWindow(mapV, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         mapWindow.showAtLocation(mapV, Gravity.CENTER, 0, 0);
 
         mapWindow.setOutsideTouchable(true);
@@ -111,7 +135,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
         mMapView.onResume();
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -125,12 +148,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 .title("yourLocation")
                 .draggable(true));
         googleMap.setOnMapClickListener(this);
-
-
-
-
-        System.out.println("kkk");
-
     }
 
     @Override
@@ -148,35 +165,31 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             e.printStackTrace();
         }
     }
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        mMapView.onResume();
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        mMapView.onPause();
-//    }
 
-    @Override
-    public void onDestroy() {
+    public void dismissPopup(Integer location){
+
+        switch (location){
+            case 1:
+                location1 = reportedLocation.getPosition();
+                textViewLocation1.setText(yourLocationString);
+                break;
+            case 2:
+                location2 = reportedLocation.getPosition();
+                textViewLocation2.setText(yourLocationString);
+                break;
+        }
+
+
         super.onDestroy();
         mMapView.onDestroy();
+        mapWindow.dismiss();
+        System.out.println("Location 1: " + location1);
+        System.out.println("Location 2: " + location2);
     }
 
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        mMapView.onSaveInstanceState(outState);
-//    }
-//
-//    @Override
-//    public void onLowMemory() {
-//        super.onLowMemory();
-//        mMapView.onLowMemory();
-//    }
+    public int getCurrentLocationReport(){
+        return currentLocationReport;
+    }
 
 
 }

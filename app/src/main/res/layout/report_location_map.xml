@@ -19,13 +19,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnLocation1Commit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Button"
+        android:text="Commit"
         app:layout_constraintBottom_toBottomOf="@+id/mapViewReport"
         app:layout_constraintEnd_toEndOf="@+id/mapViewReport"
-        app:layout_constraintStart_toStartOf="@+id/mapViewReport" />
+        app:layout_constraintStart_toStartOf="@+id/mapViewReport"
+        android:onClick="dismissPopupForLocation1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

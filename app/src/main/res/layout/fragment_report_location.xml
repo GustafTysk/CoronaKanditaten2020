@@ -19,6 +19,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/setLocation1"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:src="@drawable/ratingfilled"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation1"
+        app:layout_constraintEnd_toEndOf="@+id/textViewReportLocation"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewLocation1"
+        app:layout_constraintTop_toTopOf="@+id/textViewLocation1" />
+
+    <ImageButton
+        android:id="@+id/setLocation2"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:src="@drawable/ratingfilled"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation2"
+        app:layout_constraintEnd_toEndOf="@+id/setLocation1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewLocation2"
+        app:layout_constraintTop_toTopOf="@+id/textViewLocation2" />
+
     <Button
         android:id="@+id/btnRlToStart"
         android:layout_width="wrap_content"
@@ -42,14 +64,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageButton
-        android:id="@+id/setLocation1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/ratingfilled"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <TextView
+        android:id="@+id/textViewLocation1"
+        android:layout_width="212dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="64dp"
+        android:hint="Location 1"
+        app:layout_constraintStart_toStartOf="@+id/textViewReportLocation"
         app:layout_constraintTop_toBottomOf="@+id/textViewReportLocation" />
+
+    <TextView
+        android:id="@+id/textViewLocation2"
+        android:layout_width="212dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="128dp"
+        android:hint="Location 2"
+        app:layout_constraintStart_toStartOf="@+id/textViewLocation1"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
