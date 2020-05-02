@@ -209,7 +209,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 String tempLocationString = "";
 
                 for (Calendar day: calendars){
-                    tempLocationString += day.get(Calendar.DAY_OF_MONTH)+"-"+(day.get(Calendar.MONTH)+1)+"-"+day.get(Calendar.YEAR)+"\n";
+                    tempLocationString += day.get(Calendar.DAY_OF_MONTH)+"-"+(day.get(Calendar.MONTH)+1)+"-"+day.get(Calendar.YEAR)+"\n"; // Toast Print
                 }
 
                 switch (location){
