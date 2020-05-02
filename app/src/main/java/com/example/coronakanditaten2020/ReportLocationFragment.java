@@ -37,13 +37,14 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class ReportLocationFragment extends Fragment  implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMapClickListener {
     private static final String TAG = "Fragment Statistics";
     private ViewGroup containerThis;
     private com.applandeo.materialcalendarview.CalendarView cal;
-    private Calendar minDate = Calendar.getInstance();
-    private Calendar maxDate = Calendar.getInstance();
+    private Calendar minDate = Calendar.getInstance(TimeZone.getDefault());
+    private Calendar maxDate = Calendar.getInstance(TimeZone.getDefault());
     private long dateNumberOfDaysAgo = 1209600000;                              //get 14 days im ms, 14 days = 14 * 24* 60 * 60 * 1000 = 1209600000 ms
     private long minDateTime = minDate.getTimeInMillis()-dateNumberOfDaysAgo;   //get date 14 days ago (today - 14 days in ms)
 
@@ -208,7 +209,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 String tempLocationString = "";
 
                 for (Calendar day: calendars){
-                    tempLocationString += day.getTime().toString()+"\n";
+                    tempLocationString += day.get(Calendar.DAY_OF_MONTH)+"-"+(day.get(Calendar.MONTH)+1)+"-"+day.get(Calendar.YEAR)+"\n";
                 }
 
                 switch (location){
