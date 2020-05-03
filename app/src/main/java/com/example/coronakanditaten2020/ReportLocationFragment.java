@@ -54,7 +54,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     public PopupWindow mapWindow;
 
     private Marker reportedLocation;
-    private String yourLocationString;
+    private String yourLocation1String;
+    private String yourLocation2String;
+    private String yourLocation3String;
 
     private Bundle savedInstance;
 
@@ -73,7 +75,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     private TextView textViewLocation2;
     private TextView textViewLocation3;
 
-    private int currentLocationReport;
+    private int currentLocationReport = 0;
 
     private List<Calendar> location1Dates;
     private String location1DateString = "";
@@ -82,9 +84,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     private List<Calendar> location3Dates;
     private String location3DateString = "";
 
-    private LatLng location1;
-    private LatLng location2;
-    private LatLng location3;
+    private LatLng location1 = null;
+    private LatLng location2 = null;
+    private LatLng location3 = null;
 
     @Nullable
     @Override
@@ -193,13 +195,37 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         final LatLng yourLocation = new LatLng(59.8, 17.63);
         mGoogleMap = googleMap;
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(59.8, 17.63), 10));
-
         reportedLocation = googleMap.addMarker(new MarkerOptions()
                 .position(yourLocation)
                 .title("yourLocation")
                 .draggable(true));
         googleMap.setOnMapClickListener(this);
+
+        switch (currentLocationReport) {
+            case 1:
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 10));
+                if (location1 != null) {
+                    reportedLocation.setPosition(location1);
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location1, 10));
+                }
+                break;
+            case 2:
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 10));
+                if (location2 != null) {
+                    reportedLocation.setPosition(location2);
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location2, 10));
+                }
+                break;
+            case 3:
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 10));
+                if (location3 != null) {
+                    reportedLocation.setPosition(location3);
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location3, 10));
+                }
+                break;
+            default:
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 10));
+        }
     }
 
     public void getCalendarView(final Integer location) throws OutOfDateRangeException {
@@ -264,9 +290,22 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
         List<Address> addresses = null;
         try {
-            addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude, 1);
-            yourLocationString = addresses.get(0).getAddressLine(0);
-            reportedLocation.setTitle(yourLocationString);
+            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            switch (currentLocationReport) {
+                case 1:
+                    yourLocation1String = addresses.get(0).getAddressLine(0);
+                    reportedLocation.setTitle(yourLocation1String);
+                    break;
+                case 2:
+                    yourLocation2String = addresses.get(0).getAddressLine(0);
+                    reportedLocation.setTitle(yourLocation2String);
+                    break;
+                case 3:
+                    yourLocation3String = addresses.get(0).getAddressLine(0);
+                    reportedLocation.setTitle(yourLocation3String);
+                    break;
+                default:
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -277,19 +316,20 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         switch (location){
             case 1:
                 location1 = reportedLocation.getPosition();
-                textViewLocation1.setText(yourLocationString);
+                textViewLocation1.setText(yourLocation1String);
                 break;
             case 2:
                 location2 = reportedLocation.getPosition();
-                textViewLocation2.setText(yourLocationString);
+                textViewLocation2.setText(yourLocation2String);
                 break;
             case 3:
                 location3 = reportedLocation.getPosition();
-                textViewLocation3.setText(yourLocationString);
+                textViewLocation3.setText(yourLocation3String);
                 break;
             default:
 
         }
+        System.out.println("1: "+location1+ "\n2: "+ location2+ "\n3: "+location3);
         super.onDestroy();
         mMapView.onDestroy();
         mapWindow.dismiss();

@@ -12,8 +12,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG = "StartPageActivity";
     //private Datahandler datahandler = new Datahandler()
+
+    StartPageFragment startpageFragment = new StartPageFragment();
     StatisticsFragment statisticsFragment = new StatisticsFragment();
+    HeatmapFragment heatmapFragment = new HeatmapFragment();
+    ReportSymptomsFragment reportSymptomsFragment = new ReportSymptomsFragment();
     ReportLocationFragment reportLocationFragment = new ReportLocationFragment();
+    ForumFragment forumFragment = new ForumFragment();
 
     private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
     private ViewPager mViewPager;
@@ -40,12 +45,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setupViewPager(ViewPager viewPager){
         adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new StartPageFragment(), "Start Page");             // 0
-        adapter.addFragment(statisticsFragment, "Statistics");                  // 1
-        adapter.addFragment(new HeatmapFragment(), "Heatmap");                  // 2
-        adapter.addFragment(new ReportSymptomsFragment(), "Report Symptoms");   // 3
+        adapter.addFragment(startpageFragment, "Start Page");             // 0
+        adapter.addFragment(statisticsFragment, "Statistics");            // 1
+        adapter.addFragment(heatmapFragment, "Heatmap");                  // 2
+        adapter.addFragment(reportSymptomsFragment, "Report Symptoms");   // 3
         adapter.addFragment(reportLocationFragment, "Report Location");   // 4
-        adapter.addFragment(new ForumFragment(), "Forum");                      // 5
+        adapter.addFragment(forumFragment, "Forum");                      // 5
         viewPager.setAdapter(adapter);
     }
 
@@ -139,7 +144,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void dismissPopupForLocation1(View view) {
-        System.out.println("Commit Location 1 btn");
         reportLocationFragment.dismissPopup(reportLocationFragment.getCurrentLocationReport());
     }
 }
