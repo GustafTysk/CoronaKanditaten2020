@@ -39,7 +39,6 @@
             android:numStars="3"
             android:stepSize="1"
             android:theme="@style/ratingBar"
-            app:layout_constraintEnd_toEndOf="@+id/imageDiarrhea"
             app:layout_constraintStart_toStartOf="@+id/imageDiarrhea"
             app:layout_constraintTop_toBottomOf="@+id/imageDiarrhea" />
 
@@ -110,7 +109,6 @@
             android:numStars="3"
             android:stepSize="1"
             android:theme="@style/ratingBar"
-            app:layout_constraintEnd_toEndOf="@+id/imageCough"
             app:layout_constraintStart_toStartOf="@+id/imageCough"
             app:layout_constraintTop_toBottomOf="@+id/imageCough" />
 
@@ -143,7 +141,6 @@
             android:rating="0"
             android:stepSize="1"
             android:theme="@style/ratingBar"
-            app:layout_constraintEnd_toEndOf="@+id/imageFever"
             app:layout_constraintStart_toStartOf="@+id/imageFever"
             app:layout_constraintTop_toBottomOf="@+id/imageFever" />
 
@@ -175,7 +172,6 @@
             android:numStars="3"
             android:stepSize="1"
             android:theme="@style/ratingBar"
-            app:layout_constraintEnd_toEndOf="@+id/imageBreathingDifficulties"
             app:layout_constraintStart_toStartOf="@+id/imageBreathingDifficulties"
             app:layout_constraintTop_toBottomOf="@+id/imageBreathingDifficulties" />
 
@@ -197,7 +193,6 @@
             android:numStars="3"
             android:stepSize="1"
             android:theme="@style/ratingBar"
-            app:layout_constraintEnd_toEndOf="@+id/imageSoreThroat"
             app:layout_constraintStart_toStartOf="@+id/imageSoreThroat"
             app:layout_constraintTop_toBottomOf="@+id/imageSoreThroat" />
 
@@ -237,7 +232,6 @@
             android:numStars="3"
             android:stepSize="1"
             android:theme="@style/ratingBar"
-            app:layout_constraintEnd_toEndOf="@+id/imageNasalCongestion"
             app:layout_constraintStart_toStartOf="@+id/imageNasalCongestion"
             app:layout_constraintTop_toBottomOf="@+id/imageNasalCongestion" />
 
@@ -249,7 +243,6 @@
             android:numStars="3"
             android:stepSize="1"
             android:theme="@style/ratingBar"
-            app:layout_constraintEnd_toEndOf="@+id/imageRunnyNose"
             app:layout_constraintStart_toStartOf="@+id/imageRunnyNose"
             app:layout_constraintTop_toBottomOf="@+id/imageRunnyNose" />
 
@@ -289,7 +282,6 @@
             android:numStars="3"
             android:stepSize="1"
             android:theme="@style/ratingBar"
-            app:layout_constraintEnd_toEndOf="@+id/imageTiredness"
             app:layout_constraintStart_toStartOf="@+id/imageTiredness"
             app:layout_constraintTop_toBottomOf="@+id/imageTiredness" />
 
@@ -310,7 +302,6 @@
             android:numStars="3"
             android:stepSize="1"
             android:theme="@style/ratingBar"
-            app:layout_constraintEnd_toEndOf="@+id/imageHeadache"
             app:layout_constraintStart_toStartOf="@+id/imageHeadache"
             app:layout_constraintTop_toBottomOf="@+id/imageHeadache" />
 
@@ -328,7 +319,7 @@
             android:id="@+id/textRunnyNose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RunnyNose"
+            android:text="Runny Nose"
             android:textColor="#000000"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/imageRunnyNose"
@@ -395,6 +386,7 @@
             android:id="@+id/btnNasalCongestionDialog"
             android:layout_width="30dp"
             android:layout_height="29dp"
+            android:layout_marginStart="8dp"
             android:background="#00FFFFFF"
             android:src="@drawable/info_i_v2_crop_new"
             app:layout_constraintBottom_toBottomOf="@+id/textNasalCongestion"
@@ -406,7 +398,6 @@
             android:id="@+id/btnRunnyNoseDialog"
             android:layout_width="30dp"
             android:layout_height="29dp"
-            android:layout_marginStart="8dp"
             android:background="#00FFFFFF"
             android:src="@drawable/info_i_v2_crop_new"
             app:layout_constraintBottom_toTopOf="@+id/imageRunnyNose"
@@ -445,6 +436,105 @@
             app:layout_constraintBottom_toBottomOf="@+id/textDiarrhea"
             app:layout_constraintStart_toEndOf="@+id/textDiarrhea"
             app:layout_constraintTop_toTopOf="@+id/textDiarrhea" />
+
+        <Button
+            android:id="@+id/btnClearCoughRating"
+            android:layout_width="53dp"
+            android:layout_height="34dp"
+            android:text="Clear"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarCough"
+            app:layout_constraintEnd_toEndOf="@+id/imageCough"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarCough"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarCough" />
+
+        <Button
+            android:id="@+id/btnClearTirednessRating"
+            android:layout_width="53dp"
+            android:layout_height="34dp"
+            android:text="Clear"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarTiredness"
+            app:layout_constraintEnd_toEndOf="@+id/imageTiredness"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarTiredness"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarTiredness" />
+
+        <Button
+            android:id="@+id/btnClearDiarrheaRating"
+            android:layout_width="53dp"
+            android:layout_height="34dp"
+            android:text="Clear"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarDiarrhea"
+            app:layout_constraintEnd_toEndOf="@+id/imageDiarrhea"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarDiarrhea"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarDiarrhea" />
+
+        <Button
+            android:id="@+id/btnClearHeadacheRating"
+            android:layout_width="53dp"
+            android:layout_height="34dp"
+            android:text="Clear"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarHeadache"
+            app:layout_constraintEnd_toEndOf="@+id/imageHeadache"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarHeadache"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarHeadache" />
+
+        <Button
+            android:id="@+id/btnCleaarRunnyNoseRating"
+            android:layout_width="53dp"
+            android:layout_height="34dp"
+            android:text="Clear"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarRunnyNose"
+            app:layout_constraintEnd_toEndOf="@+id/imageRunnyNose"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarRunnyNose"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarRunnyNose" />
+
+        <Button
+            android:id="@+id/btnClearNasalCongestionRating"
+            android:layout_width="53dp"
+            android:layout_height="34dp"
+            android:text="Clear"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarNasalCongestion"
+            app:layout_constraintEnd_toEndOf="@+id/imageNasalCongestion"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarNasalCongestion"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarNasalCongestion" />
+
+        <Button
+            android:id="@+id/btnClearSoreThroatRating"
+            android:layout_width="53dp"
+            android:layout_height="34dp"
+            android:text="Clear"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarSoreThroat"
+            app:layout_constraintEnd_toEndOf="@+id/imageSoreThroat"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarSoreThroat"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarSoreThroat" />
+
+        <Button
+            android:id="@+id/btnClearBreathingRating"
+            android:layout_width="53dp"
+            android:layout_height="34dp"
+            android:text="Clear"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarBreathingDifficulties"
+            app:layout_constraintEnd_toEndOf="@+id/imageBreathingDifficulties"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarBreathingDifficulties"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarBreathingDifficulties" />
+
+        <Button
+            android:id="@+id/btnClearFeverRating"
+            android:layout_width="53dp"
+            android:layout_height="34dp"
+            android:text="Clear"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarFever"
+            app:layout_constraintEnd_toEndOf="@+id/imageFever"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarFever"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarFever" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

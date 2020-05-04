@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "StartPageActivity";
@@ -143,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void dismissPopupForLocation1(View view) {
+    public void dismissPopupForLocation1(View view){
         reportLocationFragment.dismissPopup(reportLocationFragment.getCurrentLocationReport());
     }
 }

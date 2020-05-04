@@ -20,31 +20,39 @@
     <EditText
         android:id="@+id/textUsername"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="32dp"
-        android:ems="10"
+        android:ems="12"
         android:inputType="textPersonName"
         android:hint="Username"
+        android:drawableLeft="@drawable/usericon"
+        android:paddingLeft="10dip"
+        android:background="@drawable/edittext_outline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRegister"
+        />
 
     <EditText
         android:id="@+id/textEmail"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:ems="10"
+        android:ems="12"
         android:inputType="textEmailAddress"
         android:hint="E-mail"
+        android:drawableLeft="@drawable/emailicon"
+        android:paddingLeft="10dip"
+        android:background="@drawable/edittext_outline"
         app:layout_constraintStart_toStartOf="@+id/textUsername"
         app:layout_constraintTop_toBottomOf="@+id/textUsername" />
 
     <RadioGroup
         android:id="@+id/radioGroupGender"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_outline"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="@+id/textEmail"
         app:layout_constraintTop_toBottomOf="@+id/textEmail">
@@ -53,52 +61,62 @@
             android:id="@+id/radio_male"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Male"
-            android:onClick="onRadioButtonClicked"/>
+            android:onClick="onRadioButtonClicked"
+            android:text="Male" />
 
         <RadioButton
             android:id="@+id/radio_female"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Female"
-            android:onClick="onRadioButtonClicked"/>
+            android:onClick="onRadioButtonClicked"
+            android:text="Female" />
 
         <RadioButton
             android:id="@+id/radio_other"
-            android:layout_width="match_parent"
+            android:layout_width="110dp"
             android:layout_height="match_parent"
-            android:text="Other"
-            android:onClick="onRadioButtonClicked"/>
+            android:onClick="onRadioButtonClicked"
+            android:text="Other" />
     </RadioGroup>
 
     <EditText
         android:id="@+id/textAge"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:ems="10"
+        android:ems="12"
         android:inputType="numberSigned"
         android:hint="Age"
+        android:drawableLeft="@drawable/calendericon"
+        android:paddingLeft="10dip"
+        android:background="@drawable/edittext_outline"
         app:layout_constraintStart_toStartOf="@+id/radioGroupGender"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupGender" />
 
     <EditText
         android:id="@+id/textPassword"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:ems="10"
+        android:ems="12"
         android:inputType="textPassword"
         android:hint="Password"
+        android:drawableLeft="@drawable/passwordicon"
+        android:paddingLeft="10dip"
+        android:background="@drawable/edittext_outline"
         app:layout_constraintStart_toStartOf="@+id/textAge"
         app:layout_constraintTop_toBottomOf="@+id/textAge" />
 
     <Button
         android:id="@+id/btnRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_width="182dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_selector"
         android:text="Register"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textPassword"
         app:layout_constraintStart_toStartOf="@+id/textPassword"
         app:layout_constraintTop_toBottomOf="@+id/textPassword" />
@@ -109,8 +127,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/button_selector"
         android:text="Back To Login"
         android:textAllCaps="true"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
