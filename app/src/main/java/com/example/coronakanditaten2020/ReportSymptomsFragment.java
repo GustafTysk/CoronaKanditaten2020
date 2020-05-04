@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
-import android.widget.Toast;
 
 public class ReportSymptomsFragment extends Fragment implements View.OnClickListener {
 
@@ -27,9 +26,12 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
     private ImageButton btnHeadacheDialog;
     private ImageButton btnDiarrheaDialog;
 
+    private Button btnClearFeverRating, btnClearCoughRating, btnClearBreathingRating, btnClearSoreThroatRating, btnClearNasalCongestionRating, btnClearRunnyNoseRating
+            , btnClearTirednessRating, btnClearHeadacheRating, btnClearDiarrheaRating;
+
     private Button btnRsToStart;
     private Button btnRsToRl;
-    RatingBar feverRatingBar, coughRatingBar, tirednessRatingBar, breathingRatingBar, throatRatingBar, headacheRatingBar, nasalCongestionRatingBar, runnyNoseRatingBar, diarrheaRatingBar;
+    RatingBar feverRatingBar, coughRatingBar, tirednessRatingBar, breathingRatingBar, SoreThroatRatingBar, headacheRatingBar, nasalCongestionRatingBar, runnyNoseRatingBar, diarrheaRatingBar;
     private float totalSeverityCount, feverSeverity, coughSeverity, tirednessSeverity, breathingSeverity, throatSeverity, headacheSeverity, nasalCongestionSeverity, runnyNoseSeverity, diarrheaSeverity;
 
     @Nullable
@@ -62,14 +64,32 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
 
 
         feverRatingBar = (RatingBar) view.findViewById(R.id.ratingBarFever);
+        btnClearFeverRating = (Button) view.findViewById(R.id.btnClearFeverRating);
+        btnClearFeverRating.setOnClickListener(this);
         coughRatingBar = (RatingBar) view.findViewById(R.id.ratingBarCough);
+        btnClearCoughRating = (Button) view.findViewById(R.id.btnClearCoughRating);
+        btnClearCoughRating.setOnClickListener(this);
         tirednessRatingBar = (RatingBar) view.findViewById(R.id.ratingBarTiredness);
+        btnClearTirednessRating = (Button) view.findViewById(R.id.btnClearTirednessRating);
+        btnClearTirednessRating.setOnClickListener(this);
         breathingRatingBar = (RatingBar) view.findViewById(R.id.ratingBarBreathingDifficulties);
-        throatRatingBar = (RatingBar) view.findViewById(R.id.ratingBarSoreThroat);
+        btnClearBreathingRating = (Button) view.findViewById(R.id.btnClearBreathingRating);
+        btnClearBreathingRating.setOnClickListener(this);
+        SoreThroatRatingBar = (RatingBar) view.findViewById(R.id.ratingBarSoreThroat);
+        btnClearSoreThroatRating = (Button) view.findViewById(R.id.btnClearSoreThroatRating);
+        btnClearSoreThroatRating.setOnClickListener(this);
         headacheRatingBar = (RatingBar) view.findViewById(R.id.ratingBarHeadache);
+        btnClearHeadacheRating = (Button) view.findViewById(R.id.btnClearHeadacheRating);
+        btnClearHeadacheRating.setOnClickListener(this);
         nasalCongestionRatingBar = (RatingBar) view.findViewById(R.id.ratingBarNasalCongestion);
+        btnClearNasalCongestionRating = (Button) view.findViewById(R.id.btnClearNasalCongestionRating);
+        btnClearNasalCongestionRating.setOnClickListener(this);
         runnyNoseRatingBar = (RatingBar) view.findViewById(R.id.ratingBarRunnyNose);
+        btnClearRunnyNoseRating = (Button) view.findViewById(R.id.btnCleaarRunnyNoseRating);
+        btnClearRunnyNoseRating.setOnClickListener(this);
         diarrheaRatingBar = (RatingBar) view.findViewById(R.id.ratingBarDiarrhea);
+        btnClearDiarrheaRating = (Button) view.findViewById(R.id.btnClearDiarrheaRating);
+        btnClearDiarrheaRating.setOnClickListener(this);
         System.out.println(feverSeverity);
 
         return view;
@@ -147,7 +167,7 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
 
     private float countAllRatings(){
         return diarrheaRatingBar.getRating() + runnyNoseRatingBar.getRating() + nasalCongestionRatingBar.getRating() + headacheRatingBar.getRating()
-                + throatRatingBar.getRating() + breathingRatingBar.getRating() + tirednessRatingBar.getRating() + coughRatingBar.getRating() + feverRatingBar.getRating();
+                + SoreThroatRatingBar.getRating() + breathingRatingBar.getRating() + tirednessRatingBar.getRating() + coughRatingBar.getRating() + feverRatingBar.getRating();
     }
 
     @Override
@@ -201,6 +221,34 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
 
             case R.id.btnDiarrheaDialog:
                 openDialog("diarrhea");
+                break;
+
+            case R.id.btnClearFeverRating:
+                feverRatingBar.setRating(0);
+                break;
+            case R.id.btnClearCoughRating:
+                coughRatingBar.setRating(0);
+                break;
+            case R.id.btnClearBreathingRating:
+                breathingRatingBar.setRating(0);
+                break;
+            case R.id.btnClearSoreThroatRating:
+                SoreThroatRatingBar.setRating(0);
+                break;
+            case R.id.btnClearNasalCongestionRating:
+                nasalCongestionRatingBar.setRating(0);
+                break;
+            case R.id.btnCleaarRunnyNoseRating:
+                runnyNoseRatingBar.setRating(0);
+                break;
+            case R.id.btnClearTirednessRating:
+                tirednessRatingBar.setRating(0);
+                break;
+            case R.id.btnClearHeadacheRating:
+                headacheRatingBar.setRating(0);
+                break;
+            case R.id.btnClearDiarrheaRating:
+                diarrheaRatingBar.setRating(0);
                 break;
         }
 
