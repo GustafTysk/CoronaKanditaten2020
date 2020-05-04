@@ -1,28 +1,42 @@
 package com.example.coronakanditaten2020;
 
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.applandeo.materialcalendarview.DatePicker;
+import com.applandeo.materialcalendarview.builders.DatePickerBuilder;
+import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
+import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
+import com.google.android.gms.maps.model.LatLng;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class StatisticsFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "Fragment Statistics";
@@ -31,6 +45,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private Button btnStatisticsToHeatmap;
     private Location[] Locations = new Location[12];
     public CheckBox diarrheaBox, runnyNoseBox, nasalConBox, headacheBox, throatBox, breathingDiffBox, tirednessBox, coughBox, feverBox;
+
 
     private GraphView graph;
     private LineGraphSeries series;
@@ -42,6 +57,13 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private LineGraphSeries series7;
     private LineGraphSeries series8;
     private LineGraphSeries series9;
+    private com.applandeo.materialcalendarview.CalendarView cal;
+    private List<Calendar> location1Dates;
+    private String location1DateString = "";
+    private Calendar maxDate = Calendar.getInstance(TimeZone.getDefault());
+    Calendar firstSelectedDate;
+    Calendar lastSelectedDate;
+    private ImageButton setCalendarLocation1;
 
     @Nullable
     @Override
@@ -62,6 +84,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         coughBox = (CheckBox) view.findViewById(R.id.coughBox);
         headacheBox = (CheckBox) view.findViewById(R.id.headacheBox);
         breathingDiffBox = (CheckBox) view.findViewById(R.id.breathingDiffBox);
+
+        setCalendarLocation1 = (ImageButton) view.findViewById(R.id.setCalendarLocation1);
+        setCalendarLocation1.setOnClickListener(this);
 
 
         Locations[0] = new Location("59.858562", "17.638927", "2020-04-29", 0, 0, 2, 0, 3, 0, 1, 1, 0, 2, "2020-04-31");
@@ -114,7 +139,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         int fever30 = 0;
         int fever31 = 0;
         int fever32 = 0;
-
 
 
         for (int i = 0; i < Locations.length; i++) {
@@ -261,172 +285,162 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                 }
             }
         }
+            Calendar calendar = Calendar.getInstance();
+            Date d1 = calendar.getTime();
+            calendar.add(Calendar.DATE, 1);
+            Date d2 = calendar.getTime();
+            calendar.add(Calendar.DATE, 1);
+            Date d3 = calendar.getTime();
+            calendar.add(Calendar.DATE, 1);
+            Date d4 = calendar.getTime();
+            calendar.add(Calendar.DATE, 1);
+            graph = (GraphView) view.findViewById(R.id.graph1);
+            series = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                    new DataPoint(d1, diarrhea29),
+                    new DataPoint(d2, diarrhea30),
+                    new DataPoint(d3, diarrhea31),
+                    new DataPoint(d4, diarrhea32)
+            });
+            series2 = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                    new DataPoint(d1, runnyNose29),
+                    new DataPoint(d2, runnyNose30),
+                    new DataPoint(d3, runnyNose31),
+                    new DataPoint(d4, runnyNose32)
+            });
+            series3 = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                    new DataPoint(d1, nasalCongestion29),
+                    new DataPoint(d2, nasalCongestion30),
+                    new DataPoint(d3, nasalCongestion31),
+                    new DataPoint(d4, nasalCongestion32)
+            });
+            series4 = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                    new DataPoint(d1, headache29),
+                    new DataPoint(d2, headache30),
+                    new DataPoint(d3, headache31),
+                    new DataPoint(d4, headache32)
+            });
+            series5 = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                    new DataPoint(d1, throat29),
+                    new DataPoint(d2, throat30),
+                    new DataPoint(d3, throat31),
+                    new DataPoint(d4, throat32)
+            });
+            series6 = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                    new DataPoint(d1, breathing29),
+                    new DataPoint(d2, breathing30),
+                    new DataPoint(d3, breathing31),
+                    new DataPoint(d4, breathing32)
+            });
+            series7 = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                    new DataPoint(d1, tiredness29),
+                    new DataPoint(d2, tiredness30),
+                    new DataPoint(d3, tiredness31),
+                    new DataPoint(d4, tiredness32)
+            });
+            series8 = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                    new DataPoint(d1, cough29),
+                    new DataPoint(d2, cough30),
+                    new DataPoint(d3, cough31),
+                    new DataPoint(d4, cough32)
+            });
+            series9 = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                    new DataPoint(d1, fever29),
+                    new DataPoint(d2, fever30),
+                    new DataPoint(d3, fever31),
+                    new DataPoint(d4, fever32)
+            });
+            graph.addSeries(series);
+            graph.addSeries(series2);
+            graph.addSeries(series3);
+            graph.addSeries(series4);
+            graph.addSeries(series5);
+            graph.addSeries(series6);
+            graph.addSeries(series7);
+            graph.addSeries(series8);
+            graph.addSeries(series9);
 
 
-
-
-        Calendar calendar = Calendar.getInstance();
-        Date d1 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        Date d2 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        Date d3 = calendar.getTime();
-        calendar.add(Calendar.DATE,1);
-        Date d4 = calendar.getTime();
-        calendar.add(Calendar.DATE,1);
-        graph = (GraphView) view.findViewById(R.id.graph1);
-        series = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(d1, diarrhea29),
-                new DataPoint(d2, diarrhea30),
-                new DataPoint(d3, diarrhea31),
-                new DataPoint(d4, diarrhea32)
-        });
-        series2 = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(d1, runnyNose29),
-                new DataPoint(d2, runnyNose30),
-                new DataPoint(d3, runnyNose31),
-                new DataPoint(d4, runnyNose32)
-        });
-        series3 = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(d1, nasalCongestion29),
-                new DataPoint(d2, nasalCongestion30),
-                new DataPoint(d3, nasalCongestion31),
-                new DataPoint(d4, nasalCongestion32)
-        });
-        series4 = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(d1, headache29),
-                new DataPoint(d2, headache30),
-                new DataPoint(d3, headache31),
-                new DataPoint(d4, headache32)
-        });
-        series5 = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(d1, throat29),
-                new DataPoint(d2, throat30),
-                new DataPoint(d3, throat31),
-                new DataPoint(d4, throat32)
-        });
-        series6 = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(d1, breathing29),
-                new DataPoint(d2, breathing30),
-                new DataPoint(d3, breathing31),
-                new DataPoint(d4, breathing32)
-        });
-        series7 = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(d1, tiredness29),
-                new DataPoint(d2, tiredness30),
-                new DataPoint(d3, tiredness31),
-                new DataPoint(d4, tiredness32)
-        });
-        series8 = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(d1, cough29),
-                new DataPoint(d2, cough30),
-                new DataPoint(d3, cough31),
-                new DataPoint(d4, cough32)
-        });
-        series9 = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(d1, fever29),
-                new DataPoint(d2, fever30),
-                new DataPoint(d3, fever31),
-                new DataPoint(d4, fever32)
-        });
-        graph.addSeries(series);
-        graph.addSeries(series2);
-        graph.addSeries(series3);
-        graph.addSeries(series4);
-        graph.addSeries(series5);
-        graph.addSeries(series6);
-        graph.addSeries(series7);
-        graph.addSeries(series8);
-        graph.addSeries(series9);
-
-        List<Integer> Numbers = new ArrayList<>();
-        Numbers.add(diarrhea29);
-        Numbers.add(diarrhea30);
-        Numbers.add(diarrhea31);
-        Numbers.add(diarrhea32);
-        Numbers.add(runnyNose29);
-        Numbers.add(runnyNose30);
-        Numbers.add(runnyNose31);
-        Numbers.add(runnyNose32);
-        Numbers.add(nasalCongestion29);
-        Numbers.add(nasalCongestion30);
-        Numbers.add(nasalCongestion31);
-        Numbers.add(nasalCongestion32);
-        Numbers.add(breathing29);
-        Numbers.add(breathing30);
-        Numbers.add(breathing31);
-        Numbers.add(breathing32);
-        Numbers.add(tiredness29);
-        Numbers.add(tiredness30);
-        Numbers.add(tiredness31);
-        Numbers.add(tiredness32);
-        Numbers.add(throat29);
-        Numbers.add(throat30);
-        Numbers.add(throat31);
-        Numbers.add(throat32);
-        Numbers.add(cough29);
-        Numbers.add(cough30);
-        Numbers.add(cough31);
-        Numbers.add(cough32);
-        Numbers.add(fever29);
-        Numbers.add(fever30);
-        Numbers.add(fever31);
-        Numbers.add(fever32);
-        Numbers.add(headache29);
-        Numbers.add(headache30);
-        Numbers.add(headache31);
-        Numbers.add(headache32);
-        int largest = 0;
-        for(int i=0; i<Numbers.size(); i++) {
-            if(Numbers.get(i)>largest) {
-                largest = Numbers.get(i);
+            List<Integer> Numbers = new ArrayList<>();
+            Numbers.add(diarrhea29);
+            Numbers.add(diarrhea30);
+            Numbers.add(diarrhea31);
+            Numbers.add(diarrhea32);
+            Numbers.add(runnyNose29);
+            Numbers.add(runnyNose30);
+            Numbers.add(runnyNose31);
+            Numbers.add(runnyNose32);
+            Numbers.add(nasalCongestion29);
+            Numbers.add(nasalCongestion30);
+            Numbers.add(nasalCongestion31);
+            Numbers.add(nasalCongestion32);
+            Numbers.add(breathing29);
+            Numbers.add(breathing30);
+            Numbers.add(breathing31);
+            Numbers.add(breathing32);
+            Numbers.add(tiredness29);
+            Numbers.add(tiredness30);
+            Numbers.add(tiredness31);
+            Numbers.add(tiredness32);
+            Numbers.add(throat29);
+            Numbers.add(throat30);
+            Numbers.add(throat31);
+            Numbers.add(throat32);
+            Numbers.add(cough29);
+            Numbers.add(cough30);
+            Numbers.add(cough31);
+            Numbers.add(cough32);
+            Numbers.add(fever29);
+            Numbers.add(fever30);
+            Numbers.add(fever31);
+            Numbers.add(fever32);
+            Numbers.add(headache29);
+            Numbers.add(headache30);
+            Numbers.add(headache31);
+            Numbers.add(headache32);
+            int largest = 0;
+            for (int i = 0; i < Numbers.size(); i++) {
+                if (Numbers.get(i) > largest) {
+                    largest = Numbers.get(i);
+                }
             }
-        }
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMinY(0);
-        graph.getViewport().setMaxY(largest);
-        graph.getViewport().setMaxX(d4.getTime());
+            graph.getViewport().setYAxisBoundsManual(true);
+            graph.getViewport().setMinY(0);
+            graph.getViewport().setMaxY(largest);
+            graph.getViewport().setMaxX(d4.getTime());
 
-        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-        graph.getViewport().setMinX(d1.getTime());
-        graph.getViewport().setMaxX(d4.getTime());
-        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getGridLabelRenderer().setNumHorizontalLabels(4);
-        graph.getGridLabelRenderer().setNumVerticalLabels(largest+1);
-        graph.getGridLabelRenderer().setHumanRounding(false);
-        graph.setTitle("All symptoms");
-        graph.setTitleTextSize(80);
-//        graph.getViewport().setMinY(0); FÖR ATT FÅ HELA TIDSSPANNET FRÅN 1970
-//        graph.getViewport().setMinX(0);
+            graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+            graph.getViewport().setMinX(d1.getTime());
+            graph.getViewport().setMaxX(d4.getTime());
+            graph.getViewport().setXAxisBoundsManual(true);
+            graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+            graph.getGridLabelRenderer().setNumVerticalLabels(largest + 1);
+            graph.getGridLabelRenderer().setHumanRounding(false);
+            graph.setTitle("All symptoms");
+            graph.setTitleTextSize(80);
 
-//        graph.getViewport().setYAxisBoundsManual(true);
-//        graph.getViewport().setXAxisBoundsManual(true);
-        //GridLabelRenderer gridLabelY = graph.getGridLabelRenderer();
-        //gridLabelY.setVerticalAxisTitle("Number of people");
-        series.setTitle("Diarrhea");
-        series2.setTitle("Runny Nose");
-        series3.setTitle("Tiredness");
-        series4.setTitle("Fever");
-        series5.setTitle("Sore Throat");
-        series6.setTitle("Nasal Congestion");
-        series7.setTitle("Cough");
-        series8.setTitle("Headache");
-        series9.setTitle("Breathing difficulties");
-        series.setColor(Color.BLACK);
-        series2.setColor(Color.GREEN);
-        series3.setColor(Color.YELLOW);
-        series4.setColor(Color.RED);
-        series5.setColor(Color.BLUE);
-        series6.setColor(Color.MAGENTA);
-        series7.setColor(Color.DKGRAY);
-        series8.setColor(Color.CYAN);
-        series9.setColor(Color.GRAY);
-        graph.getLegendRenderer().setVisible(true);
-        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.MIDDLE);
-        graph.getLegendRenderer().setTextSize(35f);
+            series.setTitle("Diarrhea");
+            series2.setTitle("Runny Nose");
+            series3.setTitle("Tiredness");
+            series4.setTitle("Fever");
+            series5.setTitle("Sore Throat");
+            series6.setTitle("Nasal Congestion");
+            series7.setTitle("Cough");
+            series8.setTitle("Headache");
+            series9.setTitle("Breathing difficulties");
+            series.setColor(Color.BLACK);
+            series2.setColor(Color.GREEN);
+            series3.setColor(Color.YELLOW);
+            series4.setColor(Color.RED);
+            series5.setColor(Color.BLUE);
+            series6.setColor(Color.MAGENTA);
+            series7.setColor(Color.DKGRAY);
+            series8.setColor(Color.CYAN);
+            series9.setColor(Color.GRAY);
+            graph.getLegendRenderer().setVisible(true);
+            graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.MIDDLE);
+            graph.getLegendRenderer().setTextSize(35f);
         return view;
     }
-
 
     @Override
     public void onClick(View v) {
@@ -439,12 +453,17 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                 Toast.makeText(getActivity(), "Going to Start Page", Toast.LENGTH_SHORT).show();
                 ((MainActivity) getActivity()).setViewPager(0);
                 break;
-
+            case R.id.setCalendarLocation1:
+                try {
+                    getCalendarView(1);
+                } catch (OutOfDateRangeException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
     }
 
     public void showDiarrheaSeries() {
-
         graph.addSeries(series);
     }
     public void hideDiarrheaSeries () {
@@ -498,5 +517,24 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     }
     public void hideBreathingDiffSeries() {
         graph.removeSeries(series9);
+    }
+
+    public void getCalendarView(final Integer location) throws OutOfDateRangeException {
+        OnSelectDateListener listener = new OnSelectDateListener() {
+            @Override
+            public void onSelect(List<Calendar> calendars) {
+                location1Dates = calendars;
+                System.out.println("hejsan" + location1Dates);
+
+            }
+        };
+
+        DatePickerBuilder builder = new DatePickerBuilder(getContext(), listener)
+                .pickerType(cal.RANGE_PICKER).setMaximumDate(maxDate);
+        if (location1Dates != null)
+            builder.setSelectedDays(location1Dates);
+
+        DatePicker datePicker = builder.build();
+        datePicker.show();
     }
 }
