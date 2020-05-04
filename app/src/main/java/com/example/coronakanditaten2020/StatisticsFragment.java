@@ -12,13 +12,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.LegendRenderer;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class StatisticsFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "Fragment Statistics";
@@ -28,27 +32,16 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private Location[] Locations = new Location[12];
     public CheckBox diarrheaBox, runnyNoseBox, nasalConBox, headacheBox, throatBox, breathingDiffBox, tirednessBox, coughBox, feverBox;
 
-    public GraphView graph;
-    public LineGraphSeries series;
-    public LineGraphSeries series2;
-    public LineGraphSeries series3;
-    public LineGraphSeries series4;
-    public LineGraphSeries series5;
-    public LineGraphSeries series6;
-    public LineGraphSeries series7;
-    public LineGraphSeries series8;
-    public LineGraphSeries series9;
-//    public BarGraphSeries series;
-//    public BarGraphSeries series2;
-//    public BarGraphSeries series3;
-//    public BarGraphSeries series4;
-//    public BarGraphSeries series5;
-//    public BarGraphSeries series6;
-//    public BarGraphSeries series7;
-//    public BarGraphSeries series8;
-//    public BarGraphSeries series9;
-
-
+    private GraphView graph;
+    private LineGraphSeries series;
+    private LineGraphSeries series2;
+    private LineGraphSeries series3;
+    private LineGraphSeries series4;
+    private LineGraphSeries series5;
+    private LineGraphSeries series6;
+    private LineGraphSeries series7;
+    private LineGraphSeries series8;
+    private LineGraphSeries series9;
 
     @Nullable
     @Override
@@ -71,227 +64,345 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         breathingDiffBox = (CheckBox) view.findViewById(R.id.breathingDiffBox);
 
 
-        Locations[0] = new Location("59.858562", "17.638927", "2020-10-15", 0, 0, 2, 0, 3, 0, 1, 1, 0, 2, "2020-10-17 10:30");
-        Locations[1] = new Location("59.858562", "17.638927", "2020-10-15", 1, 2, 3, 0, 2, 1, 1, 2, 1, 1, "2020-10-17 10:30");
-        Locations[2] = new Location("59.858562", "17.638927", "2020-10-15", 2, 2, 1, 0, 3, 2, 1, 3, 2, 2, "2020-10-17 10:30");
-        Locations[3] = new Location("59.858562", "17.638927", "2020-10-15", 3, 3, 2, 0, 1, 3, 1, 1, 0, 3, "2020-10-17 10:30");
-        Locations[4] = new Location("59.858562", "17.638927", "2020-10-15", 4, 0, 0, 3, 3, 2, 1, 2, 0, 2, "2020-10-17 10:30");
-        Locations[5] = new Location("59.858562", "17.638927", "2020-10-15", 5, 0, 3, 0, 2, 2, 1, 3, 1, 1, "2020-10-17 10:30");
-        Locations[6] = new Location("59.858562", "17.638927", "2020-10-15", 6, 2, 0, 1, 3, 1, 1, 1, 0, 0, "2020-10-17 10:30");
-        Locations[7] = new Location("59.858562", "17.638927", "2020-10-15", 7, 3, 0, 2, 1, 2, 1, 2, 0, 3, "2020-10-17 10:30");
-        Locations[8] = new Location("59.858562", "17.638927", "2020-10-15", 8, 0, 0, 2, 3, 1, 1, 3, 3, 2, "2020-10-17 10:30");
-        Locations[9] = new Location("59.858562", "17.638927", "2020-10-15", 9, 1, 2, 0, 0, 0, 1, 1, 0, 1, "2020-10-17 10:30");
-        Locations[10] = new Location("59.858562", "17.638927", "2020-10-15", 10, 2, 1, 0, 3, 3, 1, 1, 0, 2, "2020-10-17 10:30");
-        Locations[11] = new Location("59.858562", "17.638927", "2020-10-15", 11, 3, 2, 0, 1, 0, 1, 1, 1, 3, "2020-10-17 10:30");
+        Locations[0] = new Location("59.858562", "17.638927", "2020-04-29", 0, 0, 2, 0, 3, 0, 1, 1, 0, 2, "2020-04-31");
+        Locations[1] = new Location("59.858562", "17.638927", "2020-05-01", 1, 2, 1, 0, 3, 2, 1, 3, 2, 2, "2020-04-30");
+        Locations[2] = new Location("59.858562", "17.638927", "2020-05-01", 2, 2, 1, 0, 3, 2, 1, 3, 2, 2, "2020-04-30");
+        Locations[3] = new Location("59.858562", "17.638927", "2020-04-29", 3, 3, 2, 0, 1, 3, 1, 1, 0, 3, "2020-04-31");
+        Locations[4] = new Location("59.858562", "17.638927", "2020-04-30", 4, 0, 0, 3, 3, 2, 1, 2, 0, 2, "2020-04-30");
+        Locations[5] = new Location("59.858562", "17.638927", "2020-04-30", 5, 0, 3, 0, 2, 2, 1, 3, 1, 1, "2020-04-29");
+        Locations[6] = new Location("59.858562", "17.638927", "2020-05-01", 6, 2, 0, 1, 3, 1, 1, 1, 0, 0, "2020-04-29");
+        Locations[7] = new Location("59.858562", "17.638927", "2020-04-30", 7, 3, 0, 2, 1, 2, 1, 2, 0, 3, "2020-04-30");
+        Locations[8] = new Location("59.858562", "17.638927", "2020-04-29", 8, 0, 0, 2, 3, 1, 1, 3, 3, 2, "2020-04-29");
+        Locations[9] = new Location("59.858562", "17.638927", "2020-05-01", 9, 1, 2, 0, 0, 0, 1, 1, 0, 1, "2020-04-29");
+        Locations[10] = new Location("59.858562", "17.638927", "2020-04-29", 10, 2, 1, 0, 3, 3, 1, 1, 0, 2, "2020-04-30");
+        Locations[11] = new Location("59.858562", "17.638927", "2020-05-01", 11, 3, 2, 0, 1, 0, 1, 1, 1, 3, "2020-04-29");
 
         //ALLA SYMPTOM
-        int diarrhea = 0;
-        int runnyNose = 0;
-        int nasalCongestion = 0;
-        int headache = 0;
-        int throat = 0;
-        int breathing = 0;
-        int tiredness = 0;
-        int cough = 0;
-        int fever = 0;
-        DataPoint dataPoint1;
-        DataPoint dataPoint2;
-        DataPoint dataPoint3;
-        DataPoint dataPoint4;
-        DataPoint dataPoint5;
-        DataPoint dataPoint6;
-        DataPoint dataPoint7;
-        DataPoint dataPoint8;
-        DataPoint dataPoint9;
+        int diarrhea29 = 0;
+        int diarrhea30 = 0;
+        int diarrhea31 = 0;
+        int diarrhea32 = 0;
+        int runnyNose29 = 0;
+        int runnyNose30 = 0;
+        int runnyNose31 = 0;
+        int runnyNose32 = 0;
+        int nasalCongestion29 = 0;
+        int nasalCongestion30 = 0;
+        int nasalCongestion31 = 0;
+        int nasalCongestion32 = 0;
+        int headache29 = 0;
+        int headache30 = 0;
+        int headache31 = 0;
+        int headache32 = 0;
+        int throat29 = 0;
+        int throat30 = 0;
+        int throat31 = 0;
+        int throat32 = 0;
+        int breathing29 = 0;
+        int breathing30 = 0;
+        int breathing31 = 0;
+        int breathing32 = 0;
+        int tiredness29 = 0;
+        int tiredness30 = 0;
+        int tiredness31 = 0;
+        int tiredness32 = 0;
+        int cough29 = 0;
+        int cough30 = 0;
+        int cough31 = 0;
+        int cough32 = 0;
+        int fever29 = 0;
+        int fever30 = 0;
+        int fever31 = 0;
+        int fever32 = 0;
 
 
 
         for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getDiarrheaRatingBar() == 1 || Locations[i].getDiarrheaRatingBar() == 2 || Locations[i].getDiarrheaRatingBar() == 3) {
-                diarrhea += 1;
-            } else {
-                diarrhea += 0;
+            if (Locations[i].getDiarrheaRatingBar() > 0) {
+                if(Locations[i].getDate() == "2020-04-29") {
+                    diarrhea29 += 1;
+                }
+                if(Locations[i].getDate() == "2020-04-30") {
+                    diarrhea30 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-01") {
+                    diarrhea31 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-02") {
+                    diarrhea32 += 1;
+                }
             }
         }
-
         for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getRunnyNoseRatingBar() == 1 || Locations[i].getRunnyNoseRatingBar() == 2 || Locations[i].getRunnyNoseRatingBar() == 3) {
-                runnyNose += 1;
-            } else {
-                runnyNose += 0;
+            if (Locations[i].getRunnyNoseRatingBar() > 0) {
+                if(Locations[i].getDate() == "2020-04-29") {
+                    runnyNose29 += 1;
+                }
+                if(Locations[i].getDate() == "2020-04-30") {
+                    runnyNose30 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-01") {
+                    runnyNose31 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-02") {
+                    runnyNose32 += 1;
+                }
             }
         }
-
         for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getNasalCongestionRatingBar() == 1 || Locations[i].getNasalCongestionRatingBar() == 2 || Locations[i].getNasalCongestionRatingBar() == 3) {
-                nasalCongestion += 1;
-            } else {
-                nasalCongestion += 0;
+            if (Locations[i].getNasalCongestionRatingBar() > 0) {
+                if(Locations[i].getDate() == "2020-04-29") {
+                    nasalCongestion29 += 1;
+                }
+                if(Locations[i].getDate() == "2020-04-30") {
+                    nasalCongestion30 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-01") {
+                    nasalCongestion31 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-02") {
+                    nasalCongestion32 += 1;
+                }
             }
         }
-
         for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getHeadacheRatingBar() == 1 || Locations[i].getHeadacheRatingBar() == 2 || Locations[i].getHeadacheRatingBar() == 3) {
-                headache += 1;
-            } else {
-                headache += 0;
+            if (Locations[i].getHeadacheRatingBar() > 0) {
+                if(Locations[i].getDate() == "2020-04-29") {
+                    headache29 += 1;
+                }
+                if(Locations[i].getDate() == "2020-04-30") {
+                    headache30 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-01") {
+                    headache31 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-02") {
+                    headache32 += 1;
+                }
             }
         }
-
         for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getThroatRatingBar() == 1 || Locations[i].getThroatRatingBar() == 2 || Locations[i].getThroatRatingBar() == 3) {
-                throat += 1;
-            } else {
-                throat += 0;
+            if (Locations[i].getThroatRatingBar() > 0) {
+                if(Locations[i].getDate() == "2020-04-29") {
+                    throat29 += 1;
+                }
+                if(Locations[i].getDate() == "2020-04-30") {
+                    throat30 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-01") {
+                    throat31 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-02") {
+                    throat32 += 1;
+                }
             }
         }
-
         for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getBreathingRatingBar() == 1 || Locations[i].getBreathingRatingBar() == 2 || Locations[i].getBreathingRatingBar() == 3) {
-                breathing += 1;
-            } else {
-                breathing += 0;
+            if (Locations[i].getBreathingRatingBar() > 0) {
+                if(Locations[i].getDate() == "2020-04-29") {
+                    breathing29 += 1;
+                }
+                if(Locations[i].getDate() == "2020-04-30") {
+                    breathing30 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-01") {
+                    breathing31 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-02") {
+                    breathing32 += 1;
+                }
             }
         }
-
         for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getTirednessRatingBar() == 1 || Locations[i].getTirednessRatingBar() == 2 || Locations[i].getTirednessRatingBar() == 3) {
-                tiredness += 1;
-            } else {
-                tiredness += 0;
+            if (Locations[i].getTirednessRatingBar() > 0) {
+                if(Locations[i].getDate() == "2020-04-29") {
+                    tiredness29 += 1;
+                }
+                if(Locations[i].getDate() == "2020-04-30") {
+                    tiredness30 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-01") {
+                    tiredness31 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-02") {
+                    tiredness32 += 1;
+                }
             }
         }
-
         for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getCoughRatingBar() == 1 || Locations[i].getCoughRatingBar() == 2 || Locations[i].getCoughRatingBar() == 3) {
-                cough += 1;
-            } else {
-                cough += 0;
+            if (Locations[i].getCoughRatingBar() > 0) {
+                if(Locations[i].getDate() == "2020-04-29") {
+                    cough29 += 1;
+                }
+                if(Locations[i].getDate() == "2020-04-30") {
+                    cough30 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-01") {
+                    cough31 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-02") {
+                    cough32 += 1;
+                }
             }
         }
-
         for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getFeverRatingBar() == 1 || Locations[i].getFeverRatingBar() == 2 || Locations[i].getFeverRatingBar() == 3) {
-                fever += 1;
-            } else {
-                fever += 0;
+            if (Locations[i].getFeverRatingBar() > 0) {
+                if(Locations[i].getDate() == "2020-04-29") {
+                    fever29 += 1;
+                }
+                if(Locations[i].getDate() == "2020-04-30") {
+                    fever30 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-01") {
+                    fever31 += 1;
+                }
+                if(Locations[i].getDate() == "2020-05-02") {
+                    fever32 += 1;
+                }
             }
         }
 
-        //LINE GRAPH SERIES
 
+
+
+        Calendar calendar = Calendar.getInstance();
+        Date d1 = calendar.getTime();
+        calendar.add(Calendar.DATE, 1);
+        Date d2 = calendar.getTime();
+        calendar.add(Calendar.DATE, 1);
+        Date d3 = calendar.getTime();
+        calendar.add(Calendar.DATE,1);
+        Date d4 = calendar.getTime();
+        calendar.add(Calendar.DATE,1);
         graph = (GraphView) view.findViewById(R.id.graph1);
-        series = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0, 0),
-                new DataPoint(1, 0),
-                new DataPoint(2, 0),
-                new DataPoint(3, 0),
+        series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(d1, diarrhea29),
+                new DataPoint(d2, diarrhea30),
+                new DataPoint(d3, diarrhea31),
+                new DataPoint(d4, diarrhea32)
         });
-        series2 = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0, 1),
-                new DataPoint(1, 1),
-                new DataPoint(2, 1),
-                new DataPoint(3, 1),
+        series2 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(d1, runnyNose29),
+                new DataPoint(d2, runnyNose30),
+                new DataPoint(d3, runnyNose31),
+                new DataPoint(d4, runnyNose32)
         });
-        series3 = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0, 2),
-                new DataPoint(1, 2),
-                new DataPoint(2, 2),
-                new DataPoint(3, 2),
+        series3 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(d1, nasalCongestion29),
+                new DataPoint(d2, nasalCongestion30),
+                new DataPoint(d3, nasalCongestion31),
+                new DataPoint(d4, nasalCongestion32)
         });
-        series4 = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0, 3),
-                new DataPoint(1, 3),
-                new DataPoint(2, 3),
-                new DataPoint(3, 3),
+        series4 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(d1, headache29),
+                new DataPoint(d2, headache30),
+                new DataPoint(d3, headache31),
+                new DataPoint(d4, headache32)
         });
-        series5 = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0, 4),
-                new DataPoint(1, 4),
-                new DataPoint(2, 4),
-                new DataPoint(3, 4),
+        series5 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(d1, throat29),
+                new DataPoint(d2, throat30),
+                new DataPoint(d3, throat31),
+                new DataPoint(d4, throat32)
         });
-        series6 = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0, 5),
-                new DataPoint(1, 5),
-                new DataPoint(2, 5),
-                new DataPoint(3, 5),
+        series6 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(d1, breathing29),
+                new DataPoint(d2, breathing30),
+                new DataPoint(d3, breathing31),
+                new DataPoint(d4, breathing32)
         });
-        series7 = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0, 6),
-                new DataPoint(1, 6),
-                new DataPoint(2, 6),
-                new DataPoint(3, 6)
+        series7 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(d1, tiredness29),
+                new DataPoint(d2, tiredness30),
+                new DataPoint(d3, tiredness31),
+                new DataPoint(d4, tiredness32)
         });
-        series8 = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0, 7),
-                new DataPoint(1, 7),
-                new DataPoint(2, 7),
-                new DataPoint(3, 7),
+        series8 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(d1, cough29),
+                new DataPoint(d2, cough30),
+                new DataPoint(d3, cough31),
+                new DataPoint(d4, cough32)
         });
-        series9 = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0, 8),
-                new DataPoint(1, 8),
-                new DataPoint(2, 8),
-                new DataPoint(3, 8),
+        series9 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(d1, fever29),
+                new DataPoint(d2, fever30),
+                new DataPoint(d3, fever31),
+                new DataPoint(d4, fever32)
         });
-
         graph.addSeries(series);
-        series.setDrawDataPoints(true);
-        series.setDataPointsRadius(10);
-        series.setThickness(8);
-
         graph.addSeries(series2);
-        series2.setDrawDataPoints(true);
-        series2.setDataPointsRadius(10);
-        series2.setThickness(8);
-
         graph.addSeries(series3);
-        series3.setDrawDataPoints(true);
-        series3.setDataPointsRadius(10);
-        series3.setThickness(8);
-
         graph.addSeries(series4);
-        series4.setDrawDataPoints(true);
-        series4.setDataPointsRadius(10);
-        series4.setThickness(8);
-
         graph.addSeries(series5);
-        series5.setDrawDataPoints(true);
-        series5.setDataPointsRadius(10);
-        series5.setThickness(8);
-
         graph.addSeries(series6);
-        series6.setDrawDataPoints(true);
-        series6.setDataPointsRadius(10);
-        series6.setThickness(8);
-
         graph.addSeries(series7);
-        series7.setDrawDataPoints(true);
-        series7.setDataPointsRadius(10);
-        series7.setThickness(8);
-
         graph.addSeries(series8);
-        series8.setDrawDataPoints(true);
-        series8.setDataPointsRadius(10);
-        series8.setThickness(8);
-
         graph.addSeries(series9);
-        series9.setDrawDataPoints(true);
-        series9.setDataPointsRadius(10);
-        series9.setThickness(8);
 
+        List<Integer> Numbers = new ArrayList<>();
+        Numbers.add(diarrhea29);
+        Numbers.add(diarrhea30);
+        Numbers.add(diarrhea31);
+        Numbers.add(diarrhea32);
+        Numbers.add(runnyNose29);
+        Numbers.add(runnyNose30);
+        Numbers.add(runnyNose31);
+        Numbers.add(runnyNose32);
+        Numbers.add(nasalCongestion29);
+        Numbers.add(nasalCongestion30);
+        Numbers.add(nasalCongestion31);
+        Numbers.add(nasalCongestion32);
+        Numbers.add(breathing29);
+        Numbers.add(breathing30);
+        Numbers.add(breathing31);
+        Numbers.add(breathing32);
+        Numbers.add(tiredness29);
+        Numbers.add(tiredness30);
+        Numbers.add(tiredness31);
+        Numbers.add(tiredness32);
+        Numbers.add(throat29);
+        Numbers.add(throat30);
+        Numbers.add(throat31);
+        Numbers.add(throat32);
+        Numbers.add(cough29);
+        Numbers.add(cough30);
+        Numbers.add(cough31);
+        Numbers.add(cough32);
+        Numbers.add(fever29);
+        Numbers.add(fever30);
+        Numbers.add(fever31);
+        Numbers.add(fever32);
+        Numbers.add(headache29);
+        Numbers.add(headache30);
+        Numbers.add(headache31);
+        Numbers.add(headache32);
+        int largest = 0;
+        for(int i=0; i<Numbers.size(); i++) {
+            if(Numbers.get(i)>largest) {
+                largest = Numbers.get(i);
+            }
+        }
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setMaxY(largest);
+        graph.getViewport().setMaxX(d4.getTime());
+
+        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+        graph.getViewport().setMinX(d1.getTime());
+        graph.getViewport().setMaxX(d4.getTime());
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+        graph.getGridLabelRenderer().setNumVerticalLabels(largest+1);
+        graph.getGridLabelRenderer().setHumanRounding(false);
         graph.setTitle("All symptoms");
         graph.setTitleTextSize(80);
-        graph.getViewport().setMinY(0);
-        graph.getViewport().setMinX(0);
-        graph.getViewport().setMaxX(8);
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setXAxisBoundsManual(true);
-        GridLabelRenderer gridLabelX = graph.getGridLabelRenderer();
-        gridLabelX.setHorizontalAxisTitle("Severity of symptom");
-        GridLabelRenderer gridLabelY = graph.getGridLabelRenderer();
-        gridLabelY.setVerticalAxisTitle("Number of people");
+//        graph.getViewport().setMinY(0); FÖR ATT FÅ HELA TIDSSPANNET FRÅN 1970
+//        graph.getViewport().setMinX(0);
+
+//        graph.getViewport().setYAxisBoundsManual(true);
+//        graph.getViewport().setXAxisBoundsManual(true);
+        //GridLabelRenderer gridLabelY = graph.getGridLabelRenderer();
+        //gridLabelY.setVerticalAxisTitle("Number of people");
         series.setTitle("Diarrhea");
         series2.setTitle("Runny Nose");
         series3.setTitle("Tiredness");
@@ -313,10 +424,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.MIDDLE);
         graph.getLegendRenderer().setTextSize(35f);
-        //graph.getLegendRenderer().setFixedPosition(0, 0);
         return view;
     }
-
 
 
     @Override
@@ -335,10 +444,11 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     }
 
     public void showDiarrheaSeries() {
+
         graph.addSeries(series);
     }
     public void hideDiarrheaSeries () {
-        System.out.println(series);
+        System.out.println(graph);
         graph.removeSeries(series);
     }
     public void showRunnyNoseSeries() {

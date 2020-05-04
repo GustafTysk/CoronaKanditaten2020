@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,12 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.applandeo.materialcalendarview.DatePicker;
+import com.applandeo.materialcalendarview.builders.DatePickerBuilder;
+import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
+import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -32,14 +34,19 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class ReportLocationFragment extends Fragment  implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMapClickListener {
     private static final String TAG = "Fragment Statistics";
     private ViewGroup containerThis;
-    private CalendarView cal;
+    private com.applandeo.materialcalendarview.CalendarView cal;
+    private Calendar minDate = Calendar.getInstance(TimeZone.getDefault());
+    private Calendar maxDate = Calendar.getInstance(TimeZone.getDefault());
+    private long dateNumberOfDaysAgo = 1209600000;                              //get 14 days im ms, 14 days = 14 * 24* 60 * 60 * 1000 = 1209600000 ms
+    private long minDateTime = minDate.getTimeInMillis()-dateNumberOfDaysAgo;   //get date 14 days ago (today - 14 days in ms)
 
 
     private GoogleMap mGoogleMap;
@@ -47,7 +54,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     public PopupWindow mapWindow;
 
     private Marker reportedLocation;
-    private String yourLocationString;
+    private String yourLocation1String;
+    private String yourLocation2String;
+    private String yourLocation3String;
 
     private Bundle savedInstance;
 
@@ -56,22 +65,28 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
     private ImageButton setLocation1;
     private ImageButton setLocation2;
+    private ImageButton setLocation3;
 
     private ImageButton setCalendarLocation1;
     private ImageButton setCalendarLocation2;
+    private ImageButton setCalendarLocation3;
 
     private TextView textViewLocation1;
     private TextView textViewLocation2;
+    private TextView textViewLocation3;
 
-    private int currentLocationReport;
+    private int currentLocationReport = 0;
 
-    private long dateNumberOfDaysAgo = 1209600000; //get date 14 days ago, 14 days = 14 * 24* 60 * 60 * 1000 = 1209600000 ms
-    private long location1Date;
-    private String location1DateString;
-    private long location2Date;
-    private String location2DateString;
-    private LatLng location1;
-    private LatLng location2;
+    private List<Calendar> location1Dates;
+    private String location1DateString = "";
+    private List<Calendar> location2Dates;
+    private String location2DateString = "";
+    private List<Calendar> location3Dates;
+    private String location3DateString = "";
+
+    private LatLng location1 = null;
+    private LatLng location2 = null;
+    private LatLng location3 = null;
 
     @Nullable
     @Override
@@ -88,14 +103,21 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         setLocation1.setOnClickListener(this);
         setLocation2 = (ImageButton) view.findViewById(R.id.setLocation2);
         setLocation2.setOnClickListener(this);
+        setLocation3 = (ImageButton) view.findViewById(R.id.setLocation3);
+        setLocation3.setOnClickListener(this);
 
         setCalendarLocation1 = (ImageButton) view.findViewById(R.id.setCalendarLocation1);
         setCalendarLocation1.setOnClickListener(this);
         setCalendarLocation2 = (ImageButton) view.findViewById(R.id.setCalendarLocation2);
         setCalendarLocation2.setOnClickListener(this);
+        setCalendarLocation3 = (ImageButton) view.findViewById(R.id.setCalendarLocation3);
+        setCalendarLocation3.setOnClickListener(this);
 
         textViewLocation1 = (TextView) view.findViewById(R.id.textViewLocation1);
         textViewLocation2 = (TextView) view.findViewById(R.id.textViewLocation2);
+        textViewLocation3 = (TextView) view.findViewById(R.id.textViewLocation3);
+
+        minDate.setTimeInMillis(minDateTime);
 
 
 
@@ -121,11 +143,30 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 currentLocationReport = 2;
                 startReportLocationMap();
                 break;
+            case R.id.setLocation3:
+                currentLocationReport = 3;
+                startReportLocationMap();
+                break;
             case R.id.setCalendarLocation1:
-                getCalendarView(1);
+                try {
+                    getCalendarView(1);
+                } catch (OutOfDateRangeException e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.setCalendarLocation2:
-                getCalendarView(2);
+                try {
+                    getCalendarView(2);
+                } catch (OutOfDateRangeException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.setCalendarLocation3:
+                try {
+                    getCalendarView(3);
+                } catch (OutOfDateRangeException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
@@ -154,44 +195,91 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         final LatLng yourLocation = new LatLng(59.8, 17.63);
         mGoogleMap = googleMap;
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(59.8, 17.63), 10));
-
         reportedLocation = googleMap.addMarker(new MarkerOptions()
                 .position(yourLocation)
                 .title("yourLocation")
                 .draggable(true));
         googleMap.setOnMapClickListener(this);
+
+        switch (currentLocationReport) {
+            case 1:
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 10));
+                if (location1 != null) {
+                    reportedLocation.setPosition(location1);
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location1, 10));
+                }
+                break;
+            case 2:
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 10));
+                if (location2 != null) {
+                    reportedLocation.setPosition(location2);
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location2, 10));
+                }
+                break;
+            case 3:
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 10));
+                if (location3 != null) {
+                    reportedLocation.setPosition(location3);
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location3, 10));
+                }
+                break;
+            default:
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 10));
+        }
     }
 
-    public void getCalendarView(final Integer location){
-        Dialog dialog = new Dialog(getContext());
-
-        dialog.setContentView(R.layout.dialog_calendar_report);
-        cal = (CalendarView) dialog.findViewById(R.id.calendarLocation);
-        cal.setMaxDate(cal.getDate());
-        cal.setMinDate(cal.getDate() - dateNumberOfDaysAgo);
-        cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+    public void getCalendarView(final Integer location) throws OutOfDateRangeException {
+        OnSelectDateListener listener = new OnSelectDateListener() {
             @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+            public void onSelect(List<Calendar> calendars) {
+                String tempLocationString = "";
 
-                Toast.makeText(getContext(),"Selected Date is\n\n" +dayOfMonth+" : "+month+" : "+year , Toast.LENGTH_LONG).show();
+                for (Calendar day: calendars){
+                    tempLocationString += day.get(Calendar.DAY_OF_MONTH)+"-"+(day.get(Calendar.MONTH)+1)+"-"+day.get(Calendar.YEAR)+"\n"; // Toast Print
+                }
 
                 switch (location){
                     case 1:
-                        location1Date = cal.getDate();
-                        location1DateString = (dayOfMonth +"-" + month + "-" + year);
-                        System.out.println("Case 1\n" + "Location 1 Date: " + location1DateString +"\nLocation 2 Date: " + location2Date);
+                        location1Dates = calendars;
+                        location1DateString = tempLocationString;
+
+                        Toast.makeText(getContext(),"Selected Dates\n" + location1DateString, Toast.LENGTH_LONG).show();
                         break;
                     case 2:
-                        location2Date = cal.getDate();
-                        location2DateString = (dayOfMonth +"-" + month + "-" + year);
-                        System.out.println("Case 2\n" + "Location 1 Date: " + location1DateString + "\nLocation 2 Date: "+ location2DateString);
+                        location2Dates = calendars;
+                        location2DateString = tempLocationString;
+                        Toast.makeText(getContext(),"Selected Dates\n" + location2DateString, Toast.LENGTH_LONG).show();
+                        break;
+                    case 3:
+                        location3Dates = calendars;
+                        location3DateString = tempLocationString;
+                        Toast.makeText(getContext(),"Selected Dates\n" + location3DateString, Toast.LENGTH_LONG).show();
                         break;
                 }
             }
-        });
-        dialog.setTitle("Report days at location");
-        dialog.show();
+        };
+
+        DatePickerBuilder builder = new DatePickerBuilder(getContext(), listener)
+                .pickerType(cal.MANY_DAYS_PICKER).setMaximumDate(maxDate).setMinimumDate(minDate);
+
+        switch (location){
+            case 1:
+                if (location1Dates != null)
+                builder.setSelectedDays(location1Dates);
+                break;
+            case 2:
+                if (location2Dates != null)
+                builder.setSelectedDays(location2Dates);
+                break;
+            case 3:
+                if (location3Dates != null)
+                    builder.setSelectedDays(location3Dates);
+                break;
+            default:
+
+        }
+        DatePicker datePicker = builder.build();
+        datePicker.show();
     }
 
     @Override
@@ -202,9 +290,22 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
         List<Address> addresses = null;
         try {
-            addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude, 1);
-            yourLocationString = addresses.get(0).getAddressLine(0);
-            reportedLocation.setTitle(yourLocationString);
+            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            switch (currentLocationReport) {
+                case 1:
+                    yourLocation1String = addresses.get(0).getAddressLine(0);
+                    reportedLocation.setTitle(yourLocation1String);
+                    break;
+                case 2:
+                    yourLocation2String = addresses.get(0).getAddressLine(0);
+                    reportedLocation.setTitle(yourLocation2String);
+                    break;
+                case 3:
+                    yourLocation3String = addresses.get(0).getAddressLine(0);
+                    reportedLocation.setTitle(yourLocation3String);
+                    break;
+                default:
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -215,24 +316,26 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         switch (location){
             case 1:
                 location1 = reportedLocation.getPosition();
-                textViewLocation1.setText(yourLocationString);
+                textViewLocation1.setText(yourLocation1String);
                 break;
             case 2:
                 location2 = reportedLocation.getPosition();
-                textViewLocation2.setText(yourLocationString);
+                textViewLocation2.setText(yourLocation2String);
                 break;
-        }
+            case 3:
+                location3 = reportedLocation.getPosition();
+                textViewLocation3.setText(yourLocation3String);
+                break;
+            default:
 
+        }
+        System.out.println("1: "+location1+ "\n2: "+ location2+ "\n3: "+location3);
         super.onDestroy();
         mMapView.onDestroy();
         mapWindow.dismiss();
-        System.out.println("Location 1: " + location1);
-        System.out.println("Location 2: " + location2);
     }
 
     public int getCurrentLocationReport(){
         return currentLocationReport;
     }
-
-
 }

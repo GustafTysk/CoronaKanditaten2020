@@ -4,8 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <CalendarView
+    <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/calendarLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:type="many_days_picker"/>
+
 </RelativeLayout>
