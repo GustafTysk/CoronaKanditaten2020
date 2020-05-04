@@ -76,6 +76,8 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     private TextView textViewLocation3;
 
     private int currentLocationReport = 0;
+    private final LatLng yourLocation = new LatLng(59.8, 17.63);
+    private String yourLocationString;
 
     private List<Calendar> location1Dates;
     private String location1DateString = "";
@@ -190,12 +192,12 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        final LatLng yourLocation = new LatLng(59.8, 17.63);
+
         mGoogleMap = googleMap;
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
         reportedLocation = googleMap.addMarker(new MarkerOptions()
                 .position(yourLocation)
-                .title("yourLocation")
+                .title("Your Location")
                 .draggable(true));
         googleMap.setOnMapClickListener(this);
 
@@ -283,10 +285,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     @Override
     public void onMapClick(LatLng latLng) {
         reportedLocation.setPosition(latLng);
-
-        System.out.println(reportedLocation.getPosition());
-        Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+        Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());;
         List<Address> addresses = null;
+        System.out.println(reportedLocation.getPosition());
         try {
             addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
             switch (currentLocationReport) {
@@ -309,7 +310,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         }
     }
 
-    public void dismissPopup(Integer location){
+    public void dismissPopup(Integer location) {
 
         switch (location){
             case 1:
@@ -325,7 +326,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 textViewLocation3.setText(yourLocation3String);
                 break;
             default:
-
         }
         System.out.println("1: "+location1+ "\n2: "+ location2+ "\n3: "+location3);
         super.onDestroy();
