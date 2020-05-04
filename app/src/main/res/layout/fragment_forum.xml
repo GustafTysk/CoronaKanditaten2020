@@ -7,36 +7,25 @@
     android:layout_height="match_parent">
 
     <RadioGroup
-        android:id="@+id/radioGroupGender"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView">
-
-        <RadioButton
-            android:id="@+id/radio_male"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:onClick="onRadioButtonClicked"
-            android:text="Male" />
-
-        <RadioButton
-            android:id="@+id/radio_female"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:onClick="onRadioButtonClicked"
-            android:text="Female" />
-
-        <RadioButton
-            android:id="@+id/radio_other"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:onClick="onRadioButtonClicked"
-            android:text="Other" />
+        <RadioButton android:id="@+id/radio_pirates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/help"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_ninjas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recommendation"
+            android:onClick="onRadioButtonClicked"/>
     </RadioGroup>
+
+
 
     <TextView
         android:id="@+id/textView"
@@ -50,26 +39,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/messageInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="@+id/radioGroupGender"
-        app:layout_constraintStart_toStartOf="@+id/radioGroupGender"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupGender" />
-
     <TextView
         android:id="@+id/messageShow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Output"
+        app:layout_constraintBottom_toTopOf="@+id/messageTitle"
+        app:layout_constraintEnd_toEndOf="@+id/messageTitle"
+        app:layout_constraintStart_toStartOf="@+id/messageTitle" />
+
+    <EditText
+        android:id="@+id/messageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="Title"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/messageInput"
         app:layout_constraintEnd_toEndOf="@+id/messageInput"
-        app:layout_constraintStart_toStartOf="@+id/messageInput"
-        app:layout_constraintTop_toBottomOf="@+id/messageInput" />
+        app:layout_constraintStart_toStartOf="@+id/messageInput" />
+
+    <EditText
+        android:id="@+id/messageInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="Write your message"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/postMessage"
@@ -81,5 +84,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/messageInput"
         app:layout_constraintStart_toEndOf="@+id/messageInput"
         app:layout_constraintTop_toTopOf="@+id/messageInput" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

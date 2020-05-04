@@ -18,5 +18,7 @@
     <string name="dialog_tiredness">Tiredness is bad </string>
     <string name="dialog_headache">Headache is bad </string>
     <string name="dialog_diarrhea">Diarrhea is bad </string>
+    <string name="help">Help and tasks </string>
+    <string name="recommendation">Recommendations and warnings </string>
 
 </resources>

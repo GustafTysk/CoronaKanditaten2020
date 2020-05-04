@@ -5,4 +5,11 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="limeGreen">#000000</color>
     <color name="red">#FF231E</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white2">#33FFFFFF</color>
+
+    <color name="buttonEnd">#00BCD4</color>
+    <color name="buttonCenter">#03A5BA</color>
+    <color name="buttonStart">#048E9F</color>
+
 </resources>

@@ -17,6 +17,7 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
     private Button btnStartToStatistics;
     private Button btnStartToHeatmap;
     private Button btnStartToRs;
+    private Button btnStartToForum;
 
     @Nullable
     @Override
@@ -28,6 +29,8 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
         btnStartToHeatmap.setOnClickListener(this);
         btnStartToRs = (Button) view.findViewById(R.id.btnStartToRs);
         btnStartToRs.setOnClickListener(this);
+        btnStartToForum = (Button) view.findViewById(R.id.btnStartToForum);
+        btnStartToForum.setOnClickListener(this);
 
         return view;
     }
@@ -44,6 +47,9 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.btnStartToRs:
                 ((MainActivity)getActivity()).setViewPager(3);
+                break;
+            case R.id.btnStartToForum:
+                ((MainActivity)getActivity()).setViewPager(5);
                 break;
 
             default:
