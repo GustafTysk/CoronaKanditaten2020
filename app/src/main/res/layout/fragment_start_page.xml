@@ -21,38 +21,71 @@
 
     <Button
         android:id="@+id/btnStartToRs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="205dp"
+        android:layout_height="76dp"
         android:layout_marginTop="50dp"
+        android:background="@drawable/button_selector"
         android:text="Report Symptoms"
         android:textAllCaps="true"
+        android:textColor="@color/white"
         android:textSize="18sp"
+        android:textStyle="bold"
+        android:drawableLeft="@drawable/sickicon"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewStartPage" />
 
     <Button
         android:id="@+id/btnStartToHeatmap"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="205dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_selector"
         android:text="Show Heatmap"
+        android:textColor="@color/white"
         android:textSize="18sp"
+        android:textStyle="bold"
+        android:drawableLeft="@drawable/earthicon"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="@+id/btnStartToRs"
         app:layout_constraintStart_toStartOf="@+id/btnStartToRs"
         app:layout_constraintTop_toBottomOf="@+id/btnStartToRs" />
 
     <Button
         android:id="@+id/btnStartToStatistics"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="205dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_selector"
         android:text="Show Statistics"
         android:textAllCaps="true"
+        android:textColor="@color/white"
         android:textSize="18sp"
+        android:textStyle="bold"
+        android:drawableLeft="@drawable/graphicon"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"
         app:layout_constraintEnd_toEndOf="@+id/btnStartToHeatmap"
         app:layout_constraintStart_toStartOf="@+id/btnStartToHeatmap"
         app:layout_constraintTop_toBottomOf="@+id/btnStartToHeatmap" />
+
+    <Button
+        android:id="@+id/btnStartToForum"
+        android:layout_width="205dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_selector"
+        android:text="SHOW FORUM"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:drawableLeft="@drawable/chaticon"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnStartToStatistics"
+        app:layout_constraintStart_toStartOf="@+id/btnStartToStatistics"
+        app:layout_constraintTop_toBottomOf="@+id/btnStartToStatistics" />
 
     <Button
         android:id="@+id/btnLogout"
@@ -61,6 +94,8 @@
         android:layout_marginBottom="16dp"
         android:text="Log Out"
         android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:background="@drawable/button_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
