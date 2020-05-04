@@ -121,8 +121,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
         minDate.setTimeInMillis(minDateTime);
 
-
-
         return view;
     }
 
