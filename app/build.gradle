@@ -21,6 +21,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
 }
 
 dependencies {
@@ -41,6 +46,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
     //implementation'org.glassfish.jersey.containers:jersey-container-servlet:2.25.1'
+    implementation 'com.applandeo:material-calendar-view:1.7.0'
 
 
 }

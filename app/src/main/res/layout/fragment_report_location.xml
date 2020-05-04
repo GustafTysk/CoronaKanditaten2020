@@ -21,21 +21,21 @@
 
     <ImageButton
         android:id="@+id/setLocation1"
-        android:layout_width="86dp"
-        android:layout_height="86dp"
-        android:src="@drawable/ratingfilled"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_dialog_map"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation1"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation1"
         app:layout_constraintTop_toTopOf="@+id/textViewLocation1" />
 
     <ImageButton
         android:id="@+id/setLocation2"
-        android:layout_width="86dp"
-        android:layout_height="86dp"
-        android:src="@drawable/ratingfilled"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_dialog_map"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation2"
-        app:layout_constraintEnd_toEndOf="@+id/setLocation1"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation2"
         app:layout_constraintTop_toTopOf="@+id/textViewLocation2" />
 
@@ -64,40 +64,71 @@
 
     <TextView
         android:id="@+id/textViewLocation1"
-        android:layout_width="160dp"
-        android:layout_height="59dp"
+        android:layout_width="146dp"
+        android:layout_height="80dp"
         android:layout_marginTop="64dp"
         android:hint="Location 1"
+        android:textAlignment="textStart"
         app:layout_constraintStart_toStartOf="@+id/textViewReportLocation"
         app:layout_constraintTop_toBottomOf="@+id/textViewReportLocation" />
 
     <TextView
         android:id="@+id/textViewLocation2"
-        android:layout_width="160dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="128dp"
+        android:layout_width="146dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="32dp"
         android:hint="Location 2"
         app:layout_constraintStart_toStartOf="@+id/textViewLocation1"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation1" />
 
     <ImageButton
         android:id="@+id/setCalendarLocation1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_menu_my_calendar"
+        android:src="@android:drawable/ic_menu_month"
         app:layout_constraintBottom_toBottomOf="@+id/setLocation1"
         app:layout_constraintStart_toEndOf="@+id/setLocation1"
         app:layout_constraintTop_toTopOf="@+id/setLocation1" />
 
     <ImageButton
         android:id="@+id/setCalendarLocation2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_my_calendar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_month"
         app:layout_constraintBottom_toBottomOf="@+id/setLocation2"
         app:layout_constraintStart_toEndOf="@+id/setLocation2"
         app:layout_constraintTop_toTopOf="@+id/setLocation2" />
+
+    <TextView
+        android:id="@+id/textViewLocation3"
+        android:layout_width="146dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="32dp"
+        android:hint="Location 3"
+        app:layout_constraintStart_toStartOf="@+id/textViewLocation2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation2" />
+
+    <ImageButton
+        android:id="@+id/setLocation3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_dialog_map"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation3"
+        app:layout_constraintStart_toEndOf="@+id/textViewLocation3"
+        app:layout_constraintTop_toTopOf="@+id/textViewLocation3" />
+
+    <ImageButton
+        android:id="@+id/setCalendarLocation3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_month"
+        app:layout_constraintBottom_toBottomOf="@+id/setLocation3"
+        app:layout_constraintStart_toEndOf="@+id/setLocation3"
+        app:layout_constraintTop_toTopOf="@+id/setLocation3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
