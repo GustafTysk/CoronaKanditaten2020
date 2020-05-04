@@ -1,47 +1,69 @@
-/*
+
 package com.example.coronakanditaten2020;
 
-import com.google.android.gms.common.api.Api;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.Response;
 
+import android.text.GetChars;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class ClientAPI {
-     Client client;
-     Response Response;
-     Location location;
-     WebTarget baseTarget;
-     String baseurl="url";
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
+
+public interface ClientAPI {
 
 
-    public ClientAPI() {
-        client =ClientBuilder.newClient();
-        baseTarget=client.target(baseurl);
-    }
+    @GET("/location/{regtime}")
+    Call<ArrayList<Location>> getAlllocations(@Path("regtime") String regtime);
+
+    @GET("/location/{email}/user/security")
+    Call<ArrayList<Location>> getuserlocations(@Header("authorization") String Auth, @Path("email") String email);
+
+    @POST("/location/{email}/user/security")
+    Call<String> createuserlocations(@Header("authorization") String Auth,@Path("email") String email, @Body ArrayList<Location> userlocation);
+
+    @PUT("/location/{email}/user/security")
+    Call<String> updateuserlocation(@Header("authorization") String Auth,@Path("email") String email, @Body ArrayList<Location> userlocation);
+
+    @DELETE("/location/{email}/user/security")
+    Call<Boolean> removeUserlocations(@Header("authorization") String Auth,@Path("email") String email);
+
+    @GET("/User/{email}/security")
+    Call<User> getuser(@Header("authorization") String Auth, @Path("email") String email);
+
+    @POST("/User")
+    Call<Boolean> createuser( @Body User user);
+
+    @PUT("User/{email}/security")
+    Call<Boolean> updateuser(@Header("authorization") String Auth,@Path("email") String email, @Body User user);
+
+    @GET("/post/{number}")
+    Call<ArrayList<Post>> getresentposts(@Path("number") String number);
+
+    @POST("/post/{email}/security")
+    Call<Post> creatpost(@Header("authorization") @Path("email") String email);
+
+    @POST("/post/answer/{email}/security")
+    Call<Post> creatanswerpost(@Header("authorization") @Path("email") String email);
+
+    @POST("/post/like/{email}/{username}/security")
+    Call<Post> creatanswerpost(@Header("authorization") @Path("email") String email, @Path("username") String username);
 
 
-    List<Location> GetheatMapLocations(String regtime){
-        client =ClientBuilder.newClient();
-        List<Location>  heatMapLocations= client.target("URl")
-                .path("location").queryParam(regtime)
-                .request().get(new GenericType<List<Location>>(){ });
-
-        return heatMapLocations;
-    }
 
 
-    javax.ws.rs.core.Response UpdateUserLocations(List<Location> userlocations, String email){
-        client =ClientBuilder.newClient();
-        Response response= client.target("URl")
-                .path("location")
-                .request().header("email", email).put(Entity.json(userlocations));
-        return response;
-    }
+
+
+
+
+
+
 }
-*/
+

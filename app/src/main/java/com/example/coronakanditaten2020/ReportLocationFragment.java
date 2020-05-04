@@ -335,7 +335,11 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         mapWindow.dismiss();
     }
 
+
+
     public int getCurrentLocationReport(){
+
+
         return currentLocationReport;
     }
 }
