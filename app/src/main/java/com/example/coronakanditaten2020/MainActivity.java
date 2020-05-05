@@ -8,12 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 
+import com.google.android.libraries.places.api.net.PlacesClient;
+
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "StartPageActivity";
-    //private Datahandler datahandler = new Datahandler()
+    Datahandler datahandler = new Datahandler();
 
     StartPageFragment startpageFragment = new StartPageFragment();
     StatisticsFragment statisticsFragment = new StatisticsFragment();
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ReportSymptomsFragment reportSymptomsFragment = new ReportSymptomsFragment();
     ReportLocationFragment reportLocationFragment = new ReportLocationFragment();
     ForumFragment forumFragment = new ForumFragment();
+    PlacesClient placesClient;
 
     private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
     private ViewPager mViewPager;
@@ -30,11 +33,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        datahandler.credentials=new Credentials("tjtjata","reresresres");
+        datahandler.getserveruser();
+        datahandler.getalllserverocations("");
+        datahandler.getuserserverlocations();
+
         setContentView(R.layout.activity_main);
-        //Log.d(TAG, "onCreate: Started");
-        //String tja = new String("tja");
-        //datahandler.save(tja, this);
 
 
         mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());

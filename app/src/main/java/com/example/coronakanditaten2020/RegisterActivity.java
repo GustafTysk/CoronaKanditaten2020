@@ -10,6 +10,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "Fragment Register";
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -34,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText textAge;
     private EditText textPassword;
     private RadioButton lastButton;
+    Datahandler datahandler=new Datahandler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         switch(view.getId()){
             case R.id.btnToLogin:
                 intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btnRegister:
                 //GET INFORMATION AND CREATE NEW USER
@@ -79,20 +85,36 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                 if(emailCorrect && passwordCorrect && usernameCorrect && ageCorrect && genderCorrect){
                     User newUser = new User(username,email,age,gender,password);
-                    Toast.makeText(getApplicationContext(), "Successfully created new user", Toast.LENGTH_LONG).show();
-                    intent = new Intent(this, LoginActivity.class);
-                    System.out.println(newUser.printInformation());
-                    emailCorrect = false;
-                    passwordCorrect = false;
-                    usernameCorrect = false;
+                    Call<Boolean> createuser = datahandler.clientAPI.createuser(newUser);
+                    createuser.enqueue(new Callback<Boolean>() {
+                        @Override
+                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                            if(!response.isSuccessful()){
+                               Toast.makeText(getApplicationContext(), "unable to create user", Toast.LENGTH_LONG).show();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(), "Successfully created new user", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                System.out.println(newUser.printInformation());
+                                emailCorrect = false;
+                                passwordCorrect = false;
+                                usernameCorrect = false;
+                                startActivity(intent);
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Boolean> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
+
+                        }
+                    });
                 }
 
                 break;
 
             default:
-        }
-        if(intent != null){
-            startActivity(intent);
         }
     }
 
