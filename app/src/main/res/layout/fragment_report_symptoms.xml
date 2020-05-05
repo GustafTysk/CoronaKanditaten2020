@@ -5,42 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:background="butt"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ReportSymptomsFragment">
-
-        <ImageView
-            android:id="@+id/imageDiarrhea"
-            android:layout_width="148dp"
-            android:layout_height="148dp"
-            android:layout_marginTop="48dp"
-            android:src="@drawable/fever"
-            app:layout_constraintStart_toStartOf="@+id/imageTiredness"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBarTiredness" />
-
-        <TextView
-            android:id="@+id/textDiarrhea"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Diarrhea"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageDiarrhea"
-            app:layout_constraintStart_toStartOf="@+id/imageDiarrhea" />
-
-        <RatingBar
-            android:id="@+id/ratingBarDiarrhea"
-            style="@style/circleRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="3"
-            android:stepSize="1"
-            android:theme="@style/ratingBar"
-            app:layout_constraintStart_toStartOf="@+id/imageDiarrhea"
-            app:layout_constraintTop_toBottomOf="@+id/imageDiarrhea" />
 
         <TextView
             android:id="@+id/textViewReportSymptoms"
@@ -54,42 +26,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btnRsToStart"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="346dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="8dp"
-            android:text="Start Page"
-            android:textAllCaps="true"
-            android:textColorLink="#00BCD4"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBarDiarrhea" />
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_style"
+            android:fontFamily="sans-serif"
+            android:text="The first step is to report the symptoms you are feeling right now. This is done by clicking on the circles below each symptom. \n Number of red circles:\n 0 = No symptoms                               1 = Low symptoms \n 2 = Medium symptoms                     3 = High symptoms"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:paddingBottom="5dp"
 
-        <Button
-            android:id="@+id/btnRsToRl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="8dp"
-            android:text="NEXT STEP"
-            android:textAllCaps="true"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageFever"
-            android:layout_width="148dp"
-            android:layout_height="148dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="48dp"
-            android:src="@drawable/fever"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintEnd_toEndOf="@+id/textViewReportSymptoms"
+            app:layout_constraintStart_toStartOf="@+id/textViewReportSymptoms"
+            app:layout_constraintTop_toBottomOf="@+id/textViewReportSymptoms" />
 
         <TextView
             android:id="@+id/textFever"
@@ -101,27 +53,6 @@
             app:layout_constraintBottom_toTopOf="@+id/imageFever"
             app:layout_constraintStart_toStartOf="@+id/imageFever" />
 
-        <RatingBar
-            android:id="@+id/ratingBarCough"
-            style="@style/circleRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="3"
-            android:stepSize="1"
-            android:theme="@style/ratingBar"
-            app:layout_constraintStart_toStartOf="@+id/imageCough"
-            app:layout_constraintTop_toBottomOf="@+id/imageCough" />
-
-        <ImageView
-            android:id="@+id/imageCough"
-            android:layout_width="148dp"
-            android:layout_height="148dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/fever"
-            app:layout_constraintEnd_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
         <TextView
             android:id="@+id/textCough"
             android:layout_width="wrap_content"
@@ -131,27 +62,6 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/imageCough"
             app:layout_constraintStart_toStartOf="@+id/imageCough" />
-
-        <RatingBar
-            android:id="@+id/ratingBarFever"
-            style="@style/circleRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="3"
-            android:rating="0"
-            android:stepSize="1"
-            android:theme="@style/ratingBar"
-            app:layout_constraintStart_toStartOf="@+id/imageFever"
-            app:layout_constraintTop_toBottomOf="@+id/imageFever" />
-
-        <ImageView
-            android:id="@+id/imageBreathingDifficulties"
-            android:layout_width="148dp"
-            android:layout_height="148dp"
-            android:layout_marginTop="48dp"
-            android:src="@drawable/fever"
-            app:layout_constraintStart_toStartOf="@+id/imageFever"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBarFever" />
 
         <TextView
             android:id="@+id/textBreathingDifficulties"
@@ -164,17 +74,6 @@
             app:layout_constraintBottom_toTopOf="@+id/imageBreathingDifficulties"
             app:layout_constraintStart_toStartOf="@+id/imageBreathingDifficulties" />
 
-        <RatingBar
-            android:id="@+id/ratingBarBreathingDifficulties"
-            style="@style/circleRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="3"
-            android:stepSize="1"
-            android:theme="@style/ratingBar"
-            app:layout_constraintStart_toStartOf="@+id/imageBreathingDifficulties"
-            app:layout_constraintTop_toBottomOf="@+id/imageBreathingDifficulties" />
-
         <TextView
             android:id="@+id/textSoreThroat"
             android:layout_width="wrap_content"
@@ -185,16 +84,84 @@
             app:layout_constraintBottom_toTopOf="@+id/imageSoreThroat"
             app:layout_constraintStart_toStartOf="@+id/imageSoreThroat" />
 
-        <RatingBar
-            android:id="@+id/ratingBarSoreThroat"
-            style="@style/circleRating"
+        <TextView
+            android:id="@+id/textNasalCongestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numStars="3"
-            android:stepSize="1"
-            android:theme="@style/ratingBar"
-            app:layout_constraintStart_toStartOf="@+id/imageSoreThroat"
-            app:layout_constraintTop_toBottomOf="@+id/imageSoreThroat" />
+            android:text="Nasal\nCongestion"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageNasalCongestion"
+            app:layout_constraintStart_toStartOf="@+id/imageNasalCongestion" />
+
+        <TextView
+            android:id="@+id/textRunnyNose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Runny Nose"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageRunnyNose"
+            app:layout_constraintStart_toStartOf="@+id/imageRunnyNose" />
+
+        <TextView
+            android:id="@+id/textTiredness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiredness"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageTiredness"
+            app:layout_constraintStart_toStartOf="@+id/imageTiredness" />
+
+        <TextView
+            android:id="@+id/textHeadache"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Headache"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageHeadache"
+            app:layout_constraintStart_toStartOf="@+id/imageHeadache" />
+
+        <TextView
+            android:id="@+id/textDiarrhea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Diarrhea"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageDiarrhea"
+            app:layout_constraintStart_toStartOf="@+id/imageDiarrhea" />
+
+        <ImageView
+            android:id="@+id/imageFever"
+            android:layout_width="148dp"
+            android:layout_height="148dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="48dp"
+            android:src="@drawable/fever"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <ImageView
+            android:id="@+id/imageCough"
+            android:layout_width="148dp"
+            android:layout_height="148dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/fever"
+            app:layout_constraintEnd_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <ImageView
+            android:id="@+id/imageBreathingDifficulties"
+            android:layout_width="148dp"
+            android:layout_height="148dp"
+            android:layout_marginTop="48dp"
+            android:src="@drawable/fever"
+            app:layout_constraintStart_toStartOf="@+id/imageFever"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBarFever" />
 
         <ImageView
             android:id="@+id/imageSoreThroat"
@@ -214,15 +181,86 @@
             app:layout_constraintStart_toStartOf="@+id/imageBreathingDifficulties"
             app:layout_constraintTop_toBottomOf="@+id/ratingBarBreathingDifficulties" />
 
-        <TextView
-            android:id="@+id/textNasalCongestion"
+        <ImageView
+            android:id="@+id/imageRunnyNose"
+            android:layout_width="148dp"
+            android:layout_height="148dp"
+            android:layout_marginTop="48dp"
+            android:src="@drawable/fever"
+            app:layout_constraintStart_toStartOf="@+id/imageSoreThroat"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBarSoreThroat" />
+
+        <ImageView
+            android:id="@+id/imageTiredness"
+            android:layout_width="148dp"
+            android:layout_height="148dp"
+            android:layout_marginTop="48dp"
+            android:src="@drawable/fever"
+            app:layout_constraintStart_toStartOf="@+id/imageNasalCongestion"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBarNasalCongestion" />
+
+        <ImageView
+            android:id="@+id/imageHeadache"
+            android:layout_width="148dp"
+            android:layout_height="148dp"
+            android:layout_marginTop="48dp"
+            android:src="@drawable/fever"
+            app:layout_constraintStart_toStartOf="@+id/imageRunnyNose"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBarRunnyNose" />
+
+        <ImageView
+            android:id="@+id/imageDiarrhea"
+            android:layout_width="148dp"
+            android:layout_height="148dp"
+            android:layout_marginTop="48dp"
+            android:src="@drawable/fever"
+            app:layout_constraintStart_toStartOf="@+id/imageTiredness"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBarTiredness" />
+
+        <RatingBar
+            android:id="@+id/ratingBarFever"
+            style="@style/circleRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nasal\nCongestion"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageNasalCongestion"
-            app:layout_constraintStart_toStartOf="@+id/imageNasalCongestion" />
+            android:numStars="3"
+            android:rating="0"
+            android:stepSize="1"
+            android:theme="@style/ratingBar"
+            app:layout_constraintStart_toStartOf="@+id/imageFever"
+            app:layout_constraintTop_toBottomOf="@+id/imageFever" />
+
+        <RatingBar
+            android:id="@+id/ratingBarCough"
+            style="@style/circleRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="3"
+            android:stepSize="1"
+            android:theme="@style/ratingBar"
+            app:layout_constraintStart_toStartOf="@+id/imageCough"
+            app:layout_constraintTop_toBottomOf="@+id/imageCough" />
+
+        <RatingBar
+            android:id="@+id/ratingBarBreathingDifficulties"
+            style="@style/circleRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="3"
+            android:stepSize="1"
+            android:theme="@style/ratingBar"
+            app:layout_constraintStart_toStartOf="@+id/imageBreathingDifficulties"
+            app:layout_constraintTop_toBottomOf="@+id/imageBreathingDifficulties" />
+
+        <RatingBar
+            android:id="@+id/ratingBarSoreThroat"
+            style="@style/circleRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="3"
+            android:stepSize="1"
+            android:theme="@style/ratingBar"
+            app:layout_constraintStart_toStartOf="@+id/imageSoreThroat"
+            app:layout_constraintTop_toBottomOf="@+id/imageSoreThroat" />
 
         <RatingBar
             android:id="@+id/ratingBarNasalCongestion"
@@ -246,34 +284,6 @@
             app:layout_constraintStart_toStartOf="@+id/imageRunnyNose"
             app:layout_constraintTop_toBottomOf="@+id/imageRunnyNose" />
 
-        <ImageView
-            android:id="@+id/imageRunnyNose"
-            android:layout_width="148dp"
-            android:layout_height="148dp"
-            android:layout_marginTop="48dp"
-            android:src="@drawable/fever"
-            app:layout_constraintStart_toStartOf="@+id/imageSoreThroat"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBarSoreThroat" />
-
-        <ImageView
-            android:id="@+id/imageTiredness"
-            android:layout_width="148dp"
-            android:layout_height="148dp"
-            android:layout_marginTop="48dp"
-            android:src="@drawable/fever"
-            app:layout_constraintStart_toStartOf="@+id/imageNasalCongestion"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBarNasalCongestion" />
-
-        <TextView
-            android:id="@+id/textTiredness"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tiredness"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageTiredness"
-            app:layout_constraintStart_toStartOf="@+id/imageTiredness" />
-
         <RatingBar
             android:id="@+id/ratingBarTiredness"
             style="@style/circleRating"
@@ -284,15 +294,6 @@
             android:theme="@style/ratingBar"
             app:layout_constraintStart_toStartOf="@+id/imageTiredness"
             app:layout_constraintTop_toBottomOf="@+id/imageTiredness" />
-
-        <ImageView
-            android:id="@+id/imageHeadache"
-            android:layout_width="148dp"
-            android:layout_height="148dp"
-            android:layout_marginTop="48dp"
-            android:src="@drawable/fever"
-            app:layout_constraintStart_toStartOf="@+id/imageRunnyNose"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBarRunnyNose" />
 
         <RatingBar
             android:id="@+id/ratingBarHeadache"
@@ -305,37 +306,16 @@
             app:layout_constraintStart_toStartOf="@+id/imageHeadache"
             app:layout_constraintTop_toBottomOf="@+id/imageHeadache" />
 
-        <TextView
-            android:id="@+id/textHeadache"
+        <RatingBar
+            android:id="@+id/ratingBarDiarrhea"
+            style="@style/circleRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Headache"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageHeadache"
-            app:layout_constraintStart_toStartOf="@+id/imageHeadache" />
-
-        <TextView
-            android:id="@+id/textRunnyNose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Runny Nose"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageRunnyNose"
-            app:layout_constraintStart_toStartOf="@+id/imageRunnyNose" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="346dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif"
-            android:text="The first step is to report the symptoms you are feeling right now. This is done by clicking on the circles below each symptom. \n                                Number of red circles:\n 0 = No symptoms                               1 = Low symptoms \n 2 = Medium symptoms                     3 = High symptoms"
-            android:textColor="#000000"
-            app:layout_constraintEnd_toEndOf="@+id/textViewReportSymptoms"
-            app:layout_constraintStart_toStartOf="@+id/textViewReportSymptoms"
-            app:layout_constraintTop_toBottomOf="@+id/textViewReportSymptoms" />
+            android:numStars="3"
+            android:stepSize="1"
+            android:theme="@style/ratingBar"
+            app:layout_constraintStart_toStartOf="@+id/imageDiarrhea"
+            app:layout_constraintTop_toBottomOf="@+id/imageDiarrhea" />
 
         <ImageButton
             android:id="@+id/btnFeverDialog"
@@ -535,6 +515,33 @@
             app:layout_constraintEnd_toEndOf="@+id/imageFever"
             app:layout_constraintStart_toEndOf="@+id/ratingBarFever"
             app:layout_constraintTop_toTopOf="@+id/ratingBarFever" />
+
+        <Button
+            android:id="@+id/btnRsToStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="Start Page"
+            android:textAllCaps="true"
+            android:textColorLink="#00BCD4"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBarDiarrhea" />
+
+        <Button
+            android:id="@+id/btnRsToRl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="NEXT STEP"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
