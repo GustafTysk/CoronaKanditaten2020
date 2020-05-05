@@ -4,10 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="butt"
-    >
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,12 +32,12 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/button_style"
             android:fontFamily="sans-serif"
+            android:paddingBottom="5dp"
             android:text="The first step is to report the symptoms you are feeling right now. This is done by clicking on the circles below each symptom. \n Number of red circles:\n 0 = No symptoms                               1 = Low symptoms \n 2 = Medium symptoms                     3 = High symptoms"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:paddingBottom="5dp"
 
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/textViewReportSymptoms"
             app:layout_constraintStart_toStartOf="@+id/textViewReportSymptoms"
             app:layout_constraintTop_toBottomOf="@+id/textViewReportSymptoms" />
