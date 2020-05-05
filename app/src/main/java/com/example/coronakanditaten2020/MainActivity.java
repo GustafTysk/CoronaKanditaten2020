@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
 
 import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.io.IOException;
+import java.security.KeyStore;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -26,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     PlacesClient placesClient;
 
     private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
-    private ViewPager mViewPager;
+    private NonSwipeableViewPager mViewPager;
 
     private SectionsStatePagerAdapter adapter;
 
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
 
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (NonSwipeableViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
     }
 

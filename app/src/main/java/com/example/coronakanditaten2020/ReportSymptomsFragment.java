@@ -95,74 +95,48 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
         return view;
     }
     public void openDialog(String symptom) {
-
+        Dialog dialog = new Dialog(getContext());
         switch (symptom){
             case "fever":
-                Dialog dialog = new Dialog(getContext());
                 dialog.setContentView(R.layout.dialog_fever_info);
                 dialog.setTitle("Fever information");
-                dialog.show();
                 break;
             case "cough":
-                Dialog dialog2 = new Dialog(getContext());
-                dialog2.setContentView(R.layout.dialog_cough_info);
-                dialog2.setTitle("Cough information");
-                dialog2.show();
+                dialog.setContentView(R.layout.dialog_cough_info);
+                dialog.setTitle("Cough information");
                 break;
-
             case "breathing":
-                Dialog dialog3= new Dialog(getContext());
-                dialog3.setContentView(R.layout.dialog_breathing_info);
-                dialog3.setTitle("Breathing Difficulty information");
-                dialog3.show();
+                dialog.setContentView(R.layout.dialog_breathing_info);
+                dialog.setTitle("Breathing Difficulty information");
                 break;
-
             case "throat":
-                Dialog dialog4= new Dialog(getContext());
-                dialog4.setContentView(R.layout.dialog_sorethroat_info);
-                dialog4.setTitle("Sore Throat information");
-                dialog4.show();
+                dialog.setContentView(R.layout.dialog_sorethroat_info);
+                dialog.setTitle("Sore Throat information");
                 break;
-
             case "nasalcongestion":
-                Dialog dialog5= new Dialog(getContext());
-                dialog5.setContentView(R.layout.dialog_nasalcongestion_info);
-                dialog5.setTitle("Nasal Congestion information");
-                dialog5.show();
+                dialog.setContentView(R.layout.dialog_nasalcongestion_info);
+                dialog.setTitle("Nasal Congestion information");
                 break;
-
             case "runnynose":
-                Dialog dialog6= new Dialog(getContext());
-                dialog6.setContentView(R.layout.dialog_runnynose_info);
-                dialog6.setTitle("Runny Nose information");
-                dialog6.show();
+                dialog.setContentView(R.layout.dialog_runnynose_info);
+                dialog.setTitle("Runny Nose information");
                 break;
-
             case "tiredness":
-                Dialog dialog7= new Dialog(getContext());
-                dialog7.setContentView(R.layout.dialog_tiredness_info);
-                dialog7.setTitle("Tiredness information");
-                dialog7.show();
+                dialog.setContentView(R.layout.dialog_tiredness_info);
+                dialog.setTitle("Tiredness information");
                 break;
-
             case "headache":
-                Dialog dialog8= new Dialog(getContext());
-                dialog8.setContentView(R.layout.dialog_headache_info);
-                dialog8.setTitle("Headache information");
-                dialog8.show();
+                dialog.setContentView(R.layout.dialog_headache_info);
+                dialog.setTitle("Headache information");
                 break;
-
             case "diarrhea":
-                Dialog dialog9= new Dialog(getContext());
-                dialog9.setContentView(R.layout.dialog_diarrhea_info);
-                dialog9.setTitle("Diarrhea information");
-                dialog9.show();
+                dialog.setContentView(R.layout.dialog_diarrhea_info);
+                dialog.setTitle("Diarrhea information");
                 break;
             default:
 
         }
-
-
+        dialog.show();
     }
 
     private float countAllRatings(){

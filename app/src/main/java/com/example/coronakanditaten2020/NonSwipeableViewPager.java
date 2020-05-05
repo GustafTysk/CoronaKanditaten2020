@@ -12,25 +12,37 @@ import java.lang.reflect.Field;
 
 public class NonSwipeableViewPager extends ViewPager {
 
+    private Boolean enabled;
+
     public NonSwipeableViewPager(Context context) {
         super(context);
         setMyScroller();
+
     }
 
     public NonSwipeableViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         setMyScroller();
+        this.enabled = false;
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         // Never allow swiping to switch between pages
+        if (this.enabled ) {
+            return super.onTouchEvent(event);
+        }
+
         return false;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         // Never allow swiping to switch between pages
+        if (this.enabled) {
+            return super.onTouchEvent(event);
+        }
+
         return false;
     }
 

@@ -20,11 +20,13 @@ import java.util.ArrayList;
 
 public class ForumFragment extends Fragment implements View.OnClickListener {
 
-    public Button postMessage;
-    public EditText messageInput;
-    public EditText messageTitle;
-    public TextView messageShow;
-    public String currentCategory;
+    private Button postMessage;
+    private Button btnForumToStart;
+
+    private EditText messageInput;
+    private EditText messageTitle;
+    private TextView messageShow;
+    private String currentCategory;
 
     public int id = 1;
     public int parentId = 0;
@@ -38,6 +40,8 @@ public class ForumFragment extends Fragment implements View.OnClickListener {
 
         postMessage = (Button) view.findViewById(R.id.postMessage);
         postMessage.setOnClickListener(this);
+        btnForumToStart = (Button) view.findViewById(R.id.btnForumToStart);
+        btnForumToStart.setOnClickListener(this);
         messageInput = (EditText) view.findViewById(R.id.messageInput);
         messageTitle = (EditText) view.findViewById(R.id.messageTitle);
         messageShow = (TextView) view.findViewById(R.id.messageShow);
@@ -80,6 +84,9 @@ public class ForumFragment extends Fragment implements View.OnClickListener {
 
                 Post newPost = new Post(username, title, timestamp, message, likes, currentCategory, id, parentId);
                 System.out.println(newPost.printInformation());
+                break;
+            case R.id.btnForumToStart:
+                ((MainActivity) getActivity()).setViewPager(0);
                 break;
 
         }
