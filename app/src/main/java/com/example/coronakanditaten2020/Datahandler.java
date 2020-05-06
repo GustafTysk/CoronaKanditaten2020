@@ -32,7 +32,7 @@ public class Datahandler {
     Credentials credentials;
     Retrofit retrofit;
     ClientAPI clientAPI;
-    String baseurl = "http://localhost:8080/corona2/";
+    String baseurl = "http://192.168.42.145:8080/tja/webapi/";
 
     public Datahandler() {
 
@@ -104,7 +104,8 @@ public class Datahandler {
             @Override
             public void onResponse(Call<ArrayList<Location>> call, Response<ArrayList<Location>> response) {
                 if (!response.isSuccessful()) {
-                    System.out.println(response.code());
+                    System.out.println(response.message());
+
                 }
                 heatlocations = response.body();
             }
@@ -146,6 +147,7 @@ public class Datahandler {
                     System.out.println("there has been an error");
                 }
                 else{
+                    System.out.println(response.toString());
                     user=response.body();
                     System.out.println("user has succefully collected");
 
@@ -160,21 +162,7 @@ public class Datahandler {
         });
     }
 
-    public void createuserlocations(ArrayList<Location> Userlocations) {
-        Call<String> createuserlocations = clientAPI.createuserlocations(credentials.encrypt, credentials.Email, Userlocations);
-        createuserlocations.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                System.out.println(response);
-            }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                System.out.println(t);
-
-            }
-        });
-    }
 
 
 
