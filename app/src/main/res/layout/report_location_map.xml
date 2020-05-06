@@ -27,6 +27,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/mapViewReport"
         app:layout_constraintEnd_toEndOf="@+id/mapViewReport"
         app:layout_constraintStart_toStartOf="@+id/mapViewReport"
-        android:onClick="dismissPopupForLocation1"/>
+        android:onClick="dismissPopupForLocation"/>
+
+    <Button
+        android:id="@+id/btnCancelMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Cancel"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnLocation1Commit"
+        app:layout_constraintEnd_toStartOf="@+id/btnLocation1Commit"
+        android:onClick="cancelPopupForLocation"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

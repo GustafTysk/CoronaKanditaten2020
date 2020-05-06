@@ -51,19 +51,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         datahandler.getserveruser();
         datahandler.getalllserverocations("");
         datahandler.getuserserverlocations();
-
-
-
-                setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_main);
 
         mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
 
         mViewPager = (NonSwipeableViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
     }
-
-
 
     private void setupViewPager(ViewPager viewPager){
         adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
@@ -82,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
-        //System.out.println(checked);
 
         switch (view.getId()) {
             case R.id.diarrheaBox:
@@ -165,22 +158,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void dismissPopupForLocation1(View view){
+    public void dismissPopupForLocation(View view){
         reportLocationFragment.dismissPopup(reportLocationFragment.getCurrentLocationReport());
+    }
+
+    public void cancelPopupForLocation(View view){
+        reportLocationFragment.cancelMapPopup();
     }
 
     @Override
     public void onBackPressed() {
         // super.onBackPressed();
-        if(mViewPager.getCurrentItem()==1){
-            setViewPager(2);
-        }
-        else{
-            setViewPager(0);
-            
-        }
+        Boolean noClosedMap = true;
+        switch (mViewPager.getCurrentItem()){
+            case 0:
+                Toast.makeText(MainActivity.this,"There is no back action",Toast.LENGTH_LONG).show();
+                break;
+            case 4:
+                try {
+                    noClosedMap = false;
+                    reportLocationFragment.cancelMapPopup();
+                } catch (Exception e) {
+                    noClosedMap = true;
+                    e.printStackTrace();
+                }
+                if(noClosedMap){
+                    setViewPager(3);
+                }
 
-        Toast.makeText(MainActivity.this,"There is no back action",Toast.LENGTH_LONG).show();
+                break;
+            default:
+                setViewPager(0);
+        }
         return;
     }
 }

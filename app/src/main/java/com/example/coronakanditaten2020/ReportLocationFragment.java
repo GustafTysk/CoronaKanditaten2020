@@ -280,6 +280,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         }
         DatePicker datePicker = builder.build();
         datePicker.show();
+
     }
 
     @Override
@@ -328,6 +329,12 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             default:
         }
         System.out.println("1: "+location1+ "\n2: "+ location2+ "\n3: "+location3);
+        super.onDestroy();
+        mMapView.onDestroy();
+        mapWindow.dismiss();
+    }
+
+    public void cancelMapPopup(){
         super.onDestroy();
         mMapView.onDestroy();
         mapWindow.dismiss();
