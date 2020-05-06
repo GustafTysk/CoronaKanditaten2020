@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import com.google.android.libraries.places.api.net.PlacesClient;
 
@@ -156,5 +157,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void dismissPopupForLocation1(View view){
         reportLocationFragment.dismissPopup(reportLocationFragment.getCurrentLocationReport());
+    }
+
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+        if(mViewPager.getCurrentItem()==1){
+            setViewPager(2);
+        }
+        else{
+            setViewPager(0);
+            
+        }
+
+        Toast.makeText(MainActivity.this,"There is no back action",Toast.LENGTH_LONG).show();
+        return;
     }
 }
