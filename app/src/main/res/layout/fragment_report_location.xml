@@ -130,15 +130,5 @@
         app:layout_constraintStart_toEndOf="@+id/setLocation3"
         app:layout_constraintTop_toTopOf="@+id/setLocation3" />
 
-    <Button
-        android:id="@+id/btnUpdateMyLocations"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="Update My Locations"
-        app:layout_constraintBottom_toTopOf="@+id/btnRlToRs"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
