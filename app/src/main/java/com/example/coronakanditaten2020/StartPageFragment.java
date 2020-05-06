@@ -1,5 +1,6 @@
 package com.example.coronakanditaten2020;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
     private Button btnStartToHeatmap;
     private Button btnStartToRs;
     private Button btnStartToForum;
+    private Button btnLogout;
 
     @Nullable
     @Override
@@ -31,13 +33,15 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
         btnStartToRs.setOnClickListener(this);
         btnStartToForum = (Button) view.findViewById(R.id.btnStartToForum);
         btnStartToForum.setOnClickListener(this);
+        btnLogout = (Button) view.findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(this);
 
         return view;
     }
 
     @Override
     public void onClick(View v) {
-
+        Intent intent = null;
         switch (v.getId()){
             case R.id.btnStartToHeatmap:
                 ((MainActivity)getActivity()).setViewPager(2);
@@ -50,6 +54,10 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.btnStartToForum:
                 ((MainActivity)getActivity()).setViewPager(5);
+                break;
+            case R.id.btnLogout:
+                intent = new Intent(getContext(), LoginActivity.class);
+                Toast.makeText(getContext(), "Logged out successfully", Toast.LENGTH_LONG);
                 break;
 
             default:

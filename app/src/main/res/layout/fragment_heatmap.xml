@@ -68,4 +68,14 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/btnHeatmapToStart"
         app:layout_constraintEnd_toStartOf="@+id/btnHeatmapToStatistics"
         app:layout_constraintStart_toEndOf="@+id/btnHeatmapToStart" />
+
+    <Button
+        android:id="@+id/btnZoomInOnMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Zoom in on Your Location"
+        app:layout_constraintBottom_toBottomOf="@+id/mapview"
+        app:layout_constraintEnd_toEndOf="@+id/mapview"
+        app:layout_constraintStart_toStartOf="@+id/mapview" />
 </androidx.constraintlayout.widget.ConstraintLayout>

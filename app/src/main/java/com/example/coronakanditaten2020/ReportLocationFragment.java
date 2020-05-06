@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
@@ -54,14 +55,15 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     public PopupWindow mapWindow;
 
     private Marker reportedLocation;
-    private String yourLocation1String;
-    private String yourLocation2String;
-    private String yourLocation3String;
+    private String yourLocation1String = "";
+    private String yourLocation2String = "";
+    private String yourLocation3String = "";
 
     private Bundle savedInstance;
 
     private Button btnRlToStart;
     private Button btnRlToRs;
+    private Button btnUpdateMyLocations;
 
     private ImageButton setLocation1;
     private ImageButton setLocation2;
@@ -76,7 +78,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     private TextView textViewLocation3;
 
     private int currentLocationReport = 0;
-    private final LatLng yourLocation = new LatLng(59.8, 17.63);
+    private LatLng yourLocation = new LatLng(59.8, 17.63);
     private String yourLocationString;
 
     private List<Calendar> location1Dates;
@@ -100,6 +102,8 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         btnRlToStart.setOnClickListener(this);
         btnRlToRs = (Button) view.findViewById(R.id.btnRlToRs);
         btnRlToRs.setOnClickListener(this);
+        btnUpdateMyLocations = (Button) view.findViewById(R.id.btnUpdateMyLocations);
+        btnUpdateMyLocations.setOnClickListener(this);
 
         setLocation1 = (ImageButton) view.findViewById(R.id.setLocation1);
         setLocation1.setOnClickListener(this);
@@ -127,6 +131,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
 
             case R.id.btnRlToRs:
@@ -134,6 +139,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 break;
             case R.id.btnRlToStart:
                 ((MainActivity) getActivity()).setViewPager(0);
+                break;
+            case R.id.btnUpdateMyLocations:
+                Toast.makeText(getContext(), "Updated Locations sent to database", Toast.LENGTH_LONG);
                 break;
             case R.id.setLocation1:
                 currentLocationReport = 1;
@@ -172,6 +180,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     }
 
     public void startReportLocationMap(){
+        yourLocation = ((MainActivity) getActivity()).getCurrentLocation();
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View mapV = inflater.inflate(R.layout.report_location_map, null);
@@ -203,28 +212,31 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
         switch (currentLocationReport) {
             case 1:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 10));
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
+                reportedLocation.setPosition(yourLocation);
                 if (location1 != null) {
                     reportedLocation.setPosition(location1);
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location1, 10));
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location1, 15));
                 }
                 break;
             case 2:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 10));
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
+                reportedLocation.setPosition(yourLocation);
                 if (location2 != null) {
                     reportedLocation.setPosition(location2);
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location2, 10));
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location2, 15));
                 }
                 break;
             case 3:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 10));
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
+                reportedLocation.setPosition(yourLocation);
                 if (location3 != null) {
                     reportedLocation.setPosition(location3);
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location3, 10));
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location3, 15));
                 }
                 break;
             default:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 10));
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
         }
     }
 
@@ -287,8 +299,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     public void onMapClick(LatLng latLng) {
         reportedLocation.setPosition(latLng);
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());;
-        List<Address> addresses = null;
-        System.out.println(reportedLocation.getPosition());
+        List<Address> addresses;
         try {
             addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
             switch (currentLocationReport) {
@@ -312,26 +323,40 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     }
 
     public void dismissPopup(Integer location) {
-
+        Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());;
+        List<Address> addresses;
+        try {
+            addresses = geocoder.getFromLocation(yourLocation.latitude, yourLocation.longitude, 1);
+            yourLocationString = addresses.get(0).getAddressLine(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         switch (location){
             case 1:
                 location1 = reportedLocation.getPosition();
-                textViewLocation1.setText(yourLocation1String);
+                textViewLocation1.setText(yourLocationString);
+                if (yourLocation1String != "") {
+                    textViewLocation1.setText(yourLocation1String);
+                }
                 break;
             case 2:
                 location2 = reportedLocation.getPosition();
-                textViewLocation2.setText(yourLocation2String);
+                textViewLocation2.setText(yourLocationString);
+                if (yourLocation2String != "") {
+                    textViewLocation2.setText(yourLocation2String);
+                }
                 break;
             case 3:
                 location3 = reportedLocation.getPosition();
-                textViewLocation3.setText(yourLocation3String);
+                textViewLocation3.setText(yourLocationString);
+                if (yourLocation3String != "") {
+                    textViewLocation3.setText(yourLocation3String);
+                }
                 break;
             default:
         }
         System.out.println("1: "+location1+ "\n2: "+ location2+ "\n3: "+location3);
-        super.onDestroy();
-        mMapView.onDestroy();
-        mapWindow.dismiss();
+        cancelMapPopup();
     }
 
     public void cancelMapPopup(){

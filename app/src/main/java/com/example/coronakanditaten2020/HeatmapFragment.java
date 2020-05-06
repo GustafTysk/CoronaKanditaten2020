@@ -42,8 +42,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class HeatmapFragment extends Fragment implements OnMapReadyCallback {
+public class HeatmapFragment extends Fragment implements OnMapReadyCallback, View.OnClickListener {
     private static final String TAG = "Fragment Statistics";
+    private LatLng yourCurrentLocation;
+    private LatLng sweden = new LatLng(62.3875,16.325556);
     private MapView mMapView;
     private GoogleMap mGoogleMap;
     private HeatmapTileProvider mProvider;
@@ -54,6 +56,7 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback {
     private Button btnHeatmapToStatistics;
     private Button btnHeatmapToStart;
     private Button btnTestChangeDay;
+    private Button btnZoomInOnMe;
 
 
     @Nullable
@@ -62,37 +65,17 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback {
 
         View view = inflater.inflate(R.layout.fragment_heatmap, container, false);
         btnHeatmapToStart = (Button) view.findViewById(R.id.btnHeatmapToStart);
+        btnHeatmapToStart.setOnClickListener(this);
         btnHeatmapToStatistics = (Button) view.findViewById(R.id.btnHeatmapToStatistics);
+        btnHeatmapToStatistics.setOnClickListener(this);
         btnTestChangeDay = (Button) view.findViewById(R.id.btnTestChangeDay);
-
+        btnTestChangeDay.setOnClickListener(this);
+        btnZoomInOnMe = (Button) view.findViewById(R.id.btnZoomInOnMe);
+        btnZoomInOnMe.setOnClickListener(this);
 
         mMapView = (MapView) view.findViewById(R.id.mapview);
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
-
-
-
-        btnHeatmapToStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) getActivity()).setViewPager(0);
-            }
-        });
-        btnHeatmapToStatistics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) getActivity()).setViewPager(1);
-            }
-        });
-
-        btnTestChangeDay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mProvider.setWeightedData(((ArrayList)GenerateHeatMapCordsList( datahandler.getHeatmaplocations(),"2020-10-16", "placeholder")));
-                mOverlay.clearTileCache();
-            }
-        });
-
 
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
                 getChildFragmentManager().findFragmentById(R.id.autocomplete_fragment);
@@ -118,6 +101,27 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback {
         return view;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnZoomInOnMe:
+                yourCurrentLocation = ((MainActivity) getActivity()).getCurrentLocation();
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourCurrentLocation,14));
+                break;
+            case R.id.btnHeatmapToStart:
+                ((MainActivity) getActivity()).setViewPager(0);
+                break;
+            case R.id.btnHeatmapToStatistics:
+                ((MainActivity) getActivity()).setViewPager(1);
+                break;
+            case R.id.btnTestChangeDay:
+                mProvider.setWeightedData(((ArrayList)GenerateHeatMapCordsList( datahandler.getHeatmaplocations(),"2020-10-16", "placeholder")));
+                mOverlay.clearTileCache();
+                break;
+
+        }
+    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -127,7 +131,9 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback {
                 .build();
         mOverlay = mGoogleMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(59.8, 17.63), 10));
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sweden,4));
+
+
         System.out.println("jajajaj");
 
 
