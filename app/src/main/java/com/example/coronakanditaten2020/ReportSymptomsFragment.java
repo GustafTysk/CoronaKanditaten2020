@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
 public class ReportSymptomsFragment extends Fragment implements View.OnClickListener {
 
@@ -227,6 +228,7 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
         }
 
     }
+
 
 
 }
