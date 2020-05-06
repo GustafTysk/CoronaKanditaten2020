@@ -1,41 +1,30 @@
 package com.example.coronakanditaten2020;
 
 import android.graphics.Color;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.applandeo.materialcalendarview.DatePicker;
 import com.applandeo.materialcalendarview.builders.DatePickerBuilder;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
-import com.google.android.gms.maps.model.LatLng;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.TimeZone;
 
 public class StatisticsFragment extends Fragment implements View.OnClickListener {
@@ -46,7 +35,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private Location[] Locations = new Location[12];
     public CheckBox diarrheaBox, runnyNoseBox, nasalConBox, headacheBox, throatBox, breathingDiffBox, tirednessBox, coughBox, feverBox;
 
-
+    //GRAPH AND SERIES
     private GraphView graph;
     private LineGraphSeries series;
     private LineGraphSeries series2;
@@ -57,56 +46,22 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private LineGraphSeries series7;
     private LineGraphSeries series8;
     private LineGraphSeries series9;
-    private com.applandeo.materialcalendarview.CalendarView cal;
-    private List<Calendar> location1Dates;
-    private String location1DateString = "";
-    private Calendar maxDate = Calendar.getInstance(TimeZone.getDefault());
-    Calendar firstSelectedDate;
-    Calendar lastSelectedDate;
-    private ImageButton setCalendarLocation1;
+
+
 
     //ALLA SYMPTOM
-    int diarrhea29 = 0;
-    int diarrhea30 = 0;
-    int diarrhea31 = 0;
-    int diarrhea32 = 0;
-    int runnyNose29 = 0;
-    int runnyNose30 = 0;
-    int runnyNose31 = 0;
-    int runnyNose32 = 0;
-    int nasalCongestion29 = 0;
-    int nasalCongestion30 = 0;
-    int nasalCongestion31 = 0;
-    int nasalCongestion32 = 0;
-    int headache29 = 0;
-    int headache30 = 0;
-    int headache31 = 0;
-    int headache32 = 0;
-    int throat29 = 0;
-    int throat30 = 0;
-    int throat31 = 0;
-    int throat32 = 0;
-    int breathing29 = 0;
-    int breathing30 = 0;
-    int breathing31 = 0;
-    int breathing32 = 0;
-    int tiredness29 = 0;
-    int tiredness30 = 0;
-    int tiredness31 = 0;
-    int tiredness32 = 0;
-    int cough29 = 0;
-    int cough30 = 0;
-    int cough31 = 0;
-    int cough32 = 0;
-    int fever29 = 0;
-    int fever30 = 0;
-    int fever31 = 0;
-    int fever32 = 0;
+    private int diarrhea29, diarrhea30, diarrhea31, diarrhea32, runnyNose29, runnyNose30, runnyNose31, runnyNose32, nasalCongestion29, nasalCongestion30, nasalCongestion31;
+    private int nasalCongestion32, headache29, headache30, headache31, headache32, throat29, throat30, throat31, throat32, breathing29, breathing30, breathing31, breathing32;
+    private int tiredness29, tiredness30, tiredness31, tiredness32, cough29, cough30, cough31, cough32, fever29, fever30, fever31, fever32, largest;
 
+    //CALENDAR
     private Boolean noSelectedDates = true;
     private Calendar calendarStat;
     private Date d1, d2, d3, d4;
-    private int largest;
+    private ImageButton setCalendarLocation1;
+    private com.applandeo.materialcalendarview.CalendarView cal;
+    private List<Calendar> location1Dates;
+    private Calendar maxDate = Calendar.getInstance(TimeZone.getDefault());
 
     @Nullable
     @Override
@@ -151,7 +106,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
         if(noSelectedDates == true) {
             calendarStat = Calendar.getInstance();
-            calendarStat.set(Calendar.DAY_OF_YEAR, 119);
+            calendarStat.set(Calendar.DAY_OF_YEAR, 120);
             d1 = calendarStat.getTime();
             calendarStat.add(Calendar.DATE, 1);
             d2 = calendarStat.getTime();
@@ -555,7 +510,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.getViewport().setMaxY(largest);
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMaxX(d4.getTime());
-        //graph.getViewport().setMinX(d1.getTime());
+        graph.getViewport().setMinX(d1.getTime());
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
 
 
