@@ -6,9 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import java.util.Date;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private int age;
     private String gender;
     private String password;
+    private String timstamp;
 
     private EditText textUsername;
     private EditText textEmail;
@@ -83,14 +87,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 checkGender();
 
 
+
                 if(emailCorrect && passwordCorrect && usernameCorrect && ageCorrect && genderCorrect){
-                    User newUser = new User(username,email,age,gender,password);
+                    Date date = new Date();
+                    timstamp=date.toString();
+                    System.out.println(timstamp);
+                    User newUser = new User(username,email,age,gender,password,timstamp);
                     Call<Boolean> createuser = datahandler.clientAPI.createuser(newUser);
                     createuser.enqueue(new Callback<Boolean>() {
                         @Override
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                            if(!response.isSuccessful()){
+                            if(!response.isSuccessful() || !response.body()){
                                Toast.makeText(getApplicationContext(), "unable to create user", Toast.LENGTH_LONG).show();
+                                System.out.println(response.toString());
                             }
                             else{
                                 Toast.makeText(getApplicationContext(), "Successfully created new user", Toast.LENGTH_LONG).show();

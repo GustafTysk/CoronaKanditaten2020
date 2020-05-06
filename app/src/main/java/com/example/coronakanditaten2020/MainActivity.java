@@ -14,12 +14,20 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.io.IOException;
 import java.security.KeyStore;
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.Body;
+import retrofit2.http.Header;
+import retrofit2.http.Path;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "StartPageActivity";
     Datahandler datahandler = new Datahandler();
-
+    ArrayList<Location> test;
     StartPageFragment startpageFragment = new StartPageFragment();
     StatisticsFragment statisticsFragment = new StatisticsFragment();
     HeatmapFragment heatmapFragment = new HeatmapFragment();
@@ -38,12 +46,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        datahandler.credentials=new Credentials("tjtjata","reresresres");
+        datahandler.credentials=new Credentials("sdfsdf.@cdggf.fsdfds","sadfsadfa");
         datahandler.getserveruser();
         datahandler.getalllserverocations("");
         datahandler.getuserserverlocations();
 
-        setContentView(R.layout.activity_main);
+
+
+                setContentView(R.layout.activity_main);
 
 
         mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
