@@ -8,20 +8,22 @@ public class User {
     private int age;
     private String gender;
     private String password;
+    private String timestamp;
 
     public User() {
     }
 
-    public User(String username, String email, int age, String gender, String password) {
+    public User(String username, String email, int age, String gender, String password, String timestamp) {
         this.username = username;
         this.email = email;
         this.age = age;
         this.gender = gender;
         this.password = password;
+        this.timestamp=timestamp;
     }
 
     public String printInformation(){
-        return ("Username: "+this.username + "\n" + "Email: " + this.email + "\n" + "Age: " + this.age + "\n" +"Gender: " + this.gender + "\n" + "Password: " + this.password);
+        return ("Username: "+this.username + "\n" + "Email: " + this.email + "\n" + "Age: " + this.age + "\n" +"Gender: " + this.gender + "\n" + "Password: " + this.password+this.timestamp);
     };
 
     public String getUsername() {
