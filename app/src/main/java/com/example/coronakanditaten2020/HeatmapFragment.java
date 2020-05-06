@@ -79,6 +79,7 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
 
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
                 getChildFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+        autocompleteFragment.setCountry("SE");
 
 // Specify the types of place data to return.
         autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
@@ -88,6 +89,8 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
             @Override
             public void onPlaceSelected(Place place) {
                 // TODO: Get info about the selected place.
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
+
                 Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
             }
 
