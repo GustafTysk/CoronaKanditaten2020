@@ -8,6 +8,8 @@
     <color name="white">#FEFFFFFF</color>
     <color name="white2">#33FFFFFF</color>
 
+    <color name="grey">#EBECF0</color>
+
     <color name="buttonEnd">#11635C</color>
     <color name="buttonCenter">#16837A</color>
     <color name="buttonStart">#11635C</color>
