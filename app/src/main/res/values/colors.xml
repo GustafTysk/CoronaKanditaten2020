@@ -12,4 +12,8 @@
     <color name="buttonCenter">#16837A</color>
     <color name="buttonStart">#11635C</color>
 
+    <color name="buttonEnd_light">#18988D</color>
+    <color name="buttonCenter_light">#1EBAAD</color>
+    <color name="buttonStart_light">#18988D</color>
+
 </resources>

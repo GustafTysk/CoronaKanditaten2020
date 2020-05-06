@@ -5,7 +5,8 @@
     android:id="@+id/locationImageMap"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReportLocationFragment">
+    tools:context=".ReportLocationFragment"
+    >
 
     <TextView
         android:id="@+id/textViewReportLocation"
@@ -19,12 +20,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textViewLocation1"
+        android:layout_width="146dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="64dp"
+        android:hint=" Location 1"
+        android:textAlignment="textStart"
+        android:background="@drawable/edittext_outline"
+        android:paddingLeft="5dp"
+        android:paddingTop="3dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewReportLocation"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReportLocation" />
+
+    <TextView
+        android:id="@+id/textViewLocation2"
+        android:layout_width="146dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="32dp"
+        android:hint="Location 2"
+        android:background="@drawable/edittext_outline"
+        android:paddingLeft="5dp"
+        android:paddingTop="3dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewLocation1"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation1" />
+
+    <TextView
+        android:id="@+id/textViewLocation3"
+        android:layout_width="146dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="32dp"
+        android:hint="Location 3"
+        android:background="@drawable/edittext_outline"
+        android:paddingLeft="5dp"
+        android:paddingTop="3dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewLocation2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation2" />
+
     <ImageButton
         android:id="@+id/setLocation1"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:src="@android:drawable/ic_dialog_map"
+        android:background="@drawable/button_style"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation1"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation1"
         app:layout_constraintTop_toTopOf="@+id/textViewLocation1" />
@@ -35,51 +74,21 @@
         android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:src="@android:drawable/ic_dialog_map"
+        android:background="@drawable/button_style"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation2"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation2"
         app:layout_constraintTop_toTopOf="@+id/textViewLocation2" />
 
-    <Button
-        android:id="@+id/btnRlToStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Start Page"
-        android:textAllCaps="true"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnRlToRs"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/btnRlToRs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Report Symptoms"
-        android:textAllCaps="true"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewLocation1"
-        android:layout_width="146dp"
+    <ImageButton
+        android:id="@+id/setLocation3"
+        android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="64dp"
-        android:hint="Location 1"
-        android:textAlignment="textStart"
-        app:layout_constraintStart_toStartOf="@+id/textViewReportLocation"
-        app:layout_constraintTop_toBottomOf="@+id/textViewReportLocation" />
-
-    <TextView
-        android:id="@+id/textViewLocation2"
-        android:layout_width="146dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="32dp"
-        android:hint="Location 2"
-        app:layout_constraintStart_toStartOf="@+id/textViewLocation1"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLocation1" />
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_dialog_map"
+        android:background="@drawable/button_style"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation3"
+        app:layout_constraintStart_toEndOf="@+id/textViewLocation3"
+        app:layout_constraintTop_toTopOf="@+id/textViewLocation3" />
 
     <ImageButton
         android:id="@+id/setCalendarLocation1"
@@ -87,6 +96,7 @@
         android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:src="@android:drawable/ic_menu_month"
+        android:background="@drawable/button_style"
         app:layout_constraintBottom_toBottomOf="@+id/setLocation1"
         app:layout_constraintStart_toEndOf="@+id/setLocation1"
         app:layout_constraintTop_toTopOf="@+id/setLocation1" />
@@ -97,28 +107,10 @@
         android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:src="@android:drawable/ic_menu_month"
+        android:background="@drawable/button_style"
         app:layout_constraintBottom_toBottomOf="@+id/setLocation2"
         app:layout_constraintStart_toEndOf="@+id/setLocation2"
         app:layout_constraintTop_toTopOf="@+id/setLocation2" />
-
-    <TextView
-        android:id="@+id/textViewLocation3"
-        android:layout_width="146dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="32dp"
-        android:hint="Location 3"
-        app:layout_constraintStart_toStartOf="@+id/textViewLocation2"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLocation2" />
-
-    <ImageButton
-        android:id="@+id/setLocation3"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_dialog_map"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation3"
-        app:layout_constraintStart_toEndOf="@+id/textViewLocation3"
-        app:layout_constraintTop_toTopOf="@+id/textViewLocation3" />
 
     <ImageButton
         android:id="@+id/setCalendarLocation3"
@@ -126,9 +118,37 @@
         android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:src="@android:drawable/ic_menu_month"
+        android:background="@drawable/button_style"
         app:layout_constraintBottom_toBottomOf="@+id/setLocation3"
         app:layout_constraintStart_toEndOf="@+id/setLocation3"
         app:layout_constraintTop_toTopOf="@+id/setLocation3" />
+
+    <Button
+        android:id="@+id/btnRlToRs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Report Symptoms"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:background="@drawable/button_selector_light"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnRlToStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="FINISH/REPORT"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:background="@drawable/button_selector_light"
+        android:textColor="@color/white"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnRlToRs"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
