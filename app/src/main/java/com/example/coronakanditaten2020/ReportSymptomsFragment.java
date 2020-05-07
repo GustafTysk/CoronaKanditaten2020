@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class ReportSymptomsFragment extends Fragment implements View.OnClickListener {
 
@@ -144,6 +147,8 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
                 + SoreThroatRatingBar.getRating() + breathingRatingBar.getRating() + tirednessRatingBar.getRating() + coughRatingBar.getRating() + feverRatingBar.getRating();
     }
 
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -226,7 +231,22 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
                 break;
         }
 
+
     }
+    public int[] getratings(){
+        int[] ratings=new int[9];
+        ratings[0]=(int)diarrheaRatingBar.getRating();
+        ratings[1]=(int)runnyNoseRatingBar.getRating();
+        ratings[2]=(int)nasalCongestionRatingBar.getRating();
+        ratings[3]=(int)headacheRatingBar.getRating();
+        ratings[4]=(int)SoreThroatRatingBar.getRating();
+        ratings[5]=(int)breathingRatingBar.getRating();
+        ratings[6]=(int)tirednessRatingBar.getRating();
+        ratings[7]=(int)coughRatingBar.getRating();
+        ratings[8]=(int)feverRatingBar.getRating();
+        return ratings;
+    }
+
 
 
 }

@@ -149,6 +149,7 @@ public class Datahandler {
                 else{
                     System.out.println(response.toString());
                     user=response.body();
+                    System.out.println(user.getEmail());
                     System.out.println("user has succefully collected");
 
                 }

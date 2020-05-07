@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/grey">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             android:layout_width="346dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@drawable/button_style"
+            android:background="@drawable/button_selector_light"
             android:fontFamily="sans-serif"
             android:paddingBottom="5dp"
             android:text="The first step is to report the symptoms you are feeling right now. This is done by clicking on the circles below each symptom. \n Number of red circles:\n 0 = No symptoms                               1 = Low symptoms \n 2 = Medium symptoms                     3 = High symptoms"
@@ -417,103 +417,130 @@
             app:layout_constraintTop_toTopOf="@+id/textDiarrhea" />
 
         <Button
+            android:id="@+id/btnClearFeverRating"
+            android:layout_width="53dp"
+            android:layout_height="34dp"
+            android:background="@drawable/button_selector"
+            android:text="Clear"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarFever"
+            app:layout_constraintEnd_toEndOf="@+id/imageFever"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarFever"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarFever" />
+
+        <Button
             android:id="@+id/btnClearCoughRating"
             android:layout_width="53dp"
             android:layout_height="34dp"
+            android:background="@drawable/button_selector"
             android:text="Clear"
+            android:textColor="@color/white"
             android:textSize="9sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/ratingBarCough"
             app:layout_constraintEnd_toEndOf="@+id/imageCough"
             app:layout_constraintStart_toEndOf="@+id/ratingBarCough"
             app:layout_constraintTop_toTopOf="@+id/ratingBarCough" />
 
         <Button
-            android:id="@+id/btnClearTirednessRating"
-            android:layout_width="53dp"
-            android:layout_height="34dp"
-            android:text="Clear"
-            android:textSize="9sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ratingBarTiredness"
-            app:layout_constraintEnd_toEndOf="@+id/imageTiredness"
-            app:layout_constraintStart_toEndOf="@+id/ratingBarTiredness"
-            app:layout_constraintTop_toTopOf="@+id/ratingBarTiredness" />
-
-        <Button
-            android:id="@+id/btnClearDiarrheaRating"
-            android:layout_width="53dp"
-            android:layout_height="34dp"
-            android:text="Clear"
-            android:textSize="9sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ratingBarDiarrhea"
-            app:layout_constraintEnd_toEndOf="@+id/imageDiarrhea"
-            app:layout_constraintStart_toEndOf="@+id/ratingBarDiarrhea"
-            app:layout_constraintTop_toTopOf="@+id/ratingBarDiarrhea" />
-
-        <Button
-            android:id="@+id/btnClearHeadacheRating"
-            android:layout_width="53dp"
-            android:layout_height="34dp"
-            android:text="Clear"
-            android:textSize="9sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ratingBarHeadache"
-            app:layout_constraintEnd_toEndOf="@+id/imageHeadache"
-            app:layout_constraintStart_toEndOf="@+id/ratingBarHeadache"
-            app:layout_constraintTop_toTopOf="@+id/ratingBarHeadache" />
-
-        <Button
-            android:id="@+id/btnCleaarRunnyNoseRating"
-            android:layout_width="53dp"
-            android:layout_height="34dp"
-            android:text="Clear"
-            android:textSize="9sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ratingBarRunnyNose"
-            app:layout_constraintEnd_toEndOf="@+id/imageRunnyNose"
-            app:layout_constraintStart_toEndOf="@+id/ratingBarRunnyNose"
-            app:layout_constraintTop_toTopOf="@+id/ratingBarRunnyNose" />
-
-        <Button
-            android:id="@+id/btnClearNasalCongestionRating"
-            android:layout_width="53dp"
-            android:layout_height="34dp"
-            android:text="Clear"
-            android:textSize="9sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ratingBarNasalCongestion"
-            app:layout_constraintEnd_toEndOf="@+id/imageNasalCongestion"
-            app:layout_constraintStart_toEndOf="@+id/ratingBarNasalCongestion"
-            app:layout_constraintTop_toTopOf="@+id/ratingBarNasalCongestion" />
-
-        <Button
-            android:id="@+id/btnClearSoreThroatRating"
-            android:layout_width="53dp"
-            android:layout_height="34dp"
-            android:text="Clear"
-            android:textSize="9sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ratingBarSoreThroat"
-            app:layout_constraintEnd_toEndOf="@+id/imageSoreThroat"
-            app:layout_constraintStart_toEndOf="@+id/ratingBarSoreThroat"
-            app:layout_constraintTop_toTopOf="@+id/ratingBarSoreThroat" />
-
-        <Button
             android:id="@+id/btnClearBreathingRating"
             android:layout_width="53dp"
             android:layout_height="34dp"
+            android:background="@drawable/button_selector"
             android:text="Clear"
+            android:textColor="@color/white"
             android:textSize="9sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/ratingBarBreathingDifficulties"
             app:layout_constraintEnd_toEndOf="@+id/imageBreathingDifficulties"
             app:layout_constraintStart_toEndOf="@+id/ratingBarBreathingDifficulties"
             app:layout_constraintTop_toTopOf="@+id/ratingBarBreathingDifficulties" />
 
         <Button
-            android:id="@+id/btnClearFeverRating"
+            android:id="@+id/btnClearSoreThroatRating"
             android:layout_width="53dp"
             android:layout_height="34dp"
+            android:background="@drawable/button_selector"
             android:text="Clear"
+            android:textColor="@color/white"
             android:textSize="9sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ratingBarFever"
-            app:layout_constraintEnd_toEndOf="@+id/imageFever"
-            app:layout_constraintStart_toEndOf="@+id/ratingBarFever"
-            app:layout_constraintTop_toTopOf="@+id/ratingBarFever" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarSoreThroat"
+            app:layout_constraintEnd_toEndOf="@+id/imageSoreThroat"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarSoreThroat"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarSoreThroat" />
+
+        <Button
+            android:id="@+id/btnClearNasalCongestionRating"
+            android:layout_width="53dp"
+            android:layout_height="34dp"
+            android:background="@drawable/button_selector"
+            android:text="Clear"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarNasalCongestion"
+            app:layout_constraintEnd_toEndOf="@+id/imageNasalCongestion"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarNasalCongestion"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarNasalCongestion" />
+
+        <Button
+            android:id="@+id/btnCleaarRunnyNoseRating"
+            android:layout_width="53dp"
+            android:layout_height="34dp"
+            android:background="@drawable/button_selector"
+            android:text="Clear"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarRunnyNose"
+            app:layout_constraintEnd_toEndOf="@+id/imageRunnyNose"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarRunnyNose"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarRunnyNose" />
+
+        <Button
+            android:id="@+id/btnClearTirednessRating"
+            android:layout_width="53dp"
+            android:layout_height="34dp"
+            android:background="@drawable/button_selector"
+            android:text="Clear"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarTiredness"
+            app:layout_constraintEnd_toEndOf="@+id/imageTiredness"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarTiredness"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarTiredness" />
+
+        <Button
+            android:id="@+id/btnClearHeadacheRating"
+            android:layout_width="53dp"
+            android:layout_height="34dp"
+            android:background="@drawable/button_selector"
+            android:text="Clear"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarHeadache"
+            app:layout_constraintEnd_toEndOf="@+id/imageHeadache"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarHeadache"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarHeadache" />
+
+        <Button
+            android:id="@+id/btnClearDiarrheaRating"
+            android:layout_width="53dp"
+            android:layout_height="34dp"
+            android:background="@drawable/button_selector"
+            android:text="Clear"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarDiarrhea"
+            app:layout_constraintEnd_toEndOf="@+id/imageDiarrhea"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarDiarrhea"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarDiarrhea" />
 
         <Button
             android:id="@+id/btnRsToStart"
@@ -522,10 +549,14 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="8dp"
+            android:background="@drawable/button_selector_light"
             android:text="Start Page"
             android:textAllCaps="true"
+            android:textColor="@color/white"
             android:textColorLink="#00BCD4"
             android:textSize="18sp"
+            android:textStyle="bold"
+            android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ratingBarDiarrhea" />
@@ -536,9 +567,13 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="8dp"
+            android:background="@drawable/button_selector_light"
             android:text="NEXT STEP"
             android:textAllCaps="true"
+            android:textColor="@color/white"
             android:textSize="18sp"
+            android:textStyle="bold"
+            android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
