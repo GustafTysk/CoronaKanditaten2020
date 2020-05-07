@@ -16,6 +16,7 @@ import com.applandeo.materialcalendarview.DatePicker;
 import com.applandeo.materialcalendarview.builders.DatePickerBuilder;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
@@ -52,7 +53,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     //ALLA SYMPTOM
     private int diarrhea29, diarrhea30, diarrhea31, diarrhea32, runnyNose29, runnyNose30, runnyNose31, runnyNose32, nasalCongestion29, nasalCongestion30, nasalCongestion31;
     private int nasalCongestion32, headache29, headache30, headache31, headache32, throat29, throat30, throat31, throat32, breathing29, breathing30, breathing31, breathing32;
-    private int tiredness29, tiredness30, tiredness31, tiredness32, cough29, cough30, cough31, cough32, fever29, fever30, fever31, fever32, largest;
+    private int tiredness29, tiredness30, tiredness31, tiredness32, cough29, cough30, cough31, cough32, fever29, fever30, fever31, fever32, largest, i;
 
     //CALENDAR
     private Boolean noSelectedDates = true;
@@ -106,9 +107,10 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
         if(noSelectedDates == true) {
             calendarStat = Calendar.getInstance();
-            calendarStat.set(Calendar.DAY_OF_YEAR, 120);
+            calendarStat.set(Calendar.DAY_OF_YEAR, 119);
             d1 = calendarStat.getTime();
             calendarStat.add(Calendar.DATE, 1);
+            //System.out.println("tja" + d1 );
             d2 = calendarStat.getTime();
             calendarStat.add(Calendar.DATE, 1);
             d3 = calendarStat.getTime();
@@ -497,7 +499,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         Numbers.add(headache31);
         Numbers.add(headache32);
         largest = 0;
-        for (int i = 0; i < Numbers.size(); i++) {
+        for (i = 0; i < Numbers.size(); i++) {
             if (Numbers.get(i) > largest) {
                 largest = Numbers.get(i);
             }
@@ -510,7 +512,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.getViewport().setMaxY(largest);
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMaxX(d4.getTime());
-        graph.getViewport().setMinX(d1.getTime());
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
 
 
