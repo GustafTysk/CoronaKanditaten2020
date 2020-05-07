@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -38,12 +39,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "StartPageActivity";
     protected LocationManager locationManager;
     protected LocationListener locationListener;
+
+
+
     protected Context context;
     private LatLng currentLocation;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 0;
     private static final int MY_PERMISSIONS_REQUEST_COARSE_LOCATION = 1;
 
-    Datahandler datahandler = new Datahandler();
+    public Datahandler datahandler = new Datahandler();
     ArrayList<Location> test;
     StartPageFragment startpageFragment = new StartPageFragment();
     StatisticsFragment statisticsFragment = new StatisticsFragment();
@@ -64,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onCreate(savedInstanceState);
         locationManager = (LocationManager) getSystemService(context.LOCATION_SERVICE);
+        Intent intent=getIntent();
+
 
 
 
@@ -72,7 +78,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
-        datahandler.credentials=new Credentials("sdfsdf.@cdggf.fsdfds","sadfsadfa");
+        datahandler.credentials=new Credentials(intent.getStringExtra("ema"),intent.getStringExtra("pass"));
+        System.out.println(datahandler.credentials.Email);
+        System.out.println(datahandler.credentials.Password);
         datahandler.getserveruser();
         datahandler.getalllserverocations("");
         datahandler.getuserserverlocations();
@@ -84,6 +92,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setupViewPager(mViewPager);
         Places.initialize(getApplicationContext(), "AIzaSyAdNZnteknM0VlU416q-b8ZEqRBjiFOiPA");
     }
+
+
 
     public void handleRequestPermission(){
             // Permission is not granted
@@ -277,6 +287,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return;
     }
+
+
+
 
     @Override
     public void onLocationChanged(android.location.Location location) {

@@ -27,13 +27,16 @@ public interface ClientAPI {
     Call<ArrayList<Location>> getuserlocations(@Header("authorization") String Auth, @Path("email") String email);
 
     @POST("location/{email}/user/security")
-    Call<String> createuserlocations(@Header("authorization") String Auth,@Path("email") String email, @Body ArrayList<Location> userlocation);
+    Call<Boolean> createuserlocations(@Header("authorization") String Auth, @Path("email") String email, @Body ArrayList<Location> userlocation);
 
     @PUT("location/{email}/user/security")
     Call<String> updateuserlocation(@Header("authorization") String Auth,@Path("email") String email, @Body ArrayList<Location> userlocation);
 
     @DELETE("location/{email}/user/security")
     Call<Boolean> removeUserlocations(@Header("authorization") String Auth,@Path("email") String email);
+
+    @GET("User/login/{email}/{password}/security")
+    Call<Boolean> login(@Header("authorization") String Auth,@Path("email") String email,@Path("password") String password);
 
     @GET("User/{email}/security")
     Call<User> getuser(@Header("authorization") String Auth, @Path("email") String email);

@@ -82,14 +82,16 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
         autocompleteFragment.setCountry("SE");
 
 // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME,Place.Field.LAT_LNG));
 
 // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
                 // TODO: Get info about the selected place.
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
+                //System.out.println(place.getLatLng());
+                //LatLng selectlatlong=place.getLatLng();
+                //mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(selectlatlong));
 
                 Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
             }

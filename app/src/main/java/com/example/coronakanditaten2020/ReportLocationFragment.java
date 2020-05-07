@@ -35,10 +35,19 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.Body;
+import retrofit2.http.Header;
+import retrofit2.http.Path;
 
 public class ReportLocationFragment extends Fragment  implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMapClickListener {
     private static final String TAG = "Fragment Statistics";
@@ -141,7 +150,40 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 ((MainActivity) getActivity()).setViewPager(0);
                 break;
             case R.id.btnUpdateMyLocations:
-                Toast.makeText(getContext(), "Updated Locations sent to database", Toast.LENGTH_LONG);
+
+                ArrayList<Location> userlcoations=creatuserlocations(((MainActivity)getActivity()).reportSymptomsFragment.getratings());
+                if(userlcoations.size()==0){
+                    Toast.makeText(getContext(), "no locations to add", Toast.LENGTH_LONG).show();
+                    System.out.println("sadsa");
+                    break;
+                }
+                Call<Boolean> creatuserlocations=((MainActivity) getActivity()).datahandler.clientAPI.createuserlocations(
+                        ((MainActivity) getActivity()).datahandler.credentials.encrypt,((MainActivity) getActivity()).datahandler.credentials.Email,userlcoations);
+                creatuserlocations.enqueue(new Callback<Boolean>() {
+                    @Override
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        System.out.println("tja");
+                        if(!response.isSuccessful()){
+                            Toast.makeText(getContext(), "failed to add user try again later", Toast.LENGTH_LONG).show();
+                            System.out.println("tja");
+                        }
+                        else{
+                            Toast.makeText(getContext(), "sucesfully added user", Toast.LENGTH_LONG).show();
+                            System.out.println("yja");
+                            ((MainActivity) getActivity()).setViewPager(0);
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Boolean> call, Throwable t) {
+                        System.out.println(t);
+                        Toast.makeText(getContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+
                 break;
             case R.id.setLocation1:
                 currentLocationReport = 1;
@@ -367,9 +409,63 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
 
 
+
+
+
     public int getCurrentLocationReport(){
 
 
         return currentLocationReport;
+    }
+
+    public ArrayList<Location> creatuserlocations(int[] ratings){
+        ArrayList<Location> returnlocations= new ArrayList<Location>();
+        Date date = new Date();
+        Double lat;
+        String latstring;
+        Double lot;
+        String lotstring;
+        String tempday;
+        if(location1Dates!=null&& location1!=null){
+        for(Calendar day:location1Dates){
+
+            lat=location1.latitude;
+            latstring=lat.toString();
+            lot=location1.longitude;
+            lotstring=lot.toString();
+            tempday=day.get(Calendar.DAY_OF_MONTH)+"-"+(day.get(Calendar.MONTH)+1)+"-"+day.get(Calendar.YEAR);
+
+            returnlocations.add(new Location(latstring,lotstring,tempday,
+                    ratings[0],ratings[1],ratings[2],ratings[3],ratings[4],ratings[5],ratings[6],ratings[7],ratings[8],date.toString()));
+
+        }}
+        if(location2Dates!=null && location1!=null){
+            for(Calendar day:location2Dates){
+
+                lat=location2.latitude;
+                latstring=lat.toString();
+                lot=location2.longitude;
+                lotstring=lot.toString();
+                tempday=day.get(Calendar.DAY_OF_MONTH)+"-"+(day.get(Calendar.MONTH)+1)+"-"+day.get(Calendar.YEAR);
+                returnlocations.add(new Location(latstring,lotstring,tempday,
+                        ratings[0],ratings[1],ratings[2],ratings[3],ratings[4],ratings[5],ratings[6],ratings[7],ratings[8],date.toString()));
+
+
+            }}
+        if(location3Dates!=null && location3!=null){
+            for(Calendar day:location3Dates){
+
+                lat=location3.latitude;
+                latstring=lat.toString();
+                lot=location3.longitude;
+                lotstring=lot.toString();
+                tempday=day.get(Calendar.DAY_OF_MONTH)+"-"+(day.get(Calendar.MONTH)+1)+"-"+day.get(Calendar.YEAR);
+                returnlocations.add(new Location(latstring,lotstring,tempday,
+                        ratings[0],ratings[1],ratings[2],ratings[3],ratings[4],ratings[5],ratings[6],ratings[7],ratings[8],date.toString()));
+
+            }}
+        return returnlocations;
+
+
     }
 }
