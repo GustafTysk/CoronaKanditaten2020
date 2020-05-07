@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/locationImageMap"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,23 +27,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/textViewLocation1"
-        android:layout_width="146dp"
-        android:layout_height="80dp"
+        android:layout_width="132dp"
+        android:layout_height="64dp"
         android:layout_marginTop="64dp"
-        android:hint="Location 1"
-        android:textAlignment="textStart"
         android:background="@drawable/edittext_outline"
-        android:paddingTop="5dp"
+        android:hint="Location 1"
         android:paddingLeft="6dp"
+        android:paddingTop="5dp"
+        android:textAlignment="textStart"
+        android:scrollbars = "vertical"
         app:layout_constraintStart_toStartOf="@+id/textViewReportLocation"
         app:layout_constraintTop_toBottomOf="@+id/textViewReportLocation" />
 
+    <ImageButton
+        android:id="@+id/setLocation1"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/button_selector"
+        android:src="@android:drawable/ic_dialog_map"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation1"
+        app:layout_constraintStart_toEndOf="@+id/textViewLocation1"
+        app:layout_constraintTop_toTopOf="@+id/textViewLocation1" />
+
+    <ImageButton
+        android:id="@+id/setCalendarLocation1"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/button_selector"
+        android:src="@android:drawable/ic_menu_month"
+        app:layout_constraintBottom_toBottomOf="@+id/setLocation1"
+        app:layout_constraintStart_toEndOf="@+id/setLocation1"
+        app:layout_constraintTop_toTopOf="@+id/setLocation1" />
+
+    <ImageButton
+        android:id="@+id/btnRemoveLocation1"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation1"
+        app:layout_constraintStart_toEndOf="@+id/setCalendarLocation1"
+        app:layout_constraintTop_toTopOf="@+id/setCalendarLocation1" />
+
     <TextView
         android:id="@+id/textViewLocation2"
-        android:layout_width="146dp"
-        android:layout_height="80dp"
+        android:layout_width="132dp"
+        android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:hint="Location 2"
         android:background="@drawable/edittext_outline"
@@ -45,10 +86,42 @@
         app:layout_constraintStart_toStartOf="@+id/textViewLocation1"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation1" />
 
+    <ImageButton
+        android:id="@+id/setLocation2"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/button_selector"
+        android:src="@android:drawable/ic_dialog_map"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation2"
+        app:layout_constraintStart_toEndOf="@+id/textViewLocation2"
+        app:layout_constraintTop_toTopOf="@+id/textViewLocation2" />
+
+    <ImageButton
+        android:id="@+id/setCalendarLocation2"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/button_selector"
+        android:src="@android:drawable/ic_menu_month"
+        app:layout_constraintBottom_toBottomOf="@+id/setLocation2"
+        app:layout_constraintStart_toEndOf="@+id/setLocation2"
+        app:layout_constraintTop_toTopOf="@+id/setLocation2" />
+
+    <ImageButton
+        android:id="@+id/btnRemoveLocation2"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation2"
+        app:layout_constraintStart_toEndOf="@+id/setCalendarLocation2"
+        app:layout_constraintTop_toTopOf="@+id/setCalendarLocation2" />
+
     <TextView
         android:id="@+id/textViewLocation3"
-        android:layout_width="146dp"
-        android:layout_height="80dp"
+        android:layout_width="132dp"
+        android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:hint="Location 3"
         android:background="@drawable/edittext_outline"
@@ -58,31 +131,9 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation2" />
 
     <ImageButton
-        android:id="@+id/setLocation1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_dialog_map"
-        android:background="@drawable/button_selector"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation1"
-        app:layout_constraintStart_toEndOf="@+id/textViewLocation1"
-        app:layout_constraintTop_toTopOf="@+id/textViewLocation1" />
-
-    <ImageButton
-        android:id="@+id/setLocation2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_dialog_map"
-        android:background="@drawable/button_selector"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation2"
-        app:layout_constraintStart_toEndOf="@+id/textViewLocation2"
-        app:layout_constraintTop_toTopOf="@+id/textViewLocation2" />
-
-    <ImageButton
         android:id="@+id/setLocation3"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_marginStart="8dp"
         android:src="@android:drawable/ic_dialog_map"
         android:background="@drawable/button_selector"
@@ -91,37 +142,427 @@
         app:layout_constraintTop_toTopOf="@+id/textViewLocation3" />
 
     <ImageButton
-        android:id="@+id/setCalendarLocation1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_menu_month"
-        android:background="@drawable/button_selector"
-        app:layout_constraintBottom_toBottomOf="@+id/setLocation1"
-        app:layout_constraintStart_toEndOf="@+id/setLocation1"
-        app:layout_constraintTop_toTopOf="@+id/setLocation1" />
-
-    <ImageButton
-        android:id="@+id/setCalendarLocation2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_menu_month"
-        android:background="@drawable/button_selector"
-        app:layout_constraintBottom_toBottomOf="@+id/setLocation2"
-        app:layout_constraintStart_toEndOf="@+id/setLocation2"
-        app:layout_constraintTop_toTopOf="@+id/setLocation2" />
-
-    <ImageButton
         android:id="@+id/setCalendarLocation3"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_marginStart="8dp"
         android:src="@android:drawable/ic_menu_month"
         android:background="@drawable/button_selector"
         app:layout_constraintBottom_toBottomOf="@+id/setLocation3"
         app:layout_constraintStart_toEndOf="@+id/setLocation3"
         app:layout_constraintTop_toTopOf="@+id/setLocation3" />
+
+    <ImageButton
+        android:id="@+id/btnRemoveLocation3"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation3"
+        app:layout_constraintStart_toEndOf="@+id/setCalendarLocation3"
+        app:layout_constraintTop_toTopOf="@+id/setCalendarLocation3" />
+
+    <TextView
+        android:id="@+id/textViewLocation4"
+        android:layout_width="132dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
+        android:hint="Location 4"
+        android:background="@drawable/edittext_outline"
+        android:paddingTop="5dp"
+        android:paddingLeft="6dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewLocation3"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation3" />
+
+    <ImageButton
+        android:id="@+id/setLocation4"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_dialog_map"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation4"
+        app:layout_constraintStart_toEndOf="@+id/textViewLocation4"
+        app:layout_constraintTop_toTopOf="@+id/textViewLocation4" />
+
+    <ImageButton
+        android:id="@+id/setCalendarLocation4"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_month"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/setLocation4"
+        app:layout_constraintStart_toEndOf="@+id/setLocation4"
+        app:layout_constraintTop_toTopOf="@+id/setLocation4" />
+
+    <ImageButton
+        android:id="@+id/btnRemoveLocation4"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation4"
+        app:layout_constraintStart_toEndOf="@+id/setCalendarLocation4"
+        app:layout_constraintTop_toTopOf="@+id/setCalendarLocation4" />
+
+    <TextView
+        android:id="@+id/textViewLocation5"
+        android:layout_width="132dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
+        android:hint="Location 5"
+        android:background="@drawable/edittext_outline"
+        android:paddingTop="5dp"
+        android:paddingLeft="6dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewLocation4"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation4" />
+
+    <ImageButton
+        android:id="@+id/setLocation5"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_dialog_map"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation5"
+        app:layout_constraintStart_toEndOf="@+id/textViewLocation5"
+        app:layout_constraintTop_toTopOf="@+id/textViewLocation5" />
+
+    <ImageButton
+        android:id="@+id/setCalendarLocation5"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_month"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/setLocation5"
+        app:layout_constraintStart_toEndOf="@+id/setLocation5"
+        app:layout_constraintTop_toTopOf="@+id/setLocation5" />
+
+    <ImageButton
+        android:id="@+id/btnRemoveLocation5"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation5"
+        app:layout_constraintStart_toEndOf="@+id/setCalendarLocation5"
+        app:layout_constraintTop_toTopOf="@+id/setCalendarLocation5" />
+
+    <TextView
+        android:id="@+id/textViewLocation6"
+        android:layout_width="132dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
+        android:hint="Location 6"
+        android:background="@drawable/edittext_outline"
+        android:paddingTop="5dp"
+        android:paddingLeft="6dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewLocation5"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation5" />
+
+    <ImageButton
+        android:id="@+id/setLocation6"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_dialog_map"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation6"
+        app:layout_constraintStart_toEndOf="@+id/textViewLocation6"
+        app:layout_constraintTop_toTopOf="@+id/textViewLocation6" />
+
+    <ImageButton
+        android:id="@+id/setCalendarLocation6"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_month"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/setLocation6"
+        app:layout_constraintStart_toEndOf="@+id/setLocation6"
+        app:layout_constraintTop_toTopOf="@+id/setLocation6" />
+
+    <ImageButton
+        android:id="@+id/btnRemoveLocation6"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation6"
+        app:layout_constraintStart_toEndOf="@+id/setCalendarLocation6"
+        app:layout_constraintTop_toTopOf="@+id/setCalendarLocation6" />
+<!--  _________________________________________________________________________________________  -->
+    <TextView
+        android:id="@+id/textViewLocation7"
+        android:layout_width="132dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
+        android:hint="Location 7"
+        android:background="@drawable/edittext_outline"
+        android:paddingTop="5dp"
+        android:paddingLeft="6dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewLocation6"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation6" />
+
+    <ImageButton
+        android:id="@+id/setLocation7"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_dialog_map"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation7"
+        app:layout_constraintStart_toEndOf="@+id/textViewLocation7"
+        app:layout_constraintTop_toTopOf="@+id/textViewLocation7" />
+
+    <ImageButton
+        android:id="@+id/setCalendarLocation7"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_month"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/setLocation7"
+        app:layout_constraintStart_toEndOf="@+id/setLocation7"
+        app:layout_constraintTop_toTopOf="@+id/setLocation7" />
+
+    <ImageButton
+        android:id="@+id/btnRemoveLocation7"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation7"
+        app:layout_constraintStart_toEndOf="@+id/setCalendarLocation7"
+        app:layout_constraintTop_toTopOf="@+id/setCalendarLocation7" />
+
+    <!--  _________________________________________________________________________________________  -->
+    <TextView
+        android:id="@+id/textViewLocation8"
+        android:layout_width="132dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
+        android:hint="Location 8"
+        android:background="@drawable/edittext_outline"
+        android:paddingTop="5dp"
+        android:paddingLeft="6dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewLocation7"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation7" />
+
+    <ImageButton
+        android:id="@+id/setLocation8"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_dialog_map"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation8"
+        app:layout_constraintStart_toEndOf="@+id/textViewLocation8"
+        app:layout_constraintTop_toTopOf="@+id/textViewLocation8" />
+
+    <ImageButton
+        android:id="@+id/setCalendarLocation8"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_month"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/setLocation8"
+        app:layout_constraintStart_toEndOf="@+id/setLocation8"
+        app:layout_constraintTop_toTopOf="@+id/setLocation8" />
+
+    <ImageButton
+        android:id="@+id/btnRemoveLocation8"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation8"
+        app:layout_constraintStart_toEndOf="@+id/setCalendarLocation8"
+        app:layout_constraintTop_toTopOf="@+id/setCalendarLocation8" />
+
+    <!--  _________________________________________________________________________________________  -->
+    <TextView
+        android:id="@+id/textViewLocation9"
+        android:layout_width="132dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
+        android:hint="Location 9"
+        android:background="@drawable/edittext_outline"
+        android:paddingTop="5dp"
+        android:paddingLeft="6dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewLocation8"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation8" />
+
+    <ImageButton
+        android:id="@+id/setLocation9"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_dialog_map"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation9"
+        app:layout_constraintStart_toEndOf="@+id/textViewLocation9"
+        app:layout_constraintTop_toTopOf="@+id/textViewLocation9" />
+
+    <ImageButton
+        android:id="@+id/setCalendarLocation9"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_month"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/setLocation9"
+        app:layout_constraintStart_toEndOf="@+id/setLocation9"
+        app:layout_constraintTop_toTopOf="@+id/setLocation9" />
+
+    <ImageButton
+        android:id="@+id/btnRemoveLocation9"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation9"
+        app:layout_constraintStart_toEndOf="@+id/setCalendarLocation9"
+        app:layout_constraintTop_toTopOf="@+id/setCalendarLocation9" />
+
+    <!--  _________________________________________________________________________________________  -->
+    <TextView
+        android:id="@+id/textViewLocation10"
+        android:layout_width="132dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
+        android:hint="Location 10"
+        android:background="@drawable/edittext_outline"
+        android:paddingTop="5dp"
+        android:paddingLeft="6dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewLocation9"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation9" />
+
+    <ImageButton
+        android:id="@+id/setLocation10"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_dialog_map"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation10"
+        app:layout_constraintStart_toEndOf="@+id/textViewLocation10"
+        app:layout_constraintTop_toTopOf="@+id/textViewLocation10" />
+
+    <ImageButton
+        android:id="@+id/setCalendarLocation10"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_month"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/setLocation10"
+        app:layout_constraintStart_toEndOf="@+id/setLocation10"
+        app:layout_constraintTop_toTopOf="@+id/setLocation10" />
+
+    <ImageButton
+        android:id="@+id/btnRemoveLocation10"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation10"
+        app:layout_constraintStart_toEndOf="@+id/setCalendarLocation10"
+        app:layout_constraintTop_toTopOf="@+id/setCalendarLocation10" />
+
+    <!--  _________________________________________________________________________________________  -->
+    <TextView
+        android:id="@+id/textViewLocation11"
+        android:layout_width="132dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
+        android:hint="Location 11"
+        android:background="@drawable/edittext_outline"
+        android:paddingTop="5dp"
+        android:paddingLeft="6dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewLocation10"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation10" />
+
+    <ImageButton
+        android:id="@+id/setLocation11"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_dialog_map"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation11"
+        app:layout_constraintStart_toEndOf="@+id/textViewLocation11"
+        app:layout_constraintTop_toTopOf="@+id/textViewLocation11" />
+
+    <ImageButton
+        android:id="@+id/setCalendarLocation11"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_month"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/setLocation11"
+        app:layout_constraintStart_toEndOf="@+id/setLocation11"
+        app:layout_constraintTop_toTopOf="@+id/setLocation11" />
+
+    <ImageButton
+        android:id="@+id/btnRemoveLocation11"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation11"
+        app:layout_constraintStart_toEndOf="@+id/setCalendarLocation11"
+        app:layout_constraintTop_toTopOf="@+id/setCalendarLocation11" />
+
+    <!--  _________________________________________________________________________________________  -->
+    <TextView
+        android:id="@+id/textViewLocation12"
+        android:layout_width="132dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
+        android:hint="Location 12"
+        android:background="@drawable/edittext_outline"
+        android:paddingTop="5dp"
+        android:paddingLeft="6dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewLocation11"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation11" />
+
+    <ImageButton
+        android:id="@+id/setLocation12"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_dialog_map"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLocation12"
+        app:layout_constraintStart_toEndOf="@+id/textViewLocation12"
+        app:layout_constraintTop_toTopOf="@+id/textViewLocation12" />
+
+    <ImageButton
+        android:id="@+id/setCalendarLocation12"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_month"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/setLocation12"
+        app:layout_constraintStart_toEndOf="@+id/setLocation12"
+        app:layout_constraintTop_toTopOf="@+id/setLocation12" />
+
+    <ImageButton
+        android:id="@+id/btnRemoveLocation12"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation12"
+        app:layout_constraintStart_toEndOf="@+id/setCalendarLocation12"
+        app:layout_constraintTop_toTopOf="@+id/setCalendarLocation12" />
+
 
     <Button
         android:id="@+id/btnUpdateMyLocations"
@@ -141,15 +582,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="100dp"
         android:layout_marginBottom="16dp"
-        android:text="Report Symptoms"
-        android:textAllCaps="true"
-        android:textSize="18sp"
         android:background="@drawable/button_selector_light"
         android:padding="10dp"
+        android:text="Report Symptoms"
+        android:textAllCaps="true"
         android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddLocation" />
 
     <Button
         android:id="@+id/btnRlToStart"
@@ -165,5 +608,17 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/btnRlToRs"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <Button
+        android:id="@+id/btnAddLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Add Location"
+        app:layout_constraintEnd_toEndOf="@+id/btnRemoveLocation1"
+        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintStart_toStartOf="@+id/textViewLocation1"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation12" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
