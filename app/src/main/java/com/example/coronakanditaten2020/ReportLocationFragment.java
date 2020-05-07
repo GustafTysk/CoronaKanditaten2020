@@ -178,7 +178,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
                         System.out.println(t);
-                        Toast.makeText(getContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
 
                     }
                 });
