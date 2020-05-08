@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
     private Button btnStartToRs;
     private Button btnStartToForum;
     private Button btnLogout;
+    private ImageButton btnSettings;
 
     @Nullable
     @Override
@@ -36,6 +38,9 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
         btnLogout = (Button) view.findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(this);
 
+        btnSettings = (ImageButton) view.findViewById(R.id.btnSettings);
+        btnSettings.setOnClickListener(this);
+
         return view;
     }
 
@@ -43,17 +48,20 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         Intent intent = null;
         switch (v.getId()){
+            case R.id.btnSettings:
+                ((MainActivity)getActivity()).setViewPager(0);
+                break;
             case R.id.btnStartToHeatmap:
-                ((MainActivity)getActivity()).setViewPager(2);
-                break;
-            case R.id.btnStartToStatistics:
-                ((MainActivity)getActivity()).setViewPager(1);
-                break;
-            case R.id.btnStartToRs:
                 ((MainActivity)getActivity()).setViewPager(3);
                 break;
+            case R.id.btnStartToStatistics:
+                ((MainActivity)getActivity()).setViewPager(2);
+                break;
+            case R.id.btnStartToRs:
+                ((MainActivity)getActivity()).setViewPager(4);
+                break;
             case R.id.btnStartToForum:
-                ((MainActivity)getActivity()).setViewPager(5);
+                ((MainActivity)getActivity()).setViewPager(6);
                 break;
             case R.id.btnLogout:
                 intent = new Intent(getContext(), LoginActivity.class);

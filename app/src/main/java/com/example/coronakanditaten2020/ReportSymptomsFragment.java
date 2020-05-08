@@ -154,7 +154,7 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
         switch (v.getId()){
 
             case R.id.btnRsToRl:
-                ((MainActivity)getActivity()).setViewPager(4);
+                ((MainActivity)getActivity()).setViewPager(5);
 
                 totalSeverityCount = countAllRatings();
 
@@ -163,7 +163,7 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
                 break;
 
             case R.id.btnRsToStart:
-                ((MainActivity)getActivity()).setViewPager(0);
+                ((MainActivity)getActivity()).setViewPager(1);
                 break;
 
             case R.id.btnFeverDialog:

@@ -127,7 +127,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener {
                 adapter.notifyDataSetChanged();
                 break;
             case R.id.btnForumToStart:
-                ((MainActivity) getActivity()).setViewPager(0);
+                ((MainActivity) getActivity()).setViewPager(1);
                 break;
 
         }
