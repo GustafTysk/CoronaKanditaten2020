@@ -244,10 +244,10 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         switch (v.getId()) {
 
             case R.id.btnRlToRs:
-                ((MainActivity) getActivity()).setViewPager(3);
+                ((MainActivity) getActivity()).setViewPager(4);
                 break;
             case R.id.btnRlToStart:
-                ((MainActivity) getActivity()).setViewPager(0);
+                ((MainActivity) getActivity()).setViewPager(1);
                 break;
             case R.id.btnAddLocation:
                 showNextLocationFragment(currentLocationReport, getView());
@@ -273,7 +273,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                         else{
                             Toast.makeText(getContext(), "sucesfully added user", Toast.LENGTH_LONG).show();
                             System.out.println("yja");
-                            ((MainActivity) getActivity()).setViewPager(0);
+                            ((MainActivity) getActivity()).setViewPager(1);
 
                         }
                     }

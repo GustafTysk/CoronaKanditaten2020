@@ -129,11 +129,11 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         switch (v.getId()){
             case R.id.btnStatisticsToHeatmap:
                 Toast.makeText(getActivity(), "Going to Heatmap", Toast.LENGTH_SHORT).show();
-                ((MainActivity) getActivity()).setViewPager(2);
+                ((MainActivity) getActivity()).setViewPager(3);
                 break;
             case R.id.btnStatisticsToStart:
                 Toast.makeText(getActivity(), "Going to Start Page", Toast.LENGTH_SHORT).show();
-                ((MainActivity) getActivity()).setViewPager(0);
+                ((MainActivity) getActivity()).setViewPager(1);
                 break;
             case R.id.setCalendarLocation1:
                 try {
