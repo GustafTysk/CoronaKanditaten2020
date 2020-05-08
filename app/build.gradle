@@ -47,4 +47,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     implementation 'com.applandeo:material-calendar-view:1.7.0'
+
+    def preference_version = "1.1.1"
+
+    // Java language implementation
+    implementation "androidx.preference:preference:$preference_version"
 }

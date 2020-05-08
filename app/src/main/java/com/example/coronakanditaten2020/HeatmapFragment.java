@@ -114,10 +114,10 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourCurrentLocation,14));
                 break;
             case R.id.btnHeatmapToStart:
-                ((MainActivity) getActivity()).setViewPager(0);
+                ((MainActivity) getActivity()).setViewPager(1);
                 break;
             case R.id.btnHeatmapToStatistics:
-                ((MainActivity) getActivity()).setViewPager(1);
+                ((MainActivity) getActivity()).setViewPager(2);
                 break;
             case R.id.btnTestChangeDay:
                 mProvider.setWeightedData(((ArrayList)GenerateHeatMapCordsList( datahandler.getHeatmaplocations(),"2020-10-16", "placeholder")));

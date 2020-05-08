@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:background="@drawable/edittext_outline">
+
+        <TextView
+            android:id="@+id/postUsername"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="Username"
+            android:padding="5dp"
+            android:layout_weight="70"
+            />
+        <TextView
+            android:id="@+id/postTitle"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:paddingLeft="20dp"
+            android:text="Title"
+            />
+
+    </LinearLayout>
+
+
+    
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_outline">
+
+        <TextView
+            android:id="@+id/postMessage"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Message"
+            android:padding="10dp"
+            />
+        <TextView
+            android:id="@+id/postLikes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:text="Likes"
+            />
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
