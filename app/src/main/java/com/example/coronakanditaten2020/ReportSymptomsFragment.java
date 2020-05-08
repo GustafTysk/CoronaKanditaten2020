@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReportSymptomsFragment extends Fragment implements View.OnClickListener {
@@ -93,7 +94,7 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
         diarrheaRatingBar = (RatingBar) view.findViewById(R.id.ratingBarDiarrhea);
         btnClearDiarrheaRating = (Button) view.findViewById(R.id.btnClearDiarrheaRating);
         btnClearDiarrheaRating.setOnClickListener(this);
-        System.out.println(feverSeverity);
+        SetuppUsersymtoms();
 
         return view;
     }
@@ -154,7 +155,7 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
         switch (v.getId()){
 
             case R.id.btnRsToRl:
-                ((MainActivity)getActivity()).setViewPager(4);
+                ((MainActivity)getActivity()).setViewPager(5);
 
                 totalSeverityCount = countAllRatings();
 
@@ -163,7 +164,7 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
                 break;
 
             case R.id.btnRsToStart:
-                ((MainActivity)getActivity()).setViewPager(0);
+                ((MainActivity)getActivity()).setViewPager(1);
                 break;
 
             case R.id.btnFeverDialog:
@@ -245,6 +246,27 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
         ratings[7]=(int)coughRatingBar.getRating();
         ratings[8]=(int)feverRatingBar.getRating();
         return ratings;
+    }
+
+    public void SetuppUsersymtoms(){
+        ArrayList<Location> userlocations=((MainActivity) getActivity()).datahandler.Userlocations;
+        if (userlocations==null){
+            return;
+        }
+        if (userlocations.size()==0){
+            return;
+        }
+        diarrheaRatingBar.setRating((float)userlocations.get(userlocations.size()-1).diarrheaRatingBar);
+        runnyNoseRatingBar.setRating((float)userlocations.get(userlocations.size()-1).runnyNoseRatingBar);
+        nasalCongestionRatingBar.setRating((float)userlocations.get(userlocations.size()-1).nasalCongestionRatingBar);
+        headacheRatingBar.setRating((float)userlocations.get(userlocations.size()-1).headacheRatingBar);
+        SoreThroatRatingBar.setRating((float)userlocations.get(userlocations.size()-1).throatRatingBar);
+        breathingRatingBar.setRating((float)userlocations.get(userlocations.size()-1).breathingRatingBar);
+        tirednessRatingBar.setRating((float)userlocations.get(userlocations.size()-1).tirednessRatingBar);
+        coughRatingBar.setRating((float)userlocations.get(userlocations.size()-1).coughRatingBar);
+        feverRatingBar.setRating((float)userlocations.get(userlocations.size()-1).feverRatingBar);
+        return;
+
     }
 
 

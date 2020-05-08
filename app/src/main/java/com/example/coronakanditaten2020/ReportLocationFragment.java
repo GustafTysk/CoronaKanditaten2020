@@ -26,6 +26,7 @@ import com.applandeo.materialcalendarview.DatePicker;
 import com.applandeo.materialcalendarview.builders.DatePickerBuilder;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
+import com.example.coronakanditaten2020.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -36,7 +37,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -72,6 +76,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     private String yourLocation10String = "";
     private String yourLocation11String = "";
     private String yourLocation12String = "";
+    ArrayList<String> YourlocationsStrings=new ArrayList<String>();
 
     private Bundle savedInstance;
 
@@ -82,30 +87,38 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
     private ImageButton setLocation1,setLocation2, setLocation3, setLocation4, setLocation5, setLocation6,
             setLocation7, setLocation8, setLocation9, setLocation10, setLocation11, setLocation12;
+    ArrayList<ImageButton> setlocations=new ArrayList<ImageButton>();
     private ImageButton setCalendarLocation1, setCalendarLocation2, setCalendarLocation3, setCalendarLocation4, setCalendarLocation5, setCalendarLocation6,
             setCalendarLocation7, setCalendarLocation8, setCalendarLocation9, setCalendarLocation10, setCalendarLocation11, setCalendarLocation12;
+    ArrayList<ImageButton> setCalandarlocations=new ArrayList<ImageButton>();
     private ImageButton btnRemoveLocation1, btnRemoveLocation2, btnRemoveLocation3, btnRemoveLocation4, btnRemoveLocation5, btnRemoveLocation6,
             btnRemoveLocation7, btnRemoveLocation8, btnRemoveLocation9, btnRemoveLocation10, btnRemoveLocation11, btnRemoveLocation12;
+    ArrayList<ImageButton> btnRemoveLocations=new ArrayList<ImageButton>();
     private TextView textViewLocation1, textViewLocation2, textViewLocation3, textViewLocation4, textViewLocation5, textViewLocation6,
             textViewLocation7, textViewLocation8, textViewLocation9,textViewLocation10, textViewLocation11, textViewLocation12;
+    ArrayList<TextView> textViewLocations=new ArrayList<TextView>();
 
     private Boolean location1Decided = false, location2Decided = false, location3Decided = false, location4Decided = false, location5Decided = false, location6Decided = false,
             location7Decided = false, location8Decided = false, location9Decided = false, location10Decided = false, location11Decided = false, location12Decided = false;
     private Boolean location1Visible = false, location2Visible = false, location3Visible = false, location4Visible = false, location5Visible = false, location6Visible = false,
             location7Visible = false, location8Visible = false, location9Visible = false, location10Visible = false, location11Visible = false, location12Visible = false;
+    ArrayList<Boolean>AlllocationDecided =new ArrayList<Boolean>();
+    ArrayList<Boolean>AlllocationVisible =new ArrayList<Boolean>();
 
     private int currentLocationReport = 0;
     private LatLng yourLocation = new LatLng(59.8, 17.63);
     private String yourLocationString;
+    ArrayList<Location> userLocations;
 
-    private List<Calendar> location1Dates, location2Dates, location3Dates,location4Dates, location5Dates, location6Dates,location7Dates,
-            location8Dates, location9Dates,location10Dates, location11Dates, location12Dates;
+    private List<Calendar> location1Dates=new ArrayList<Calendar>(), location2Dates=new ArrayList<Calendar>(), location3Dates=new ArrayList<Calendar>(),location4Dates=new ArrayList<Calendar>(), location5Dates=new ArrayList<Calendar>(), location6Dates=new ArrayList<Calendar>(),location7Dates=new ArrayList<Calendar>(),
+            location8Dates=new ArrayList<Calendar>(), location9Dates=new ArrayList<Calendar>(),location10Dates=new ArrayList<Calendar>(), location11Dates=new ArrayList<Calendar>(), location12Dates=new ArrayList<Calendar>();
     private String location1DateString = "", location2DateString = "", location3DateString = "",location4DateString = "", location5DateString = "", location6DateString = "",
             location7DateString = "", location8DateString = "", location9DateString = "",location10DateString = "", location11DateString = "", location12DateString = "";
-
+    ArrayList<String> locationDateStrings=new  ArrayList<String>();
     private LatLng location1 = null, location2 = null, location3 = null,location4 = null, location5 = null, location6 = null,
             location7 = null, location8 = null, location9 = null,location10 = null, location11 = null, location12 = null;
     private ArrayList<LatLng> locations;
+    ArrayList<List<Calendar>> AllLocationDates=new ArrayList<List<Calendar>>();
 
     @Nullable
     @Override
@@ -123,6 +136,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         btnAddLocation.setOnClickListener(this);
 
         locations = new ArrayList<LatLng>();
+        if(((MainActivity)getActivity()).datahandler.Userlocations!=null){
+            userLocations=((MainActivity)getActivity()).datahandler.Userlocations;
+        }
 
         // SET ALL LOCATION MAP IMAGE BUTTONS
         setLocation1 = (ImageButton) view.findViewById(R.id.setLocation1);
@@ -233,6 +249,11 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
         minDate.setTimeInMillis(minDateTime);
         hideAllButFirstLocationFragment(getView());
+        Creatlists();
+        if(userLocations!=null){
+            SetUppPage();
+        }
+
 
         return view;
     }
@@ -244,10 +265,10 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         switch (v.getId()) {
 
             case R.id.btnRlToRs:
-                ((MainActivity) getActivity()).setViewPager(3);
+                ((MainActivity) getActivity()).setViewPager(4);
                 break;
             case R.id.btnRlToStart:
-                ((MainActivity) getActivity()).setViewPager(0);
+                ((MainActivity) getActivity()).setViewPager(1);
                 break;
             case R.id.btnAddLocation:
                 showNextLocationFragment(currentLocationReport, getView());
@@ -255,6 +276,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             case R.id.btnUpdateMyLocations:
 
                 ArrayList<Location> userLocations=creatuserlocations(((MainActivity)getActivity()).reportSymptomsFragment.getratings());
+
                 if(userLocations.size()==0){
                     Toast.makeText(getContext(), "no locations to add", Toast.LENGTH_LONG).show();
                     System.out.println("sadsa");
@@ -267,13 +289,14 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                         System.out.println("tja");
                         if(!response.isSuccessful()){
+                            System.out.println(userLocations.get(0).latitude+"latitude");System.out.println(userLocations.get(0).longitude+"long");
                             Toast.makeText(getContext(), "failed to add user try again later", Toast.LENGTH_LONG).show();
                             System.out.println("tja");
                         }
                         else{
                             Toast.makeText(getContext(), "sucesfully added user", Toast.LENGTH_LONG).show();
                             System.out.println("yja");
-                            ((MainActivity) getActivity()).setViewPager(0);
+                            ((MainActivity) getActivity()).setViewPager(1);
 
                         }
                     }
@@ -466,9 +489,10 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             case 1:
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
                 reportedLocation.setPosition(yourLocation);
-                if (location1 != null) {
-                    reportedLocation.setPosition(location1);
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location1, 15));
+
+                if (locations.get(0) != null) {
+                    reportedLocation.setPosition(locations.get(0));
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locations.get(0), 15));
                 }
                 break;
             case 2:
@@ -573,131 +597,20 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 for (Calendar day: calendars){
                     tempLocationString += day.get(Calendar.DAY_OF_MONTH)+"-"+(day.get(Calendar.MONTH)+1)+"-"+day.get(Calendar.YEAR)+"\n"; // Toast Print
                 }
-
-                switch (location){
-                    case 1:
-                        location1Dates = calendars;
-                        location1DateString = tempLocationString;
-
-                        Toast.makeText(getContext(),"Selected Dates\n" + location1DateString, Toast.LENGTH_LONG).show();
-                        break;
-                    case 2:
-                        location2Dates = calendars;
-                        location2DateString = tempLocationString;
-                        Toast.makeText(getContext(),"Selected Dates\n" + location2DateString, Toast.LENGTH_LONG).show();
-                        break;
-                    case 3:
-                        location3Dates = calendars;
-                        location3DateString = tempLocationString;
-                        Toast.makeText(getContext(),"Selected Dates\n" + location3DateString, Toast.LENGTH_LONG).show();
-                        break;
-                    case 4:
-                        location4Dates = calendars;
-                        location4DateString = tempLocationString;
-
-                        Toast.makeText(getContext(),"Selected Dates\n" + location4DateString, Toast.LENGTH_LONG).show();
-                        break;
-                    case 5:
-                        location5Dates = calendars;
-                        location5DateString = tempLocationString;
-                        Toast.makeText(getContext(),"Selected Dates\n" + location5DateString, Toast.LENGTH_LONG).show();
-                        break;
-                    case 6:
-                        location6Dates = calendars;
-                        location6DateString = tempLocationString;
-                        Toast.makeText(getContext(),"Selected Dates\n" + location6DateString, Toast.LENGTH_LONG).show();
-                        break;
-                    case 7:
-                        location7Dates = calendars;
-                        location7DateString = tempLocationString;
-
-                        Toast.makeText(getContext(),"Selected Dates\n" + location7DateString, Toast.LENGTH_LONG).show();
-                        break;
-                    case 8:
-                        location8Dates = calendars;
-                        location8DateString = tempLocationString;
-                        Toast.makeText(getContext(),"Selected Dates\n" + location8DateString, Toast.LENGTH_LONG).show();
-                        break;
-                    case 9:
-                        location9Dates = calendars;
-                        location9DateString = tempLocationString;
-                        Toast.makeText(getContext(),"Selected Dates\n" + location9DateString, Toast.LENGTH_LONG).show();
-                        break;
-                    case 10:
-                        location10Dates = calendars;
-                        location10DateString = tempLocationString;
-
-                        Toast.makeText(getContext(),"Selected Dates\n" + location10DateString, Toast.LENGTH_LONG).show();
-                        break;
-                    case 11:
-                        location11Dates = calendars;
-                        location11DateString = tempLocationString;
-                        Toast.makeText(getContext(),"Selected Dates\n" + location11DateString, Toast.LENGTH_LONG).show();
-                        break;
-                    case 12:
-                        location12Dates = calendars;
-                        location12DateString = tempLocationString;
-                        Toast.makeText(getContext(),"Selected Dates\n" + location12DateString, Toast.LENGTH_LONG).show();
-                        break;
-                }
+                        AllLocationDates.set(location-1,calendars);
+                        locationDateStrings.set(location-1,tempLocationString);
+                        Toast.makeText(getContext(),"Selected Dates\n" + tempLocationString, Toast.LENGTH_LONG).show();
             }
         };
 
         DatePickerBuilder builder = new DatePickerBuilder(getContext(), listener)
                 .pickerType(cal.MANY_DAYS_PICKER).setMaximumDate(maxDate).setMinimumDate(minDate);
 
-        switch (location){
-            case 1:
-                if (location1Dates != null)
-                builder.setSelectedDays(location1Dates);
-                break;
-            case 2:
-                if (location2Dates != null)
-                builder.setSelectedDays(location2Dates);
-                break;
-            case 3:
-                if (location3Dates != null)
-                    builder.setSelectedDays(location3Dates);
-                break;
-            case 4:
-                if (location4Dates != null)
-                    builder.setSelectedDays(location4Dates);
-                break;
-            case 5:
-                if (location5Dates != null)
-                    builder.setSelectedDays(location5Dates);
-                break;
-            case 6:
-                if (location6Dates != null)
-                    builder.setSelectedDays(location6Dates);
-                break;
-            case 7:
-                if (location7Dates != null)
-                    builder.setSelectedDays(location7Dates);
-                break;
-            case 8:
-                if (location8Dates != null)
-                    builder.setSelectedDays(location8Dates);
-                break;
-            case 9:
-                if (location9Dates != null)
-                    builder.setSelectedDays(location9Dates);
-                break;
-            case 10:
-                if (location10Dates != null)
-                    builder.setSelectedDays(location10Dates);
-                break;
-            case 11:
-                if (location11Dates != null)
-                    builder.setSelectedDays(location11Dates);
-                break;
-            case 12:
-                if (location12Dates != null)
-                    builder.setSelectedDays(location12Dates);
-                break;
-            default:
 
-        }
+
+                    builder.setSelectedDays(AllLocationDates.get(location-1));
+
+
         DatePicker datePicker = builder.build();
         datePicker.show();
 
@@ -765,156 +678,35 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     }
 
     public int numberOfLocationsSet(){
-        return locations.size();
+        return Collections.frequency(AlllocationDecided,true);
     }
 
     public void showNextLocationFragment(int currentLocationReport, View v){
         Boolean hasEmptyLocation = false;
-        switch (currentLocationReport){
-            case 0:
-                Toast.makeText(getContext(),"Fill in Location above before adding another one", Toast.LENGTH_LONG).show();
-                break;
-            case 1:
-                if(location2Visible) {
-                    hasEmptyLocation = true;
-                }
-                if(numberOfLocationsSet() == currentLocationReport && !location2Decided) {
-                    textViewLocation2.setVisibility(v.VISIBLE);
-                    setLocation2.setVisibility(v.VISIBLE);
-                    setCalendarLocation2.setVisibility(v.VISIBLE);
-                    btnRemoveLocation2.setVisibility(v.VISIBLE);
-                    location2Visible = true;
-                }
-                break;
-            case 2:
-                if(location3Visible) {
-                    hasEmptyLocation = true;
-                }
-                if(numberOfLocationsSet() == currentLocationReport && !location3Decided) {
-                    textViewLocation3.setVisibility(v.VISIBLE);
-                    setLocation3.setVisibility(v.VISIBLE);
-                    setCalendarLocation3.setVisibility(v.VISIBLE);
-                    btnRemoveLocation3.setVisibility(v.VISIBLE);
-                    location3Visible = true;
-                }
-                break;
-            case 3:
-                if(location4Visible) {
-                    hasEmptyLocation = true;
-                }
-                if(numberOfLocationsSet() == currentLocationReport && !location4Decided) {
-                    textViewLocation4.setVisibility(v.VISIBLE);
-                    setLocation4.setVisibility(v.VISIBLE);
-                    setCalendarLocation4.setVisibility(v.VISIBLE);
-                    btnRemoveLocation4.setVisibility(v.VISIBLE);
-                    location4Visible = true;
-                }
-                break;
+        System.out.println("3232");
+        System.out.println(currentLocationReport+"cyrr");
+        if (currentLocationReport==0){
+            Toast.makeText(getContext(),"Fill in Location above before adding another one", Toast.LENGTH_LONG).show();
 
-            case 4:
-                if(location5Visible) {
-                    hasEmptyLocation = true;
-                }
-                if(numberOfLocationsSet() == currentLocationReport && !location5Decided) {
-                    textViewLocation5.setVisibility(v.VISIBLE);
-                    setLocation5.setVisibility(v.VISIBLE);
-                    setCalendarLocation5.setVisibility(v.VISIBLE);
-                    btnRemoveLocation5.setVisibility(v.VISIBLE);
-                    location5Visible = true;
-                }
-                break;
-            case 5:
-                if(location6Visible) {
-                    hasEmptyLocation = true;
-                }
-                if(numberOfLocationsSet() == currentLocationReport && !location6Decided) {
-                    textViewLocation6.setVisibility(v.VISIBLE);
-                    setLocation6.setVisibility(v.VISIBLE);
-                    setCalendarLocation6.setVisibility(v.VISIBLE);
-                    btnRemoveLocation6.setVisibility(v.VISIBLE);
-                    location6Visible = true;
-                }
-                break;
-
-            case 6:
-                if(location7Visible) {
-                    hasEmptyLocation = true;
-                }
-                if(numberOfLocationsSet() == currentLocationReport && !location7Decided) {
-                    textViewLocation7.setVisibility(v.VISIBLE);
-                    setLocation7.setVisibility(v.VISIBLE);
-                    setCalendarLocation7.setVisibility(v.VISIBLE);
-                    btnRemoveLocation7.setVisibility(v.VISIBLE);
-                    location7Visible = true;
-                }
-                break;
-            case 7:
-                if(location8Visible) {
-                    hasEmptyLocation = true;
-                }
-                if(numberOfLocationsSet() == currentLocationReport && !location8Decided) {
-                    textViewLocation8.setVisibility(v.VISIBLE);
-                    setLocation8.setVisibility(v.VISIBLE);
-                    setCalendarLocation8.setVisibility(v.VISIBLE);
-                    btnRemoveLocation8.setVisibility(v.VISIBLE);
-                    location8Visible = true;
-                }
-                break;
-
-            case 8:
-                if(location9Visible) {
-                    hasEmptyLocation = true;
-                }
-                if(numberOfLocationsSet() == currentLocationReport && !location9Decided) {
-                    textViewLocation9.setVisibility(v.VISIBLE);
-                    setLocation9.setVisibility(v.VISIBLE);
-                    setCalendarLocation9.setVisibility(v.VISIBLE);
-                    btnRemoveLocation9.setVisibility(v.VISIBLE);
-                    location9Visible = true;
-                }
-                break;
-            case 9:
-                if(location10Visible) {
-                    hasEmptyLocation = true;
-                }
-                if(numberOfLocationsSet() == currentLocationReport && !location10Decided) {
-                    textViewLocation10.setVisibility(v.VISIBLE);
-                    setLocation10.setVisibility(v.VISIBLE);
-                    setCalendarLocation10.setVisibility(v.VISIBLE);
-                    btnRemoveLocation10.setVisibility(v.VISIBLE);
-                    location10Visible = true;
-                }
-                break;
-
-            case 10:
-                if(location11Visible) {
-                    hasEmptyLocation = true;
-                }
-                if(numberOfLocationsSet() == currentLocationReport && !location11Decided) {
-                    textViewLocation11.setVisibility(v.VISIBLE);
-                    setLocation11.setVisibility(v.VISIBLE);
-                    setCalendarLocation11.setVisibility(v.VISIBLE);
-                    btnRemoveLocation11.setVisibility(v.VISIBLE);
-                    location11Visible = true;
-                }
-                break;
-            case 11:
-                if(location12Visible) {
-                    hasEmptyLocation = true;
-                }
-                if(numberOfLocationsSet() == currentLocationReport && !location12Decided) {
-                    textViewLocation12.setVisibility(v.VISIBLE);
-                    setLocation12.setVisibility(v.VISIBLE);
-                    setCalendarLocation12.setVisibility(v.VISIBLE);
-                    btnRemoveLocation12.setVisibility(v.VISIBLE);
-                    location12Visible = true;
-                }
-                break;
-
-
-            default:
-                Toast.makeText(getContext(),"Maximum number of locations added", Toast.LENGTH_LONG).show();
         }
+        if(currentLocationReport==12){
+            Toast.makeText(getContext(),"Maximum number of locations added", Toast.LENGTH_LONG).show();
+        }
+        if(currentLocationReport>0&&currentLocationReport<12){
+            if(AlllocationVisible.get(currentLocationReport)) {
+                hasEmptyLocation = true;
+            }
+            System.out.println(numberOfLocationsSet()+"nummber of locations set");
+            if(numberOfLocationsSet() == currentLocationReport && !AlllocationDecided.get(currentLocationReport)) {
+                textViewLocations.get(currentLocationReport).setVisibility(v.VISIBLE);
+                setlocations.get(currentLocationReport).setVisibility(v.VISIBLE);
+                setCalandarlocations.get(currentLocationReport).setVisibility(v.VISIBLE);
+                btnRemoveLocations.get(currentLocationReport).setVisibility(v.VISIBLE);
+                AlllocationVisible.set(currentLocationReport,true);
+            }
+
+        }
+
         if (hasEmptyLocation) {
             Toast.makeText(getContext(), "Choose location and date for previous empty location first", Toast.LENGTH_LONG).show();
         }
@@ -927,57 +719,10 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         List<Address> addresses;
         try {
             addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-            switch (currentLocationReport) {
-                case 1:
-                    yourLocation1String = addresses.get(0).getAddressLine(0);
-                    reportedLocation.setTitle(yourLocation1String);
-                    break;
-                case 2:
-                    yourLocation2String = addresses.get(0).getAddressLine(0);
-                    reportedLocation.setTitle(yourLocation2String);
-                    break;
-                case 3:
-                    yourLocation3String = addresses.get(0).getAddressLine(0);
-                    reportedLocation.setTitle(yourLocation3String);
-                    break;
-                case 4:
-                    yourLocation4String = addresses.get(0).getAddressLine(0);
-                    reportedLocation.setTitle(yourLocation4String);
-                    break;
-                case 5:
-                    yourLocation5String = addresses.get(0).getAddressLine(0);
-                    reportedLocation.setTitle(yourLocation5String);
-                    break;
-                case 6:
-                    yourLocation6String = addresses.get(0).getAddressLine(0);
-                    reportedLocation.setTitle(yourLocation6String);
-                    break;
-                case 7:
-                    yourLocation7String = addresses.get(0).getAddressLine(0);
-                    reportedLocation.setTitle(yourLocation7String);
-                    break;
-                case 8:
-                    yourLocation8String = addresses.get(0).getAddressLine(0);
-                    reportedLocation.setTitle(yourLocation8String);
-                    break;
-                case 9:
-                    yourLocation9String = addresses.get(0).getAddressLine(0);
-                    reportedLocation.setTitle(yourLocation9String);
-                    break;
-                case 10:
-                    yourLocation10String = addresses.get(0).getAddressLine(0);
-                    reportedLocation.setTitle(yourLocation10String);
-                    break;
-                case 11:
-                    yourLocation11String = addresses.get(0).getAddressLine(0);
-                    reportedLocation.setTitle(yourLocation11String);
-                    break;
-                case 12:
-                    yourLocation12String = addresses.get(0).getAddressLine(0);
-                    reportedLocation.setTitle(yourLocation12String);
-                    break;
-                default:
-            }
+
+                    YourlocationsStrings.set(currentLocationReport-1,addresses.get(0).getAddressLine(0));
+                    reportedLocation.setTitle(YourlocationsStrings.get(currentLocationReport-1));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -987,191 +732,25 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());;
         List<Address> addresses;
         try {
+            System.out.println();
             addresses = geocoder.getFromLocation(yourLocation.latitude, yourLocation.longitude, 1);
             yourLocationString = addresses.get(0).getAddressLine(0);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        switch (location){
-            case 1:
-                location1 = reportedLocation.getPosition();
-                textViewLocation1.setText(yourLocationString);
-                if (yourLocation1String != "") {
-                    textViewLocation1.setText(yourLocation1String);
-                }
-                if (location1Decided){
-                    this.setLocationInLocations(location, location1);
-                }
-                else{
-                    this.addLocationToLocations(location1);
-                    location1Decided = true;
-                }
-                break;
-            case 2:
-                location2 = reportedLocation.getPosition();
-                textViewLocation2.setText(yourLocationString);
-                if (yourLocation2String != "") {
-                    textViewLocation2.setText(yourLocation2String);
-                }
-                if (location2Decided){
-                    this.setLocationInLocations(location, location2);
-                }
-                else{
-                    this.addLocationToLocations(location2);
-                    location2Decided = true;
-                }
-                break;
-            case 3:
-                location3 = reportedLocation.getPosition();
-                textViewLocation3.setText(yourLocationString);
-                if (yourLocation3String != "") {
-                    textViewLocation3.setText(yourLocation3String);
-                }
-                if (location3Decided){
-                    this.setLocationInLocations(location, location3);
-                }
-                else{
-                    this.addLocationToLocations(location3);
-                    location3Decided = true;
-                }
-                break;
-            case 4:
-                location4 = reportedLocation.getPosition();
-                textViewLocation4.setText(yourLocationString);
-                if (yourLocation4String != "") {
-                    textViewLocation4.setText(yourLocation4String);
-                }
-                if (location4Decided){
-                    this.setLocationInLocations(location, location4);
-                }
-                else{
-                    this.addLocationToLocations(location4);
-                    location4Decided = true;
-                }
+                AlllocationDecided.set(location-1,true);
+                textViewLocations.get(location-1).setText(yourLocationString);
 
-                break;
-            case 5:
-                location5 = reportedLocation.getPosition();
-                textViewLocation5.setText(yourLocationString);
-                if (yourLocation5String != "") {
-                    textViewLocation5.setText(yourLocation5String);
+                if (YourlocationsStrings.get(location-1) != "") {
+                    textViewLocation1.setText(YourlocationsStrings.get(location-1));
                 }
-                if (location5Decided){
-                    this.setLocationInLocations(location, location5);
-                }
-                else{
-                    this.addLocationToLocations(location5);
-                    location5Decided = true;
-                }
+                System.out.println((AlllocationDecided.get(location-1)));
 
-                break;
-            case 6:
-                location6 = reportedLocation.getPosition();
-                textViewLocation6.setText(yourLocationString);
-                if (yourLocation6String != "") {
-                    textViewLocation6.setText(yourLocation6String);
-                }
-                if (location6Decided){
-                    this.setLocationInLocations(location, location6);
-                }
-                else{
-                    this.addLocationToLocations(location6);
-                    location6Decided = true;
-                }
 
-                break;
-            case 7:
-                location7 = reportedLocation.getPosition();
-                textViewLocation7.setText(yourLocationString);
-                if (yourLocation7String != "") {
-                    textViewLocation7.setText(yourLocation7String);
-                }
-                if (location7Decided){
-                    this.setLocationInLocations(location, location7);
-                }
-                else{
-                    this.addLocationToLocations(location7);
-                    location7Decided = true;
-                }
+                    locations.set(location-1,reportedLocation.getPosition());
 
-                break;
-            case 8:
-                location8 = reportedLocation.getPosition();
-                textViewLocation8.setText(yourLocationString);
-                if (yourLocation8String != "") {
-                    textViewLocation8.setText(yourLocation8String);
-                }
-                if (location8Decided){
-                    this.setLocationInLocations(location, location8);
-                }
-                else{
-                    this.addLocationToLocations(location8);
-                    location8Decided = true;
-                }
-                break;
-            case 9:
-                location9 = reportedLocation.getPosition();
-                textViewLocation9.setText(yourLocationString);
-                if (yourLocation9String != "") {
-                    textViewLocation9.setText(yourLocation9String);
-                }
-                if (location9Decided){
-                    this.setLocationInLocations(location, location9);
-                }
-                else{
-                    this.addLocationToLocations(location9);
-                    location9Decided = true;
-                }
 
-                break;
-            case 10:
-                location10 = reportedLocation.getPosition();
-                textViewLocation10.setText(yourLocationString);
-                if (yourLocation10String != "") {
-                    textViewLocation10.setText(yourLocation10String);
-                }
-                if (location10Decided){
-                    this.setLocationInLocations(location, location10);
-                }
-                else{
-                    this.addLocationToLocations(location10);
-                    location10Decided = true;
-                }
 
-                break;
-            case 11:
-                location11 = reportedLocation.getPosition();
-                textViewLocation11.setText(yourLocationString);
-                if (yourLocation11String != "") {
-                    textViewLocation11.setText(yourLocation11String);
-                }
-                if (location11Decided){
-                    this.setLocationInLocations(location, location11);
-                }
-                else{
-                    this.addLocationToLocations(location11);
-                    location11Decided = true;
-                }
-
-                break;
-            case 12:
-                location12 = reportedLocation.getPosition();
-                textViewLocation12.setText(yourLocationString);
-                if (yourLocation12String != "") {
-                    textViewLocation12.setText(yourLocation12String);
-                }
-                if (location12Decided){
-                    this.setLocationInLocations(location, location12);
-                }
-                else{
-                    this.addLocationToLocations(location12);
-                    location12Decided = true;
-                }
-
-                break;
-            default:
-        }
-        System.out.println("1: "+location1+ "\n2: "+ location2+ "\n3: "+location3);
         cancelMapPopup();
     }
 
@@ -1193,46 +772,245 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         Double lot;
         String lotstring;
         String tempday;
-        if(location1Dates!=null&& location1!=null){
-        for(Calendar day:location1Dates){
+        int counter=0;
+        System.out.println(locations.size()+"jhkhjkjh");
+        for (LatLng thelocation:locations){
+            if(AllLocationDates.get(counter)!=null && thelocation!=null){
+                System.out.println("fdsfsdf");
 
-            lat=location1.latitude;
-            latstring=lat.toString();
-            lot=location1.longitude;
-            lotstring=lot.toString();
-            tempday=day.get(Calendar.DAY_OF_MONTH)+"-"+(day.get(Calendar.MONTH)+1)+"-"+day.get(Calendar.YEAR);
-
-            returnlocations.add(new Location(latstring,lotstring,tempday,
-                    ratings[0],ratings[1],ratings[2],ratings[3],ratings[4],ratings[5],ratings[6],ratings[7],ratings[8],date.toString()));
-
-        }}
-        if(location2Dates!=null && location1!=null){
-            for(Calendar day:location2Dates){
-
-                lat=location2.latitude;
-                latstring=lat.toString();
-                lot=location2.longitude;
-                lotstring=lot.toString();
-                tempday=day.get(Calendar.DAY_OF_MONTH)+"-"+(day.get(Calendar.MONTH)+1)+"-"+day.get(Calendar.YEAR);
-                returnlocations.add(new Location(latstring,lotstring,tempday,
-                        ratings[0],ratings[1],ratings[2],ratings[3],ratings[4],ratings[5],ratings[6],ratings[7],ratings[8],date.toString()));
+                for(Calendar day:AllLocationDates.get(counter)){
 
 
-            }}
-        if(location3Dates!=null && location3!=null){
-            for(Calendar day:location3Dates){
+                    lat=thelocation.latitude;
+                    System.out.println(thelocation.latitude+"latidude");
+                    latstring=lat.toString();
+                    lot=thelocation.longitude;
+                    lotstring=lot.toString();
+                    tempday=day.get(Calendar.DAY_OF_MONTH)+"-"+(day.get(Calendar.MONTH)-
+                            +1)+"-"+day.get(Calendar.YEAR);
 
-                lat=location3.latitude;
-                latstring=lat.toString();
-                lot=location3.longitude;
-                lotstring=lot.toString();
-                tempday=day.get(Calendar.DAY_OF_MONTH)+"-"+(day.get(Calendar.MONTH)+1)+"-"+day.get(Calendar.YEAR);
-                returnlocations.add(new Location(latstring,lotstring,tempday,
-                        ratings[0],ratings[1],ratings[2],ratings[3],ratings[4],ratings[5],ratings[6],ratings[7],ratings[8],date.toString()));
+                    returnlocations.add(new Location(latstring,lotstring,tempday,
+                            ratings[0],ratings[1],ratings[2],ratings[3],ratings[4],ratings[5],ratings[6],ratings[7],ratings[8],date.toString()));
 
-            }}
+                }}
+            counter++;
+        }
+
         return returnlocations;
 
 
     }
+
+
+    void SetUppPage(){
+        ArrayList<Location> uniclocations=getunicLocation(userLocations);
+        int Counter1=0;
+        int Counter2=0;
+
+        LatLng templatlong;
+        Calendar tempCalender=Calendar.getInstance(TimeZone.getDefault());
+        String[] theday;
+        Geocoder geocoder = new Geocoder(getContext(), getResources().getConfiguration().locale);;
+        List<Address> addresses;
+
+        for(Location Alocation:uniclocations){
+            System.out.println(Double.valueOf(Alocation.latitude));
+            templatlong=new LatLng(Double.valueOf(Alocation.latitude), Double.valueOf(Alocation.longitude));
+            locations.set(Counter1,templatlong);
+            try {
+                addresses = geocoder.getFromLocation(templatlong.latitude, templatlong.longitude, 1);
+                if(addresses.size()>0){
+                textViewLocations.get(Counter1).setText(addresses.get(0).getAddressLine(0));}
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            for (Location datlocation:userLocations){
+                System.out.println("tja");
+
+                if(Alocation.longitude.equals(datlocation.longitude)&& Alocation.latitude.equals(datlocation.latitude)){
+                    theday=datlocation.getDate().split("-");
+                    System.out.println(theday[0]);
+                    System.out.println(theday[1]);
+                    System.out.println(theday[2]);
+                    tempCalender.set((int)Integer.parseInt(theday[2]),(int)Integer.parseInt(theday[1])+1,(int)Integer.parseInt(theday[0]));
+
+                    AllLocationDates.get(Counter1).add(Calendar.getInstance(TimeZone.getDefault()));
+                    AllLocationDates.get(Counter1).get(Counter2).set((int)Integer.parseInt(theday[2]),(int)Integer.parseInt(theday[1])+1,(int)Integer.parseInt(theday[0]));
+                    Counter2++;
+
+                }
+
+            }
+
+            System.out.println(templatlong.latitude);
+            textViewLocations.get(Counter1).setVisibility(getView().VISIBLE);
+            setCalandarlocations.get(Counter1).setVisibility(getView().VISIBLE);
+            setlocations.get(Counter1).setVisibility(getView().VISIBLE);
+            btnRemoveLocations.get(Counter1).setVisibility(getView().VISIBLE);
+            AlllocationDecided.set(Counter1,true);
+            AlllocationVisible.set(Counter1,true);
+            Counter1++;
+            Counter2=0;
+
+        }
+
+
+
+    }
+
+
+    public ArrayList<Location> getunicLocation( ArrayList<Location> thelocations){
+        ArrayList<String> uniclocationsString=new ArrayList<String>();
+        ArrayList<Location> uniclocations=new ArrayList<Location>();
+        String tempString="";
+        for(Location thelocation:thelocations){
+            tempString=thelocation.latitude+thelocation.longitude;
+            if(!uniclocationsString.contains(tempString)){
+                uniclocationsString.add(tempString);
+                uniclocations.add(thelocation);
+            }
+        }
+        return uniclocations;
+    }
+
+
+
+
+    void Creatlists(){
+        setlocations.add(setLocation1);
+        setlocations.add(setLocation2);
+        setlocations.add(setLocation3);
+        setlocations.add(setLocation4);
+        setlocations.add(setLocation5);
+        setlocations.add(setLocation6);
+        setlocations.add(setLocation7);
+        setlocations.add(setLocation8);
+        setlocations.add(setLocation9);
+        setlocations.add(setLocation10);
+        setlocations.add(setLocation11);
+        setlocations.add(setLocation12);
+
+        setCalandarlocations.add(setCalendarLocation1);
+        setCalandarlocations.add(setCalendarLocation2);
+        setCalandarlocations.add(setCalendarLocation3);
+        setCalandarlocations.add(setCalendarLocation4);
+        setCalandarlocations.add(setCalendarLocation5);
+        setCalandarlocations.add(setCalendarLocation6);
+        setCalandarlocations.add(setCalendarLocation7);
+        setCalandarlocations.add(setCalendarLocation8);
+        setCalandarlocations.add(setCalendarLocation9);
+        setCalandarlocations.add(setCalendarLocation10);
+        setCalandarlocations.add(setCalendarLocation11);
+        setCalandarlocations.add(setCalendarLocation12);
+
+        btnRemoveLocations.add(btnRemoveLocation1);
+        btnRemoveLocations.add(btnRemoveLocation2);
+        btnRemoveLocations.add(btnRemoveLocation3);
+        btnRemoveLocations.add(btnRemoveLocation4);
+        btnRemoveLocations.add(btnRemoveLocation5);
+        btnRemoveLocations.add(btnRemoveLocation6);
+        btnRemoveLocations.add(btnRemoveLocation7);
+        btnRemoveLocations.add(btnRemoveLocation8);
+        btnRemoveLocations.add(btnRemoveLocation9);
+        btnRemoveLocations.add(btnRemoveLocation10);
+        btnRemoveLocations.add(btnRemoveLocation11);
+        btnRemoveLocations.add(btnRemoveLocation12);
+
+
+        textViewLocations.add(textViewLocation1);
+        textViewLocations.add(textViewLocation2);
+        textViewLocations.add(textViewLocation3);
+        textViewLocations.add(textViewLocation4);
+        textViewLocations.add(textViewLocation5);
+        textViewLocations.add(textViewLocation6);
+        textViewLocations.add(textViewLocation7);
+        textViewLocations.add(textViewLocation8);
+        textViewLocations.add(textViewLocation9);
+        textViewLocations.add(textViewLocation10);
+        textViewLocations.add(textViewLocation11);
+        textViewLocations.add(textViewLocation12);
+
+        AlllocationDecided.add(location1Decided);
+        AlllocationDecided.add(location2Decided);
+        AlllocationDecided.add(location3Decided);
+        AlllocationDecided.add(location4Decided);
+        AlllocationDecided.add(location5Decided);
+        AlllocationDecided.add(location6Decided);
+        AlllocationDecided.add(location7Decided);
+        AlllocationDecided.add(location8Decided);
+        AlllocationDecided.add(location9Decided);
+        AlllocationDecided.add(location10Decided);
+        AlllocationDecided.add(location11Decided);
+        AlllocationDecided.add(location12Decided);
+
+
+        AlllocationVisible.add(location1Visible);
+        AlllocationVisible.add(location2Visible);
+        AlllocationVisible.add(location3Visible);
+        AlllocationVisible.add(location4Visible);
+        AlllocationVisible.add(location5Visible);
+        AlllocationVisible.add(location6Visible);
+        AlllocationVisible.add(location7Visible);
+        AlllocationVisible.add(location8Visible);
+        AlllocationVisible.add(location9Visible);
+        AlllocationVisible.add(location10Visible);
+        AlllocationVisible.add(location11Visible);
+        AlllocationVisible.add(location12Visible);
+
+        locationDateStrings.add(location1DateString);
+        locationDateStrings.add(location2DateString);
+        locationDateStrings.add(location3DateString);
+        locationDateStrings.add(location4DateString);
+        locationDateStrings.add(location5DateString);
+        locationDateStrings.add(location6DateString);
+        locationDateStrings.add(location7DateString);
+        locationDateStrings.add(location8DateString);
+        locationDateStrings.add(location9DateString);
+        locationDateStrings.add(location10DateString);
+        locationDateStrings.add(location11DateString);
+        locationDateStrings.add(location12DateString);
+
+        locations.add(location1);
+        locations.add(location2);
+        locations.add(location3);
+        locations.add(location4);
+        locations.add(location5);
+        locations.add(location6);
+        locations.add(location7);
+        locations.add(location8);
+        locations.add(location9);
+        locations.add(location10);
+        locations.add(location11);
+        locations.add(location12);
+
+        AllLocationDates.add(location1Dates);
+        AllLocationDates.add(location2Dates);
+        AllLocationDates.add(location3Dates);
+        AllLocationDates.add(location4Dates);
+        AllLocationDates.add(location5Dates);
+        AllLocationDates.add(location6Dates);
+        AllLocationDates.add(location7Dates);
+        AllLocationDates.add(location8Dates);
+        AllLocationDates.add(location9Dates);
+        AllLocationDates.add(location10Dates);
+        AllLocationDates.add(location11Dates);
+        AllLocationDates.add(location12Dates);
+
+        YourlocationsStrings.add(yourLocation1String);
+        YourlocationsStrings.add(yourLocation2String);
+        YourlocationsStrings.add(yourLocation3String);
+        YourlocationsStrings.add(yourLocation4String);
+        YourlocationsStrings.add(yourLocation5String);
+        YourlocationsStrings.add(yourLocation6String);
+        YourlocationsStrings.add(yourLocation7String);
+        YourlocationsStrings.add(yourLocation8String);
+        YourlocationsStrings.add(yourLocation9String);
+        YourlocationsStrings.add(yourLocation10String);
+        YourlocationsStrings.add(yourLocation11String);
+        YourlocationsStrings.add(yourLocation12String);
+    }
+
+
+
 }
+
