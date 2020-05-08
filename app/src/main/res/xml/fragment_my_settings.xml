@@ -9,18 +9,42 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
-    <SwitchPreferenceCompat
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:key="notifications"
-        android:title="Enable message notifications" />
+    <PreferenceCategory
+        app:key="notifications_category"
+        app:title="Notifications">
 
-    <Preference
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:key="feedback"
-        android:summary="Report technical issues or suggest new features"
-        android:title="Send feedback" />
+        <SwitchPreferenceCompat
+            app:key="notifications"
+            app:title="Enable message notifications"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="user_data_category"
+        app:title="User Data">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="enable_user_settings"
+            app:title="Enable user settings"/>
+
+        <EditTextPreference
+            app:key="signature"
+            app:title="Click to change username"
+            app:isPreferenceVisible="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="help_category"
+        app:title="Help">
+
+        <Preference
+            app:key="feedback"
+            app:summary="Report technical issues or suggest new features"
+            app:title="Send feedback"/>
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
 
