@@ -27,6 +27,9 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     private int mResource;
     private int lastPostion = -1;
 
+    private ArrayList<Post> all_values;
+    private ArrayList<Post> filter_values;
+
     static class ViewHolder {
         TextView username;
         TextView title;
@@ -39,6 +42,12 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         super(context, resource, objects);
         this.mContext = context;
         this.mResource = resource;
+
+//        all_values = new ArrayList<Post>();
+//        all_values.addAll(objects);
+//        filter_values = all_values.clone();
+
+
     }
 
     @NonNull
