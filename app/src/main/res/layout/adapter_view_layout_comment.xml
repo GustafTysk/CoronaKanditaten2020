@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="100"
-        android:background="@drawable/edittext_outline">
+        android:background="@drawable/edittext_outline_comment"
+        android:id="@+id/postTopSection">
 
         <TextView
             android:id="@+id/postUsername"
@@ -48,7 +49,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edittext_outline">
+        android:background="@drawable/edittext_outline_comment">
 
         <TextView
             android:id="@+id/postMessage"

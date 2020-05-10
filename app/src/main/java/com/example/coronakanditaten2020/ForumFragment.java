@@ -80,11 +80,11 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         Post newPost = new Post("Person1", "title1", "23 jan", "I need help", likes, "help", 1, 0);
         Post newPost2 = new Post("Person2", "title2", "24 jan", "Me too", likes, "help", 2, 0);
         Post newPost3 = new Post("Person3", "title3", "25 jan", "Me same", likes, "help",3, 0);
-        Post newPost4 = new Post("Person4", "title4", "26 jan", "I need help", likes, "no", 4, 0);
-        Post newPost5 = new Post("Person5", "title5", "27 jan", "Me too", likes, "no", 5, 0);
-        Post newPost6 = new Post("Person6", "title6", "28 jan", "Me same", likes, "no",6, 0);
-        Post newPost7 = new Post("Person7", "title7", "29 jan", "I need help", likes, "no", 7, 0);
-        Post newPost8 = new Post("Person8", "title8", "30 jan", "Me too", likes, "no", 8, 4);
+        Post newPost4 = new Post("Person4", "title4", "26 jan", "I need help", likes, "rec", 4, 0);
+        Post newPost5 = new Post("Person5", "title5", "27 jan", "Me too", likes, "rec", 5, 0);
+        Post newPost6 = new Post("Person6", "title6", "28 jan", "Me same", likes, "rec",6, 0);
+        Post newPost7 = new Post("Person7", "title7", "29 jan", "I need help", likes, "rec", 7, 0);
+        Post newPost8 = new Post("Person8", "title8", "30 jan", "Me too", likes, "rec", 8, 4);
         Post newPost9 = new Post("Person9", "title9", "31 jan", "Me same", likes, "help",9, 2);
 
         postList = new ArrayList<>();
@@ -146,6 +146,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         }
 
         adapter.notifyDataSetChanged();
+
 
         // Then you start a new Activity via I        tent
 //        Intent intent = new Intent();
