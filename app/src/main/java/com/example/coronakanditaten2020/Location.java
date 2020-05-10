@@ -4,19 +4,19 @@ public class Location {
     public Location() {
     }
 
-    private String latitude;
-    private String longitude;
+    String latitude;
+    String longitude;
     String date;
     private int id;
-    private int diarrheaRatingBar;
-    private int runnyNoseRatingBar;
-    private int nasalCongestionRatingBar;
-    private int headacheRatingBar;
-    private int throatRatingBar;
-    private int breathingRatingBar;
-    private int tirednessRatingBar;
-    private int coughRatingBar;
-    private int feverRatingBar;
+    int diarrheaRatingBar;
+    int runnyNoseRatingBar;
+    int nasalCongestionRatingBar;
+    int headacheRatingBar;
+    int throatRatingBar;
+    int breathingRatingBar;
+    int tirednessRatingBar;
+    int coughRatingBar;
+    int feverRatingBar;
     private String regTime;
 
     public Location(String latitude, String longitude, String date, int id, int diarrheaRatingBar, int runnyNoseRatingBar, int nasalCongestionRatingBar, int headacheRatingBar, int throatRatingBar, int breathingRatingBar, int tirednessRatingBar, int coughRatingBar, int feverRatingBar, String regTime) {
