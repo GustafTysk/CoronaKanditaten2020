@@ -1,25 +1,31 @@
 package com.example.coronakanditaten2020;
 
+import android.accounts.Account;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ForumFragment extends Fragment implements View.OnClickListener {
+public class ForumFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private Button messageButton;
     private Button btnForumToStart;
@@ -41,6 +47,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener {
     public int parentId = 0;
 
     public List<Post>copyList;
+    public List<Post>commentList;
     public ArrayList<Post>postList;
     private PostListAdapter adapter;
 
@@ -77,8 +84,8 @@ public class ForumFragment extends Fragment implements View.OnClickListener {
         Post newPost5 = new Post("Person5", "title5", "27 jan", "Me too", likes, "no", 5, 0);
         Post newPost6 = new Post("Person6", "title6", "28 jan", "Me same", likes, "no",6, 0);
         Post newPost7 = new Post("Person7", "title7", "29 jan", "I need help", likes, "no", 7, 0);
-        Post newPost8 = new Post("Person8", "title8", "30 jan", "Me too", likes, "no", 8, 0);
-        Post newPost9 = new Post("Person9", "title9", "31 jan", "Me same", likes, "no",9, 0);
+        Post newPost8 = new Post("Person8", "title8", "30 jan", "Me too", likes, "no", 8, 4);
+        Post newPost9 = new Post("Person9", "title9", "31 jan", "Me same", likes, "help",9, 2);
 
         postList = new ArrayList<>();
 
@@ -93,30 +100,69 @@ public class ForumFragment extends Fragment implements View.OnClickListener {
         postList.add(newPost9);
 
         copyList = new ArrayList<>(postList);
+        commentList = new ArrayList<>(postList);
+
+        removeComments();
 
         adapter = new PostListAdapter(getContext(), R.layout.adapter_view_layout, postList);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(this);
 
         searchFilter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 (ForumFragment.this).adapter.getFilter().filter(s.toString());
 
             }
-
             @Override
             public void afterTextChanged(Editable s) {
 
             }
         });
-
-
         return view;
+    }
+
+    public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+        Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
+
+        long postId = id + 1;
+        int thePostId = (int) postId;
+        String theCategory = postList.get(thePostId).getCategory();
+        System.out.println(theCategory);
+
+        postList.clear();
+
+        for (Post post: copyList) {
+            if(post.getCategory() == theCategory) {
+                if(post.getParentId() == thePostId || post.getId() == postId){
+                    postList.add(post);
+                }
+            }
+        }
+
+        adapter.notifyDataSetChanged();
+
+        // Then you start a new Activity via I        tent
+//        Intent intent = new Intent();
+//        intent.setClass(ForumFragment.this, PostItemDetail.class);
+//        intent.putExtra("position", position);
+//        // Or / And
+//        intent.putExtra("id", id);
+//        startActivity(intent);
+    }
+
+    public void removeComments() {
+        postList.clear();
+        for (Post post: copyList) {
+            if(post.getParentId() == 0) {
+                postList.add(post);
+            }
+        }
     }
 
     @Override
