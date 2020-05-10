@@ -7,15 +7,18 @@ import androidx.viewpager.widget.ViewPager;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public Datahandler datahandler = new Datahandler();
     ArrayList<Location> test;
+
+    MySettingsFragment mySettingsFragment = new MySettingsFragment();
+
     StartPageFragment startpageFragment = new StartPageFragment();
     StatisticsFragment statisticsFragment = new StatisticsFragment();
     HeatmapFragment heatmapFragment = new HeatmapFragment();
@@ -91,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         datahandler.getalllserverocations("");
         datahandler.getuserserverlocations();
         setContentView(R.layout.activity_main);
+
+
+
 
         mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
 
@@ -162,18 +171,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setupViewPager(ViewPager viewPager){
         adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(startpageFragment, "Start Page");             // 0
-        adapter.addFragment(statisticsFragment, "Statistics");            // 1
-        adapter.addFragment(heatmapFragment, "Heatmap");                  // 2
-        adapter.addFragment(reportSymptomsFragment, "Report Symptoms");   // 3
-        adapter.addFragment(reportLocationFragment, "Report Location");   // 4
-        adapter.addFragment(forumFragment, "Forum");                      // 5
+        adapter.addFragment(mySettingsFragment, "My Settings");           // 0
+        adapter.addFragment(startpageFragment, "Start Page");             // 1
+        adapter.addFragment(statisticsFragment, "Statistics");            // 2
+        adapter.addFragment(heatmapFragment, "Heatmap");                  // 3
+        adapter.addFragment(reportSymptomsFragment, "Report Symptoms");   // 4
+        adapter.addFragment(reportLocationFragment, "Report Location");   // 5
+        adapter.addFragment(forumFragment, "Forum");                      // 6
         viewPager.setAdapter(adapter);
+
+        setViewPager(1);
     }
 
     public void setViewPager(int fragmentNumber){
         mViewPager.setCurrentItem(fragmentNumber);
     }
+
 
     public void onCheckboxClicked(View view) {
         checked = ((CheckBox) view).isChecked();
@@ -346,10 +359,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // super.onBackPressed();
         Boolean noClosedMap = true;
         switch (mViewPager.getCurrentItem()){
-            case 0:
+            case 1:
                 Toast.makeText(MainActivity.this,"There is no back action",Toast.LENGTH_LONG).show();
                 break;
-            case 4:
+            case 5:
                 try {
                     noClosedMap = false;
                     reportLocationFragment.cancelMapPopup();
@@ -358,12 +371,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     e.printStackTrace();
                 }
                 if(noClosedMap){
-                    setViewPager(3);
+                    setViewPager(4);
                 }
 
                 break;
             default:
-                setViewPager(0);
+                setViewPager(1);
         }
         return;
     }
@@ -374,7 +387,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onLocationChanged(android.location.Location location) {
         currentLocation = new LatLng(location.getLatitude(),location.getLongitude());
-        //System.out.println(currentLocation);
+        System.out.println(currentLocation);
     }
 
     @Override
@@ -395,4 +408,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public LatLng getCurrentLocation(){
         return currentLocation;
     }
+
 }
