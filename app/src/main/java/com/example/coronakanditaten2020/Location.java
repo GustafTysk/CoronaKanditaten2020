@@ -1,28 +1,23 @@
 package com.example.coronakanditaten2020;
 
-import android.icu.text.StringPrepParseException;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 public class Location {
     public Location() {
     }
 
-    String latitude;
-    String longitude;
+    private String latitude;
+    private String longitude;
     String date;
-    int id;
-    int diarrheaRatingBar;
-    int runnyNoseRatingBar;
-    int nasalCongestionRatingBar;
-    int headacheRatingBar;
-    int throatRatingBar;
-    int breathingRatingBar;
-    int tirednessRatingBar;
-    int coughRatingBar;
-    int feverRatingBar;
-    String regTime;
+    private int id;
+    private int diarrheaRatingBar;
+    private int runnyNoseRatingBar;
+    private int nasalCongestionRatingBar;
+    private int headacheRatingBar;
+    private int throatRatingBar;
+    private int breathingRatingBar;
+    private int tirednessRatingBar;
+    private int coughRatingBar;
+    private int feverRatingBar;
+    private String regTime;
 
     public Location(String latitude, String longitude, String date, int id, int diarrheaRatingBar, int runnyNoseRatingBar, int nasalCongestionRatingBar, int headacheRatingBar, int throatRatingBar, int breathingRatingBar, int tirednessRatingBar, int coughRatingBar, int feverRatingBar, String regTime) {
         this.latitude = latitude;

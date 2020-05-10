@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +30,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-public class StatisticsFragment extends Fragment implements View.OnClickListener {
+public class StatisticsFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private static final String TAG = "Fragment Statistics";
 
     private Button btnStatisticsToStart;
@@ -37,22 +40,20 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     //GRAPH AND SERIES
     private GraphView graph;
-    private LineGraphSeries series;
-    private LineGraphSeries series2;
-    private LineGraphSeries series3;
-    private LineGraphSeries series4;
-    private LineGraphSeries series5;
-    private LineGraphSeries series6;
-    private LineGraphSeries series7;
-    private LineGraphSeries series8;
-    private LineGraphSeries series9;
+    private LineGraphSeries series, series2, series3, series4, series5, series6, series7, series8, series9, seriesb, series2b, series3b, series4b, series5b, series6b, series7b, series8b, series9b;
+    private Spinner spinner;
+    private ArrayAdapter<CharSequence> adapter;
+    private boolean series1exist = false;
+
 
 
 
     //ALLA SYMPTOM
     private int diarrhea29, diarrhea30, diarrhea31, diarrhea32, runnyNose29, runnyNose30, runnyNose31, runnyNose32, nasalCongestion29, nasalCongestion30, nasalCongestion31,
-        nasalCongestion32, headache29, headache30, headache31, headache32, throat29, throat30, throat31, throat32, breathing29, breathing30, breathing31, breathing32,
-        tiredness29, tiredness30, tiredness31, tiredness32, cough29, cough30, cough31, cough32, fever29, fever30, fever31, fever32, largest;
+            nasalCongestion32, headache29, headache30, headache31, headache32, throat29, throat30, throat31, throat32, breathing29, breathing30, breathing31, breathing32,
+            tiredness29, tiredness30, tiredness31, tiredness32, cough29, cough30, cough31, cough32, fever29, fever30, fever31, fever32, largest, largest2, diarrhea, nasalCongestion,
+            breathing, headache, fever, cough, tiredness, runnyNose, throat;
+
 
     //CALENDAR
     private Boolean noSelectedDates = true;
@@ -88,6 +89,11 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         setCalendarLocation1 = (ImageButton) view.findViewById(R.id.setCalendarLocation1);
         setCalendarLocation1.setOnClickListener(this);
 
+        spinner = view.findViewById(R.id.spinner1);
+        adapter = ArrayAdapter.createFromResource(getContext(), R.array.numbers, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
         Locations[0] = new Location("59.858562", "17.638927", "2020-04-29", 0, 0, 2, 0, 3, 0, 1, 1, 0, 2, "2020-04-31");
         Locations[1] = new Location("59.858562", "17.638927", "2020-05-01", 1, 2, 1, 0, 3, 2, 1, 3, 2, 2, "2020-04-30");
@@ -103,24 +109,28 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         Locations[11] = new Location("59.858562", "17.638927", "2020-05-01", 11, 3, 2, 0, 1, 0, 1, 1, 1, 3, "2020-04-29");
 
         countAllSymptoms();
-
         if(noSelectedDates == true) {
             calendarStat = Calendar.getInstance();
             calendarStat.set(Calendar.DAY_OF_YEAR, 119);
             d1 = calendarStat.getTime();
-            calendarStat.add(Calendar.DATE, 1);
+            calendarStat.add(Calendar.DAY_OF_MONTH, 1);
             d2 = calendarStat.getTime();
-            calendarStat.add(Calendar.DATE, 1);
+            calendarStat.add(Calendar.DAY_OF_MONTH, 1);
             d3 = calendarStat.getTime();
-            calendarStat.add(Calendar.DATE, 1);
+            calendarStat.add(Calendar.DAY_OF_MONTH, 1);
             d4 = calendarStat.getTime();
-            calendarStat.add(Calendar.DATE, 1);
+            calendarStat.add(Calendar.DAY_OF_MONTH, 1);
         }
-
-        makeGraphLines();
-        calculateHighestVal();
-        designGraph();
-
+        if(series1exist == false) {
+            makeGraphLines1();
+            addAllSeries1();
+            designSeriesA();
+        }
+        else {
+            makeGraphLines2();
+            addAllSeries2();
+            designSeriesb();
+        }
         return view;
     }
 
@@ -148,21 +158,46 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     public void showDiarrheaSeries() {
         graph.addSeries(series);
     }
+
+    public void showDiarrheaSeries2() {
+        graph.addSeries(seriesb);
+    }
+
     public void hideDiarrheaSeries () {
-        System.out.println(graph);
         graph.removeSeries(series);
     }
+
+    public void hideDiarrheaSeries2() {
+        graph.removeSeries(seriesb);
+    }
+
     public void showRunnyNoseSeries() {
         graph.addSeries(series2);
     }
+    public void showRunnyNoseSeries2() {
+        graph.addSeries(series2b);
+    }
+
     public void hideRunnyNoseSeries () {
         graph.removeSeries(series2);
     }
+    public void hideRunnyNoseSeries2() {
+        graph.removeSeries(series2b);
+    }
+
     public void showTirednessSeries() {
         graph.addSeries(series3);
     }
+    public void showTirednessSeries2() {
+        graph.addSeries(series3b);
+    }
+
     public void hideTirednessSeries() {
         graph.removeSeries(series3);
+    }
+
+    public void hideTirednessSeries2() {
+        graph.removeSeries(series3b);
     }
     public void showFeverSeries() {
         graph.addSeries(series4);
@@ -200,6 +235,43 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     public void hideBreathingDiffSeries() {
         graph.removeSeries(series9);
     }
+    public void showFeverSeries2() {
+        graph.addSeries(series4b);
+    }
+    public void hideFeverSeries2() {
+        graph.removeSeries(series4b);
+    }
+    public void showThroatSeries2() {
+        graph.addSeries(series5b);
+    }
+    public void hideThroatSeries2() {
+        graph.removeSeries(series5b);
+    }
+
+    public void showNasalConSeries2() {
+        graph.addSeries(series6b);
+    }
+    public void hideNasalConSeries2() {
+        graph.removeSeries(series6b);
+    }
+    public void showCoughSeries2() {
+        graph.addSeries(series7b);
+    }
+    public void hideCoughSeries2() {
+        graph.removeSeries(series7b);
+    }
+    public void showHeadacheSeries2() {
+        graph.addSeries(series8b);
+    }
+    public void hideHeadacheSeries2() {
+        graph.removeSeries(series8b);
+    }
+    public void showBreathingDiffSeries2() {
+        graph.addSeries(series9b);
+    }
+    public void hideBreathingDiffSeries2() {
+        graph.removeSeries(series9b);
+    }
 
     public void getCalendarView(final Integer location) throws OutOfDateRangeException {
         OnSelectDateListener listener = new OnSelectDateListener() {
@@ -212,8 +284,14 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                 d2 = location1Dates.get(1).getTime();
                 d3 = location1Dates.get(2).getTime();
                 d4 = location1Dates.get(3).getTime();
-                addAllSeries();
-                designGraph();
+                if(series1exist == true){
+                    addAllSeries1();
+                    designSeriesA();
+                }
+                else{
+                    addAllSeries2();
+                    designSeriesb();
+                }
 
                 System.out.println("hejsan" + location1Dates);
 
@@ -229,7 +307,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         datePicker.show();
     }
 
-    public void addAllSeries(){
+    public void addAllSeries1(){
         graph.addSeries(series);
         graph.addSeries(series2);
         graph.addSeries(series3);
@@ -239,6 +317,20 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.addSeries(series7);
         graph.addSeries(series8);
         graph.addSeries(series9);
+        series1exist = true;
+    }
+
+    public void addAllSeries2(){
+        graph.addSeries(seriesb);
+        graph.addSeries(series2b);
+        graph.addSeries(series3b);
+        graph.addSeries(series4b);
+        graph.addSeries(series5b);
+        graph.addSeries(series6b);
+        graph.addSeries(series7b);
+        graph.addSeries(series8b);
+        graph.addSeries(series9b);
+        series1exist = false;
     }
 
     public void clearGraph(){
@@ -392,7 +484,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    public void makeGraphLines(){
+    public void makeGraphLines1(){
         series = new LineGraphSeries<DataPoint>(new DataPoint[]{
                 new DataPoint(d1, diarrhea29),
                 new DataPoint(d2, diarrhea30),
@@ -447,18 +539,67 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                 new DataPoint(d3, fever31),
                 new DataPoint(d4, fever32)
         });
-        graph.addSeries(series);
-        graph.addSeries(series2);
-        graph.addSeries(series3);
-        graph.addSeries(series4);
-        graph.addSeries(series5);
-        graph.addSeries(series6);
-        graph.addSeries(series7);
-        graph.addSeries(series8);
-        graph.addSeries(series9);
     }
 
-    public void calculateHighestVal(){
+    public void makeGraphLines2(){
+        seriesb = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                new DataPoint(d1, diarrhea29),
+                new DataPoint(d2, diarrhea29+diarrhea30),
+                new DataPoint(d3, diarrhea29+diarrhea30+diarrhea31),
+                new DataPoint(d4, diarrhea29+diarrhea30+diarrhea31+diarrhea32)
+        });
+        series2b = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                new DataPoint(d1, runnyNose29),
+                new DataPoint(d2, runnyNose29+runnyNose30),
+                new DataPoint(d3, runnyNose29+runnyNose30+runnyNose31),
+                new DataPoint(d4, runnyNose29+runnyNose30+runnyNose31+runnyNose32)
+        });
+        series3b = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                new DataPoint(d1, nasalCongestion29),
+                new DataPoint(d2, nasalCongestion29+nasalCongestion30),
+                new DataPoint(d3, nasalCongestion29+nasalCongestion30+nasalCongestion31),
+                new DataPoint(d4, nasalCongestion29+nasalCongestion30+nasalCongestion31+nasalCongestion32)
+        });
+        series4b = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                new DataPoint(d1, headache29),
+                new DataPoint(d2, headache29+headache30),
+                new DataPoint(d3, headache29+headache30+headache31),
+                new DataPoint(d4, headache29+headache30+headache31+headache32)
+        });
+        series5b = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                new DataPoint(d1, throat29),
+                new DataPoint(d2, throat29+throat30),
+                new DataPoint(d3, throat29+throat30+throat31),
+                new DataPoint(d4, throat29+throat30+throat31+throat32)
+        });
+        series6b = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                new DataPoint(d1, breathing29),
+                new DataPoint(d2, breathing29+breathing30),
+                new DataPoint(d3, breathing29+breathing30+breathing31),
+                new DataPoint(d4, breathing29+breathing30+breathing31+breathing32)
+        });
+        series7b = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                new DataPoint(d1, tiredness29),
+                new DataPoint(d2, tiredness29+tiredness30),
+                new DataPoint(d3, tiredness29+tiredness30+tiredness31),
+                new DataPoint(d4, tiredness29+tiredness30+tiredness31+tiredness32)
+        });
+        series8b = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                new DataPoint(d1, cough29),
+                new DataPoint(d2, cough29+cough30),
+                new DataPoint(d3, cough29+cough30+cough31),
+                new DataPoint(d4, cough29+cough30+cough31+cough32)
+        });
+        series9b = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                new DataPoint(d1, fever29),
+                new DataPoint(d2, fever29+fever30),
+                new DataPoint(d3, fever29+fever30+fever31),
+                new DataPoint(d4, fever29+fever30+fever31+fever32)
+        });
+    }
+
+
+    public void calculateHighestValA(){
         List<Integer> Numbers = new ArrayList<>();
         Numbers.add(diarrhea29);
         Numbers.add(diarrhea30);
@@ -503,7 +644,36 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             }
         }
     }
-    public void designGraph(){
+    public void calculateHighestValB() {
+        diarrhea = diarrhea29 + diarrhea30 + diarrhea31 + diarrhea32;
+        nasalCongestion = nasalCongestion29 + nasalCongestion30 + nasalCongestion31 + nasalCongestion32;
+        runnyNose = runnyNose29 + runnyNose30 + runnyNose31 + runnyNose32;
+        fever = fever29 + fever30 + fever31 + fever32;
+        cough = cough29 + cough30 + cough31 + cough32;
+        tiredness = tiredness29 + tiredness30 + tiredness31 + tiredness32;
+        throat = throat29 + throat30 + throat31 + throat32;
+        breathing = breathing29 + breathing30 + breathing31 + breathing32;
+        headache = headache29 + headache30 + headache31 + headache32;
+        List<Integer> Numbers2 = new ArrayList<>();
+        Numbers2.add(diarrhea);
+        Numbers2.add(nasalCongestion);
+        Numbers2.add(runnyNose);
+        Numbers2.add(fever);
+        Numbers2.add(cough);
+        Numbers2.add(tiredness);
+        Numbers2.add(throat);
+        Numbers2.add(breathing);
+        Numbers2.add(headache);
+        for (int i = 0; i < Numbers2.size(); i++) {
+            if (Numbers2.get(i) > largest2) {
+                largest2 = Numbers2.get(i);
+            }
+        }
+        System.out.println(largest2);
+    }
+
+    public void designSeriesA() {
+        calculateHighestValA();
         graph.getViewport().setScrollable(true);
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
@@ -513,13 +683,15 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         //graph.getViewport().setMinX(d1.getTime());
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
 
-
-
         graph.getGridLabelRenderer().setNumHorizontalLabels(4);
         graph.getGridLabelRenderer().setNumVerticalLabels(largest + 1);
         graph.getGridLabelRenderer().setHumanRounding(false);
-        graph.setTitle("All symptoms");
+        graph.setTitle("Symptoms per day");
         graph.setTitleTextSize(80);
+
+        graph.getLegendRenderer().setVisible(true);
+        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.MIDDLE);
+        graph.getLegendRenderer().setTextSize(35f);
 
         series.setTitle("Diarrhea");
         series2.setTitle("Runny Nose");
@@ -539,8 +711,97 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         series7.setColor(Color.DKGRAY);
         series8.setColor(Color.CYAN);
         series9.setColor(Color.GRAY);
+        series.setDrawDataPoints(true);
+        series2.setDrawDataPoints(true);
+        series3.setDrawDataPoints(true);
+        series4.setDrawDataPoints(true);
+        series5.setDrawDataPoints(true);
+        series6.setDrawDataPoints(true);
+        series7.setDrawDataPoints(true);
+        series8.setDrawDataPoints(true);
+        series9.setDrawDataPoints(true);
+
+    }
+
+    public void designSeriesb() {
+        calculateHighestValB();
+        graph.getViewport().setScrollable(true);
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setMaxY(largest2);
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMaxX(d4.getTime());
+        //graph.getViewport().setMinX(d1.getTime());
+        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+
+        graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+        graph.getGridLabelRenderer().setNumVerticalLabels(largest2 + 1);
+        graph.getGridLabelRenderer().setHumanRounding(false);
+        graph.setTitle("Total symptoms");
+        graph.setTitleTextSize(80);
+
+
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.MIDDLE);
         graph.getLegendRenderer().setTextSize(35f);
+
+        seriesb.setTitle("Diarrhea");
+        series2b.setTitle("Runny Nose");
+        series3b.setTitle("Tiredness");
+        series4b.setTitle("Fever");
+        series5b.setTitle("Sore Throat");
+        series6b.setTitle("Nasal Congestion");
+        series7b.setTitle("Cough");
+        series8b.setTitle("Headache");
+        series9b.setTitle("Breathing difficulties");
+        seriesb.setColor(Color.BLACK);
+        series2b.setColor(Color.GREEN);
+        series3b.setColor(Color.YELLOW);
+        series4b.setColor(Color.RED);
+        series5b.setColor(Color.BLUE);
+        series6b.setColor(Color.MAGENTA);
+        series7b.setColor(Color.DKGRAY);
+        series8b.setColor(Color.CYAN);
+        series9b.setColor(Color.GRAY);
+        seriesb.setDrawDataPoints(true);
+        series2b.setDrawDataPoints(true);
+        series3b.setDrawDataPoints(true);
+        series4b.setDrawDataPoints(true);
+        series5b.setDrawDataPoints(true);
+        series6b.setDrawDataPoints(true);
+        series7b.setDrawDataPoints(true);
+        series8b.setDrawDataPoints(true);
+        series9b.setDrawDataPoints(true);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+        diarrheaBox.setChecked(true);
+        nasalConBox.setChecked(true);
+        runnyNoseBox.setChecked(true);
+        feverBox.setChecked(true);
+        coughBox.setChecked(true);
+        tirednessBox.setChecked(true);
+        throatBox.setChecked(true);
+        breathingDiffBox.setChecked(true);
+        headacheBox.setChecked(true);
+        if(text.equals("Symptoms per day")){
+            clearGraph();
+            makeGraphLines1();
+            addAllSeries1();
+            designSeriesA();
+        }
+        else{
+            clearGraph();
+            makeGraphLines2();
+            addAllSeries2();
+            designSeriesb();
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

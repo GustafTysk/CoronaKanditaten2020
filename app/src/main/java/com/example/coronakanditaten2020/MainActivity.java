@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +62,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private NonSwipeableViewPager mViewPager;
 
     private SectionsStatePagerAdapter adapter;
+
+    private Spinner spinner;
+    String text;
+    boolean checked;
 
 
     @Override
@@ -171,79 +176,153 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onCheckboxClicked(View view) {
-        boolean checked = ((CheckBox) view).isChecked();
-
+        checked = ((CheckBox) view).isChecked();
+        spinner = (Spinner)findViewById(R.id.spinner1);
+        text = spinner.getSelectedItem().toString();
         switch (view.getId()) {
             case R.id.diarrheaBox:
-                if (checked) {
-                    statisticsFragment.showDiarrheaSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showDiarrheaSeries();
+                    } else {
+                        statisticsFragment.hideDiarrheaSeries();
+                    }
                 }
                 else{
-                    statisticsFragment.hideDiarrheaSeries();
+                    if (checked) {
+                        statisticsFragment.showDiarrheaSeries2();
+                    } else {
+                        statisticsFragment.hideDiarrheaSeries2();
+                    }
                 }
                 break;
             case R.id.runnyNoseBox:
-                if (checked) {
-                    statisticsFragment.showRunnyNoseSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showRunnyNoseSeries();
+                    } else {
+                        statisticsFragment.hideRunnyNoseSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideRunnyNoseSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showRunnyNoseSeries2();
+                    } else {
+                        statisticsFragment.hideRunnyNoseSeries2();
+                    }
                 }
                 break;
             case R.id.tirednessBox:
-                if (checked) {
-                    statisticsFragment.showTirednessSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showTirednessSeries();
+                    } else {
+                        statisticsFragment.hideTirednessSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideTirednessSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showTirednessSeries2();
+                    } else {
+                        statisticsFragment.hideTirednessSeries2();
+                    }
                 }
                 break;
             case R.id.feverBox:
-                if (checked) {
-                    statisticsFragment.showFeverSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showFeverSeries();
+                    } else {
+                        statisticsFragment.hideFeverSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideFeverSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showFeverSeries2();
+                    } else {
+                        statisticsFragment.hideFeverSeries2();
+                    }
                 }
                 break;
             case R.id.throatBox:
-                if (checked) {
-                    statisticsFragment.showThroatSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showThroatSeries();
+                    } else {
+                        statisticsFragment.hideThroatSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideThroatSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showThroatSeries2();
+                    } else {
+                        statisticsFragment.hideThroatSeries2();
+                    }
                 }
                 break;
             case R.id.nasalConBox:
-                if (checked) {
-                    statisticsFragment.showNasalConSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showNasalConSeries();
+                    } else {
+                        statisticsFragment.hideNasalConSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideNasalConSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showNasalConSeries2();
+                    } else {
+                        statisticsFragment.hideNasalConSeries2();
+                    }
                 }
                 break;
             case R.id.coughBox:
-                if (checked) {
-                    statisticsFragment.showCoughSeries();
+                if(text.equals("Symptoms per day")){
+
+                    if (checked) {
+                        statisticsFragment.showCoughSeries();
+                    } else {
+                        statisticsFragment.hideCoughSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideCoughSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showCoughSeries2();
+                    } else {
+                        statisticsFragment.hideCoughSeries2();
+                    }
                 }
                 break;
             case R.id.headacheBox:
-                if (checked) {
-                    statisticsFragment.showHeadacheSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showHeadacheSeries();
+                    } else {
+                        statisticsFragment.hideHeadacheSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideHeadacheSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showHeadacheSeries2();
+                    } else {
+                        statisticsFragment.hideHeadacheSeries2();
+                    }
                 }
                 break;
             case R.id.breathingDiffBox:
-                if (checked) {
-                    statisticsFragment.showBreathingDiffSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showBreathingDiffSeries();
+                    } else {
+                        statisticsFragment.hideBreathingDiffSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideBreathingDiffSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showBreathingDiffSeries2();
+                    } else {
+                        statisticsFragment.hideBreathingDiffSeries2();
+                    }
                 }
                 break;
 
@@ -295,7 +374,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onLocationChanged(android.location.Location location) {
         currentLocation = new LatLng(location.getLatitude(),location.getLongitude());
-        System.out.println(currentLocation);
+        //System.out.println(currentLocation);
     }
 
     @Override
