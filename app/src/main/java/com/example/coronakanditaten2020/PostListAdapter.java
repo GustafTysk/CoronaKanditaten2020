@@ -92,11 +92,17 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         holder.text.setText(text);
         holder.likesShow.setText("Likes: " + likes);
 
-        if(parentId != 0) {
+        if(category == "comment") {
             holder.category.setText("Comment");
             holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline_comment);
             holder.postBottomSection.setBackgroundResource(R.drawable.edittext_outline_comment);
         }
+        else{
+
+            holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline);
+            holder.postBottomSection.setBackgroundResource(R.drawable.edittext_outline);
+        }
+
 
         return convertView;
     }

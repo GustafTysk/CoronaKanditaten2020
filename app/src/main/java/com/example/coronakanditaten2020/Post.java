@@ -1,8 +1,9 @@
 package com.example.coronakanditaten2020;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
-public class Post {
+public class Post implements Comparable<Post> {
     String username;
     String title;
     String timestamp;
@@ -24,10 +25,21 @@ public class Post {
         this.parentId = parentId;
     }
 
-    public Post() {
+    public static final Comparator<Post> DESCENDING_COMPARATOR = new Comparator<Post>() {
+        // Overriding the compare method to sort the age
+        public int compare(Post p1, Post p2) {
+           // return p1.likes - p2.likes;
+            return p2.likes - p1.likes;
+        }
+    };
 
-
+    public int compareTo(Post p) {
+        return (this.title).compareTo(p.title);
     }
+
+//    public int compare( d, Dog d1) {
+//        return DESCENDING_COMPARATOR.compare(d, d1);
+//    }
 
     public String getUsername() {
         return username;
