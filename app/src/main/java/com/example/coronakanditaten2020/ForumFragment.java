@@ -20,6 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,8 +67,8 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
         messageButton = (Button) view.findViewById(R.id.messageButton);
         messageButton.setOnClickListener(this);
-        btnForumToStart = (Button) view.findViewById(R.id.btnForumToStart);
-        btnForumToStart.setOnClickListener(this);
+//        btnForumToStart = (Button) view.findViewById(R.id.btnForumToStart);
+//        btnForumToStart.setOnClickListener(this);
         messageInput = (EditText) view.findViewById(R.id.messageInput);
         messageTitle = (EditText) view.findViewById(R.id.messageTitle);
 
@@ -124,7 +126,14 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
             }
         });
+
         return view;
+    }
+
+    public void setForumBottomNav(){
+        ((MainActivity) requireActivity()).bottomNav = (BottomNavigationView) getView().findViewById(R.id.bottom_navigation);
+        ((MainActivity) requireActivity()).bottomNav.setOnNavigationItemSelectedListener(((MainActivity) getActivity()).navListener);
+        ((MainActivity) requireActivity()).bottomNav.getMenu().findItem(R.id.nav_forum).setChecked(true);
     }
 
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
@@ -186,9 +195,9 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 messageTitle.setText("");
                 messageInput.setText("");
                 break;
-            case R.id.btnForumToStart:
-                ((MainActivity) getActivity()).setViewPager(1);
-                break;
+//            case R.id.btnForumToStart:
+//                ((MainActivity) getActivity()).setViewPager(1);
+//                break;
 
             case R.id.btnFilterHelp:
                 postList.clear();

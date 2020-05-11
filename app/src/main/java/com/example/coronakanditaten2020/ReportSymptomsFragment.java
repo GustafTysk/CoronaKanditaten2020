@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,12 +15,16 @@ import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ReportSymptomsFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "Fragment Statistics";
+
     private ImageButton btnFeverDialog;
     private ImageButton btnCoughDialog;
     private ImageButton btnDifficultyBreathingDialog;
@@ -42,8 +47,8 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_report_symptoms, container, false);
-        btnRsToStart = (Button) view.findViewById(R.id.btnRsToStart);
-        btnRsToStart.setOnClickListener(this);
+//        btnRsToStart = (Button) view.findViewById(R.id.btnRsToStart);
+//        btnRsToStart.setOnClickListener(this);
         btnRsToRl = (Button) view.findViewById(R.id.btnRsToRl);
         btnRsToRl.setOnClickListener(this);
 
@@ -96,8 +101,18 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
         btnClearDiarrheaRating.setOnClickListener(this);
         SetuppUsersymtoms();
 
+       ((MainActivity) requireActivity()).bottomNav = (BottomNavigationView) view.findViewById(R.id.bottom_navigation);
+       ((MainActivity) requireActivity()).bottomNav.setOnNavigationItemSelectedListener(((MainActivity) getActivity()).navListener);
+
         return view;
     }
+
+    public void setReportSymptomsBottomNav(){
+        ((MainActivity) requireActivity()).bottomNav = (BottomNavigationView) getView().findViewById(R.id.bottom_navigation);
+        ((MainActivity) requireActivity()).bottomNav.setOnNavigationItemSelectedListener(((MainActivity) getActivity()).navListener);
+        ((MainActivity) requireActivity()).bottomNav.getMenu().findItem(R.id.nav_report_symptoms).setChecked(true);
+    }
+
     public void openDialog(String symptom) {
         Dialog dialog = new Dialog(getContext());
         switch (symptom){
@@ -156,16 +171,16 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
 
             case R.id.btnRsToRl:
                 ((MainActivity)getActivity()).setViewPager(5);
-
+                ((MainActivity)getActivity()).reportLocationFragment.setReportLocationBottomNav();
                 totalSeverityCount = countAllRatings();
 
                 System.out.println(totalSeverityCount);
                 totalSeverityCount = 0;
                 break;
-
+/*
             case R.id.btnRsToStart:
                 ((MainActivity)getActivity()).setViewPager(1);
-                break;
+                break;*/
 
             case R.id.btnFeverDialog:
                 openDialog("fever");

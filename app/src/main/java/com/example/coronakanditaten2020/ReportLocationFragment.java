@@ -34,6 +34,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,7 +59,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     private Calendar maxDate = Calendar.getInstance(TimeZone.getDefault());
     private long dateNumberOfDaysAgo = 1209600000;                              //get 14 days im ms, 14 days = 14 * 24* 60 * 60 * 1000 = 1209600000 ms
     private long minDateTime = minDate.getTimeInMillis()-dateNumberOfDaysAgo;   //get date 14 days ago (today - 14 days in ms)
-
 
     private GoogleMap mGoogleMap;
     private MapView mMapView;
@@ -126,8 +126,8 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         containerThis = container;
         savedInstance = savedInstanceState;
         View view = inflater.inflate(R.layout.fragment_report_location, container, false);
-        btnRlToStart = (Button) view.findViewById(R.id.btnRlToStart);
-        btnRlToStart.setOnClickListener(this);
+//        btnRlToStart = (Button) view.findViewById(R.id.btnRlToStart);
+//        btnRlToStart.setOnClickListener(this);
         btnRlToRs = (Button) view.findViewById(R.id.btnRlToRs);
         btnRlToRs.setOnClickListener(this);
         btnUpdateMyLocations = (Button) view.findViewById(R.id.btnUpdateMyLocations);
@@ -254,10 +254,14 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             SetUppPage();
         }
 
-
         return view;
     }
 
+    public void setReportLocationBottomNav(){
+        ((MainActivity) requireActivity()).bottomNav = (BottomNavigationView) getView().findViewById(R.id.bottom_navigation);
+        ((MainActivity) requireActivity()).bottomNav.setOnNavigationItemSelectedListener(((MainActivity) getActivity()).navListener);
+        ((MainActivity) requireActivity()).bottomNav.getMenu().findItem(R.id.nav_report_symptoms).setChecked(true);
+    }
 
     @Override
     public void onClick(View v) {
@@ -267,9 +271,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             case R.id.btnRlToRs:
                 ((MainActivity) getActivity()).setViewPager(4);
                 break;
-            case R.id.btnRlToStart:
+/*            case R.id.btnRlToStart:
                 ((MainActivity) getActivity()).setViewPager(1);
-                break;
+                break;*/
             case R.id.btnAddLocation:
                 showNextLocationFragment(currentLocationReport, getView());
                 break;
