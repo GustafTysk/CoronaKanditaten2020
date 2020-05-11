@@ -7,13 +7,13 @@ public class Post {
     String title;
     String timestamp;
     String text;
-    ArrayList <String> likes;
+    int likes;
     String category;
     int id;
     int parentId;
 
 
-    public Post(String username, String title, String timestamp, String text, ArrayList<String> likes, String category, int id, int parentId) {
+    public Post(String username, String title, String timestamp, String text, int likes, String category, int id, int parentId) {
         this.username = username;
         this.title = title;
         this.timestamp = timestamp;
@@ -53,10 +53,10 @@ public class Post {
     public void setText(String text) {
         this.text = text;
     }
-    public ArrayList<String> getLikes() {
+    public int getLikes() {
         return likes;
     }
-    public void setLikes(ArrayList<String> likes) {
+    public void setLikes(int likes) {
         this.likes = likes;
     }
     public String getCategory() {
