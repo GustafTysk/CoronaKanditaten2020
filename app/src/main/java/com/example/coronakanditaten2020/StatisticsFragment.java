@@ -36,7 +36,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     private Button btnStatisticsToStart;
     private Button btnStatisticsToHeatmap;
-    private Location[] Locations = new Location[12];
+    private ArrayList<Location> Locations = new ArrayList<Location>();
+
     public CheckBox diarrheaBox, runnyNoseBox, nasalConBox, headacheBox, throatBox, breathingDiffBox, tirednessBox, coughBox, feverBox;
 
     //GRAPH AND SERIES
@@ -68,6 +69,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //((MainActivity)getActivity()).datahandler.heatlocations;
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_statistics, container, false);
         /*btnStatisticsToStart = (Button) view.findViewById(R.id.btnStatisticsToStart);
@@ -95,32 +97,33 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-
-        Locations[0] = new Location("59.858562", "17.638927", "2020-04-29", 0, 0, 2, 0, 3, 0, 1, 1, 0, 2, "2020-04-31");
-        Locations[1] = new Location("59.858562", "17.638927", "2020-05-01", 1, 2, 1, 0, 3, 2, 1, 3, 2, 2, "2020-04-30");
-        Locations[2] = new Location("59.858562", "17.638927", "2020-05-01", 2, 2, 1, 0, 3, 2, 1, 3, 2, 2, "2020-04-30");
-        Locations[3] = new Location("59.858562", "17.638927", "2020-04-29", 3, 3, 2, 0, 1, 3, 1, 1, 0, 3, "2020-04-31");
-        Locations[4] = new Location("59.858562", "17.638927", "2020-04-30", 4, 0, 0, 3, 3, 2, 1, 2, 0, 2, "2020-04-30");
-        Locations[5] = new Location("59.858562", "17.638927", "2020-04-30", 5, 0, 3, 0, 2, 2, 1, 3, 1, 1, "2020-04-29");
-        Locations[6] = new Location("59.858562", "17.638927", "2020-05-01", 6, 2, 0, 1, 3, 1, 1, 1, 0, 0, "2020-04-29");
-        Locations[7] = new Location("59.858562", "17.638927", "2020-04-30", 7, 3, 0, 2, 1, 2, 1, 2, 0, 3, "2020-04-30");
-        Locations[8] = new Location("59.858562", "17.638927", "2020-04-29", 8, 0, 0, 2, 3, 1, 1, 3, 3, 2, "2020-04-29");
-        Locations[9] = new Location("59.858562", "17.638927", "2020-05-01", 9, 1, 2, 0, 0, 0, 1, 1, 0, 1, "2020-04-29");
-        Locations[10] = new Location("59.858562", "17.638927", "2020-04-29", 10, 2, 1, 0, 3, 3, 1, 1, 0, 2, "2020-04-30");
-        Locations[11] = new Location("59.858562", "17.638927", "2020-05-01", 11, 3, 2, 0, 1, 0, 1, 1, 1, 3, "2020-04-29");
-
+        Location location = new Location("59.858562", "17.638927", "2020-04-29", 0, 0, 2, 0, 3, 0, 1, 1, 0, 2, "2020-04-31");
+        Locations.add(location);
+        Location location2 = new Location("59.858562", "17.638927", "2020-05-01", 1, 2, 1, 0, 3, 2, 1, 3, 2, 2, "2020-04-30");
+        Locations.add(location2);
+        Location location3 = new Location("59.858562", "17.638927", "2020-05-01", 2, 2, 1, 0, 3, 2, 1, 3, 2, 2, "2020-04-30");
+        Locations.add(location3);
+        Location location4 = new Location("59.858562", "17.638927", "2020-04-29", 3, 3, 2, 0, 1, 3, 1, 1, 0, 3, "2020-04-31");
+        Locations.add(location4);
+        Location location5 = new Location("59.858562", "17.638927", "2020-04-30", 4, 0, 0, 3, 3, 2, 1, 2, 0, 2, "2020-04-30");
+        Locations.add(location5);
+        Location location6 = new Location("59.858562", "17.638927", "2020-04-30", 5, 0, 3, 0, 2, 2, 1, 3, 1, 1, "2020-04-29");
+        Locations.add(location6);
+        Location location7 = new Location("59.858562", "17.638927", "2020-05-01", 6, 2, 0, 1, 3, 1, 1, 1, 0, 0, "2020-04-29");
+        Locations.add(location7);
+        Location location8 = new Location("59.858562", "17.638927", "2020-04-30", 7, 3, 0, 2, 1, 2, 1, 2, 0, 3, "2020-04-30");
+        Locations.add(location8);
+        Location location9 = new Location("59.858562", "17.638927", "2020-04-29", 8, 0, 0, 2, 3, 1, 1, 3, 3, 2, "2020-04-29");
+        Locations.add(location9);
+        Location location10 = new Location("59.858562", "17.638927", "2020-05-01", 9, 1, 2, 0, 0, 0, 1, 1, 0, 1, "2020-04-29");
+        Locations.add(location10);
+        Location location11 = new Location("59.858562", "17.638927", "2020-04-29", 10, 2, 1, 0, 3, 3, 1, 1, 0, 2, "2020-04-30");
+        Locations.add(location11);
+        Location location12 = new Location("59.858562", "17.638927", "2020-05-01", 11, 3, 2, 0, 1, 0, 1, 1, 1, 3, "2020-04-29");
+        Locations.add(location12);
         countAllSymptoms();
         if(noSelectedDates == true) {
-            calendarStat = Calendar.getInstance();
-            calendarStat.set(Calendar.DAY_OF_YEAR, 119);
-            d1 = calendarStat.getTime();
-            calendarStat.add(Calendar.DAY_OF_MONTH, 1);
-            d2 = calendarStat.getTime();
-            calendarStat.add(Calendar.DAY_OF_MONTH, 1);
-            d3 = calendarStat.getTime();
-            calendarStat.add(Calendar.DAY_OF_MONTH, 1);
-            d4 = calendarStat.getTime();
-            calendarStat.add(Calendar.DAY_OF_MONTH, 1);
+            createCalendar();
         }
         if(series1exist == false) {
             makeGraphLines1();
@@ -281,6 +284,20 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.removeSeries(series9b);
     }
 
+    public void createCalendar() {
+        calendarStat = Calendar.getInstance();
+        calendarStat.set(Calendar.DAY_OF_YEAR, 119);
+        d1 = calendarStat.getTime();
+        calendarStat.add(Calendar.DAY_OF_MONTH, 1);
+        System.out.println("1" + d1);
+        d2 = calendarStat.getTime();
+        calendarStat.add(Calendar.DAY_OF_MONTH, 1);
+        d3 = calendarStat.getTime();
+        calendarStat.add(Calendar.DAY_OF_MONTH, 1);
+        d4 = calendarStat.getTime();
+        calendarStat.add(Calendar.DAY_OF_MONTH, 1);
+    }
+
     public void getCalendarView(final Integer location) throws OutOfDateRangeException {
         OnSelectDateListener listener = new OnSelectDateListener() {
             @Override
@@ -292,6 +309,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                 d2 = location1Dates.get(1).getTime();
                 d3 = location1Dates.get(2).getTime();
                 d4 = location1Dates.get(3).getTime();
+
                 if(series1exist == true){
                     addAllSeries1();
                     designSeriesA();
@@ -300,14 +318,12 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                     addAllSeries2();
                     designSeriesb();
                 }
-
-                System.out.println("hejsan" + location1Dates);
-
             }
         };
 
         DatePickerBuilder builder = new DatePickerBuilder(getContext(), listener)
                 .pickerType(cal.RANGE_PICKER).setMaximumDate(maxDate);
+        //System.out.println("broseph" + builder);
         if (location1Dates != null)
             builder.setSelectedDays(location1Dates);
 
@@ -346,146 +362,155 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     }
 
     public void countAllSymptoms(){
-        for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getDiarrheaRatingBar() > 0) {
-                if(Locations[i].getDate() == "2020-04-29") {
+        for (Location location: Locations) {
+            String getDateForCountAllSymptoms = location.getDate();
+            if (location.diarrheaRatingBar > 0) {
+                if(getDateForCountAllSymptoms.equals("2020-04-29")) {
                     diarrhea29 += 1;
                 }
-                if(Locations[i].getDate() == "2020-04-30") {
+                if(getDateForCountAllSymptoms.equals("2020-04-30")) {
                     diarrhea30 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-01") {
+                if(getDateForCountAllSymptoms.equals("2020-05-01")) {
                     diarrhea31 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-02") {
+                if(getDateForCountAllSymptoms.equals("2020-05-02")) {
                     diarrhea32 += 1;
                 }
             }
         }
-        for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getRunnyNoseRatingBar() > 0) {
-                if(Locations[i].getDate() == "2020-04-29") {
+        for (Location location: Locations) {
+            String getDateForCountAllSymptoms = location.getDate();
+            if (location.runnyNoseRatingBar > 0) {
+                if(getDateForCountAllSymptoms.equals("2020-04-29")) {
                     runnyNose29 += 1;
                 }
-                if(Locations[i].getDate() == "2020-04-30") {
+                if(getDateForCountAllSymptoms.equals("2020-04-30")) {
                     runnyNose30 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-01") {
+                if(getDateForCountAllSymptoms.equals("2020-05-01")) {
                     runnyNose31 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-02") {
+                if(getDateForCountAllSymptoms.equals("2020-05-02")) {
                     runnyNose32 += 1;
                 }
             }
         }
-        for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getNasalCongestionRatingBar() > 0) {
-                if(Locations[i].getDate() == "2020-04-29") {
+        for (Location location: Locations) {
+            String getDateForCountAllSymptoms = location.getDate();
+            if (location.nasalCongestionRatingBar > 0) {
+                if(getDateForCountAllSymptoms.equals("2020-04-29")) {
                     nasalCongestion29 += 1;
                 }
-                if(Locations[i].getDate() == "2020-04-30") {
+                if(getDateForCountAllSymptoms.equals("2020-04-30")) {
                     nasalCongestion30 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-01") {
+                if(getDateForCountAllSymptoms.equals("2020-05-01")) {
                     nasalCongestion31 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-02") {
+                if(getDateForCountAllSymptoms.equals("2020-05-02")) {
                     nasalCongestion32 += 1;
                 }
             }
         }
-        for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getHeadacheRatingBar() > 0) {
-                if(Locations[i].getDate() == "2020-04-29") {
+        for (Location location: Locations) {
+            String getDateForCountAllSymptoms = location.getDate();
+            if (location.headacheRatingBar > 0) {
+                if(getDateForCountAllSymptoms.equals("2020-04-29")) {
                     headache29 += 1;
                 }
-                if(Locations[i].getDate() == "2020-04-30") {
+                if(getDateForCountAllSymptoms.equals("2020-04-30")) {
                     headache30 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-01") {
+                if(getDateForCountAllSymptoms.equals("2020-05-01")) {
                     headache31 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-02") {
+                if(getDateForCountAllSymptoms.equals("2020-05-02")) {
                     headache32 += 1;
                 }
             }
         }
-        for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getThroatRatingBar() > 0) {
-                if(Locations[i].getDate() == "2020-04-29") {
+        for (Location location: Locations) {
+            String getDateForCountAllSymptoms = location.getDate();
+            if (location.throatRatingBar > 0) {
+                if(getDateForCountAllSymptoms.equals("2020-04-29")) {
                     throat29 += 1;
                 }
-                if(Locations[i].getDate() == "2020-04-30") {
+                if(getDateForCountAllSymptoms.equals("2020-04-30")) {
                     throat30 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-01") {
+                if(getDateForCountAllSymptoms.equals("2020-05-01")) {
                     throat31 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-02") {
+                if(getDateForCountAllSymptoms.equals("2020-05-02")) {
                     throat32 += 1;
                 }
             }
         }
-        for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getBreathingRatingBar() > 0) {
-                if(Locations[i].getDate() == "2020-04-29") {
+        for (Location location: Locations) {
+            String getDateForCountAllSymptoms = location.getDate();
+            if (location.breathingRatingBar > 0) {
+                if(getDateForCountAllSymptoms.equals("2020-04-29")) {
                     breathing29 += 1;
                 }
-                if(Locations[i].getDate() == "2020-04-30") {
+                if(getDateForCountAllSymptoms.equals("2020-04-30")) {
                     breathing30 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-01") {
+                if(getDateForCountAllSymptoms.equals("2020-05-01")) {
                     breathing31 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-02") {
+                if(getDateForCountAllSymptoms.equals("2020-05-02")) {
                     breathing32 += 1;
                 }
             }
         }
-        for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getTirednessRatingBar() > 0) {
-                if(Locations[i].getDate() == "2020-04-29") {
+        for (Location location: Locations) {
+            String getDateForCountAllSymptoms = location.getDate();
+            if (location.tirednessRatingBar > 0) {
+                if(getDateForCountAllSymptoms.equals("2020-04-29")) {
                     tiredness29 += 1;
                 }
-                if(Locations[i].getDate() == "2020-04-30") {
+                if(getDateForCountAllSymptoms.equals("2020-04-30")) {
                     tiredness30 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-01") {
+                if(getDateForCountAllSymptoms.equals("2020-05-01")) {
                     tiredness31 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-02") {
+                if(getDateForCountAllSymptoms.equals("2020-05-02")) {
                     tiredness32 += 1;
                 }
             }
         }
-        for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getCoughRatingBar() > 0) {
-                if(Locations[i].getDate() == "2020-04-29") {
+        for (Location location: Locations) {
+            String getDateForCountAllSymptoms = location.getDate();
+            if (location.coughRatingBar > 0) {
+                if(getDateForCountAllSymptoms.equals("2020-04-29")) {
                     cough29 += 1;
                 }
-                if(Locations[i].getDate() == "2020-04-30") {
+                if(getDateForCountAllSymptoms.equals("2020-04-30")) {
                     cough30 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-01") {
+                if(getDateForCountAllSymptoms.equals("2020-05-01")) {
                     cough31 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-02") {
+                if(getDateForCountAllSymptoms.equals("2020-05-02")) {
                     cough32 += 1;
                 }
             }
         }
-        for (int i = 0; i < Locations.length; i++) {
-            if (Locations[i].getFeverRatingBar() > 0) {
-                if(Locations[i].getDate() == "2020-04-29") {
+        for (Location location: Locations) {
+            String getDateForCountAllSymptoms = location.getDate();
+            if (location.feverRatingBar > 0) {
+                if(getDateForCountAllSymptoms.equals("2020-04-29")) {
                     fever29 += 1;
                 }
-                if(Locations[i].getDate() == "2020-04-30") {
+                if(getDateForCountAllSymptoms.equals("2020-04-30")) {
                     fever30 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-01") {
+                if(getDateForCountAllSymptoms.equals("2020-05-01")) {
                     fever31 += 1;
                 }
-                if(Locations[i].getDate() == "2020-05-02") {
+                if(getDateForCountAllSymptoms.equals("2020-05-02")) {
                     fever32 += 1;
                 }
             }
@@ -682,16 +707,16 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public void designSeriesA() {
         calculateHighestValA();
-        graph.getViewport().setScrollable(true);
+        graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+        //graph.getViewport().setScrollable(true);
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(largest);
         graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(d1.getTime());
+        System.out.println("HAlalallall"+d1.getTime());
         graph.getViewport().setMaxX(d4.getTime());
-        //graph.getViewport().setMinX(d1.getTime());
-        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-
-        graph.getGridLabelRenderer().setNumHorizontalLabels(4);
         graph.getGridLabelRenderer().setNumVerticalLabels(largest + 1);
         graph.getGridLabelRenderer().setHumanRounding(false);
         graph.setTitle("Symptoms per day");
@@ -733,22 +758,20 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public void designSeriesb() {
         calculateHighestValB();
-        graph.getViewport().setScrollable(true);
+        //graph.getViewport().setScrollable(true);
+        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+        graph.getGridLabelRenderer().setNumHorizontalLabels(4);
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(largest2);
         graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(d1.getTime());
         graph.getViewport().setMaxX(d4.getTime());
-        //graph.getViewport().setMinX(d1.getTime());
-        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
 
-        graph.getGridLabelRenderer().setNumHorizontalLabels(4);
         graph.getGridLabelRenderer().setNumVerticalLabels(largest2 + 1);
         graph.getGridLabelRenderer().setHumanRounding(false);
         graph.setTitle("Total symptoms");
         graph.setTitleTextSize(80);
-
-
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.MIDDLE);
         graph.getLegendRenderer().setTextSize(35f);
@@ -794,13 +817,17 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         throatBox.setChecked(true);
         breathingDiffBox.setChecked(true);
         headacheBox.setChecked(true);
+        noSelectedDates = true;
+
         if(text.equals("Symptoms per day")){
+            createCalendar();
             clearGraph();
             makeGraphLines1();
             addAllSeries1();
             designSeriesA();
         }
         else{
+            createCalendar();
             clearGraph();
             makeGraphLines2();
             addAllSeries2();

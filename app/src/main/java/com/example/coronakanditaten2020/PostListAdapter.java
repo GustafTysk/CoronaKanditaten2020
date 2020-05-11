@@ -29,29 +29,20 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     private int mResource;
     private int lastPostion = -1;
 
-    private ArrayList<Post> all_values;
-    private ArrayList<Post> filter_values;
-
     static class ViewHolder {
         TextView username;
         TextView title;
         TextView text;
         TextView likesShow;
         TextView category;
-       // LinearLayout postTopSection;
-
+        LinearLayout postTopSection;
+        LinearLayout postBottomSection;
     }
 
     public PostListAdapter(Context context, int resource, ArrayList<Post> objects) {
         super(context, resource, objects);
         this.mContext = context;
         this.mResource = resource;
-
-//        all_values = new ArrayList<Post>();
-//        all_values.addAll(objects);
-//        filter_values = all_values.clone();
-
-
     }
 
     @NonNull
@@ -61,12 +52,11 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         String title = getItem(position).getTitle();
         String timestamp = getItem(position).getTimestamp();
         String text = getItem(position).getText();
-        ArrayList <String> likes = getItem(position).getLikes();
+        int likes = getItem(position).getLikes();
         String category = getItem(position).getCategory();
         int id = getItem(position).getId();
         int parentId = getItem(position).getParentId();
 
-        Post post = new Post(username, title, timestamp, text, likes, category, id, parentId);
 
         final View result;
         ViewHolder holder;
@@ -75,24 +65,21 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
             holder = new ViewHolder();
-            //convertView.setBackgroundColor(Color.BLUE);
             holder.username = (TextView) convertView.findViewById(R.id.postUsername);
             holder.title = (TextView) convertView.findViewById(R.id.postTitle);
             holder.category = (TextView) convertView.findViewById(R.id.postCategory);
             holder.text = (TextView) convertView.findViewById(R.id.postMessage);
             holder.likesShow = (TextView) convertView.findViewById(R.id.postLikes);
-            //holder.postTopSection = (LinearLayout) convertView.findViewById(R.id.postTopSection);
-
+            holder.postTopSection = (LinearLayout) convertView.findViewById(R.id.postTopSection);
+            holder.postBottomSection = (LinearLayout) convertView.findViewById(R.id.postBottomSection);
 
             result = convertView;
             convertView.setTag(holder);
-
         }
         else{
             holder = (ViewHolder) convertView.getTag();
             result = convertView;
         }
-
 
         Animation animation = AnimationUtils.loadAnimation(mContext,
                 (position > lastPostion) ? R.anim.load_down_anim : R.anim.load_up_anim);
@@ -103,18 +90,20 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         holder.title.setText(title);
         holder.category.setText(category);
         holder.text.setText(text);
-        holder.likesShow.setText("Likes: " + likes.get(0));
+        holder.likesShow.setText("Likes: " + likes);
 
-        if(parentId != 0) {
+        if(category == "comment") {
             holder.category.setText("Comment");
+            holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline_comment);
+            holder.postBottomSection.setBackgroundResource(R.drawable.edittext_outline_comment);
+        }
+        else{
 
-           // holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline_comment);
-//          holder.title.setBackgroundResource(R.drawable.edittext_outline_comment);
-//          holder.text.setBackgroundResource(R.drawable.edittext_outline_comment);
-
+            holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline);
+            holder.postBottomSection.setBackgroundResource(R.drawable.edittext_outline);
         }
 
-        return convertView;
 
+        return convertView;
     }
 }

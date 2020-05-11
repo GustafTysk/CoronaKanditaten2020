@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="100"
-        android:background="@drawable/edittext_outline">
+        android:background="@drawable/edittext_outline"
+        android:id="@+id/postTopSection">
 
         <TextView
             android:id="@+id/postUsername"
@@ -38,8 +39,6 @@
             android:text="Category"
             android:layout_weight="15"
             />
-
-
     </LinearLayout>
 
 
@@ -48,7 +47,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edittext_outline">
+        android:background="@drawable/edittext_outline"
+        android:id="@+id/postBottomSection">
 
         <TextView
             android:id="@+id/postMessage"
@@ -64,8 +64,6 @@
             android:padding="10dp"
             android:text="Likes"
             />
-
-
     </LinearLayout>
 
 

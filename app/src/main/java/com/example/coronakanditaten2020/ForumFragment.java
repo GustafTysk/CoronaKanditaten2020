@@ -1,7 +1,5 @@
 package com.example.coronakanditaten2020;
 
-import android.accounts.Account;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -32,7 +30,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
     private Button messageButton;
     private Button btnForumToStart;
 
-    private Button btnFilterHelp;
+    private Button btnMostLiked;
     private Button btnFilterRec;
     private Button btnFilterAll;
 
@@ -40,13 +38,15 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
     private EditText messageInput;
     private EditText messageTitle;
     private TextView usernameShow;
-
+    ArrayList<Post> topPost;
     private String currentCategory;
 
     public ListView listView;
 
     public int id = 1;
     public int parentId = 0;
+    int thePostId;
+    int thePostParentId;
 
     public List<Post>copyList;
     public List<Post>commentList;
@@ -58,8 +58,10 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_forum, container, false);
 
-        btnFilterHelp = (Button) view.findViewById(R.id.btnFilterHelp);
-        btnFilterHelp.setOnClickListener(this);
+        topPost =((MainActivity)getActivity()).datahandler.viewPosts;
+
+        btnMostLiked = (Button) view.findViewById(R.id.btnMostLiked);
+        btnMostLiked.setOnClickListener(this);
         btnFilterRec = (Button) view.findViewById(R.id.btnFilterRec);
         btnFilterRec.setOnClickListener(this);
         btnFilterAll = (Button) view.findViewById(R.id.btnFilterAll);
@@ -74,37 +76,11 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
         searchFilter = (EditText) view.findViewById(R.id.searchFilter);
         listView = (ListView) view.findViewById(R.id.listview);
-        ArrayList<String> likes = new ArrayList<String>();
 
-        likes.add("1");
         currentCategory = "Help";
 
-        Post newPost = new Post("Person1", "title1", "23 jan", "I need help", likes, "help", 1, 0);
-        Post newPost2 = new Post("Person2", "title2", "24 jan", "Me too", likes, "help", 2, 0);
-        Post newPost3 = new Post("Person3", "title3", "25 jan", "Me same", likes, "help",3, 0);
-        Post newPost4 = new Post("Person4", "title4", "26 jan", "I need help", likes, "rec", 4, 0);
-        Post newPost5 = new Post("Person5", "title5", "27 jan", "Me too", likes, "rec", 5, 0);
-        Post newPost6 = new Post("Person6", "title6", "28 jan", "Me same", likes, "rec",6, 0);
-        Post newPost7 = new Post("Person7", "title7", "29 jan", "I need help", likes, "rec", 7, 0);
-        Post newPost8 = new Post("Person8", "title8", "30 jan", "Me too", likes, "rec", 8, 4);
-        Post newPost9 = new Post("Person9", "title9", "31 jan", "Me same", likes, "help",9, 2);
-
-        postList = new ArrayList<>();
-
-        postList.add(newPost);
-        postList.add(newPost2);
-        postList.add(newPost3);
-        postList.add(newPost4);
-        postList.add(newPost5);
-        postList.add(newPost6);
-        postList.add(newPost7);
-        postList.add(newPost8);
-        postList.add(newPost9);
-
-        copyList = new ArrayList<>(postList);
-        commentList = new ArrayList<>(postList);
-
-        removeComments();
+        postList = new ArrayList<>(topPost);
+        copyList = new ArrayList<>(topPost);
 
         adapter = new PostListAdapter(getContext(), R.layout.adapter_view_layout, postList);
         listView.setAdapter(adapter);
@@ -139,31 +115,19 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
         Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
 
-        long postId = id + 1;
-        int thePostId = (int) postId;
+        long postId = id;
+        thePostId = (int) postId;
         String theCategory = postList.get(thePostId).getCategory();
-        System.out.println(theCategory);
+        thePostParentId = postList.get(thePostId).getParentId();
+        //System.out.println(thePostId);
 
+        Post thePost = postList.get(thePostId);
+        System.out.println(thePost.printInformation());
         postList.clear();
-
-        for (Post post: copyList) {
-            if(post.getCategory() == theCategory) {
-                if(post.getParentId() == thePostId || post.getId() == postId){
-                    postList.add(post);
-                }
-            }
-        }
-
+        postList.add(thePost);
+        getComments(thePost);
         adapter.notifyDataSetChanged();
 
-
-        // Then you start a new Activity via I        tent
-//        Intent intent = new Intent();
-//        intent.setClass(ForumFragment.this, PostItemDetail.class);
-//        intent.putExtra("position", position);
-//        // Or / And
-//        intent.putExtra("id", id);
-//        startActivity(intent);
     }
 
     public void removeComments() {
@@ -174,6 +138,27 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             }
         }
     }
+
+    public void getComments(Post post) {
+
+        ArrayList<Post> tempPost= new ArrayList<>();
+        tempPost.add(new Post("Comment1", "comment1", "23 jan", "Hello1", 0, "comment", 10, 1));
+        tempPost.add(new Post("Comment2", "comment2", "23 jan", "Hello2", 0, "comment", 11, 2));
+        tempPost.add(new Post("Comment3", "comment3", "23 jan", "Hello3", 0, "comment", 12, 3));
+        tempPost.add(new Post("Comment4", "comment4", "23 jan", "Hello4", 0, "comment", 13, 2));
+        tempPost.add(new Post("Comment5", "comment5", "23 jan", "Hello5", 0, "comment", 14, 4));
+        tempPost.add(new Post("Comment6", "comment6", "23 jan", "Hello6", 0, "comment", 15, 1));
+        tempPost.add(new Post("Comment7", "comment7", "23 jan", "Hello7", 0, "comment", 16, 7));
+
+        for (Post testPost : tempPost) {
+            if(testPost.getParentId()==post.getId()){
+                System.out.println("Hej");
+                postList.add(testPost);
+            }
+        }
+        tempPost.clear();
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -186,10 +171,15 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 String message = messageInput.getText().toString();
                 ArrayList<String> likes = new ArrayList<String>();
                 likes.add("1");
-
-                Post newWrittenPost = new Post(username, title, timestamp, message, likes, "help", 30, 0);
-                System.out.println(newWrittenPost.printInformation());
-                postList.add(newWrittenPost);
+                if(thePostId != 0) {
+                    Post newWrittenPost = new Post(username, title, timestamp, message, 0, "help", 30, thePostParentId);
+                    postList.add(newWrittenPost);
+                }
+                else{
+                    Post newWrittenPost = new Post(username, title, timestamp, message, 0, "help", 30, 0);
+                    System.out.println(newWrittenPost.printInformation());
+                    postList.add(newWrittenPost);
+                }
                 adapter.notifyDataSetChanged();
 
                 messageTitle.setText("");
@@ -199,19 +189,13 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 //                ((MainActivity) getActivity()).setViewPager(1);
 //                break;
 
-            case R.id.btnFilterHelp:
+            case R.id.btnMostLiked:
                 postList.clear();
-                for (Post post: copyList) {
+                for (Post post : copyList){
                     postList.add(post);
                 }
+                Collections.sort(postList, Post.DESCENDING_COMPARATOR);
 
-                List<Post> noShow = new ArrayList<Post>();
-                for (Post post: postList) {
-                    if(post.getCategory().equals("no")){
-                        noShow.add(post);
-                    }
-                }
-                postList.removeAll(noShow);
                 adapter.notifyDataSetChanged();
                 break;
 
