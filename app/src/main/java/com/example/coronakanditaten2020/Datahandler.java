@@ -29,6 +29,7 @@ public class Datahandler {
     ArrayList<Location> Userlocations;
     User user;
     ArrayList<Post> viewPosts;
+
     Credentials credentials;
     Retrofit retrofit;
     ClientAPI clientAPI;
