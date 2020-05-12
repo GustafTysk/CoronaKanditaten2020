@@ -234,6 +234,7 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
 
 
     }
+
     public int[] getratings(){
         int[] ratings=new int[9];
         ratings[0]=(int)diarrheaRatingBar.getRating();
