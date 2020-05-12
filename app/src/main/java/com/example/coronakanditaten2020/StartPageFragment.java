@@ -41,6 +41,8 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
         btnSettings = (ImageButton) view.findViewById(R.id.btnSettings);
         btnSettings.setOnClickListener(this);
 
+
+
         return view;
     }
 
@@ -50,18 +52,28 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
         switch (v.getId()){
             case R.id.btnSettings:
                 ((MainActivity)getActivity()).setViewPager(0);
+
                 break;
             case R.id.btnStartToHeatmap:
+
                 ((MainActivity)getActivity()).setViewPager(3);
+                ((MainActivity)getActivity()).heatmapFragment.setHeatmapBottomNav();
+                ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_heatmap);
                 break;
             case R.id.btnStartToStatistics:
                 ((MainActivity)getActivity()).setViewPager(2);
+                ((MainActivity)getActivity()).statisticsFragment.setStatisticsBottomNav();
+                ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_statistics);
                 break;
             case R.id.btnStartToRs:
                 ((MainActivity)getActivity()).setViewPager(4);
+                ((MainActivity)getActivity()).reportSymptomsFragment.setReportSymptomsBottomNav();
+                ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_report_symptoms);
                 break;
             case R.id.btnStartToForum:
                 ((MainActivity)getActivity()).setViewPager(6);
+                ((MainActivity)getActivity()).forumFragment.setForumBottomNav();
+                ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_forum);
                 break;
             case R.id.btnLogout:
                 intent = new Intent(getContext(), LoginActivity.class);

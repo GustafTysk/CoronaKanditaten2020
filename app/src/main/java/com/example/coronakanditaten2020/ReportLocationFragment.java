@@ -34,8 +34,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -49,6 +53,8 @@ import java.util.TimeZone;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Header;
+import retrofit2.http.Path;
 
 public class ReportLocationFragment extends Fragment  implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMapClickListener {
     private static final String TAG = "Fragment Statistics";
@@ -58,7 +64,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     private Calendar maxDate = Calendar.getInstance(TimeZone.getDefault());
     private long dateNumberOfDaysAgo = 1209600000;                              //get 14 days im ms, 14 days = 14 * 24* 60 * 60 * 1000 = 1209600000 ms
     private long minDateTime = minDate.getTimeInMillis()-dateNumberOfDaysAgo;   //get date 14 days ago (today - 14 days in ms)
-
 
     private GoogleMap mGoogleMap;
     private MapView mMapView;
@@ -77,6 +82,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     private String yourLocation11String = "";
     private String yourLocation12String = "";
     ArrayList<String> YourlocationsStrings=new ArrayList<String>();
+
 
     private Bundle savedInstance;
 
@@ -109,6 +115,10 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     private LatLng yourLocation = new LatLng(59.8, 17.63);
     private String yourLocationString;
     ArrayList<Location> userLocations;
+    ArrayList<Location> postlocations;
+    ArrayList<Location> deletelocations;
+    ArrayList<Location> putlocations;
+
 
     private List<Calendar> location1Dates=new ArrayList<Calendar>(), location2Dates=new ArrayList<Calendar>(), location3Dates=new ArrayList<Calendar>(),location4Dates=new ArrayList<Calendar>(), location5Dates=new ArrayList<Calendar>(), location6Dates=new ArrayList<Calendar>(),location7Dates=new ArrayList<Calendar>(),
             location8Dates=new ArrayList<Calendar>(), location9Dates=new ArrayList<Calendar>(),location10Dates=new ArrayList<Calendar>(), location11Dates=new ArrayList<Calendar>(), location12Dates=new ArrayList<Calendar>();
@@ -126,8 +136,8 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         containerThis = container;
         savedInstance = savedInstanceState;
         View view = inflater.inflate(R.layout.fragment_report_location, container, false);
-        btnRlToStart = (Button) view.findViewById(R.id.btnRlToStart);
-        btnRlToStart.setOnClickListener(this);
+//        btnRlToStart = (Button) view.findViewById(R.id.btnRlToStart);
+//        btnRlToStart.setOnClickListener(this);
         btnRlToRs = (Button) view.findViewById(R.id.btnRlToRs);
         btnRlToRs.setOnClickListener(this);
         btnUpdateMyLocations = (Button) view.findViewById(R.id.btnUpdateMyLocations);
@@ -248,16 +258,21 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
 
         minDate.setTimeInMillis(minDateTime);
+        System.out.println("fffdfddf");
         hideAllButFirstLocationFragment(getView());
         Creatlists();
         if(userLocations!=null){
             SetUppPage();
         }
 
-
         return view;
     }
 
+    public void setReportLocationBottomNav(){
+        ((MainActivity) requireActivity()).bottomNav = (BottomNavigationView) getView().findViewById(R.id.bottom_navigation);
+        ((MainActivity) requireActivity()).bottomNav.setOnNavigationItemSelectedListener(((MainActivity) getActivity()).navListener);
+        ((MainActivity) requireActivity()).bottomNav.getMenu().findItem(R.id.nav_report_symptoms).setChecked(true);
+    }
 
     @Override
     public void onClick(View v) {
@@ -267,47 +282,112 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             case R.id.btnRlToRs:
                 ((MainActivity) getActivity()).setViewPager(4);
                 break;
-            case R.id.btnRlToStart:
+/*            case R.id.btnRlToStart:
                 ((MainActivity) getActivity()).setViewPager(1);
-                break;
+                break;*/
             case R.id.btnAddLocation:
                 showNextLocationFragment(currentLocationReport, getView());
                 break;
             case R.id.btnUpdateMyLocations:
 
-                ArrayList<Location> userLocations=creatuserlocations(((MainActivity)getActivity()).reportSymptomsFragment.getratings());
+                userLocations=creatuserlocations(((MainActivity)getActivity()).reportSymptomsFragment.getratings());
 
                 if(userLocations.size()==0){
                     Toast.makeText(getContext(), "no locations to add", Toast.LENGTH_LONG).show();
-                    System.out.println("sadsa");
                     break;
                 }
+
+
+
+
+                Call<Boolean> removelocations=((MainActivity) getActivity()).datahandler.clientAPI.removeUserlocations(
+                        ((MainActivity) getActivity()).datahandler.credentials.encrypt,((MainActivity) getActivity()).datahandler.credentials.Email);
                 Call<Boolean> creatuserlocations=((MainActivity) getActivity()).datahandler.clientAPI.createuserlocations(
                         ((MainActivity) getActivity()).datahandler.credentials.encrypt,((MainActivity) getActivity()).datahandler.credentials.Email,userLocations);
-                creatuserlocations.enqueue(new Callback<Boolean>() {
-                    @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                        System.out.println("tja");
-                        if(!response.isSuccessful()){
-                            System.out.println(userLocations.get(0).latitude+"latitude");System.out.println(userLocations.get(0).longitude+"long");
-                            Toast.makeText(getContext(), "failed to add user try again later", Toast.LENGTH_LONG).show();
-                            System.out.println("tja");
+
+                if(((MainActivity)getActivity()).datahandler.Userlocations==null){
+
+                    creatuserlocations.enqueue(new Callback<Boolean>() {
+                        @Override
+                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                            if(!response.isSuccessful()){
+                                System.out.println(userLocations.get(0).latitude+"latitude");System.out.println(userLocations.get(0).longitude+"long");
+                                Toast.makeText(getContext(), "failed to add user try again later", Toast.LENGTH_LONG).show();
+                                System.out.println("tja");
+                            }
+                            else{
+                                Toast.makeText(getContext(), "sucesfully added user", Toast.LENGTH_LONG).show();
+                                System.out.println("yja");
+                                ((MainActivity) getActivity()).datahandler.Userlocations=userLocations;
+                                ((MainActivity) getActivity()).setViewPager(1);
+
+
+                            }
                         }
-                        else{
-                            Toast.makeText(getContext(), "sucesfully added user", Toast.LENGTH_LONG).show();
-                            System.out.println("yja");
-                            ((MainActivity) getActivity()).setViewPager(1);
+
+                        @Override
+                        public void onFailure(Call<Boolean> call, Throwable t) {
+                            System.out.println(t);
+                            Toast.makeText(getContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
 
                         }
+                    });
+
+
+                }
+                else{
+                removelocations.enqueue(new Callback<Boolean>() {
+                    @Override
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        if(!response.isSuccessful()|| !response.body()){
+                            Toast.makeText(getContext(), "failed to add user try again later", Toast.LENGTH_LONG).show();
+
+                        }
+                        else{
+
+                            creatuserlocations.enqueue(new Callback<Boolean>() {
+                                @Override
+                                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+
+                                    if(!response.isSuccessful()){
+                                        Toast.makeText(getContext(), "failed to add user try again later", Toast.LENGTH_LONG).show();
+                                    }
+                                    else{
+                                        Toast.makeText(getContext(), "sucesfully added user", Toast.LENGTH_LONG).show();
+
+                                        System.out.println("sdfdsfds");
+                                        System.out.println(AlllocationDecided.get(2));
+                                        System.out.println(AlllocationVisible.get(2));
+                                        System.out.println(textViewLocation2.getText());
+                                        System.out.println(textViewLocation2.getVisibility());
+                                        ((MainActivity) getActivity()).datahandler.Userlocations=userLocations;
+                                        ((MainActivity) getActivity()).setViewPager(1);
+                                        System.out.println();
+
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<Boolean> call, Throwable t) {
+                                    System.out.println(t);
+                                    Toast.makeText(getContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
+
+                                }
+                            });
+
+
+                        }
+
                     }
 
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
                         System.out.println(t);
-                        //Toast.makeText(getContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
 
                     }
-                });
+                });}
+
 
 
                 break;
@@ -443,6 +523,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                     e.printStackTrace();
                 }
                 break;
+
+
+
         }
     }
 
@@ -490,7 +573,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
                 reportedLocation.setPosition(yourLocation);
 
-                if (locations.get(0) != null) {
+                if (location1 != null) {
                     reportedLocation.setPosition(locations.get(0));
                     mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locations.get(0), 15));
                 }
@@ -680,36 +763,44 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     public int numberOfLocationsSet(){
         return Collections.frequency(AlllocationDecided,true);
     }
+    public int numberOfVisibleLocations(){
+        return Collections.frequency(AlllocationVisible,true);
+    }
 
     public void showNextLocationFragment(int currentLocationReport, View v){
         Boolean hasEmptyLocation = false;
-        System.out.println("3232");
-        System.out.println(currentLocationReport+"cyrr");
+        int locationsvisible=numberOfVisibleLocations();
         if (currentLocationReport==0){
             Toast.makeText(getContext(),"Fill in Location above before adding another one", Toast.LENGTH_LONG).show();
+            return;
 
         }
-        if(currentLocationReport==12){
+        if(locationsvisible==12){
             Toast.makeText(getContext(),"Maximum number of locations added", Toast.LENGTH_LONG).show();
+            return;
         }
         if(currentLocationReport>0&&currentLocationReport<12){
             if(AlllocationVisible.get(currentLocationReport)) {
                 hasEmptyLocation = true;
             }
             System.out.println(numberOfLocationsSet()+"nummber of locations set");
-            if(numberOfLocationsSet() == currentLocationReport && !AlllocationDecided.get(currentLocationReport)) {
-                textViewLocations.get(currentLocationReport).setVisibility(v.VISIBLE);
-                setlocations.get(currentLocationReport).setVisibility(v.VISIBLE);
-                setCalandarlocations.get(currentLocationReport).setVisibility(v.VISIBLE);
-                btnRemoveLocations.get(currentLocationReport).setVisibility(v.VISIBLE);
-                AlllocationVisible.set(currentLocationReport,true);
+            System.out.println(currentLocationReport + "currentlcoation report");
+            System.out.println(!AlllocationDecided.get(currentLocationReport));
+            if(numberOfLocationsSet() >=locationsvisible ) {
+                textViewLocations.get(locationsvisible).setVisibility(v.VISIBLE);
+                setlocations.get(locationsvisible).setVisibility(v.VISIBLE);
+                setCalandarlocations.get(locationsvisible).setVisibility(v.VISIBLE);
+                btnRemoveLocations.get(locationsvisible).setVisibility(v.VISIBLE);
+                AlllocationVisible.set(locationsvisible,true);
+            }
+            else{
+                Toast.makeText(getContext(), "Choose location and date for previous empty location first", Toast.LENGTH_LONG).show();
             }
 
         }
 
-        if (hasEmptyLocation) {
-            Toast.makeText(getContext(), "Choose location and date for previous empty location first", Toast.LENGTH_LONG).show();
-        }
+
+
     }
 
     @Override
@@ -742,7 +833,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 textViewLocations.get(location-1).setText(yourLocationString);
 
                 if (YourlocationsStrings.get(location-1) != "") {
-                    textViewLocation1.setText(YourlocationsStrings.get(location-1));
+                    textViewLocations.get(location-1).setText(YourlocationsStrings.get(location-1));
                 }
                 System.out.println((AlllocationDecided.get(location-1)));
 
@@ -814,7 +905,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         List<Address> addresses;
 
         for(Location Alocation:uniclocations){
-            System.out.println(Double.valueOf(Alocation.latitude));
+
             templatlong=new LatLng(Double.valueOf(Alocation.latitude), Double.valueOf(Alocation.longitude));
             locations.set(Counter1,templatlong);
             try {
@@ -825,13 +916,11 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 e.printStackTrace();
             }
             for (Location datlocation:userLocations){
-                System.out.println("tja");
+
 
                 if(Alocation.longitude.equals(datlocation.longitude)&& Alocation.latitude.equals(datlocation.latitude)){
                     theday=datlocation.getDate().split("-");
-                    System.out.println(theday[0]);
-                    System.out.println(theday[1]);
-                    System.out.println(theday[2]);
+
                     tempCalender.set((int)Integer.parseInt(theday[2]),(int)Integer.parseInt(theday[1])+1,(int)Integer.parseInt(theday[0]));
 
                     AllLocationDates.get(Counter1).add(Calendar.getInstance(TimeZone.getDefault()));
@@ -842,7 +931,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
             }
 
-            System.out.println(templatlong.latitude);
+
             textViewLocations.get(Counter1).setVisibility(getView().VISIBLE);
             setCalandarlocations.get(Counter1).setVisibility(getView().VISIBLE);
             setlocations.get(Counter1).setVisibility(getView().VISIBLE);
@@ -850,6 +939,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             AlllocationDecided.set(Counter1,true);
             AlllocationVisible.set(Counter1,true);
             Counter1++;
+            currentLocationReport++;
             Counter2=0;
 
         }
@@ -871,6 +961,27 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             }
         }
         return uniclocations;
+    }
+
+
+
+
+
+
+    boolean ratingsequel(Location orloc,Location newloc){
+        if(orloc.breathingRatingBar==newloc.breathingRatingBar &&
+                orloc.coughRatingBar==newloc.coughRatingBar &&
+                orloc.diarrheaRatingBar==newloc.diarrheaRatingBar &&
+                orloc.breathingRatingBar==newloc.breathingRatingBar &&
+                orloc.feverRatingBar==newloc.feverRatingBar &&
+                orloc.headacheRatingBar==newloc.headacheRatingBar &&
+                orloc.tirednessRatingBar==newloc.tirednessRatingBar&&
+                orloc.throatRatingBar==newloc.throatRatingBar &&
+                orloc.runnyNoseRatingBar==newloc.runnyNoseRatingBar &&
+                orloc.nasalCongestionRatingBar==newloc.nasalCongestionRatingBar){
+            return true;
+        }
+        return false;
     }
 
 
@@ -1010,7 +1121,21 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         YourlocationsStrings.add(yourLocation12String);
     }
 
+    @Override
+    public void onResume() {
+        System.out.println("fsdfdsfds");
+        for(int i=0; i>numberOfLocationsSet();i++){
+            textViewLocations.get(i).setVisibility(getView().VISIBLE);
+            setCalandarlocations.get(i).setVisibility(getView().VISIBLE);
+            setlocations.get(i).setVisibility(getView().VISIBLE);
+            btnRemoveLocations.get(i).setVisibility(getView().VISIBLE);
+            textViewLocations.get(i).setText(YourlocationsStrings.get(i));
+            System.out.println(YourlocationsStrings.get(i));
 
+
+        }
+        super.onResume();
+    }
 
 }
 

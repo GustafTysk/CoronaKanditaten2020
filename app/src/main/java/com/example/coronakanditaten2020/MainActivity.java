@@ -1,5 +1,6 @@
 package com.example.coronakanditaten2020;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
@@ -7,36 +8,23 @@ import androidx.viewpager.widget.ViewPager;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.MotionEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.libraries.places.api.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.IOException;
-import java.security.KeyStore;
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.http.Body;
-import retrofit2.http.Header;
-import retrofit2.http.Path;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, LocationListener {
 
@@ -44,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected LocationManager locationManager;
     protected LocationListener locationListener;
 
+    public BottomNavigationView bottomNav;
 
 
     protected Context context;
@@ -84,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             handleRequestPermission();
         }
@@ -106,8 +97,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mViewPager = (NonSwipeableViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
         Places.initialize(getApplicationContext(), "AIzaSyAdNZnteknM0VlU416q-b8ZEqRBjiFOiPA");
+        setViewPager(1);
+
+
     }
 
+    public BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.nav_home:
+                    setViewPager(1);
+                    return true;
+                case R.id.nav_statistics:
+                    setViewPager(2);
+                    statisticsFragment.setStatisticsBottomNav();
+                    return true;
+                case R.id.nav_heatmap:
+                    setViewPager(3);
+                    heatmapFragment.setHeatmapBottomNav();
+                    return true;
+                case R.id.nav_report_symptoms:
+                    setViewPager(4);
+                    reportSymptomsFragment.setReportSymptomsBottomNav();
+                    return true;
+                case R.id.nav_forum:
+                    setViewPager(6);
+                    forumFragment.setForumBottomNav();
+                    return true;
+
+                default:
+            }
+            return false;            }
+    };
 
 
     public void handleRequestPermission(){
@@ -179,8 +201,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter.addFragment(reportLocationFragment, "Report Location");   // 5
         adapter.addFragment(forumFragment, "Forum");                      // 6
         viewPager.setAdapter(adapter);
-
-        setViewPager(1);
     }
 
     public void setViewPager(int fragmentNumber){

@@ -19,6 +19,7 @@ import com.applandeo.materialcalendarview.DatePicker;
 import com.applandeo.materialcalendarview.builders.DatePickerBuilder;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
@@ -71,10 +72,10 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         //((MainActivity)getActivity()).datahandler.heatlocations;
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_statistics, container, false);
-        btnStatisticsToStart = (Button) view.findViewById(R.id.btnStatisticsToStart);
+        /*btnStatisticsToStart = (Button) view.findViewById(R.id.btnStatisticsToStart);
         btnStatisticsToStart.setOnClickListener(this);
         btnStatisticsToHeatmap = (Button) view.findViewById(R.id.btnStatisticsToHeatmap);
-        btnStatisticsToHeatmap.setOnClickListener(this);
+        btnStatisticsToHeatmap.setOnClickListener(this);*/
 
         diarrheaBox = (CheckBox) view.findViewById(R.id.diarrheaBox);
         runnyNoseBox = (CheckBox) view.findViewById(R.id.runnyNoseBox);
@@ -134,20 +135,27 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             addAllSeries2();
             designSeriesb();
         }
+
         return view;
+    }
+
+    public void setStatisticsBottomNav(){
+        ((MainActivity) requireActivity()).bottomNav = (BottomNavigationView) getView().findViewById(R.id.bottom_navigation);
+        ((MainActivity) requireActivity()).bottomNav.setOnNavigationItemSelectedListener(((MainActivity) getActivity()).navListener);
+        ((MainActivity) requireActivity()).bottomNav.getMenu().findItem(R.id.nav_statistics).setChecked(true);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btnStatisticsToHeatmap:
+/*            case R.id.btnStatisticsToHeatmap:
                 Toast.makeText(getActivity(), "Going to Heatmap", Toast.LENGTH_SHORT).show();
                 ((MainActivity) getActivity()).setViewPager(3);
                 break;
             case R.id.btnStatisticsToStart:
                 Toast.makeText(getActivity(), "Going to Start Page", Toast.LENGTH_SHORT).show();
                 ((MainActivity) getActivity()).setViewPager(1);
-                break;
+                break;*/
             case R.id.setCalendarLocation1:
                 try {
                     getCalendarView(1);
