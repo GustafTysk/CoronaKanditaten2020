@@ -25,4 +25,6 @@
         <item>Symptoms per day</item>
     </string-array>
 
+    <string name="forgot_password"><u>Forgot your password? Click here</u></string>
+
 </resources>

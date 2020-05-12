@@ -10,8 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.libraries.places.api.Places;
 
 import org.w3c.dom.Text;
 
@@ -19,19 +23,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button btnLogin;
-    private Button btnToRegister;
-    private Button btnLoginToStartPage;
-    boolean passwordCorrect;
-    String Password;
-    String Email;
-    EditText textPassword;
-    EditText textEmail;
-    Datahandler datahandler;
+    private static final int CONTENT_VIEW_ID = 10101010;
+    private FragmentTransaction transaction;
+    ResetPasswordFragment resetPasswordFragment = new ResetPasswordFragment();
+    LoginFragment loginFragment = new LoginFragment();
 
-    private TextView textViewGoToResetPassword;
+
+    private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
+    private NonSwipeableViewPager mViewPager;
+
+    private SectionsStatePagerAdapter adapter;
 
 
     @Override
@@ -39,98 +42,45 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        btnLogin = (Button) findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(this);
-        btnToRegister = (Button) findViewById(R.id.btnToRegister);
-        btnToRegister.setOnClickListener(this);
-        btnLoginToStartPage = (Button) findViewById(R.id.btnLoginToStartPage);
-        btnLoginToStartPage.setOnClickListener(this);
-        textEmail = (EditText) findViewById(R.id.username);
-        textPassword = (EditText) findViewById(R.id.password);
+        mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
 
-        textViewGoToResetPassword = (TextView) findViewById(R.id.textViewGoToResetPassword);
-        textViewGoToResetPassword.setOnTouchListener(this);
-        datahandler=new Datahandler();
-
+        mViewPager = (NonSwipeableViewPager) findViewById(R.id.container);
+        setupViewPager(mViewPager);
+        setViewPager(1);
 
     }
 
 
     @Override
     public void onClick(View view) {
-        Intent intent = null;
 
-        switch(view.getId()){
-            case R.id.btnToRegister:
-                intent = new Intent(this, RegisterActivity.class);
-                break;
-            case R.id.btnLoginToStartPage:
-                intent = new Intent(this,MainActivity.class);
-                break;
+    }
 
-            case R.id.btnLogin:
-                Email=textEmail.getText().toString();
-                Password=textPassword.getText().toString();
-                datahandler.credentials=new Credentials(Email,Password);
-                Call<Boolean> login=datahandler.clientAPI.login(datahandler.credentials.encrypt,datahandler.credentials.Email,datahandler.credentials.Password);
-                login.enqueue(new Callback<Boolean>() {
-                    @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                        if(response.isSuccessful()){
-                            if (response.body()==true){
-                                Toast.makeText(getApplicationContext(),"logged in", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                intent.putExtra("pass",Password);
-                                intent.putExtra("ema",Email);
-                                startActivity(intent);
-                            }
-                            else{
-                                Toast.makeText(getApplicationContext(),"wrong password or email", Toast.LENGTH_SHORT).show();
-                            }
+    private void setupViewPager(ViewPager viewPager){
+        adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(resetPasswordFragment, "Reset Password");           // 0
+        adapter.addFragment(loginFragment, "Log In");                           // 1
+        viewPager.setAdapter(adapter);
+    }
 
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(),"error with server", Toast.LENGTH_SHORT).show();
-                        }
-
-
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
-
-                        Toast.makeText(getApplicationContext(),"failed to connect to server", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-
-                break;
-//            case R.id.btnNextMenu:
-//                intent = new Intent(this, PlayMenu.class);
-//                break;
-
-            default:
-        }
-        if(intent != null){
-            startActivity(intent);
-        }
+    public void setViewPager(int fragmentNumber){
+        mViewPager.setCurrentItem(fragmentNumber);
     }
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        switch (v.getId()){
-            case R.id.textViewGoToResetPassword:
-                ResetPasswordFragment resetPasswordFragment = ResetPasswordFragment.newInstance();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.add(R.id.places_autocomplete_content, resetPasswordFragment);
-                fragmentTransaction.commit();
+    public void onBackPressed() {
+        // super.onBackPressed();
+        switch (mViewPager.getCurrentItem()){
+            case 1:
+                Toast.makeText(this,"There is no back action", Toast.LENGTH_SHORT);
+                break;
+            case 0:
+                setViewPager(1);
+                break;
+            default:
+
         }
-        return true;
+        return;
     }
-
-
 
 }

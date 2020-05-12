@@ -115,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                         @Override
                         public void onFailure(Call<Boolean> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Failed to connect to server", Toast.LENGTH_LONG).show();
 
                         }
                     });
