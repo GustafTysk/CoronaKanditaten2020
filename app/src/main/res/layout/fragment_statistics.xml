@@ -12,9 +12,6 @@
         android:layout_height="match_parent">
 
 <androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -96,6 +93,126 @@
         android:src="@android:drawable/ic_menu_month"
         app:layout_constraintEnd_toStartOf="@+id/textViewStatistics"
         app:layout_constraintTop_toBottomOf="@+id/textViewStatistics" />
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp"
+                android:text="Age(years)"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp"
+                android:text="Number of registrered"
+                android:textColor="@android:color/black" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp"
+                android:text="0-18"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp"
+                android:textColor="@android:color/black" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp"
+                android:text="19-40"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp"
+                android:textColor="@android:color/black" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp"
+                android:text="41-64"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp"
+                android:textColor="@android:color/black" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp"
+                android:text="65+"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp"
+                android:textColor="@android:color/black" />
+
+        </TableRow>
+
+    </TableLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/relativeLayout"
@@ -199,9 +316,12 @@
             android:text="Headache"
             app:layout_constraintBaseline_toBaselineOf="@+id/coughBox"
             app:layout_constraintStart_toStartOf="@+id/throatBox" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -212,6 +332,7 @@
             android:background="@color/quantum_grey400"
             app:menu="@menu/bottom_navigation_menu"
             app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"/>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
