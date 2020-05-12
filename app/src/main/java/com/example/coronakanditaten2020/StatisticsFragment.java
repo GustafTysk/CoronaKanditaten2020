@@ -313,7 +313,11 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                 d2 = location1Dates.get(1).getTime();
                 d3 = location1Dates.get(2).getTime();
                 d4 = location1Dates.get(3).getTime();
-
+                //long minDate = 43200000;
+                //long minDateTime = d1.getTime() - 43200000;
+//                graph.getViewport().setMinX(d1.getTime());
+//                graph.getViewport().setMaxX(d4.getTime());
+//                graph.getViewport().setXAxisBoundsManual(true); //MEDFÖR EN BUGG
                 if(series1exist == true){
                     addAllSeries1();
                     designSeriesA();
@@ -719,10 +723,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(largest);
-        graph.getViewport().setXAxisBoundsManual(true); //MEDFÖR EN BUGG
-        graph.getViewport().setMinX(d1.getTime());
-        System.out.println("HAlalallall"+d1.getTime());
-        graph.getViewport().setMaxX(d4.getTime());
+        graph.getViewport().setXAxisBoundsManual(true);
         graph.getGridLabelRenderer().setNumVerticalLabels(largest + 1);
         graph.getGridLabelRenderer().setHumanRounding(false);
         graph.setTitle("Symptoms per day");
@@ -765,14 +766,12 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     public void designSeriesb() {
         calculateHighestValB();
         //graph.getViewport().setScrollable(true);
-        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
         graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+        graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(largest2);
-        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(d1.getTime());
-        graph.getViewport().setMaxX(d4.getTime());
 
         graph.getGridLabelRenderer().setNumVerticalLabels(largest2 + 1);
         graph.getGridLabelRenderer().setHumanRounding(false);
