@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/nav_statistics"
+        android:icon="@drawable/statistics_icon_32x34"
+        android:title="Statistics" />
+    <item
+        android:id="@+id/nav_heatmap"
+        android:icon="@drawable/earth_icon_32x32"
+        android:title="Heatmap" />
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/home_icon_32x30"
+        android:title="Home" />
+    <item
+        android:id="@+id/nav_report_symptoms"
+        android:icon="@drawable/smiley_icon_32x32"
+        android:title="Report Symptoms" />
+
+    <item
+        android:id="@+id/nav_forum"
+        android:icon="@drawable/comments_icon_32x31"
+        android:title="Forum" />
+</menu>

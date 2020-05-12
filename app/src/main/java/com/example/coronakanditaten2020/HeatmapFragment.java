@@ -28,6 +28,7 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 import com.google.maps.android.heatmaps.WeightedLatLng;
 
@@ -64,10 +65,10 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_heatmap, container, false);
-        btnHeatmapToStart = (Button) view.findViewById(R.id.btnHeatmapToStart);
+/*        btnHeatmapToStart = (Button) view.findViewById(R.id.btnHeatmapToStart);
         btnHeatmapToStart.setOnClickListener(this);
         btnHeatmapToStatistics = (Button) view.findViewById(R.id.btnHeatmapToStatistics);
-        btnHeatmapToStatistics.setOnClickListener(this);
+        btnHeatmapToStatistics.setOnClickListener(this);*/
         btnTestChangeDay = (Button) view.findViewById(R.id.btnTestChangeDay);
         btnTestChangeDay.setOnClickListener(this);
         btnZoomInOnMe = (Button) view.findViewById(R.id.btnZoomInOnMe);
@@ -103,8 +104,15 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
             }
         });
 
+
         return view;
     }
+
+    public void setHeatmapBottomNav(){
+        ((MainActivity) requireActivity()).bottomNav = (BottomNavigationView) getView().findViewById(R.id.bottom_navigation);
+        ((MainActivity) requireActivity()).bottomNav.setOnNavigationItemSelectedListener(((MainActivity) getActivity()).navListener);
+        ((MainActivity) requireActivity()).bottomNav.getMenu().findItem(R.id.nav_heatmap).setChecked(true);    }
+
 
     @Override
     public void onClick(View v) {
@@ -113,12 +121,12 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
                 yourCurrentLocation = ((MainActivity) getActivity()).getCurrentLocation();
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourCurrentLocation,14));
                 break;
-            case R.id.btnHeatmapToStart:
+/*            case R.id.btnHeatmapToStart:
                 ((MainActivity) getActivity()).setViewPager(1);
                 break;
             case R.id.btnHeatmapToStatistics:
                 ((MainActivity) getActivity()).setViewPager(2);
-                break;
+                break;*/
             case R.id.btnTestChangeDay:
                 mProvider.setWeightedData(((ArrayList)GenerateHeatMapCordsList( datahandler.getHeatmaplocations(),"2020-10-16", "placeholder")));
                 mOverlay.clearTileCache();

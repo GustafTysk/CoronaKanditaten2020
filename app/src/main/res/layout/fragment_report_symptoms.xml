@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/grey">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ReportSymptomsFragment">
+
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grey">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ReportSymptomsFragment">
 
         <TextView
             android:id="@+id/textViewReportSymptoms"
@@ -542,7 +555,7 @@
             app:layout_constraintStart_toEndOf="@+id/ratingBarDiarrhea"
             app:layout_constraintTop_toTopOf="@+id/ratingBarDiarrhea" />
 
-        <Button
+        <!--<Button
             android:id="@+id/btnRsToStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -559,7 +572,7 @@
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBarDiarrhea" />
+            app:layout_constraintTop_toBottomOf="@+id/ratingBarDiarrhea" />-->
 
         <Button
             android:id="@+id/btnRsToRl"
@@ -578,4 +591,20 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/quantum_deeporange400"
+                app:menu="@menu/bottom_navigation_menu"
+                app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"/>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

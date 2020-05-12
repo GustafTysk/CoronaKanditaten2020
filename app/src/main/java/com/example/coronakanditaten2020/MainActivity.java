@@ -1,5 +1,6 @@
 package com.example.coronakanditaten2020;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
@@ -7,35 +8,23 @@ import androidx.viewpager.widget.ViewPager;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.MotionEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.libraries.places.api.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.IOException;
-import java.security.KeyStore;
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.http.Body;
-import retrofit2.http.Header;
-import retrofit2.http.Path;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, LocationListener {
 
@@ -43,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected LocationManager locationManager;
     protected LocationListener locationListener;
 
+    public BottomNavigationView bottomNav;
 
 
     protected Context context;
@@ -68,6 +58,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private SectionsStatePagerAdapter adapter;
 
+    private Spinner spinner;
+    String text;
+    boolean checked;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         locationManager = (LocationManager) getSystemService(context.LOCATION_SERVICE);
         Intent intent=getIntent();
+
+
 
 
 
@@ -101,8 +97,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mViewPager = (NonSwipeableViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
         Places.initialize(getApplicationContext(), "AIzaSyAdNZnteknM0VlU416q-b8ZEqRBjiFOiPA");
+        setViewPager(1);
+
+
     }
 
+    public BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.nav_home:
+                    setViewPager(1);
+                    return true;
+                case R.id.nav_statistics:
+                    setViewPager(2);
+                    statisticsFragment.setStatisticsBottomNav();
+                    return true;
+                case R.id.nav_heatmap:
+                    setViewPager(3);
+                    heatmapFragment.setHeatmapBottomNav();
+                    return true;
+                case R.id.nav_report_symptoms:
+                    setViewPager(4);
+                    reportSymptomsFragment.setReportSymptomsBottomNav();
+                    return true;
+                case R.id.nav_forum:
+                    setViewPager(6);
+                    forumFragment.setForumBottomNav();
+                    return true;
+
+                default:
+            }
+            return false;            }
+    };
 
 
     public void handleRequestPermission(){
@@ -174,8 +201,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter.addFragment(reportLocationFragment, "Report Location");   // 5
         adapter.addFragment(forumFragment, "Forum");                      // 6
         viewPager.setAdapter(adapter);
-
-        setViewPager(1);
     }
 
     public void setViewPager(int fragmentNumber){
@@ -184,79 +209,153 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void onCheckboxClicked(View view) {
-        boolean checked = ((CheckBox) view).isChecked();
-
+        checked = ((CheckBox) view).isChecked();
+        spinner = (Spinner)findViewById(R.id.spinner1);
+        text = spinner.getSelectedItem().toString();
         switch (view.getId()) {
             case R.id.diarrheaBox:
-                if (checked) {
-                    statisticsFragment.showDiarrheaSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showDiarrheaSeries();
+                    } else {
+                        statisticsFragment.hideDiarrheaSeries();
+                    }
                 }
                 else{
-                    statisticsFragment.hideDiarrheaSeries();
+                    if (checked) {
+                        statisticsFragment.showDiarrheaSeries2();
+                    } else {
+                        statisticsFragment.hideDiarrheaSeries2();
+                    }
                 }
                 break;
             case R.id.runnyNoseBox:
-                if (checked) {
-                    statisticsFragment.showRunnyNoseSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showRunnyNoseSeries();
+                    } else {
+                        statisticsFragment.hideRunnyNoseSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideRunnyNoseSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showRunnyNoseSeries2();
+                    } else {
+                        statisticsFragment.hideRunnyNoseSeries2();
+                    }
                 }
                 break;
             case R.id.tirednessBox:
-                if (checked) {
-                    statisticsFragment.showTirednessSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showTirednessSeries();
+                    } else {
+                        statisticsFragment.hideTirednessSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideTirednessSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showTirednessSeries2();
+                    } else {
+                        statisticsFragment.hideTirednessSeries2();
+                    }
                 }
                 break;
             case R.id.feverBox:
-                if (checked) {
-                    statisticsFragment.showFeverSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showFeverSeries();
+                    } else {
+                        statisticsFragment.hideFeverSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideFeverSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showFeverSeries2();
+                    } else {
+                        statisticsFragment.hideFeverSeries2();
+                    }
                 }
                 break;
             case R.id.throatBox:
-                if (checked) {
-                    statisticsFragment.showThroatSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showThroatSeries();
+                    } else {
+                        statisticsFragment.hideThroatSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideThroatSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showThroatSeries2();
+                    } else {
+                        statisticsFragment.hideThroatSeries2();
+                    }
                 }
                 break;
             case R.id.nasalConBox:
-                if (checked) {
-                    statisticsFragment.showNasalConSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showNasalConSeries();
+                    } else {
+                        statisticsFragment.hideNasalConSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideNasalConSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showNasalConSeries2();
+                    } else {
+                        statisticsFragment.hideNasalConSeries2();
+                    }
                 }
                 break;
             case R.id.coughBox:
-                if (checked) {
-                    statisticsFragment.showCoughSeries();
+                if(text.equals("Symptoms per day")){
+
+                    if (checked) {
+                        statisticsFragment.showCoughSeries();
+                    } else {
+                        statisticsFragment.hideCoughSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideCoughSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showCoughSeries2();
+                    } else {
+                        statisticsFragment.hideCoughSeries2();
+                    }
                 }
                 break;
             case R.id.headacheBox:
-                if (checked) {
-                    statisticsFragment.showHeadacheSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showHeadacheSeries();
+                    } else {
+                        statisticsFragment.hideHeadacheSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideHeadacheSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showHeadacheSeries2();
+                    } else {
+                        statisticsFragment.hideHeadacheSeries2();
+                    }
                 }
                 break;
             case R.id.breathingDiffBox:
-                if (checked) {
-                    statisticsFragment.showBreathingDiffSeries();
+                if(text.equals("Symptoms per day")){
+                    if (checked) {
+                        statisticsFragment.showBreathingDiffSeries();
+                    } else {
+                        statisticsFragment.hideBreathingDiffSeries();
+                    }
                 }
-                else {
-                    statisticsFragment.hideBreathingDiffSeries();
+                else{
+                    if (checked) {
+                        statisticsFragment.showBreathingDiffSeries2();
+                    } else {
+                        statisticsFragment.hideBreathingDiffSeries2();
+                    }
                 }
                 break;
 
