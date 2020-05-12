@@ -22,4 +22,8 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
     public void onClick(View v) {
 
     }
+
+    public static ResetPasswordFragment newInstance() {
+        return new ResetPasswordFragment();
+    }
 }

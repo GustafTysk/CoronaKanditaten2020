@@ -101,9 +101,6 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
         btnClearDiarrheaRating.setOnClickListener(this);
         SetuppUsersymtoms();
 
-       ((MainActivity) requireActivity()).bottomNav = (BottomNavigationView) view.findViewById(R.id.bottom_navigation);
-       ((MainActivity) requireActivity()).bottomNav.setOnNavigationItemSelectedListener(((MainActivity) getActivity()).navListener);
-
         return view;
     }
 

@@ -2,18 +2,24 @@ package com.example.coronakanditaten2020;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import org.w3c.dom.Text;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener{
 
     private Button btnLogin;
     private Button btnToRegister;
@@ -24,6 +30,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText textPassword;
     EditText textEmail;
     Datahandler datahandler;
+
+    private TextView textViewGoToResetPassword;
 
 
     @Override
@@ -39,7 +47,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnLoginToStartPage.setOnClickListener(this);
         textEmail = (EditText) findViewById(R.id.username);
         textPassword = (EditText) findViewById(R.id.password);
+
+        textViewGoToResetPassword = (TextView) findViewById(R.id.textViewGoToResetPassword);
+        textViewGoToResetPassword.setOnTouchListener(this);
         datahandler=new Datahandler();
+
+
     }
 
 
@@ -54,6 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnLoginToStartPage:
                 intent = new Intent(this,MainActivity.class);
                 break;
+
             case R.id.btnLogin:
                 Email=textEmail.getText().toString();
                 Password=textPassword.getText().toString();
@@ -102,6 +116,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(intent != null){
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (v.getId()){
+            case R.id.textViewGoToResetPassword:
+                ResetPasswordFragment resetPasswordFragment = ResetPasswordFragment.newInstance();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.places_autocomplete_content, resetPasswordFragment);
+                fragmentTransaction.commit();
+        }
+        return true;
     }
 
 

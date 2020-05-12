@@ -46,6 +46,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private Spinner spinner;
     private ArrayAdapter<CharSequence> adapter;
     private boolean series1exist = false;
+    private boolean notCounted = true;
 
 
 
@@ -121,7 +122,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         Locations.add(location11);
         Location location12 = new Location("59.858562", "17.638927", "2020-05-01", 11, 3, 2, 0, 1, 0, 1, 1, 1, 3, "2020-04-29");
         Locations.add(location12);
-        countAllSymptoms();
+        if (notCounted) {
+            countAllSymptoms();
+        }
         if(noSelectedDates == true) {
             createCalendar();
         }
@@ -143,6 +146,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         ((MainActivity) requireActivity()).bottomNav = (BottomNavigationView) getView().findViewById(R.id.bottom_navigation);
         ((MainActivity) requireActivity()).bottomNav.setOnNavigationItemSelectedListener(((MainActivity) getActivity()).navListener);
         ((MainActivity) requireActivity()).bottomNav.getMenu().findItem(R.id.nav_statistics).setChecked(true);
+
     }
 
     @Override
@@ -362,6 +366,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     }
 
     public void countAllSymptoms(){
+
         for (Location location: Locations) {
             String getDateForCountAllSymptoms = location.getDate();
             if (location.diarrheaRatingBar > 0) {
@@ -515,6 +520,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                 }
             }
         }
+        notCounted = false;
     }
 
     public void makeGraphLines1(){

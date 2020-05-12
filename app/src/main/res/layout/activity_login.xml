@@ -112,4 +112,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnToRegister"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textViewGoToResetPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="Forgot your password?"
+        app:layout_constraintEnd_toEndOf="@+id/btnToRegister"
+        app:layout_constraintStart_toStartOf="@+id/btnToRegister"
+        app:layout_constraintTop_toBottomOf="@+id/btnToRegister" />
 </androidx.constraintlayout.widget.ConstraintLayout>
