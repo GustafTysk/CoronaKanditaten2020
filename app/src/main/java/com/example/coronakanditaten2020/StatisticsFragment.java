@@ -713,7 +713,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(largest);
-        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setXAxisBoundsManual(true); //MEDFÖR EN BUGG
         graph.getViewport().setMinX(d1.getTime());
         System.out.println("HAlalallall"+d1.getTime());
         graph.getViewport().setMaxX(d4.getTime());
