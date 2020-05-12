@@ -106,7 +106,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/quantum_deeporange400"
+        android:background="@color/quantum_grey400"
         app:menu="@menu/bottom_navigation_menu"
 
         />

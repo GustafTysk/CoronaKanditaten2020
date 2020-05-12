@@ -138,9 +138,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/quantum_deeporange400"
-            app:menu="@menu/bottom_navigation_menu"
-            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"/>
+            android:background="@color/quantum_grey400"
+            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+            app:menu="@menu/bottom_navigation_menu" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
