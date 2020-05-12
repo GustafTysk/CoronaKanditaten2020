@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -28,6 +29,8 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     private Context mContext;
     private int mResource;
     private int lastPostion = -1;
+    private int likes;
+    private Boolean hasLiked = false;
 
     static class ViewHolder {
         TextView username;
@@ -37,6 +40,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         TextView category;
         LinearLayout postTopSection;
         LinearLayout postBottomSection;
+        Button postLikeButton;
     }
 
     public PostListAdapter(Context context, int resource, ArrayList<Post> objects) {
@@ -52,11 +56,11 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         String title = getItem(position).getTitle();
         String timestamp = getItem(position).getTimestamp();
         String text = getItem(position).getText();
-        int likes = getItem(position).getLikes();
+        likes = getItem(position).getLikes();
         String category = getItem(position).getCategory();
         int id = getItem(position).getId();
-        int parentId = getItem(position).getParentId();
 
+        int parentId = getItem(position).getParentId();
 
         final View result;
         ViewHolder holder;
@@ -72,7 +76,18 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             holder.likesShow = (TextView) convertView.findViewById(R.id.postLikes);
             holder.postTopSection = (LinearLayout) convertView.findViewById(R.id.postTopSection);
             holder.postBottomSection = (LinearLayout) convertView.findViewById(R.id.postBottomSection);
+            holder.postLikeButton = (Button) convertView.findViewById(R.id.postButtonLike);
+            holder.postLikeButton.setOnClickListener(new View.OnClickListener(){
 
+                public void onClick(View v) {
+                    System.out.println("You have click like");
+                    System.out.println(likes);
+                    hasLiked = true;
+                    likes = likes + 1;
+                    getItem(position).setLikes(likes);
+                    System.out.println(likes);
+                }
+                                                     });
             result = convertView;
             convertView.setTag(holder);
         }
@@ -92,6 +107,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         holder.text.setText(text);
         holder.likesShow.setText("Likes: " + likes);
 
+
         if(category == "comment") {
             holder.category.setText("Comment");
             holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline_comment);
@@ -102,6 +118,8 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline);
             holder.postBottomSection.setBackgroundResource(R.drawable.edittext_outline);
         }
+
+
 
 
         return convertView;

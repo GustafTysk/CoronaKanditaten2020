@@ -64,6 +64,17 @@
             android:padding="10dp"
             android:text="Likes"
             />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Like"
+            android:id="@+id/postButtonLike"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            >
+
+        </Button>
     </LinearLayout>
 
 

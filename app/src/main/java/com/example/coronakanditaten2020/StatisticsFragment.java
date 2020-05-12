@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,15 +51,11 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private boolean series1exist = false;
     private boolean notCounted = true;
 
-
-
-
     //ALLA SYMPTOM
     private int diarrhea29, diarrhea30, diarrhea31, diarrhea32, runnyNose29, runnyNose30, runnyNose31, runnyNose32, nasalCongestion29, nasalCongestion30, nasalCongestion31,
             nasalCongestion32, headache29, headache30, headache31, headache32, throat29, throat30, throat31, throat32, breathing29, breathing30, breathing31, breathing32,
             tiredness29, tiredness30, tiredness31, tiredness32, cough29, cough30, cough31, cough32, fever29, fever30, fever31, fever32, largest, largest2, diarrhea, nasalCongestion,
             breathing, headache, fever, cough, tiredness, runnyNose, throat;
-
 
     //CALENDAR
     private Boolean noSelectedDates = true;
@@ -66,6 +65,19 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private com.applandeo.materialcalendarview.CalendarView cal;
     private List<Calendar> location1Dates;
     private Calendar maxDate = Calendar.getInstance(TimeZone.getDefault());
+
+    //TABLE VIEW
+    TableLayout tableLayout;
+    TableRow tableRow1;
+    TableRow tableRow2;
+    TableRow tableRow3;
+    TableRow tableRow4;
+    TableRow tableRow5;
+    TextView textView1;
+    TextView textView2;
+    TextView textView3;
+    TextView textView4;
+    TextView textView5;
 
     @Nullable
     @Override
@@ -313,7 +325,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                 d2 = location1Dates.get(1).getTime();
                 d3 = location1Dates.get(2).getTime();
                 d4 = location1Dates.get(3).getTime();
-
+                graph.getViewport().setMinX(d1.getTime());
+                graph.getViewport().setMaxX(d4.getTime());
                 if(series1exist == true){
                     addAllSeries1();
                     designSeriesA();
@@ -327,7 +340,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
         DatePickerBuilder builder = new DatePickerBuilder(getContext(), listener)
                 .pickerType(cal.RANGE_PICKER).setMaximumDate(maxDate);
-        //System.out.println("broseph" + builder);
         if (location1Dates != null)
             builder.setSelectedDays(location1Dates);
 
@@ -719,10 +731,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(largest);
-        graph.getViewport().setXAxisBoundsManual(true); //MEDFÖR EN BUGG
-        graph.getViewport().setMinX(d1.getTime());
-        System.out.println("HAlalallall"+d1.getTime());
-        graph.getViewport().setMaxX(d4.getTime());
+        graph.getViewport().setXAxisBoundsManual(true);
         graph.getGridLabelRenderer().setNumVerticalLabels(largest + 1);
         graph.getGridLabelRenderer().setHumanRounding(false);
         graph.setTitle("Symptoms per day");
@@ -765,14 +774,12 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     public void designSeriesb() {
         calculateHighestValB();
         //graph.getViewport().setScrollable(true);
-        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
         graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+        graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(largest2);
-        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(d1.getTime());
-        graph.getViewport().setMaxX(d4.getTime());
 
         graph.getGridLabelRenderer().setNumVerticalLabels(largest2 + 1);
         graph.getGridLabelRenderer().setHumanRounding(false);
