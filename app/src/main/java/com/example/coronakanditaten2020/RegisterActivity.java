@@ -88,6 +88,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 DatePickerDialog dialog = new DatePickerDialog(RegisterActivity.this,
                         R.style.Theme_AppCompat_DayNight_Dialog_MinWidth,
                         onDateSetListener,year, month, day);
+                dialog.getDatePicker().setMaxDate(cal.getTimeInMillis());
                 dialog.show();
             }
         });
