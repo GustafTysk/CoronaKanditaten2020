@@ -150,8 +150,15 @@
     <string name="post_hint_username">Username</string>
     <string name="btn_post">Post</string>
 
+    <string name="fail_to_get_post">Failed to get post</string>
+    <string name="fail_to_add_post">Failed to add post</string>
+    <string name="fail_to_add_like">Failed to add like</string>
+
+    <string name="success_to_get_most_liked_post">Got most liked post</string>
+
     <string name="help">Help and tasks </string>
     <string name="recommendation">Recommendations and warnings </string>
+
 
 
 

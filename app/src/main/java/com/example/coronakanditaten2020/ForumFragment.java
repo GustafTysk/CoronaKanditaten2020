@@ -249,7 +249,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
                 if(!response.isSuccessful()) {
                     System.out.println(response);
-                    Toast.makeText(getContext(), "failed to get post", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.fail_to_get_post), Toast.LENGTH_LONG).show();
                 }
                 else {
                     ((MainActivity) getActivity()).datahandler.viewPosts = response.body();
@@ -261,7 +261,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
             @Override
             public void onFailure(Call<ArrayList<Post>> call, Throwable t) {
-                Toast.makeText(getContext(), "failed to conenct to server", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
 
             }
         });
@@ -274,7 +274,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
                 if(!response.isSuccessful()) {
                     System.out.println(response);
-                    Toast.makeText(getContext(), "failed to get post", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.fail_to_get_post), Toast.LENGTH_LONG).show();
                 }
                 else {
                     commentList = response.body();
@@ -286,7 +286,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
             @Override
             public void onFailure(Call<ArrayList<Post>> call, Throwable t) {
-                Toast.makeText(getContext(), "failed to conenct to server", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
 
             }
         });
@@ -301,7 +301,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
                 if(!response.isSuccessful()) {
                     System.out.println(response);
-                    Toast.makeText(getContext(), "failed to get post", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.fail_to_get_post), Toast.LENGTH_LONG).show();
                 }
                 else {
                     ((MainActivity) getActivity()).datahandler.viewPosts = response.body();
@@ -313,7 +313,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
             @Override
             public void onFailure(Call<ArrayList<Post>> call, Throwable t) {
-                Toast.makeText(getContext(), "failed to conenct to server", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
 
             }
         });
@@ -328,7 +328,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
                 if(!response.isSuccessful()) {
                     System.out.println(response);
-                    Toast.makeText(getContext(), "failed to get post", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.fail_to_get_post), Toast.LENGTH_LONG).show();
                 }
                 else {
                 ((MainActivity)getActivity()).datahandler.viewPosts=response.body();
@@ -340,7 +340,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
             @Override
             public void onFailure(Call<ArrayList<Post>> call, Throwable t) {
-                Toast.makeText(getContext(), "failed to conenct to server", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
 
             }
         });
@@ -354,7 +354,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if(!response.isSuccessful()){
-                    Toast.makeText(getContext(), "failed to add post to server", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.fail_to_get_post), Toast.LENGTH_LONG).show();
                 }
                 else{
                     ((MainActivity)getActivity()).datahandler.viewPosts.add(post);
@@ -365,7 +365,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
-                Toast.makeText(getContext(), "failed to conenct to server", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
 
             }
         });
@@ -379,7 +379,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if(!response.isSuccessful()){
-                    Toast.makeText(getContext(), "failed to add post to server", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.fail_to_add_post), Toast.LENGTH_LONG).show();
                 }
                 else {
                     commentList.add(post);
@@ -389,7 +389,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
-                Toast.makeText(getContext(), "failed to conenct to server", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -402,7 +402,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if(!response.isSuccessful()){
-                    Toast.makeText(getContext(), "failed to add like to server", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.fail_to_add_like), Toast.LENGTH_LONG).show();
                 }else {
                     //to be added when micihiel decides howyou like a post
 
@@ -411,7 +411,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
-                Toast.makeText(getContext(), "failed to conenct to server", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
 
             }
         });
