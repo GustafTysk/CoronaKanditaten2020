@@ -30,6 +30,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     private int mResource;
     private int lastPostion = -1;
     private int likes;
+    String title;
     private Boolean hasLiked = false;
 
     static class ViewHolder {
@@ -53,17 +54,17 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         String username = getItem(position).getUsername();
-        String title = getItem(position).getTitle();
+        title = getItem(position).getTitle();
         String timestamp = getItem(position).getTimestamp();
         String text = getItem(position).getText();
         likes = getItem(position).getLikes();
         String category = getItem(position).getCategory();
         int id = getItem(position).getId();
-
         int parentId = getItem(position).getParentId();
 
         final View result;
-        ViewHolder holder;
+        ViewHolder holder=null;
+        convertView=null;
 
         if (convertView==null) {
             LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -78,14 +79,20 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             holder.postBottomSection = (LinearLayout) convertView.findViewById(R.id.postBottomSection);
             holder.postLikeButton = (Button) convertView.findViewById(R.id.postButtonLike);
             holder.postLikeButton.setOnClickListener(new View.OnClickListener(){
-
+                @Override
                 public void onClick(View v) {
-                    System.out.println("You have click like");
+                    //System.out.println("You have click like");
+                    likes = getItem(position).getLikes();
                     System.out.println(likes);
                     hasLiked = true;
                     likes = likes + 1;
                     getItem(position).setLikes(likes);
+                    likes = getItem(position).getLikes();
                     System.out.println(likes);
+                    title = getItem(position).getTitle();
+                    System.out.println(title);
+                    notifyDataSetChanged();
+                    System.out.println(position);
                 }
                                                      });
             result = convertView;
@@ -95,11 +102,6 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             holder = (ViewHolder) convertView.getTag();
             result = convertView;
         }
-
-        Animation animation = AnimationUtils.loadAnimation(mContext,
-                (position > lastPostion) ? R.anim.load_down_anim : R.anim.load_up_anim);
-        result.startAnimation(animation);
-        lastPostion = position;
 
         holder.username.setText(username);
         holder.title.setText(title);
@@ -119,7 +121,10 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             holder.postBottomSection.setBackgroundResource(R.drawable.edittext_outline);
         }
 
-
+        Animation animation = AnimationUtils.loadAnimation(mContext,
+                (position > lastPostion) ? R.anim.load_down_anim : R.anim.load_up_anim);
+        result.startAnimation(animation);
+        lastPostion = position;
 
 
         return convertView;

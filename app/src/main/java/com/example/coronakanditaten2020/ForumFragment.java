@@ -185,6 +185,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 if(thePostId != 0) {
                     Post newWrittenPost = new Post(username, title, timestamp, message, 0, "help", 30, thePostParentId);
                     postList.add(newWrittenPost);
+                    copyList.add(newWrittenPost);
                 }
                 else{
                     Post newWrittenPost = new Post(username, title, timestamp, message, 0, "help", 30, 0);
