@@ -72,6 +72,32 @@
     // MY SETTINGS PAGE
     <string name="fragment_my_settings">Settings</string>
 
+    <string name="section_notifications">Notifications</string>
+    <string name="title_enable_notifications">Enable notifications</string>
+
+    <string name="section_user">User</string>
+    <string name="title_change_username">Change username</string>
+    <string name="summary_change_username">This is the name displayed in the Forum</string>
+    <string name="title_remove_user_locations">Remove reported locations</string>
+    <string name="summary_remove_user_locations">Removes all your reported locations from the database</string>
+    <string name="title_remove_user_posts">Remove posts</string>
+    <string name="summary_remove_user_posts">Removes all your written posts in the Forum</string>
+    <string name="title_remove_user">Delete user</string>
+    <string name="summary_remove_user">Deletes your account and all your data</string>
+
+    <string name="alert_title_locations">Delete user locations</string>
+    <string name="alert_message_locations">Are you sure you want to delete all your reported locations?</string>
+    <string name="alert_toast_locations">Location data deleted</string>
+    <string name="alert_title_posts">Delete user posts</string>
+    <string name="alert_message_posts">Are you sure you want to delete all your written posts?</string>
+    <string name="alert_toast_posts">Posts deleted</string>
+    <string name="alert_title_user">Delete user</string>
+    <string name="alert_message_user">Are you sure you want to delete your entire user account?</string>
+
+
+    <string name="section_help">Help</string>
+    <string name="title_send_feedback">Send feedback</string>
+
     // STATISTICS PAGE
     <string name="fragment_statistics">Statistics</string>
 

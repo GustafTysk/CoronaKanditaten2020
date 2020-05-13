@@ -11,33 +11,44 @@
 
     <PreferenceCategory
         app:key="notifications_category"
-        app:title="Notifications">
+        app:title="@string/section_notifications">
 
         <SwitchPreferenceCompat
             app:key="notifications"
-            app:title="Enable message notifications"/>
+            app:title="@string/title_enable_notifications"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory
         app:key="user_data_category"
-        app:title="User Data">
-
-        <SwitchPreferenceCompat
-            app:defaultValue="false"
-            app:key="enable_user_settings"
-            app:title="Enable user settings"/>
+        app:title="@string/section_user">
 
         <EditTextPreference
             app:key="signature"
-            app:title="Click to change username"
-            app:isPreferenceVisible="false"/>
+            app:title="@string/title_change_username"
+            app:summary="@string/summary_change_username"
+            app:isPreferenceVisible="true"/>
+
+        <Preference
+            app:key="remove_user_locations"
+            app:summary="@string/summary_remove_user_locations"
+            app:title="@string/title_remove_user_locations"/>
+
+        <Preference
+            app:key="remove_user_posts"
+            app:summary="@string/summary_remove_user_posts"
+            app:title="@string/title_remove_user_posts"/>
+
+        <Preference
+            app:key="remove_user"
+            app:summary="@string/summary_remove_user"
+            app:title="@string/title_remove_user"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory
         app:key="help_category"
-        app:title="Help">
+        app:title="@string/section_help">
 
         <Preference
             app:key="feedback"

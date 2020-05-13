@@ -43,14 +43,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public Datahandler datahandler = new Datahandler();
     ArrayList<Location> test;
 
-    MySettingsFragment mySettingsFragment = new MySettingsFragment();
+    MySettingsFragment mySettingsFragment;
 
-    StartPageFragment startpageFragment = new StartPageFragment();
-    StatisticsFragment statisticsFragment = new StatisticsFragment();
-    HeatmapFragment heatmapFragment = new HeatmapFragment();
-    ReportSymptomsFragment reportSymptomsFragment = new ReportSymptomsFragment();
-    ReportLocationFragment reportLocationFragment = new ReportLocationFragment();
-    ForumFragment forumFragment = new ForumFragment();
+    StartPageFragment startpageFragment;
+    StatisticsFragment statisticsFragment ;
+    HeatmapFragment heatmapFragment;
+    ReportSymptomsFragment reportSymptomsFragment;
+    ReportLocationFragment reportLocationFragment;
+    ForumFragment forumFragment;
+
     PlacesClient placesClient;
 
     private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
@@ -92,19 +93,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         datahandler.getuserserverlocations();
         setContentView(R.layout.activity_main);
 
+            mySettingsFragment = new MySettingsFragment();
 
+            startpageFragment = new StartPageFragment();
+            statisticsFragment = new StatisticsFragment();
+            heatmapFragment = new HeatmapFragment();
+            reportSymptomsFragment = new ReportSymptomsFragment();
+            reportLocationFragment = new ReportLocationFragment();
+            forumFragment = new ForumFragment();
 
+            mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
 
-        mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-
-        mViewPager = (NonSwipeableViewPager) findViewById(R.id.container);
-        setupViewPager(mViewPager);
-        Places.initialize(getApplicationContext(), "AIzaSyAdNZnteknM0VlU416q-b8ZEqRBjiFOiPA");
-        setViewPager(1);
+            mViewPager = (NonSwipeableViewPager) findViewById(R.id.container);
+            setupViewPager(mViewPager);
+            Places.initialize(getApplicationContext(), "AIzaSyAdNZnteknM0VlU416q-b8ZEqRBjiFOiPA");
+            setViewPager(1);
 
 
 
     }
+
 
     public BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -207,6 +215,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(7);
     }
+
 
     public void setViewPager(int fragmentNumber){
         mViewPager.setCurrentItem(fragmentNumber);
@@ -434,4 +443,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return currentLocation;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 }
