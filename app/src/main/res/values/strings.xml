@@ -3,50 +3,101 @@
     // VARIOUS
     <string name="app_name">CoronaKanditaten2020</string>
 
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+
+
+
     // LOGIN PAGE
-    <string name="title_activity_login">Sign in</string>
+    <string name="btn_login">Sign in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
+    <string name="forgot_password"><u>Forgot your password? Click here</u></string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
+    <string name="btn_to_register_page">Register user</string>
+
     // REGISTER PAGE
+    <string name="page_name_register">Register user</string>
     <string name="hint_username">Username</string>
-    <string name="hint_email">Email</string>
     <string name="gender_male">Male</string>
     <string name="gender_female">Female</string>
     <string name="gender_other">Other</string>
     <string name="hint_age">Age</string>
-    <string name="hint_password">Password</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_to_login">Back to Login</string>
 
     // RESET PASSWORD PAGE
+    <string name="page_name_reset_password">Reset Password</string>
+    <string name="btn_send_code">send confirmation code to email</string>
+    <string name="hint_confirmation_code">Confirmation code</string>
 
     // START PAGE
+    <string name="page_name_start_page">Start page</string>
+    <string name="log_out">Log Out</string>
 
     // MY SETTINGS PAGE
+    <string name="fragment_my_settings">Settings</string>
 
     // STATISTICS PAGE
+    <string name="fragment_statistics">Statistics</string>
 
     // HEATMAP PAGE
+    <string name="fragment_heatmap">Heatmap</string>
+
+    <string name="btn_zoom_in_on_your_location">Zoom in on your location</string>
 
     // REPORT SYMPTOMS PAGE
+    <string name="fragment_report_symptoms">Report symptoms</string>
 
-    // REPORT LOCATION PAGE
+    <string name="report_symptoms_information">The first step is to report the symptoms you are feeling right now. This is done by clicking on the circles below each symptom.
+        \n Number of red circles:\n 0 = No symptoms                               1 = Low symptoms \n 2 = Medium symptoms                     3 = High symptoms"</string>
 
-    // FORUM PAGE
-    <string name="dialog_text">Fever is bad </string>
+    <string name="symptom_fever">Fever</string>
+    <string name="symptom_cough">Cough</string>
+    <string name="symptom_breathing">Difficulty\nBreathing</string>
+    <string name="symptom_sore_throat">Sore Throat</string>
+    <string name="symptom_nasal_congestion">Nasal\nCongestion</string>
+    <string name="symptom_runny_nose">Runny Nose</string>
+    <string name="symptom_tiredness">Tiredness</string>
+    <string name="symptom_headache">Headache</string>
+    <string name="symptom_diarrhea">Diarrhea</string>
+
+    <string name="dialog_fever">Fever is bad </string>
     <string name="dialog_cough">Cough is bad </string>
     <string name="dialog_breathing">Breathing is bad </string>
-    <string name="dialog_sorethroat">Sore Throat is bad </string>
-    <string name="dialog_nasalcongestion">Nasal Congestion is bad </string>
-    <string name="dialog_runnynose">Runny Nose is bad </string>
+    <string name="dialog_sore_throat">Sore Throat is bad </string>
+    <string name="dialog_nasal_congestion">Nasal Congestion is bad </string>
+    <string name="dialog_runny_nose">Runny Nose is bad </string>
     <string name="dialog_tiredness">Tiredness is bad </string>
     <string name="dialog_headache">Headache is bad </string>
     <string name="dialog_diarrhea">Diarrhea is bad </string>
+
+    <string name="btn_clear">Clear</string>
+    <string name="btn_next_page_rl">Next step</string>
+
+    // REPORT LOCATION PAGE
+    <string name="fragment_report_location">Report location</string>
+    <string name="btn_update_locations">Upload locations to database</string>
+    <string name="btn_previous_page_rs">Back to Report Symptoms</string>
+    <string name="btn_add_location">Add another location</string>
+
+    // FORUM PAGE
+    <string name="fragment_forum">Forum</string>
+
+    <string name="btn_most_liked">Most liked</string>
+    <string name="btn_recommended">Rec</string>
+    <string name="btn_all">All</string>
+    <string name="post_hint_title">Title</string>
+    <string name="post_hint_message">Message</string>
+    <string name="post_hint_username">Username</string>
+    <string name="btn_post">Post</string>
+
     <string name="help">Help and tasks </string>
     <string name="recommendation">Recommendations and warnings </string>
     <string-array name = "numbers">
@@ -54,6 +105,5 @@
         <item>Symptoms per day</item>
     </string-array>
 
-    <string name="forgot_password"><u>Forgot your password? Click here</u></string>
 
 </resources>

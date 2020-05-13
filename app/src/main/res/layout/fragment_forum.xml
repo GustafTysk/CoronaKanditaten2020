@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Forum"
+                android:text="@string/fragment_forum"
                 android:textSize="36sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:ems="10"
-                android:hint="Title"
+                android:hint="@string/post_hint_title"
                 android:inputType="textPersonName"
                 app:layout_constraintBottom_toTopOf="@+id/messageInput"
                 app:layout_constraintEnd_toEndOf="@+id/messageInput"
@@ -71,7 +71,7 @@
                 android:layout_marginBottom="16dp"
                 android:ems="10"
                 android:gravity="start|top"
-                android:hint="Write your message"
+                android:hint="@string/post_hint_message"
                 android:inputType="textMultiLine"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:fontFamily="sans-serif"
-                android:text="Post"
+                android:text="@string/btn_post"
                 app:layout_constraintBottom_toBottomOf="@+id/messageInput"
                 app:layout_constraintStart_toEndOf="@+id/messageInput"
                 app:layout_constraintTop_toTopOf="@+id/messageInput" />
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="username"
+                android:text="@string/post_hint_username"
                 app:layout_constraintBottom_toTopOf="@+id/messageButton"
                 app:layout_constraintEnd_toEndOf="@+id/messageButton"
                 app:layout_constraintStart_toStartOf="@+id/messageButton" />
@@ -109,7 +109,7 @@
                 android:id="@+id/btnMostLiked"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Most liked"
+                android:text="@string/btn_most_liked"
                 app:layout_constraintEnd_toStartOf="@+id/btnFilterRec"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -117,7 +117,7 @@
                 android:id="@+id/btnFilterRec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rec"
+                android:text="@string/btn_recommended"
                 app:layout_constraintEnd_toEndOf="@+id/textView"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -126,7 +126,7 @@
                 android:id="@+id/btnFilterAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="All"
+                android:text="@string/btn_all"
                 app:layout_constraintStart_toEndOf="@+id/btnFilterRec"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 

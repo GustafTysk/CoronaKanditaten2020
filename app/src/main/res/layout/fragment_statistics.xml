@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Statistics"
+        android:text="@string/fragment_statistics"
         android:textAllCaps="true"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -229,7 +229,7 @@
             android:layout_marginTop="16dp"
             android:checked="true"
             android:onClick="onCheckboxClicked"
-            android:text="Diarrhea"
+            android:text="@string/symptom_diarrhea"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -240,7 +240,7 @@
             android:layout_marginStart="16dp"
             android:checked="true"
             android:onClick="onCheckboxClicked"
-            android:text="Runny Nose"
+            android:text="@string/symptom_runny_nose"
             app:layout_constraintBaseline_toBaselineOf="@+id/diarrheaBox"
             app:layout_constraintStart_toEndOf="@+id/diarrheaBox" />
 
@@ -250,7 +250,7 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:onClick="onCheckboxClicked"
-            android:text="Sore Throat"
+            android:text="@string/symptom_sore_throat"
             app:layout_constraintBaseline_toBaselineOf="@+id/feverBox"
             app:layout_constraintStart_toStartOf="@+id/runnyNoseBox" />
 
@@ -261,7 +261,7 @@
             android:layout_marginStart="16dp"
             android:checked="true"
             android:onClick="onCheckboxClicked"
-            android:text="Tiredness"
+            android:text="@string/symptom_tiredness"
             app:layout_constraintBaseline_toBaselineOf="@+id/runnyNoseBox"
             app:layout_constraintStart_toEndOf="@+id/runnyNoseBox" />
 
@@ -271,7 +271,7 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:onClick="onCheckboxClicked"
-            android:text="Breathing Difficulties"
+            android:text="@string/symptom_breathing"
             app:layout_constraintBaseline_toBaselineOf="@+id/headacheBox"
             app:layout_constraintStart_toStartOf="@+id/nasalConBox" />
 
@@ -281,7 +281,7 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:onClick="onCheckboxClicked"
-            android:text="Nasal Congestion"
+            android:text="@string/symptom_nasal_congestion"
             app:layout_constraintBaseline_toBaselineOf="@+id/throatBox"
             app:layout_constraintStart_toStartOf="@+id/tirednessBox" />
 
@@ -292,7 +292,7 @@
             android:layout_marginTop="16dp"
             android:checked="true"
             android:onClick="onCheckboxClicked"
-            android:text="Fever"
+            android:text="@string/symptom_fever"
             app:layout_constraintStart_toStartOf="@+id/diarrheaBox"
             app:layout_constraintTop_toBottomOf="@+id/diarrheaBox" />
 
@@ -303,7 +303,7 @@
             android:layout_marginTop="16dp"
             android:checked="true"
             android:onClick="onCheckboxClicked"
-            android:text="Cough"
+            android:text="@string/symptom_cough"
             app:layout_constraintStart_toStartOf="@+id/feverBox"
             app:layout_constraintTop_toBottomOf="@+id/feverBox" />
 
@@ -313,7 +313,7 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:onClick="onCheckboxClicked"
-            android:text="Headache"
+            android:text="@string/symptom_headache"
             app:layout_constraintBaseline_toBaselineOf="@+id/coughBox"
             app:layout_constraintStart_toStartOf="@+id/throatBox" />
 
