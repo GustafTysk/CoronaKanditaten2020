@@ -6,6 +6,7 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
 
+    <string name="fail_connect_to_server">Failed to connect to server</string>
 
 
     // LOGIN PAGE
@@ -16,9 +17,11 @@
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="forgot_password"><u>Forgot your password? Click here</u></string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="invalid_email">Invalid Email</string>
+    <string name="invalid_password">Password must exceed 4 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <string name="login_success">"Login success"</string>
 
     <string name="btn_to_register_page">Register user</string>
 
@@ -31,6 +34,14 @@
     <string name="hint_age">Age</string>
     <string name="btn_register">Register</string>
     <string name="btn_to_login">Back to Login</string>
+
+    <string name="invalid_username">Invalid Username, must exceed 1 character</string>
+
+    <string name="invalid_gender">Invalid Gender, please select your gender</string>
+    <string name="invalid_age">Invalid Age, please enter your age</string>
+
+    <string name="fail_create_user">Unable to create user</string>
+    <string name="success_create_user">Successfully created new user</string>
 
     // RESET PASSWORD PAGE
     <string name="page_name_reset_password">Reset Password</string>
@@ -46,6 +57,13 @@
 
     // STATISTICS PAGE
     <string name="fragment_statistics">Statistics</string>
+
+    <string name="age_years">Age (years)</string>
+    <string name="number_of_users">Number of registered users</string>
+    <string name="age_0_18">0-18</string>
+    <string name="age_19_40">19-40</string>
+    <string name="age_41_64">41_64</string>
+    <string name="age_over_65">65+</string>
 
     // HEATMAP PAGE
     <string name="fragment_heatmap">Heatmap</string>
