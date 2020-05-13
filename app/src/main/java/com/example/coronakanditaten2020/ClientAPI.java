@@ -50,14 +50,30 @@ public interface ClientAPI {
     @GET ("User/num/{timestamp}")
     Call<Integer>  getNumberOfUsers(@Path("timestamp") String timestamp);
 
+
     @POST("User")
     Call<Boolean> createuser( @Body User user);
+
+
+    //@POST("User/{ver}")
+    //Call<Boolean> createuser( @Path("ver") String ver ,@Body User user);
 
     @PUT("User/{email}/security")
     Call<Boolean> updateuser(@Header("authorization") String Auth,@Path("email") String email, @Body User user);
 
     @DELETE("User/{email}/security")
     Call<Boolean> Deleteuser(@Header("authorization") String Auth,@Path("email") String email);
+
+    @POST("User/ver/{email}")
+    Call<Boolean> verifyemail(@Path("email") String email);
+
+    @POST("User/password/{email}")
+    Call<Boolean> verifypassword(@Path("email") String email);
+
+    @PUT("User/password/{email}/{ver}/{password}")
+    Call<Boolean> setpassword(@Path("email") String email,@Path("ver") String ver,@Path("password") String password);
+
+
 
 
 
@@ -86,17 +102,6 @@ public interface ClientAPI {
 
     @POST("post/answer/{email}/security")
     Call<Boolean> creatanswerpost(@Header("authorization")String Auth, @Path("email") String email, @Body Post thePost);
-
-
-
-
-
-
-
-
-
-
-
 
 
 
