@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Commit"
+        android:text="@string/btn_commit_location"
         app:layout_constraintBottom_toBottomOf="@+id/mapViewReport"
         app:layout_constraintEnd_toEndOf="@+id/mapViewReport"
         app:layout_constraintStart_toStartOf="@+id/mapViewReport"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="Cancel"
+        android:text="@string/btn_cancel"
         app:layout_constraintBaseline_toBaselineOf="@+id/btnLocation1Commit"
         app:layout_constraintEnd_toStartOf="@+id/btnLocation1Commit"
         android:onClick="cancelPopupForLocation"/>

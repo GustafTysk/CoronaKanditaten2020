@@ -22,6 +22,7 @@
     <string name="fail_connect_to_server">Failed to connect to server</string>
     <string name="no_back_action">There is no back action</string>
 
+    <string name="btn_cancel">Cancel</string>
 
 
     // LOGIN PAGE
@@ -66,6 +67,7 @@
     // START PAGE
     <string name="page_name_start_page">Start page</string>
     <string name="log_out">Log Out</string>
+    <string name="success_logout">Logged out successfully</string>
 
     // MY SETTINGS PAGE
     <string name="fragment_my_settings">Settings</string>
@@ -73,12 +75,20 @@
     // STATISTICS PAGE
     <string name="fragment_statistics">Statistics</string>
 
+    <string name="total_symptoms">Total symptoms</string>
+    <string name="per_day_symptoms">Symptoms per day</string>
+
     <string name="age_years">Age (years)</string>
     <string name="number_of_users">Number of registered users</string>
     <string name="age_0_18">0-18</string>
     <string name="age_19_40">19-40</string>
     <string name="age_41_64">41_64</string>
     <string name="age_over_65">65+</string>
+
+    <string-array name = "numbers">
+        <item>Total symptoms</item>
+        <item>Symptoms per day</item>
+    </string-array>
 
     // HEATMAP PAGE
     <string name="fragment_heatmap">Heatmap</string>
@@ -119,6 +129,7 @@
     <string name="btn_update_locations">Upload locations to database</string>
     <string name="btn_previous_page_rs">Back to Report Symptoms</string>
     <string name="btn_add_location">Add another location</string>
+    <string name="btn_commit_location">Set Location</string>
 
     <string name="no_locations_to_add">No locations to add</string>'
     <string name="fail_add_user_locations">Failed to add user locations, please try again later</string>
@@ -142,10 +153,7 @@
     <string name="help">Help and tasks </string>
     <string name="recommendation">Recommendations and warnings </string>
 
-    <string-array name = "numbers">
-        <item>Total symptoms</item>
-        <item>Symptoms per day</item>
-    </string-array>
+
 
 
 </resources>
