@@ -22,8 +22,8 @@
 
         android:background="@drawable/edittext_outline"
         android:hint="@string/prompt_email"
-        android:paddingLeft="5dp"
         android:inputType="textEmailAddress"
+        android:paddingLeft="5dp"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
