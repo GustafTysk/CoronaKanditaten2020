@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Register"
+        android:text="@string/page_name_register"
         android:textAllCaps="true"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +26,7 @@
         android:background="@drawable/edittext_outline"
         android:drawableLeft="@drawable/usericon"
         android:ems="12"
-        android:hint="Username"
+        android:hint="@string/hint_username"
         android:inputType="textPersonName"
         android:paddingLeft="10dip"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +41,7 @@
         android:background="@drawable/edittext_outline"
         android:drawableLeft="@drawable/emailicon"
         android:ems="12"
-        android:hint=" E-mail"
+        android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
         android:paddingLeft="10dip"
         app:layout_constraintStart_toStartOf="@+id/textUsername"
@@ -62,7 +62,7 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:onClick="onRadioButtonClicked"
-            android:text="Male"
+            android:text="@string/gender_male"
             android:textAlignment="viewStart" />
 
         <RadioButton
@@ -70,14 +70,14 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:onClick="onRadioButtonClicked"
-            android:text="Female" />
+            android:text="@string/gender_female" />
 
         <RadioButton
             android:id="@+id/radio_other"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:onClick="onRadioButtonClicked"
-            android:text="Other" />
+            android:text="@string/gender_other" />
     </RadioGroup>
 
     <EditText
@@ -88,7 +88,7 @@
         android:background="@drawable/edittext_outline"
         android:drawableLeft="@drawable/ageicon"
         android:ems="12"
-        android:hint=" Age"
+        android:hint="@string/hint_age"
         android:inputType="numberSigned"
         android:paddingLeft="10dip"
         app:layout_constraintStart_toStartOf="@+id/radioGroupGender"
@@ -102,7 +102,7 @@
         android:background="@drawable/edittext_outline"
         android:drawableLeft="@drawable/passwordicon"
         android:ems="12"
-        android:hint="Password"
+        android:hint="@string/hint_password"
         android:inputType="textPassword"
         android:paddingLeft="10dip"
         app:layout_constraintStart_toStartOf="@+id/textAge"
@@ -114,7 +114,7 @@
         android:layout_height="58dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/button_selector"
-        android:text="Register"
+        android:text="@string/btn_register"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -129,8 +129,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/button_selector_light"
-        android:text="Back To Login"
         android:padding="10dp"
+        android:text="@string/btn_to_login"
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="24sp"

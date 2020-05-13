@@ -5,22 +5,22 @@
     <item
         android:id="@+id/nav_statistics"
         android:icon="@drawable/statistics_icon_32x34"
-        android:title="Statistics" />
+        android:title="@string/fragment_statistics" />
     <item
         android:id="@+id/nav_heatmap"
         android:icon="@drawable/earth_icon_32x32"
-        android:title="Heatmap" />
+        android:title="@string/fragment_heatmap" />
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/home_icon_32x30"
-        android:title="Home" />
+        android:title="@string/page_name_start_page" />
     <item
         android:id="@+id/nav_report_symptoms"
         android:icon="@drawable/smiley_icon_32x32"
-        android:title="Report Symptoms" />
+        android:title="@string/fragment_report_symptoms" />
 
     <item
         android:id="@+id/nav_forum"
         android:icon="@drawable/comments_icon_32x31"
-        android:title="Forum" />
+        android:title="@string/fragment_forum" />
 </menu>

@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Heatmap"
+        android:text="@string/fragment_heatmap"
         android:textAllCaps="true"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Zoom in on Your Location"
+        android:text="@string/btn_zoom_in_on_your_location"
         app:layout_constraintBottom_toBottomOf="@+id/mapview"
         app:layout_constraintEnd_toEndOf="@+id/mapview"
         app:layout_constraintStart_toStartOf="@+id/mapview" />

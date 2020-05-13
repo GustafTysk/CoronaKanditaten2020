@@ -98,11 +98,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                             if(!response.isSuccessful() || !response.body()){
-                               Toast.makeText(getApplicationContext(), "unable to create user", Toast.LENGTH_LONG).show();
+                               Toast.makeText(getApplicationContext(), getString(R.string.fail_create_user), Toast.LENGTH_LONG).show();
                                 System.out.println(response.toString());
                             }
                             else{
-                                Toast.makeText(getApplicationContext(), "Successfully created new user", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), getString(R.string.success_create_user), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                 System.out.println(newUser.printInformation());
                                 emailCorrect = false;
@@ -115,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                         @Override
                         public void onFailure(Call<Boolean> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(), "Failed to connect to server", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
 
                         }
                     });
@@ -133,7 +133,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
         else{
             passwordCorrect = false;
-            textPassword.setError("Password must exceed 4 characters");
+            textPassword.setError(getString(R.string.invalid_password));
         }
     }
 
@@ -143,7 +143,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
         else{
             usernameCorrect = false;
-            textUsername.setError("Username must exceed 1 character");
+            textUsername.setError(getString(R.string.invalid_username));
         }
     }
 
@@ -155,7 +155,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
         else
         {
-            textEmail.setError("Invalid email");
+            textEmail.setError(getString(R.string.invalid_email));
             emailCorrect = false;
         }
     }
@@ -168,7 +168,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
         else {
             ageCorrect = false;
-            textAge.setError("Please enter your age");
+            textAge.setError(getString(R.string.invalid_age));
 
         }
     }
@@ -197,7 +197,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void checkGender(){
         if(genderCorrect == false){
-            lastButton.setError("Please choose gender");
+            lastButton.setError(getString(R.string.invalid_gender));
         }
     }
 
