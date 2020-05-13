@@ -202,6 +202,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter.addFragment(reportLocationFragment, "Report Location");   // 5
         adapter.addFragment(forumFragment, "Forum");                      // 6
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(7);
     }
 
     public void setViewPager(int fragmentNumber){
