@@ -90,9 +90,9 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
             @Override
             public void onPlaceSelected(Place place) {
                 // TODO: Get info about the selected place.
-                //System.out.println(place.getLatLng());
-                //LatLng selectlatlong=place.getLatLng();
-                //mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(selectlatlong));
+
+                LatLng selectlatlong=place.getLatLng();
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(selectlatlong,14));
 
                 Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
             }

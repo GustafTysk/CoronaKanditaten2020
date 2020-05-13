@@ -70,17 +70,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     public PopupWindow mapWindow;
 
     private Marker reportedLocation;
-    private String yourLocation1String = "", yourLocation2String = "";
-    private String yourLocation3String = "";
-    private String yourLocation4String = "";
-    private String yourLocation5String = "";
-    private String yourLocation6String = "";
-    private String yourLocation7String = "";
-    private String yourLocation8String = "";
-    private String yourLocation9String = "";
-    private String yourLocation10String = "";
-    private String yourLocation11String = "";
-    private String yourLocation12String = "";
+
     ArrayList<String> YourlocationsStrings=new ArrayList<String>();
 
 
@@ -104,10 +94,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             textViewLocation7, textViewLocation8, textViewLocation9,textViewLocation10, textViewLocation11, textViewLocation12;
     ArrayList<TextView> textViewLocations=new ArrayList<TextView>();
 
-    private Boolean location1Decided = false, location2Decided = false, location3Decided = false, location4Decided = false, location5Decided = false, location6Decided = false,
-            location7Decided = false, location8Decided = false, location9Decided = false, location10Decided = false, location11Decided = false, location12Decided = false;
-    private Boolean location1Visible = false, location2Visible = false, location3Visible = false, location4Visible = false, location5Visible = false, location6Visible = false,
-            location7Visible = false, location8Visible = false, location9Visible = false, location10Visible = false, location11Visible = false, location12Visible = false;
+
     ArrayList<Boolean>AlllocationDecided =new ArrayList<Boolean>();
     ArrayList<Boolean>AlllocationVisible =new ArrayList<Boolean>();
 
@@ -118,15 +105,12 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     ArrayList<Location> postlocations;
     ArrayList<Location> deletelocations;
     ArrayList<Location> putlocations;
+    private final int Maxlocations=12;
 
 
-    private List<Calendar> location1Dates=new ArrayList<Calendar>(), location2Dates=new ArrayList<Calendar>(), location3Dates=new ArrayList<Calendar>(),location4Dates=new ArrayList<Calendar>(), location5Dates=new ArrayList<Calendar>(), location6Dates=new ArrayList<Calendar>(),location7Dates=new ArrayList<Calendar>(),
-            location8Dates=new ArrayList<Calendar>(), location9Dates=new ArrayList<Calendar>(),location10Dates=new ArrayList<Calendar>(), location11Dates=new ArrayList<Calendar>(), location12Dates=new ArrayList<Calendar>();
-    private String location1DateString = "", location2DateString = "", location3DateString = "",location4DateString = "", location5DateString = "", location6DateString = "",
-            location7DateString = "", location8DateString = "", location9DateString = "",location10DateString = "", location11DateString = "", location12DateString = "";
+
     ArrayList<String> locationDateStrings=new  ArrayList<String>();
-    private LatLng location1 = null, location2 = null, location3 = null,location4 = null, location5 = null, location6 = null,
-            location7 = null, location8 = null, location9 = null,location10 = null, location11 = null, location12 = null;
+
     private ArrayList<LatLng> locations;
     ArrayList<List<Calendar>> AllLocationDates=new ArrayList<List<Calendar>>();
 
@@ -258,9 +242,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
 
         minDate.setTimeInMillis(minDateTime);
-        System.out.println("fffdfddf");
-        hideAllButFirstLocationFragment(getView());
         Creatlists();
+        hideAllButFirstLocationFragment(getView());
+
         if(userLocations!=null){
             SetUppPage();
         }
@@ -290,35 +274,33 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 break;
             case R.id.btnUpdateMyLocations:
 
-                userLocations=creatuserlocations(((MainActivity)getActivity()).reportSymptomsFragment.getratings());
+                userLocations = creatuserlocations(((MainActivity) getActivity()).reportSymptomsFragment.getratings());
 
-                if(userLocations.size()==0){
+                if (userLocations.size() == 0) {
                     Toast.makeText(getContext(), "no locations to add", Toast.LENGTH_LONG).show();
                     break;
                 }
 
 
+                Call<Boolean> removelocations = ((MainActivity) getActivity()).datahandler.clientAPI.removeUserlocations(
+                        ((MainActivity) getActivity()).datahandler.credentials.encrypt, ((MainActivity) getActivity()).datahandler.credentials.Email);
+                Call<Boolean> creatuserlocations = ((MainActivity) getActivity()).datahandler.clientAPI.createuserlocations(
+                        ((MainActivity) getActivity()).datahandler.credentials.encrypt, ((MainActivity) getActivity()).datahandler.credentials.Email, userLocations);
 
-
-                Call<Boolean> removelocations=((MainActivity) getActivity()).datahandler.clientAPI.removeUserlocations(
-                        ((MainActivity) getActivity()).datahandler.credentials.encrypt,((MainActivity) getActivity()).datahandler.credentials.Email);
-                Call<Boolean> creatuserlocations=((MainActivity) getActivity()).datahandler.clientAPI.createuserlocations(
-                        ((MainActivity) getActivity()).datahandler.credentials.encrypt,((MainActivity) getActivity()).datahandler.credentials.Email,userLocations);
-
-                if(((MainActivity)getActivity()).datahandler.Userlocations==null){
+                if (((MainActivity) getActivity()).datahandler.Userlocations == null) {
 
                     creatuserlocations.enqueue(new Callback<Boolean>() {
                         @Override
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                            if(!response.isSuccessful()){
-                                System.out.println(userLocations.get(0).latitude+"latitude");System.out.println(userLocations.get(0).longitude+"long");
+                            if (!response.isSuccessful()) {
+                                System.out.println(userLocations.get(0).latitude + "latitude");
+                                System.out.println(userLocations.get(0).longitude + "long");
                                 Toast.makeText(getContext(), "failed to add user try again later", Toast.LENGTH_LONG).show();
                                 System.out.println("tja");
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(getContext(), "sucesfully added user", Toast.LENGTH_LONG).show();
                                 System.out.println("yja");
-                                ((MainActivity) getActivity()).datahandler.Userlocations=userLocations;
+                                ((MainActivity) getActivity()).datahandler.Userlocations = userLocations;
                                 ((MainActivity) getActivity()).setViewPager(1);
 
 
@@ -334,199 +316,126 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                     });
 
 
-                }
-                else{
-                removelocations.enqueue(new Callback<Boolean>() {
-                    @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                        if(!response.isSuccessful()|| !response.body()){
-                            Toast.makeText(getContext(), "failed to add user try again later", Toast.LENGTH_LONG).show();
+                } else {
+                    removelocations.enqueue(new Callback<Boolean>() {
+                        @Override
+                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                            if (!response.isSuccessful() || !response.body()) {
+                                Toast.makeText(getContext(), "failed to add user try again later", Toast.LENGTH_LONG).show();
+
+                            } else {
+
+                                creatuserlocations.enqueue(new Callback<Boolean>() {
+                                    @Override
+                                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+
+                                        if (!response.isSuccessful()) {
+                                            Toast.makeText(getContext(), "failed to add user try again later", Toast.LENGTH_LONG).show();
+                                        } else {
+                                            Toast.makeText(getContext(), "sucesfully added user", Toast.LENGTH_LONG).show();
+
+                                            System.out.println("sdfdsfds");
+                                            System.out.println(AlllocationDecided.get(2));
+                                            System.out.println(AlllocationVisible.get(2));
+                                            System.out.println(textViewLocation2.getText());
+                                            System.out.println(textViewLocation2.getVisibility());
+                                            ((MainActivity) getActivity()).datahandler.Userlocations = userLocations;
+                                            ((MainActivity) getActivity()).setViewPager(1);
+                                            System.out.println();
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Boolean> call, Throwable t) {
+                                        System.out.println(t);
+                                        Toast.makeText(getContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
+
+                                    }
+                                });
+
+
+                            }
 
                         }
-                        else{
 
-                            creatuserlocations.enqueue(new Callback<Boolean>() {
-                                @Override
-                                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-
-                                    if(!response.isSuccessful()){
-                                        Toast.makeText(getContext(), "failed to add user try again later", Toast.LENGTH_LONG).show();
-                                    }
-                                    else{
-                                        Toast.makeText(getContext(), "sucesfully added user", Toast.LENGTH_LONG).show();
-
-                                        System.out.println("sdfdsfds");
-                                        System.out.println(AlllocationDecided.get(2));
-                                        System.out.println(AlllocationVisible.get(2));
-                                        System.out.println(textViewLocation2.getText());
-                                        System.out.println(textViewLocation2.getVisibility());
-                                        ((MainActivity) getActivity()).datahandler.Userlocations=userLocations;
-                                        ((MainActivity) getActivity()).setViewPager(1);
-                                        System.out.println();
-
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<Boolean> call, Throwable t) {
-                                    System.out.println(t);
-                                    Toast.makeText(getContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
-
-                                }
-                            });
-
+                        @Override
+                        public void onFailure(Call<Boolean> call, Throwable t) {
+                            System.out.println(t);
+                            Toast.makeText(getContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
 
                         }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
-                        System.out.println(t);
-                        Toast.makeText(getContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
-
-                    }
-                });}
-
-
-
-                break;
-            case R.id.setLocation1:
-                currentLocationReport = 1;
-                startReportLocationMap();
-                break;
-            case R.id.setLocation2:
-                currentLocationReport = 2;
-                startReportLocationMap();
-                break;
-            case R.id.setLocation3:
-                currentLocationReport = 3;
-                startReportLocationMap();
-                break;
-            case R.id.setLocation4:
-                currentLocationReport = 4;
-                startReportLocationMap();
-                break;
-            case R.id.setLocation5:
-                currentLocationReport = 5;
-                startReportLocationMap();
-                break;
-            case R.id.setLocation6:
-                currentLocationReport = 6;
-                startReportLocationMap();
-                break;
-            case R.id.setLocation7:
-                currentLocationReport = 7;
-                startReportLocationMap();
-                break;
-            case R.id.setLocation8:
-                currentLocationReport = 8;
-                startReportLocationMap();
-                break;
-            case R.id.setLocation9:
-                currentLocationReport = 9;
-                startReportLocationMap();
-                break;
-            case R.id.setLocation10:
-                currentLocationReport = 10;
-                startReportLocationMap();
-                break;
-            case R.id.setLocation11:
-                currentLocationReport = 11;
-                startReportLocationMap();
-                break;
-            case R.id.setLocation12:
-                currentLocationReport = 12;
-                startReportLocationMap();
-                break;
-            case R.id.setCalendarLocation1:
-                try {
-                    getCalendarView(1);
-                } catch (OutOfDateRangeException e) {
-                    e.printStackTrace();
+                    });
                 }
-                break;
-            case R.id.setCalendarLocation2:
-                try {
-                    getCalendarView(2);
-                } catch (OutOfDateRangeException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.setCalendarLocation3:
-                try {
-                    getCalendarView(3);
-                } catch (OutOfDateRangeException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.setCalendarLocation4:
-                try {
-                    getCalendarView(4);
-                } catch (OutOfDateRangeException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.setCalendarLocation5:
-                try {
-                    getCalendarView(5);
-                } catch (OutOfDateRangeException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.setCalendarLocation6:
-                try {
-                    getCalendarView(6);
-                } catch (OutOfDateRangeException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.setCalendarLocation7:
-                try {
-                    getCalendarView(7);
-                } catch (OutOfDateRangeException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.setCalendarLocation8:
-                try {
-                    getCalendarView(8);
-                } catch (OutOfDateRangeException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.setCalendarLocation9:
-                try {
-                    getCalendarView(9);
-                } catch (OutOfDateRangeException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.setCalendarLocation10:
-                try {
-                    getCalendarView(10);
-                } catch (OutOfDateRangeException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.setCalendarLocation11:
-                try {
-                    getCalendarView(11);
-                } catch (OutOfDateRangeException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.setCalendarLocation12:
-                try {
-                    getCalendarView(12);
-                } catch (OutOfDateRangeException e) {
-                    e.printStackTrace();
-                }
-                break;
-
-
-
         }
+
+            for(int i=0 ; i<setlocations.size() ;  i++ ){
+                System.out.println("setlcoatioN"+setlocations.get(i).getId()+"button"+ v.getId());
+
+                if(setlocations.get(i).getId()==v.getId()){
+
+                    currentLocationReport=i+1;
+                    startReportLocationMap();
+                    break;
+                }
+            }
+
+            for(int i=0 ; i<setCalandarlocations.size() ;  i++){
+
+                if(setCalandarlocations.get(i).getId()==v.getId()){
+                    try {
+                        getCalendarView(i+1);
+                    } catch (OutOfDateRangeException e) {
+                        e.printStackTrace();
+                    }
+
+                    break;
+                }
+
+            }
+
+            for (int i=0; i<btnRemoveLocations.size();i++){
+                if(btnRemoveLocations.get(i).getId()==v.getId()){
+                    currentLocationReport=i+1;
+                    removelocation();
+                    break;
+                }
+            }
+
+
+
+
+
+
+
+    }
+
+    void removelocation(){
+        int decided=Collections.frequency(AlllocationDecided,true)-1;
+        textViewLocations.get(decided).setVisibility(getView().GONE);
+        setlocations.get(decided).setVisibility(getView().GONE);
+        setCalandarlocations.get(decided).setVisibility(getView().GONE);
+        btnRemoveLocations.get(decided).setVisibility(getView().GONE);
+        AlllocationVisible.set(decided,false);
+        AlllocationDecided.set(decided,false);
+        textViewLocations.get(decided).setText("location "+decided+1);
+
+
+        locations.remove(currentLocationReport-1);
+        locations.add(null);
+        YourlocationsStrings.remove(currentLocationReport-1);
+        YourlocationsStrings.add("");
+        locationDateStrings.remove(currentLocationReport-1);
+        locationDateStrings.add(null);
+        AllLocationDates.remove(currentLocationReport-1);
+        locationDateStrings.add("");
+        for(int i=0; i<decided; i++){
+            textViewLocations.get(i).setText(YourlocationsStrings.get(i));
+        }
+
+
+
+
     }
 
     public void addLocationToLocations(LatLng location){
@@ -538,6 +447,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     }
 
     public void startReportLocationMap(){
+        System.out.println("fdsfsdfdsf");
         yourLocation = ((MainActivity) getActivity()).getCurrentLocation();
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -562,113 +472,27 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
         mGoogleMap = googleMap;
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
+
+
+        if (locations.get(currentLocationReport-1)!= null) {
+            reportedLocation = googleMap.addMarker(new MarkerOptions()
+                    .position(locations.get(currentLocationReport-1))
+                    .title(YourlocationsStrings.get(currentLocationReport-1))
+                    .draggable(true));
+            googleMap.setOnMapClickListener(this);
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locations.get(currentLocationReport-1), 15));
+            return;
+        }
+
         reportedLocation = googleMap.addMarker(new MarkerOptions()
                 .position(yourLocation)
                 .title("Your Location")
                 .draggable(true));
         googleMap.setOnMapClickListener(this);
+        System.out.println(locations.get(currentLocationReport));
 
-        switch (currentLocationReport) {
-            case 1:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
-                reportedLocation.setPosition(yourLocation);
-
-                if (location1 != null) {
-                    reportedLocation.setPosition(locations.get(0));
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locations.get(0), 15));
-                }
-                break;
-            case 2:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
-                reportedLocation.setPosition(yourLocation);
-                if (location2 != null) {
-                    reportedLocation.setPosition(location2);
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location2, 15));
-                }
-                break;
-            case 3:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
-                reportedLocation.setPosition(yourLocation);
-                if (location3 != null) {
-                    reportedLocation.setPosition(location3);
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location3, 15));
-                }
-                break;
-            case 4:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
-                reportedLocation.setPosition(yourLocation);
-                if (location4 != null) {
-                    reportedLocation.setPosition(location4);
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location4, 15));
-                }
-                break;
-            case 5:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
-                reportedLocation.setPosition(yourLocation);
-                if (location5 != null) {
-                    reportedLocation.setPosition(location5);
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location5, 15));
-                }
-                break;
-            case 6:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
-                reportedLocation.setPosition(yourLocation);
-                if (location6 != null) {
-                    reportedLocation.setPosition(location6);
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location6, 15));
-                }
-                break;
-            case 7:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
-                reportedLocation.setPosition(yourLocation);
-                if (location7 != null) {
-                    reportedLocation.setPosition(location7);
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location7, 15));
-                }
-                break;
-            case 8:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
-                reportedLocation.setPosition(yourLocation);
-                if (location8 != null) {
-                    reportedLocation.setPosition(location8);
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location8, 15));
-                }
-                break;
-            case 9:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
-                reportedLocation.setPosition(yourLocation);
-                if (location9 != null) {
-                    reportedLocation.setPosition(location9);
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location9, 15));
-                }
-                break;
-            case 10:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
-                reportedLocation.setPosition(yourLocation);
-                if (location10 != null) {
-                    reportedLocation.setPosition(location10);
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location10, 15));
-                }
-                break;
-            case 11:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
-                reportedLocation.setPosition(yourLocation);
-                if (location11 != null) {
-                    reportedLocation.setPosition(location11);
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location11, 15));
-                }
-                break;
-            case 12:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
-                reportedLocation.setPosition(yourLocation);
-                if (location12 != null) {
-                    reportedLocation.setPosition(location12);
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location12, 15));
-                }
-                break;
-            default:
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
-        }
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
+        reportedLocation.setPosition(yourLocation);
     }
 
     public void getCalendarView(final Integer location) throws OutOfDateRangeException {
@@ -704,7 +528,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         setLocation2.setVisibility(v.GONE);
         setCalendarLocation2.setVisibility(v.GONE);
         btnRemoveLocation2.setVisibility(v.GONE);
-        location1Visible = true;
+        AlllocationVisible.set(0,true);
 
         textViewLocation3.setVisibility(v.GONE);
         setLocation3.setVisibility(v.GONE);
@@ -775,11 +599,11 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             return;
 
         }
-        if(locationsvisible==12){
+        if(locationsvisible==Maxlocations){
             Toast.makeText(getContext(),"Maximum number of locations added", Toast.LENGTH_LONG).show();
             return;
         }
-        if(currentLocationReport>0&&currentLocationReport<12){
+        if(currentLocationReport>0&&currentLocationReport<Maxlocations){
             if(AlllocationVisible.get(currentLocationReport)) {
                 hasEmptyLocation = true;
             }
@@ -864,7 +688,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         String lotstring;
         String tempday;
         int counter=0;
-        System.out.println(locations.size()+"jhkhjkjh");
         for (LatLng thelocation:locations){
             if(AllLocationDates.get(counter)!=null && thelocation!=null){
                 System.out.println("fdsfsdf");
@@ -1041,101 +864,16 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         textViewLocations.add(textViewLocation11);
         textViewLocations.add(textViewLocation12);
 
-        AlllocationDecided.add(location1Decided);
-        AlllocationDecided.add(location2Decided);
-        AlllocationDecided.add(location3Decided);
-        AlllocationDecided.add(location4Decided);
-        AlllocationDecided.add(location5Decided);
-        AlllocationDecided.add(location6Decided);
-        AlllocationDecided.add(location7Decided);
-        AlllocationDecided.add(location8Decided);
-        AlllocationDecided.add(location9Decided);
-        AlllocationDecided.add(location10Decided);
-        AlllocationDecided.add(location11Decided);
-        AlllocationDecided.add(location12Decided);
-
-
-        AlllocationVisible.add(location1Visible);
-        AlllocationVisible.add(location2Visible);
-        AlllocationVisible.add(location3Visible);
-        AlllocationVisible.add(location4Visible);
-        AlllocationVisible.add(location5Visible);
-        AlllocationVisible.add(location6Visible);
-        AlllocationVisible.add(location7Visible);
-        AlllocationVisible.add(location8Visible);
-        AlllocationVisible.add(location9Visible);
-        AlllocationVisible.add(location10Visible);
-        AlllocationVisible.add(location11Visible);
-        AlllocationVisible.add(location12Visible);
-
-        locationDateStrings.add(location1DateString);
-        locationDateStrings.add(location2DateString);
-        locationDateStrings.add(location3DateString);
-        locationDateStrings.add(location4DateString);
-        locationDateStrings.add(location5DateString);
-        locationDateStrings.add(location6DateString);
-        locationDateStrings.add(location7DateString);
-        locationDateStrings.add(location8DateString);
-        locationDateStrings.add(location9DateString);
-        locationDateStrings.add(location10DateString);
-        locationDateStrings.add(location11DateString);
-        locationDateStrings.add(location12DateString);
-
-        locations.add(location1);
-        locations.add(location2);
-        locations.add(location3);
-        locations.add(location4);
-        locations.add(location5);
-        locations.add(location6);
-        locations.add(location7);
-        locations.add(location8);
-        locations.add(location9);
-        locations.add(location10);
-        locations.add(location11);
-        locations.add(location12);
-
-        AllLocationDates.add(location1Dates);
-        AllLocationDates.add(location2Dates);
-        AllLocationDates.add(location3Dates);
-        AllLocationDates.add(location4Dates);
-        AllLocationDates.add(location5Dates);
-        AllLocationDates.add(location6Dates);
-        AllLocationDates.add(location7Dates);
-        AllLocationDates.add(location8Dates);
-        AllLocationDates.add(location9Dates);
-        AllLocationDates.add(location10Dates);
-        AllLocationDates.add(location11Dates);
-        AllLocationDates.add(location12Dates);
-
-        YourlocationsStrings.add(yourLocation1String);
-        YourlocationsStrings.add(yourLocation2String);
-        YourlocationsStrings.add(yourLocation3String);
-        YourlocationsStrings.add(yourLocation4String);
-        YourlocationsStrings.add(yourLocation5String);
-        YourlocationsStrings.add(yourLocation6String);
-        YourlocationsStrings.add(yourLocation7String);
-        YourlocationsStrings.add(yourLocation8String);
-        YourlocationsStrings.add(yourLocation9String);
-        YourlocationsStrings.add(yourLocation10String);
-        YourlocationsStrings.add(yourLocation11String);
-        YourlocationsStrings.add(yourLocation12String);
-    }
-
-    @Override
-    public void onResume() {
-        System.out.println("fsdfdsfds");
-        for(int i=0; i>numberOfLocationsSet();i++){
-            textViewLocations.get(i).setVisibility(getView().VISIBLE);
-            setCalandarlocations.get(i).setVisibility(getView().VISIBLE);
-            setlocations.get(i).setVisibility(getView().VISIBLE);
-            btnRemoveLocations.get(i).setVisibility(getView().VISIBLE);
-            textViewLocations.get(i).setText(YourlocationsStrings.get(i));
-            System.out.println(YourlocationsStrings.get(i));
-
-
+        for(int i=1; i<=Maxlocations;i++){
+            AlllocationDecided.add(false);
+            AlllocationVisible.add(false);
+            locationDateStrings.add("");
+            locations.add(null);
+            AllLocationDates.add(new ArrayList<Calendar>());
+            YourlocationsStrings.add("");
         }
-        super.onResume();
-    }
 
+
+    }
 }
 

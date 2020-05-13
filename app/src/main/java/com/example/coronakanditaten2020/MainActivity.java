@@ -84,6 +84,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        // datahandler.credentials=new Credentials(intent.getStringExtra("ema"),intent.getStringExtra("pass"));
         //System.out.println(datahandler.credentials.Email);
        // System.out.println(datahandler.credentials.Password);
+
+        datahandler.getserveruserinfo("");
+        datahandler.getTopPost(100);
         datahandler.getserveruser();
         datahandler.getalllserverocations("");
         datahandler.getuserserverlocations();
@@ -202,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter.addFragment(reportLocationFragment, "Report Location");   // 5
         adapter.addFragment(forumFragment, "Forum");                      // 6
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(7);
     }
 
     public void setViewPager(int fragmentNumber){
