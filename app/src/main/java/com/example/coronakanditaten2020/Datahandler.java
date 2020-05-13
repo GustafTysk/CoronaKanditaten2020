@@ -29,6 +29,7 @@ public class Datahandler {
     ArrayList<Location> Userlocations;
     User user;
     ArrayList<Post> viewPosts;
+    ArrayList<ArrayList> userinfo;
 
     Credentials credentials;
     Retrofit retrofit;
@@ -189,101 +190,54 @@ public class Datahandler {
         });
     }
 
+public void getserveruserinfo(String timestamp){
+        Call<ArrayList<ArrayList>> getuserinfo=clientAPI.GetUserinfo(timestamp);
+        getuserinfo.enqueue(new Callback<ArrayList<ArrayList>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ArrayList>> call, Response<ArrayList<ArrayList>> response) {
+                if(!response.isSuccessful()){
+                    System.out.println("there has been an error");
+                }
+                else{
+                    System.out.println(response.toString());
+                    userinfo=response.body();
 
+                    System.out.println("userinfos has succefully collected");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void save(String textSave, Context ctx) {
-        FileOutputStream fos = null;
-        try {
-            fos = ctx.openFileOutput(FILE_NAME, ctx.MODE_PRIVATE);
-            fos.write(textSave.getBytes());
-            //Toast.makeText(Context , this, "Saved to " + ctx.getFilesDir() + "/" + FILE_NAME, Toast.LENGTH_LONG).show();
-        } catch (FileNotFoundException e) {
-
-            
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
-        }
-    }
 
-    public void load(Context ctx) {
-        FileInputStream fis = null;
-        try {
-            fis = ctx.openFileInput(FILE_NAME);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String textSave;
-            while((textSave = br.readLine()) != null) {
-                sb.append(textSave).append("\n");
+            @Override
+            public void onFailure(Call<ArrayList<ArrayList>> call, Throwable t) {
+                System.out.println("failed to connect to server");
+
             }
+        });
+}
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if(fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+    public void getTopPost(int number){
+        Call<ArrayList<Post>> getTopPost=clientAPI.getresentposts(number);
+        getTopPost.enqueue(new Callback<ArrayList<Post>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
+                if(!response.isSuccessful()){
+                    System.out.println("there has been an error");
                 }
+                else{
+                    System.out.println(response.toString());
+                    viewPosts=response.body();
+
+                    System.out.println("userinfos has succefully collected");
+
+                }
+
             }
-        }
+
+            @Override
+            public void onFailure(Call<ArrayList<Post>> call, Throwable t) {
+                System.out.println("failed to connect to server");
+            }
+        });
     }
 
 }

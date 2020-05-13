@@ -134,9 +134,116 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             userLocations=((MainActivity)getActivity()).datahandler.Userlocations;
         }
 
-        SetUpp(getView());
-        minDate.setTimeInMillis(minDateTime);
+        // SET ALL LOCATION MAP IMAGE BUTTONS
+        setLocation1 = (ImageButton) view.findViewById(R.id.setLocation1);
+        setLocation1.setOnClickListener(this);
+        setLocation2 = (ImageButton) view.findViewById(R.id.setLocation2);
+        setLocation2.setOnClickListener(this);
+        setLocation3 = (ImageButton) view.findViewById(R.id.setLocation3);
+        setLocation3.setOnClickListener(this);
+        setLocation4 = (ImageButton) view.findViewById(R.id.setLocation4);
+        setLocation4.setOnClickListener(this);
+        setLocation5 = (ImageButton) view.findViewById(R.id.setLocation5);
+        setLocation5.setOnClickListener(this);
+        setLocation6 = (ImageButton) view.findViewById(R.id.setLocation6);
+        setLocation6.setOnClickListener(this);
+        setLocation7 = (ImageButton) view.findViewById(R.id.setLocation7);
+        setLocation7.setOnClickListener(this);
+        setLocation8 = (ImageButton) view.findViewById(R.id.setLocation8);
+        setLocation8.setOnClickListener(this);
+        setLocation9 = (ImageButton) view.findViewById(R.id.setLocation9);
+        setLocation9.setOnClickListener(this);
+        setLocation10 = (ImageButton) view.findViewById(R.id.setLocation10);
+        setLocation10.setOnClickListener(this);
+        setLocation11 = (ImageButton) view.findViewById(R.id.setLocation11);
+        setLocation11.setOnClickListener(this);
+        setLocation12 = (ImageButton) view.findViewById(R.id.setLocation12);
+        setLocation12.setOnClickListener(this);
 
+        //SET ALL CALENDAR LOCATION IMAGE BUTTONS
+        setCalendarLocation1 = (ImageButton) view.findViewById(R.id.setCalendarLocation1);
+        setCalendarLocation1.setOnClickListener(this);
+        setCalendarLocation2 = (ImageButton) view.findViewById(R.id.setCalendarLocation2);
+        setCalendarLocation2.setOnClickListener(this);
+        setCalendarLocation3 = (ImageButton) view.findViewById(R.id.setCalendarLocation3);
+        setCalendarLocation3.setOnClickListener(this);
+        setCalendarLocation4 = (ImageButton) view.findViewById(R.id.setCalendarLocation4);
+        setCalendarLocation4.setOnClickListener(this);
+        setCalendarLocation5 = (ImageButton) view.findViewById(R.id.setCalendarLocation5);
+        setCalendarLocation5.setOnClickListener(this);
+        setCalendarLocation6 = (ImageButton) view.findViewById(R.id.setCalendarLocation6);
+        setCalendarLocation6.setOnClickListener(this);
+        setCalendarLocation7 = (ImageButton) view.findViewById(R.id.setCalendarLocation7);
+        setCalendarLocation7.setOnClickListener(this);
+        setCalendarLocation8 = (ImageButton) view.findViewById(R.id.setCalendarLocation8);
+        setCalendarLocation8.setOnClickListener(this);
+        setCalendarLocation9 = (ImageButton) view.findViewById(R.id.setCalendarLocation9);
+        setCalendarLocation9.setOnClickListener(this);
+        setCalendarLocation10 = (ImageButton) view.findViewById(R.id.setCalendarLocation10);
+        setCalendarLocation10.setOnClickListener(this);
+        setCalendarLocation11 = (ImageButton) view.findViewById(R.id.setCalendarLocation11);
+        setCalendarLocation11.setOnClickListener(this);
+        setCalendarLocation12 = (ImageButton) view.findViewById(R.id.setCalendarLocation12);
+        setCalendarLocation12.setOnClickListener(this);
+
+        // SET ALL REMOVE LOCATION BUTTONS
+        btnRemoveLocation1 = (ImageButton) view.findViewById(R.id.btnRemoveLocation1);
+        btnRemoveLocation1.setOnClickListener(this);
+        btnRemoveLocation2 = (ImageButton) view.findViewById(R.id.btnRemoveLocation2);
+        btnRemoveLocation2.setOnClickListener(this);
+        btnRemoveLocation3 = (ImageButton) view.findViewById(R.id.btnRemoveLocation3);
+        btnRemoveLocation3.setOnClickListener(this);
+        btnRemoveLocation4 = (ImageButton) view.findViewById(R.id.btnRemoveLocation4);
+        btnRemoveLocation4.setOnClickListener(this);
+        btnRemoveLocation5 = (ImageButton) view.findViewById(R.id.btnRemoveLocation5);
+        btnRemoveLocation5.setOnClickListener(this);
+        btnRemoveLocation6 = (ImageButton) view.findViewById(R.id.btnRemoveLocation6);
+        btnRemoveLocation6.setOnClickListener(this);
+        btnRemoveLocation7 = (ImageButton) view.findViewById(R.id.btnRemoveLocation7);
+        btnRemoveLocation7.setOnClickListener(this);
+        btnRemoveLocation8 = (ImageButton) view.findViewById(R.id.btnRemoveLocation8);
+        btnRemoveLocation8.setOnClickListener(this);
+        btnRemoveLocation9 = (ImageButton) view.findViewById(R.id.btnRemoveLocation9);
+        btnRemoveLocation9.setOnClickListener(this);
+        btnRemoveLocation10 = (ImageButton) view.findViewById(R.id.btnRemoveLocation10);
+        btnRemoveLocation10.setOnClickListener(this);
+        btnRemoveLocation11 = (ImageButton) view.findViewById(R.id.btnRemoveLocation11);
+        btnRemoveLocation11.setOnClickListener(this);
+        btnRemoveLocation12 = (ImageButton) view.findViewById(R.id.btnRemoveLocation12);
+        btnRemoveLocation12.setOnClickListener(this);
+
+        // SET ALL TEXT VIEWS FOR LOCATIONS
+        textViewLocation1 = (TextView) view.findViewById(R.id.textViewLocation1);
+        textViewLocation2 = (TextView) view.findViewById(R.id.textViewLocation2);
+        textViewLocation3 = (TextView) view.findViewById(R.id.textViewLocation3);
+        textViewLocation4 = (TextView) view.findViewById(R.id.textViewLocation4);
+        textViewLocation5 = (TextView) view.findViewById(R.id.textViewLocation5);
+        textViewLocation6 = (TextView) view.findViewById(R.id.textViewLocation6);
+        textViewLocation7 = (TextView) view.findViewById(R.id.textViewLocation7);
+        textViewLocation8 = (TextView) view.findViewById(R.id.textViewLocation8);
+        textViewLocation9 = (TextView) view.findViewById(R.id.textViewLocation9);
+        textViewLocation10 = (TextView) view.findViewById(R.id.textViewLocation10);
+        textViewLocation11 = (TextView) view.findViewById(R.id.textViewLocation11);
+        textViewLocation12 = (TextView) view.findViewById(R.id.textViewLocation12);
+        // SET ALL SCROLL'S FOR THE TEXT VIEWS
+        textViewLocation1.setMovementMethod(new ScrollingMovementMethod());
+        textViewLocation2.setMovementMethod(new ScrollingMovementMethod());
+        textViewLocation3.setMovementMethod(new ScrollingMovementMethod());
+        textViewLocation4.setMovementMethod(new ScrollingMovementMethod());
+        textViewLocation5.setMovementMethod(new ScrollingMovementMethod());
+        textViewLocation6.setMovementMethod(new ScrollingMovementMethod());
+        textViewLocation7.setMovementMethod(new ScrollingMovementMethod());
+        textViewLocation8.setMovementMethod(new ScrollingMovementMethod());
+        textViewLocation9.setMovementMethod(new ScrollingMovementMethod());
+        textViewLocation10.setMovementMethod(new ScrollingMovementMethod());
+        textViewLocation11.setMovementMethod(new ScrollingMovementMethod());
+        textViewLocation12.setMovementMethod(new ScrollingMovementMethod());
+
+
+
+        minDate.setTimeInMillis(minDateTime);
+        Creatlists();
+        hideAllButFirstLocationFragment(getView());
 
         if(userLocations!=null){
             SetUppPage();
@@ -703,111 +810,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
 
 
-    void SetUpp(View view){
-        // SET ALL LOCATION MAP IMAGE BUTTONS
-        setLocation1 = (ImageButton) view.findViewById(R.id.setLocation1);
-        setLocation1.setOnClickListener(this);
-        setLocation2 = (ImageButton) view.findViewById(R.id.setLocation2);
-        setLocation2.setOnClickListener(this);
-        setLocation3 = (ImageButton) view.findViewById(R.id.setLocation3);
-        setLocation3.setOnClickListener(this);
-        setLocation4 = (ImageButton) view.findViewById(R.id.setLocation4);
-        setLocation4.setOnClickListener(this);
-        setLocation5 = (ImageButton) view.findViewById(R.id.setLocation5);
-        setLocation5.setOnClickListener(this);
-        setLocation6 = (ImageButton) view.findViewById(R.id.setLocation6);
-        setLocation6.setOnClickListener(this);
-        setLocation7 = (ImageButton) view.findViewById(R.id.setLocation7);
-        setLocation7.setOnClickListener(this);
-        setLocation8 = (ImageButton) view.findViewById(R.id.setLocation8);
-        setLocation8.setOnClickListener(this);
-        setLocation9 = (ImageButton) view.findViewById(R.id.setLocation9);
-        setLocation9.setOnClickListener(this);
-        setLocation10 = (ImageButton) view.findViewById(R.id.setLocation10);
-        setLocation10.setOnClickListener(this);
-        setLocation11 = (ImageButton) view.findViewById(R.id.setLocation11);
-        setLocation11.setOnClickListener(this);
-        setLocation12 = (ImageButton) view.findViewById(R.id.setLocation12);
-        setLocation12.setOnClickListener(this);
-
-        //SET ALL CALENDAR LOCATION IMAGE BUTTONS
-        setCalendarLocation1 = (ImageButton) view.findViewById(R.id.setCalendarLocation1);
-        setCalendarLocation1.setOnClickListener(this);
-        setCalendarLocation2 = (ImageButton) view.findViewById(R.id.setCalendarLocation2);
-        setCalendarLocation2.setOnClickListener(this);
-        setCalendarLocation3 = (ImageButton) view.findViewById(R.id.setCalendarLocation3);
-        setCalendarLocation3.setOnClickListener(this);
-        setCalendarLocation4 = (ImageButton) view.findViewById(R.id.setCalendarLocation4);
-        setCalendarLocation4.setOnClickListener(this);
-        setCalendarLocation5 = (ImageButton) view.findViewById(R.id.setCalendarLocation5);
-        setCalendarLocation5.setOnClickListener(this);
-        setCalendarLocation6 = (ImageButton) view.findViewById(R.id.setCalendarLocation6);
-        setCalendarLocation6.setOnClickListener(this);
-        setCalendarLocation7 = (ImageButton) view.findViewById(R.id.setCalendarLocation7);
-        setCalendarLocation7.setOnClickListener(this);
-        setCalendarLocation8 = (ImageButton) view.findViewById(R.id.setCalendarLocation8);
-        setCalendarLocation8.setOnClickListener(this);
-        setCalendarLocation9 = (ImageButton) view.findViewById(R.id.setCalendarLocation9);
-        setCalendarLocation9.setOnClickListener(this);
-        setCalendarLocation10 = (ImageButton) view.findViewById(R.id.setCalendarLocation10);
-        setCalendarLocation10.setOnClickListener(this);
-        setCalendarLocation11 = (ImageButton) view.findViewById(R.id.setCalendarLocation11);
-        setCalendarLocation11.setOnClickListener(this);
-        setCalendarLocation12 = (ImageButton) view.findViewById(R.id.setCalendarLocation12);
-        setCalendarLocation12.setOnClickListener(this);
-
-        // SET ALL REMOVE LOCATION BUTTONS
-        btnRemoveLocation1 = (ImageButton) view.findViewById(R.id.btnRemoveLocation1);
-        btnRemoveLocation1.setOnClickListener(this);
-        btnRemoveLocation2 = (ImageButton) view.findViewById(R.id.btnRemoveLocation2);
-        btnRemoveLocation2.setOnClickListener(this);
-        btnRemoveLocation3 = (ImageButton) view.findViewById(R.id.btnRemoveLocation3);
-        btnRemoveLocation3.setOnClickListener(this);
-        btnRemoveLocation4 = (ImageButton) view.findViewById(R.id.btnRemoveLocation4);
-        btnRemoveLocation4.setOnClickListener(this);
-        btnRemoveLocation5 = (ImageButton) view.findViewById(R.id.btnRemoveLocation5);
-        btnRemoveLocation5.setOnClickListener(this);
-        btnRemoveLocation6 = (ImageButton) view.findViewById(R.id.btnRemoveLocation6);
-        btnRemoveLocation6.setOnClickListener(this);
-        btnRemoveLocation7 = (ImageButton) view.findViewById(R.id.btnRemoveLocation7);
-        btnRemoveLocation7.setOnClickListener(this);
-        btnRemoveLocation8 = (ImageButton) view.findViewById(R.id.btnRemoveLocation8);
-        btnRemoveLocation8.setOnClickListener(this);
-        btnRemoveLocation9 = (ImageButton) view.findViewById(R.id.btnRemoveLocation9);
-        btnRemoveLocation9.setOnClickListener(this);
-        btnRemoveLocation10 = (ImageButton) view.findViewById(R.id.btnRemoveLocation10);
-        btnRemoveLocation10.setOnClickListener(this);
-        btnRemoveLocation11 = (ImageButton) view.findViewById(R.id.btnRemoveLocation11);
-        btnRemoveLocation11.setOnClickListener(this);
-        btnRemoveLocation12 = (ImageButton) view.findViewById(R.id.btnRemoveLocation12);
-        btnRemoveLocation12.setOnClickListener(this);
-
-        // SET ALL TEXT VIEWS FOR LOCATIONS
-        textViewLocation1 = (TextView) view.findViewById(R.id.textViewLocation1);
-        textViewLocation2 = (TextView) view.findViewById(R.id.textViewLocation2);
-        textViewLocation3 = (TextView) view.findViewById(R.id.textViewLocation3);
-        textViewLocation4 = (TextView) view.findViewById(R.id.textViewLocation4);
-        textViewLocation5 = (TextView) view.findViewById(R.id.textViewLocation5);
-        textViewLocation6 = (TextView) view.findViewById(R.id.textViewLocation6);
-        textViewLocation7 = (TextView) view.findViewById(R.id.textViewLocation7);
-        textViewLocation8 = (TextView) view.findViewById(R.id.textViewLocation8);
-        textViewLocation9 = (TextView) view.findViewById(R.id.textViewLocation9);
-        textViewLocation10 = (TextView) view.findViewById(R.id.textViewLocation10);
-        textViewLocation11 = (TextView) view.findViewById(R.id.textViewLocation11);
-        textViewLocation12 = (TextView) view.findViewById(R.id.textViewLocation12);
-        // SET ALL SCROLL'S FOR THE TEXT VIEWS
-        textViewLocation1.setMovementMethod(new ScrollingMovementMethod());
-        textViewLocation2.setMovementMethod(new ScrollingMovementMethod());
-        textViewLocation3.setMovementMethod(new ScrollingMovementMethod());
-        textViewLocation4.setMovementMethod(new ScrollingMovementMethod());
-        textViewLocation5.setMovementMethod(new ScrollingMovementMethod());
-        textViewLocation6.setMovementMethod(new ScrollingMovementMethod());
-        textViewLocation7.setMovementMethod(new ScrollingMovementMethod());
-        textViewLocation8.setMovementMethod(new ScrollingMovementMethod());
-        textViewLocation9.setMovementMethod(new ScrollingMovementMethod());
-        textViewLocation10.setMovementMethod(new ScrollingMovementMethod());
-        textViewLocation11.setMovementMethod(new ScrollingMovementMethod());
-        textViewLocation12.setMovementMethod(new ScrollingMovementMethod());
+    void Creatlists(){
         setlocations.add(setLocation1);
         setlocations.add(setLocation2);
         setlocations.add(setLocation3);
@@ -869,7 +872,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             AllLocationDates.add(new ArrayList<Calendar>());
             YourlocationsStrings.add("");
         }
-        hideAllButFirstLocationFragment(view);
 
 
     }

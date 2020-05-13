@@ -1,6 +1,7 @@
 package com.example.coronakanditaten2020;
 
 import android.os.Bundle;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +25,13 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.Header;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 
 public class ForumFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
@@ -48,8 +57,8 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
     int thePostId;
     int thePostParentId;
 
-    public List<Post>copyList;
-    public List<Post>commentList;
+    public ArrayList<Post>copyList;
+    public ArrayList<Post>commentList;
     public ArrayList<Post>postList;
     private PostListAdapter adapter;
 
@@ -140,6 +149,8 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
     }
 
     public void getComments(Post post) {
+        //run this to get get commants att commantslist
+        // getserverComments(post);
 
         ArrayList<Post> tempPost= new ArrayList<>();
         tempPost.add(new Post("Comment1", "comment1", "23 jan", "Hello1", 0, "comment", 10, 1));
@@ -191,6 +202,8 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
             case R.id.btnMostLiked:
                 postList.clear();
+                //run the statment under whhen you are connected to database
+                //postList=getmostliked()
                 for (Post post : copyList){
                     postList.add(post);
                 }
@@ -226,4 +239,191 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 break;
         }
     }
+
+
+    public void getmostliked(){
+        Call<ArrayList<Post>> getmostliked=((MainActivity)getActivity()).datahandler.clientAPI.getMostlikedpost("");
+        getmostliked.enqueue(new Callback<ArrayList<Post>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
+                if(!response.isSuccessful()) {
+                    System.out.println(response);
+                    Toast.makeText(getContext(), "failed to get post", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    ((MainActivity) getActivity()).datahandler.viewPosts = response.body();
+                    postList = ((MainActivity) getActivity()).datahandler.viewPosts;
+                    adapter.notifyDataSetChanged();
+                    System.out.println("got mosts liked post");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Post>> call, Throwable t) {
+                Toast.makeText(getContext(), "failed to conenct to server", Toast.LENGTH_LONG).show();
+
+            }
+        });
+        }
+
+    public void getserverComments(Post post){
+        Call<ArrayList<Post>> getComments=((MainActivity)getActivity()).datahandler.clientAPI.getAllchildPosts(post.id);
+        getComments.enqueue(new Callback<ArrayList<Post>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
+                if(!response.isSuccessful()) {
+                    System.out.println(response);
+                    Toast.makeText(getContext(), "failed to get post", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    commentList = response.body();
+                    postList = commentList;
+                    adapter.notifyDataSetChanged();
+                    System.out.println("got mosts liked post");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Post>> call, Throwable t) {
+                Toast.makeText(getContext(), "failed to conenct to server", Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
+    public void getuserpost(){
+        Call<ArrayList<Post>> getuserpost=((MainActivity)getActivity()).datahandler.clientAPI.GetOwnPosts(
+                ((MainActivity)getActivity()).datahandler.credentials.encrypt,
+                ((MainActivity)getActivity()).datahandler.credentials.Email);
+        getuserpost.enqueue(new Callback<ArrayList<Post>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
+                if(!response.isSuccessful()) {
+                    System.out.println(response);
+                    Toast.makeText(getContext(), "failed to get post", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    ((MainActivity) getActivity()).datahandler.viewPosts = response.body();
+                    postList = ((MainActivity) getActivity()).datahandler.viewPosts;
+                    adapter.notifyDataSetChanged();
+                    System.out.println("got mosts liked post");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Post>> call, Throwable t) {
+                Toast.makeText(getContext(), "failed to conenct to server", Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
+    public void GetOwnLikedPosts(){
+        Call<ArrayList<Post>> GetOwnLikedPosts=((MainActivity)getActivity()).datahandler.clientAPI.GetOwnLikedPosts(
+                ((MainActivity)getActivity()).datahandler.credentials.encrypt,
+                ((MainActivity)getActivity()).datahandler.credentials.Email);
+        GetOwnLikedPosts.enqueue(new Callback<ArrayList<Post>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
+                if(!response.isSuccessful()) {
+                    System.out.println(response);
+                    Toast.makeText(getContext(), "failed to get post", Toast.LENGTH_LONG).show();
+                }
+                else {
+                ((MainActivity)getActivity()).datahandler.viewPosts=response.body();
+                postList=((MainActivity)getActivity()).datahandler.viewPosts;
+                adapter.notifyDataSetChanged();
+                System.out.println("got mosts liked post");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Post>> call, Throwable t) {
+                Toast.makeText(getContext(), "failed to conenct to server", Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
+    public void sendposttoserver(Post post){
+        Call<Boolean> sendposttoserver=((MainActivity)getActivity()).datahandler.clientAPI.creatpost(
+                ((MainActivity)getActivity()).datahandler.credentials.encrypt,
+                ((MainActivity)getActivity()).datahandler.credentials.Email,post);
+        sendposttoserver.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getContext(), "failed to add post to server", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    ((MainActivity)getActivity()).datahandler.viewPosts.add(post);
+                    postList=((MainActivity)getActivity()).datahandler.viewPosts;
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(getContext(), "failed to conenct to server", Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
+    public void sendanswertoserver(Post post){
+        Call<Boolean> sendanswertoserver=((MainActivity)getActivity()).datahandler.clientAPI.creatanswerpost(
+                ((MainActivity)getActivity()).datahandler.credentials.encrypt,
+                ((MainActivity)getActivity()).datahandler.credentials.Email,post);
+        sendanswertoserver.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getContext(), "failed to add post to server", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    commentList.add(post);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(getContext(), "failed to conenct to server", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void likepost(Post post){
+        Call<Boolean> likepost=((MainActivity)getActivity()).datahandler.clientAPI.likePost(
+                ((MainActivity)getActivity()).datahandler.credentials.encrypt,
+                ((MainActivity)getActivity()).datahandler.credentials.Email,post.id);
+        likepost.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getContext(), "failed to add like to server", Toast.LENGTH_LONG).show();
+                }else {
+                    //to be added when micihiel decides howyou like a post
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(getContext(), "failed to conenct to server", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+    }
+
+
+
+
+
+
+
+
+
+
 }

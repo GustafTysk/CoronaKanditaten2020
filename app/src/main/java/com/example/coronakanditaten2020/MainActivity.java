@@ -84,6 +84,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        // datahandler.credentials=new Credentials(intent.getStringExtra("ema"),intent.getStringExtra("pass"));
         //System.out.println(datahandler.credentials.Email);
        // System.out.println(datahandler.credentials.Password);
+
+        datahandler.getserveruserinfo("");
+        datahandler.getTopPost(100);
         datahandler.getserveruser();
         datahandler.getalllserverocations("");
         datahandler.getuserserverlocations();
