@@ -385,7 +385,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Boolean noClosedMap = true;
         switch (mViewPager.getCurrentItem()){
             case 1:
-                Toast.makeText(MainActivity.this,"There is no back action",Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this,getString(R.string.no_back_action),Toast.LENGTH_LONG).show();
                 break;
             case 5:
                 try {

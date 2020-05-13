@@ -3,10 +3,25 @@
     // VARIOUS
     <string name="app_name">CoronaKanditaten2020</string>
 
+    <string name="your_location">Your Location</string>
+    <string name="username">Username</string>
+    <string name="title">Title</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="text">Text</string>
+    <string name="likes">Likes</string>
+    <string name="category">Category</string>
+    <string name="id">Id</string>
+    <string name="parent_id">ParentId</string>
+    <string name="selected_dates">Selected dates</string>
+
+
+
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
 
     <string name="fail_connect_to_server">Failed to connect to server</string>
+    <string name="no_back_action">There is no back action</string>
+
 
 
     // LOGIN PAGE
@@ -105,6 +120,14 @@
     <string name="btn_previous_page_rs">Back to Report Symptoms</string>
     <string name="btn_add_location">Add another location</string>
 
+    <string name="no_locations_to_add">No locations to add</string>'
+    <string name="fail_add_user_locations">Failed to add user locations, please try again later</string>
+    <string name="success_add_user_locations">Successfully added user locations</string>
+
+    <string name="no_location_added">Fill in Location above before adding another one</string>
+    <string name="max_number_of_locations_reached">Maximum number of locations added</string>
+    <string name="already_empty_location">Fill in empty location above before adding another one</string>
+
     // FORUM PAGE
     <string name="fragment_forum">Forum</string>
 
@@ -118,6 +141,7 @@
 
     <string name="help">Help and tasks </string>
     <string name="recommendation">Recommendations and warnings </string>
+
     <string-array name = "numbers">
         <item>Total symptoms</item>
         <item>Symptoms per day</item>

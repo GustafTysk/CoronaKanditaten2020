@@ -295,10 +295,10 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                             if (!response.isSuccessful()) {
                                 System.out.println(userLocations.get(0).latitude + "latitude");
                                 System.out.println(userLocations.get(0).longitude + "long");
-                                Toast.makeText(getContext(), "failed to add user try again later", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), getString(R.string.fail_add_user_locations), Toast.LENGTH_LONG).show();
                                 System.out.println("tja");
                             } else {
-                                Toast.makeText(getContext(), "sucesfully added user", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), getString(R.string.success_add_user_locations), Toast.LENGTH_LONG).show();
                                 System.out.println("yja");
                                 ((MainActivity) getActivity()).datahandler.Userlocations = userLocations;
                                 ((MainActivity) getActivity()).setViewPager(1);
@@ -310,7 +310,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                         @Override
                         public void onFailure(Call<Boolean> call, Throwable t) {
                             System.out.println(t);
-                            Toast.makeText(getContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
 
                         }
                     });
@@ -321,7 +321,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                         @Override
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                             if (!response.isSuccessful() || !response.body()) {
-                                Toast.makeText(getContext(), "failed to add user try again later", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), getString(R.string.fail_add_user_locations), Toast.LENGTH_LONG).show();
 
                             } else {
 
@@ -330,9 +330,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
 
                                         if (!response.isSuccessful()) {
-                                            Toast.makeText(getContext(), "failed to add user try again later", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getContext(), getString(R.string.fail_add_user_locations), Toast.LENGTH_LONG).show();
                                         } else {
-                                            Toast.makeText(getContext(), "sucesfully added user", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getContext(), getString(R.string.success_add_user_locations), Toast.LENGTH_LONG).show();
 
                                             System.out.println("sdfdsfds");
                                             System.out.println(AlllocationDecided.get(2));
@@ -349,7 +349,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                                     @Override
                                     public void onFailure(Call<Boolean> call, Throwable t) {
                                         System.out.println(t);
-                                        Toast.makeText(getContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
 
                                     }
                                 });
@@ -362,7 +362,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                         @Override
                         public void onFailure(Call<Boolean> call, Throwable t) {
                             System.out.println(t);
-                            Toast.makeText(getContext(), "failed to connect to server", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
 
                         }
                     });
@@ -486,7 +486,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
         reportedLocation = googleMap.addMarker(new MarkerOptions()
                 .position(yourLocation)
-                .title("Your Location")
+                .title(getString(R.string.your_location))
                 .draggable(true));
         googleMap.setOnMapClickListener(this);
         System.out.println(locations.get(currentLocationReport));
@@ -506,7 +506,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 }
                         AllLocationDates.set(location-1,calendars);
                         locationDateStrings.set(location-1,tempLocationString);
-                        Toast.makeText(getContext(),"Selected Dates\n" + tempLocationString, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),getString(R.string.selected_dates)+ "\n" + tempLocationString, Toast.LENGTH_LONG).show();
             }
         };
 
@@ -595,12 +595,12 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         Boolean hasEmptyLocation = false;
         int locationsvisible=numberOfVisibleLocations();
         if (currentLocationReport==0){
-            Toast.makeText(getContext(),"Fill in Location above before adding another one", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),getString(R.string.no_location_added), Toast.LENGTH_LONG).show();
             return;
 
         }
         if(locationsvisible==Maxlocations){
-            Toast.makeText(getContext(),"Maximum number of locations added", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),getString(R.string.max_number_of_locations_reached), Toast.LENGTH_LONG).show();
             return;
         }
         if(currentLocationReport>0&&currentLocationReport<Maxlocations){
@@ -618,7 +618,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 AlllocationVisible.set(locationsvisible,true);
             }
             else{
-                Toast.makeText(getContext(), "Choose location and date for previous empty location first", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getString(R.string.already_empty_location), Toast.LENGTH_LONG).show();
             }
 
         }
