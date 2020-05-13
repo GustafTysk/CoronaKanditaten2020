@@ -80,7 +80,7 @@
             android:text="@string/gender_other" />
     </RadioGroup>
 
-    <EditText
+    <TextView
         android:id="@+id/textAge"
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -88,9 +88,11 @@
         android:background="@drawable/edittext_outline"
         android:drawableLeft="@drawable/ageicon"
         android:ems="12"
+        android:gravity="center_vertical"
         android:hint="@string/hint_age"
         android:inputType="numberSigned"
         android:paddingLeft="10dip"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/radioGroupGender"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupGender" />
 
