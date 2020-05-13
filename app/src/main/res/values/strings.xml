@@ -47,7 +47,7 @@
     <string name="gender_male">Male</string>
     <string name="gender_female">Female</string>
     <string name="gender_other">Other</string>
-    <string name="hint_age">Age</string>
+    <string name="hint_age">Select date of birth</string>
     <string name="btn_register">Register</string>
     <string name="btn_to_login">Back to Login</string>
 
@@ -105,10 +105,12 @@
     <string name="per_day_symptoms">Symptoms per day</string>
 
     <string name="age_years">Age (years)</string>
-    <string name="number_of_users">Number of registered users</string>
+    <string name="number_of_female_users">Female</string>
+    <string name="number_of_male_users">Male</string>
+    <string name="number_of_other_users">Other</string>
     <string name="age_0_18">0-18</string>
     <string name="age_19_40">19-40</string>
-    <string name="age_41_64">41_64</string>
+    <string name="age_41_64">41-64</string>
     <string name="age_over_65">65+</string>
 
     <string-array name = "numbers">

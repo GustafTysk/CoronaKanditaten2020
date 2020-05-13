@@ -1,12 +1,21 @@
 package com.example.coronakanditaten2020;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+
+import java.util.Calendar;
 import java.util.Date;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,10 +48,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private EditText textUsername;
     private EditText textEmail;
-    private EditText textAge;
+    private TextView textAge;
     private EditText textPassword;
     private RadioButton lastButton;
-    Datahandler datahandler=new Datahandler();
+    Datahandler datahandler = new Datahandler();
+
+    //Datepicker calendar
+    private DatePickerDialog.OnDateSetListener onDateSetListener;
+    private String textViewDate;
+    private Calendar cal;
+    private Calendar today;
+    private Calendar dob;
+    private int year, month, day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +72,54 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btnRegister.setOnClickListener(this);
 
         textEmail = (EditText) findViewById(R.id.textEmail);
-        textAge = (EditText) findViewById(R.id.textAge);
+        textAge = (TextView) findViewById(R.id.textAge);
         textUsername = (EditText) findViewById(R.id.textUsername);
         textPassword = (EditText) findViewById(R.id.textPassword);
         lastButton = (RadioButton) findViewById(R.id.radio_other);
 
+        textAge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cal = Calendar.getInstance();
+                year = cal.get(Calendar.YEAR);
+                month = cal.get(Calendar.MONTH);
+                day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(RegisterActivity.this,
+                        R.style.Theme_AppCompat_DayNight_Dialog_MinWidth,
+                        onDateSetListener,year, month, day);
+                dialog.getDatePicker().setMaxDate(cal.getTimeInMillis());
+                dialog.show();
+            }
+        });
+        onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                month = month + 1;
+                cal = Calendar.getInstance();
+                cal.set(Calendar.YEAR, year);
+                cal.set(Calendar.MONTH, month);
+                cal.set(Calendar.DAY_OF_MONTH, day);
+                textViewDate = day + "/" + month + "/" + year;
+                textAge.setText(textViewDate);
+                calculateAge(cal.getTimeInMillis());
+            }
+        };
     }
+
+
+    int calculateAge(long date){
+        dob = Calendar.getInstance();
+        dob.setTimeInMillis(date);
+        today = Calendar.getInstance();
+        age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+        if(today.get(Calendar.DAY_OF_MONTH) < dob.get(Calendar.DAY_OF_MONTH)){
+            age--;
+        }
+        System.out.println("Age for selected date: " + age);
+        return age;
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -75,7 +134,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 //GET INFORMATION AND CREATE NEW USER
                 username = textUsername.getText().toString();
                 checkUsername(username);
-                String ageString = (String) textAge.getText().toString();
+                String ageString = "" + textAge.getText();
                 checkAge(ageString);
 
                 password = textPassword.getText().toString();
@@ -163,8 +222,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void checkAge(String givenAge) {
         if (givenAge.length() > 0) {
             ageCorrect = true;
-            age = Integer.valueOf(givenAge);
-
         }
         else {
             ageCorrect = false;

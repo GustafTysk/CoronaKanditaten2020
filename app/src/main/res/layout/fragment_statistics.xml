@@ -94,13 +94,23 @@
         app:layout_constraintEnd_toStartOf="@+id/textViewStatistics"
         app:layout_constraintTop_toBottomOf="@+id/textViewStatistics" />
 
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Number of reported cases:"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
     <TableLayout
         android:id="@+id/tableLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+        app:layout_constraintTop_toBottomOf="@+id/textView22">
 
         <TableRow
             android:id="@+id/tableRow1"
@@ -111,6 +121,7 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#D3D3D3"
                 android:padding="10sp"
                 android:text="@string/age_years"
                 android:textColor="@android:color/black" />
@@ -119,8 +130,28 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:padding="10sp"
-                android:text="@string/number_of_users"
+                android:text="@string/number_of_female_users"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#D3D3D3"
+                android:gravity="center"
+                android:padding="10sp"
+                android:text="@string/number_of_male_users"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10sp"
+                android:text="@string/number_of_other_users"
                 android:textColor="@android:color/black" />
         </TableRow>
 
@@ -130,7 +161,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10sp"
@@ -138,11 +169,25 @@
                 android:textColor="@android:color/black" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#D3D3D3"
                 android:padding="10sp"
                 android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#D3D3D3"
+                android:padding="10sp" />
 
         </TableRow>
 
@@ -152,19 +197,33 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#D3D3D3"
                 android:padding="10sp"
                 android:text="@string/age_19_40"
                 android:textColor="@android:color/black" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10sp"
                 android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#D3D3D3"
+                android:padding="10sp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp" />
 
         </TableRow>
 
@@ -174,7 +233,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10sp"
@@ -182,11 +241,25 @@
                 android:textColor="@android:color/black" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#D3D3D3"
                 android:padding="10sp"
                 android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#D3D3D3"
+                android:padding="10sp" />
 
         </TableRow>
 
@@ -196,19 +269,33 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#D3D3D3"
                 android:padding="10sp"
                 android:text="@string/age_over_65"
                 android:textColor="@android:color/black" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10sp"
                 android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#D3D3D3"
+                android:padding="10sp" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp" />
 
         </TableRow>
 

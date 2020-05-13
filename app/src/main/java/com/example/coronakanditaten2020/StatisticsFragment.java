@@ -78,6 +78,21 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     TextView textView3;
     TextView textView4;
     TextView textView5;
+    TextView textView6;
+    TextView textView7;
+    TextView textView8;
+    TextView textView9;
+    TextView textView10;
+    TextView textView11;
+    TextView textView12;
+    TextView textView13;
+    TextView textView14;
+    TextView textView15;
+    TextView textView16;
+    TextView textView17;
+    TextView textView18;
+    TextView textView19;
+    TextView textView20;
 
     @Nullable
     @Override
