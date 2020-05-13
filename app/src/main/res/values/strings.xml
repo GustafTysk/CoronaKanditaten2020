@@ -3,10 +3,26 @@
     // VARIOUS
     <string name="app_name">CoronaKanditaten2020</string>
 
+    <string name="your_location">Your Location</string>
+    <string name="username">Username</string>
+    <string name="title">Title</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="text">Text</string>
+    <string name="likes">Likes</string>
+    <string name="category">Category</string>
+    <string name="id">Id</string>
+    <string name="parent_id">ParentId</string>
+    <string name="selected_dates">Selected dates</string>
+
+
+
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
 
     <string name="fail_connect_to_server">Failed to connect to server</string>
+    <string name="no_back_action">There is no back action</string>
+
+    <string name="btn_cancel">Cancel</string>
 
 
     // LOGIN PAGE
@@ -51,12 +67,16 @@
     // START PAGE
     <string name="page_name_start_page">Start page</string>
     <string name="log_out">Log Out</string>
+    <string name="success_logout">Logged out successfully</string>
 
     // MY SETTINGS PAGE
     <string name="fragment_my_settings">Settings</string>
 
     // STATISTICS PAGE
     <string name="fragment_statistics">Statistics</string>
+
+    <string name="total_symptoms">Total symptoms</string>
+    <string name="per_day_symptoms">Symptoms per day</string>
 
     <string name="age_years">Age (years)</string>
     <string name="number_of_female_users">Female</string>
@@ -66,6 +86,11 @@
     <string name="age_19_40">19-40</string>
     <string name="age_41_64">41-64</string>
     <string name="age_over_65">65+</string>
+
+    <string-array name = "numbers">
+        <item>Total symptoms</item>
+        <item>Symptoms per day</item>
+    </string-array>
 
     // HEATMAP PAGE
     <string name="fragment_heatmap">Heatmap</string>
@@ -106,6 +131,15 @@
     <string name="btn_update_locations">Upload locations to database</string>
     <string name="btn_previous_page_rs">Back to Report Symptoms</string>
     <string name="btn_add_location">Add another location</string>
+    <string name="btn_commit_location">Set Location</string>
+
+    <string name="no_locations_to_add">No locations to add</string>'
+    <string name="fail_add_user_locations">Failed to add user locations, please try again later</string>
+    <string name="success_add_user_locations">Successfully added user locations</string>
+
+    <string name="no_location_added">Fill in Location above before adding another one</string>
+    <string name="max_number_of_locations_reached">Maximum number of locations added</string>
+    <string name="already_empty_location">Fill in empty location above before adding another one</string>
 
     // FORUM PAGE
     <string name="fragment_forum">Forum</string>
@@ -118,12 +152,17 @@
     <string name="post_hint_username">Username</string>
     <string name="btn_post">Post</string>
 
+    <string name="fail_to_get_post">Failed to get post</string>
+    <string name="fail_to_add_post">Failed to add post</string>
+    <string name="fail_to_add_like">Failed to add like</string>
+
+    <string name="success_to_get_most_liked_post">Got most liked post</string>
+
     <string name="help">Help and tasks </string>
     <string name="recommendation">Recommendations and warnings </string>
-    <string-array name = "numbers">
-        <item>Total symptoms</item>
-        <item>Symptoms per day</item>
-    </string-array>
+
+
+
 
 
 </resources>

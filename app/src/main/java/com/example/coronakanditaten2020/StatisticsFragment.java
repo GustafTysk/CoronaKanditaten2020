@@ -749,22 +749,22 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getGridLabelRenderer().setNumVerticalLabels(largest + 1);
         graph.getGridLabelRenderer().setHumanRounding(false);
-        graph.setTitle("Symptoms per day");
+        graph.setTitle(getString(R.string.per_day_symptoms));
         graph.setTitleTextSize(80);
 
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.MIDDLE);
         graph.getLegendRenderer().setTextSize(35f);
 
-        series.setTitle("Diarrhea");
-        series2.setTitle("Runny Nose");
-        series3.setTitle("Tiredness");
-        series4.setTitle("Fever");
-        series5.setTitle("Sore Throat");
-        series6.setTitle("Nasal Congestion");
-        series7.setTitle("Cough");
-        series8.setTitle("Headache");
-        series9.setTitle("Breathing difficulties");
+        series.setTitle(getString(R.string.symptom_diarrhea));
+        series2.setTitle(getString(R.string.symptom_runny_nose));
+        series3.setTitle(getString(R.string.symptom_tiredness));
+        series4.setTitle(getString(R.string.symptom_fever));
+        series5.setTitle(getString(R.string.symptom_sore_throat));
+        series6.setTitle(getString(R.string.symptom_nasal_congestion));
+        series7.setTitle(getString(R.string.symptom_cough));
+        series8.setTitle(getString(R.string.symptom_headache));
+        series9.setTitle(getString(R.string.symptom_breathing));
         series.setColor(Color.BLACK);
         series2.setColor(Color.GREEN);
         series3.setColor(Color.YELLOW);
@@ -798,21 +798,21 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
         graph.getGridLabelRenderer().setNumVerticalLabels(largest2 + 1);
         graph.getGridLabelRenderer().setHumanRounding(false);
-        graph.setTitle("Total symptoms");
+        graph.setTitle(getString(R.string.total_symptoms));
         graph.setTitleTextSize(80);
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.MIDDLE);
         graph.getLegendRenderer().setTextSize(35f);
 
-        seriesb.setTitle("Diarrhea");
-        series2b.setTitle("Runny Nose");
-        series3b.setTitle("Tiredness");
-        series4b.setTitle("Fever");
-        series5b.setTitle("Sore Throat");
-        series6b.setTitle("Nasal Congestion");
-        series7b.setTitle("Cough");
-        series8b.setTitle("Headache");
-        series9b.setTitle("Breathing difficulties");
+        seriesb.setTitle(getString(R.string.symptom_diarrhea));
+        series2b.setTitle(getString(R.string.symptom_runny_nose));
+        series3b.setTitle(getString(R.string.symptom_tiredness));
+        series4b.setTitle(getString(R.string.symptom_fever));
+        series5b.setTitle(getString(R.string.symptom_sore_throat));
+        series6b.setTitle(getString(R.string.symptom_nasal_congestion));
+        series7b.setTitle(getString(R.string.symptom_cough));
+        series8b.setTitle(getString(R.string.symptom_headache));
+        series9b.setTitle(getString(R.string.symptom_breathing));
         seriesb.setColor(Color.BLACK);
         series2b.setColor(Color.GREEN);
         series3b.setColor(Color.YELLOW);
@@ -847,7 +847,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         headacheBox.setChecked(true);
         noSelectedDates = true;
 
-        if(text.equals("Symptoms per day")){
+        if(text.equals(getString(R.string.per_day_symptoms))){
             createCalendar();
             clearGraph();
             makeGraphLines1();

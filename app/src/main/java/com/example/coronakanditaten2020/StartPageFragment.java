@@ -77,7 +77,7 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.btnLogout:
                 intent = new Intent(getContext(), LoginActivity.class);
-                Toast.makeText(getContext(), "Logged out successfully", Toast.LENGTH_LONG);
+                Toast.makeText(getContext(), getString(R.string.success_logout), Toast.LENGTH_LONG);
                 break;
 
             default:
