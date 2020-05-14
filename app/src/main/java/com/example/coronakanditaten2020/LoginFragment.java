@@ -31,7 +31,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
     String Email;
     EditText textPassword;
     EditText textEmail;
-    Datahandler datahandler;
 
     private TextView textViewGoToResetPassword;
 
@@ -54,7 +53,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
         textViewGoToResetPassword = (TextView) view.findViewById(R.id.textViewGoToResetPassword);
         textViewGoToResetPassword.setOnTouchListener(this);
 
-        datahandler=new Datahandler();
+
 
         return view;
     }
@@ -74,8 +73,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
             case R.id.btnLogin:
                 Email=textEmail.getText().toString();
                 Password=textPassword.getText().toString();
-                datahandler.credentials=new Credentials(Email,Password);
-                Call<Boolean> login=datahandler.clientAPI.login(datahandler.credentials.encrypt,datahandler.credentials.Email,datahandler.credentials.Password);
+                ((LoginActivity)getActivity()).datahandler.credentials=new Credentials(Email,Password);
+                Call<Boolean> login=((LoginActivity)getActivity()).datahandler.clientAPI.login(((MainActivity)getActivity()).datahandler.credentials.encrypt,
+                        ((LoginActivity)getActivity()).datahandler.credentials.Email,
+                        ((LoginActivity)getActivity()).datahandler.credentials.Password);
                 login.enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -93,7 +94,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
 
                         }
                         else{
-                            Toast.makeText(getContext(),"error with server", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),getString(R.string.error_with_server), Toast.LENGTH_SHORT).show();
                         }
 
 

@@ -18,7 +18,7 @@
 
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
-
+    <string name="error_with_server"> error with server</string>
     <string name="fail_connect_to_server">Failed to connect to server</string>
     <string name="no_back_action">There is no back action</string>
 
@@ -41,6 +41,9 @@
 
     <string name="btn_to_register_page">Register user</string>
 
+
+
+
     // REGISTER PAGE
     <string name="page_name_register">Register user</string>
     <string name="hint_username">Username</string>
@@ -62,7 +65,10 @@
     // RESET PASSWORD PAGE
     <string name="page_name_reset_password">Reset Password</string>
     <string name="btn_send_code">send confirmation code to email</string>
+    <string name="btn_resend_code">resend confirmation code to email</string>
+    <string name="sent_email_toast"> An code hase been sent to your email</string>
     <string name="hint_confirmation_code">Confirmation code</string>
+    <string name="wrong_email">No user connected to this Email</string>
 
     // START PAGE
     <string name="page_name_start_page">Start page</string>

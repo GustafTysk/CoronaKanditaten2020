@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FragmentTransaction transaction;
     ResetPasswordFragment resetPasswordFragment = new ResetPasswordFragment();
     LoginFragment loginFragment = new LoginFragment();
+    Datahandler datahandler;
 
 
     private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
@@ -43,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-
+        datahandler=new Datahandler();
         mViewPager = (NonSwipeableViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
         setViewPager(1);
