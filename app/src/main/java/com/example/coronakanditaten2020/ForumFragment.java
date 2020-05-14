@@ -94,10 +94,14 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         postList = new ArrayList<>(topPost);
         copyList = new ArrayList<>(topPost);
 
+        Collections.reverse(postList);
+
         adapter = new PostListAdapter(getContext(), R.layout.adapter_view_layout, postList);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(this);
+
+        removePosts();
 
         searchFilter.addTextChangedListener(new TextWatcher() {
             @Override
@@ -143,13 +147,14 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
     }
 
-    public void removeComments() {
-        postList.clear();
-        for (Post post: copyList) {
-            if(post.getParentId() == 0) {
-                postList.add(post);
+    public void removePosts() {
+        for (Post post: postList) {
+            if(post.getCategory() == "remove") {
+                postList.remove(post);
+                copyList.remove(post);
             }
         }
+        adapter.notifyDataSetChanged();
     }
 
     public void getComments(Post post) {
@@ -185,18 +190,25 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 String timestamp = "3 jan";
                 String message = messageInput.getText().toString();
                 if(thePostId != 0) {
-                    Post newWrittenPost = new Post(username,email ,title, timestamp, message, 0, "top", 30, thePostParentId);
+                    Post newWrittenPost = new Post(username,email ,title, timestamp, message, 0, "comment", 30, thePostParentId);
                     postList.add(newWrittenPost);
                     copyList.add(newWrittenPost);
                     //sendanswertoserver(newWrittenPost);
 
+
                 }
                 else{
-                    Post newWrittenPost = new Post(username, email,title, timestamp, message, 0, "comment", 30, 0);
+                    Post newWrittenPost = new Post(username, email,title, timestamp, message, 0, "top", 30, 0);
                     System.out.println(newWrittenPost.printInformation());
+                    postList.clear();
+                    for(Post post : copyList){
+                        postList.add(post);
+                    }
                     postList.add(newWrittenPost);
+                    Collections.reverse(postList);
                     copyList.add(newWrittenPost);
                     // sendposttoserver(newWrittenPost);
+
 
                 }
                 adapter.notifyDataSetChanged();
@@ -210,9 +222,14 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
             case R.id.btnMostLiked:
                 postList.clear();
+                for(Post post : copyList){
+                    postList.add(post);
+                }
+                Collections.sort(postList, Post.DESCENDING_COMPARATOR);
+                adapter.notifyDataSetChanged();
                 //run the statment under whhen you are connected to database
                 //postList=getmostliked()
-                getmostliked();
+                //getmostliked();
 
                 break;
 
@@ -238,6 +255,9 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 for (Post post: copyList) {
                     postList.add(post);
                 }
+                removePosts();
+
+                Collections.reverse(postList);
 
                 adapter.notifyDataSetChanged();
                 break;
