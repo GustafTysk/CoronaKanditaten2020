@@ -26,7 +26,8 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
         setPreferencesFromResource(R.xml.fragment_my_settings, rootKey);
 
         notificationsPreference = findPreference("notifications");
-        usernamePreference = findPreference("signature");
+        usernamePreference = findPreference("username");
+
         removeUserLocationsPreference = findPreference("remove_user_locations");
         removeUserLocationsPreference.setOnPreferenceClickListener(this);
         removeUserPostsPreference = findPreference("remove_user_posts");
@@ -46,6 +47,10 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
                     Toast.makeText(getContext(),"Notifications disabled", Toast.LENGTH_SHORT);
                 }
                 break;
+            case "username":
+                changeUsername("username");
+                break;
+
         }
     }
 
@@ -98,6 +103,23 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
         }
 
         return false;
+    }
+
+
+    private void changeUsername(String key){
+        if (key.equals("username")){
+            if (usernamePreference instanceof EditTextPreference){
+                EditTextPreference editTextPreference =  (EditTextPreference)usernamePreference;
+                if (editTextPreference.getText().trim().length() > 0){
+                    String newUsername = editTextPreference.getText();
+                    editTextPreference.setSummary(getString(R.string.on_changed_username) + editTextPreference.getText());
+
+                    // TODO set USERS username = newUsername
+                }else{
+                    editTextPreference.setSummary(getString(R.string.invalid_username));
+                }
+            }
+        }
     }
 
     public void removeUserLocations(){
