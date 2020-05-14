@@ -100,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 cal.set(Calendar.YEAR, year);
                 cal.set(Calendar.MONTH, month);
                 cal.set(Calendar.DAY_OF_MONTH, day);
-                textViewDate = day + "/" + month + "/" + year;
+                textViewDate = year + "/" + month + "/" + day;
                 textAge.setText(textViewDate);
                 calculateAge(cal.getTimeInMillis());
             }

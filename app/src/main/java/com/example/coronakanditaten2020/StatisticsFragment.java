@@ -40,6 +40,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private Button btnStatisticsToStart;
     private Button btnStatisticsToHeatmap;
     private ArrayList<Location> Locations = new ArrayList<Location>();
+    private ArrayList<User> Users = new ArrayList<User>();
 
     public CheckBox diarrheaBox, runnyNoseBox, nasalConBox, headacheBox, throatBox, breathingDiffBox, tirednessBox, coughBox, feverBox;
 
@@ -55,7 +56,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private int diarrhea29, diarrhea30, diarrhea31, diarrhea32, runnyNose29, runnyNose30, runnyNose31, runnyNose32, nasalCongestion29, nasalCongestion30, nasalCongestion31,
             nasalCongestion32, headache29, headache30, headache31, headache32, throat29, throat30, throat31, throat32, breathing29, breathing30, breathing31, breathing32,
             tiredness29, tiredness30, tiredness31, tiredness32, cough29, cough30, cough31, cough32, fever29, fever30, fever31, fever32, largest, largest2, diarrhea, nasalCongestion,
-            breathing, headache, fever, cough, tiredness, runnyNose, throat;
+            breathing, headache, fever, cough, tiredness, runnyNose, throat, maleAge0To18, maleAge19To40, maleAge41To64, maleAge65Plus, femaleAge0To18, femaleAge19To40, femaleAge41To64,
+            femaleAge65Plus, otherAge0To18, otherAge19To40, otherAge41To64, otherAge65Plus;
 
     //CALENDAR
     private Boolean noSelectedDates = true;
@@ -68,31 +70,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     //TABLE VIEW
     TableLayout tableLayout;
-    TableRow tableRow1;
-    TableRow tableRow2;
-    TableRow tableRow3;
-    TableRow tableRow4;
-    TableRow tableRow5;
-    TextView textView1;
-    TextView textView2;
-    TextView textView3;
-    TextView textView4;
-    TextView textView5;
-    TextView textView6;
-    TextView textView7;
-    TextView textView8;
-    TextView textView9;
-    TextView textView10;
-    TextView textView11;
-    TextView textView12;
-    TextView textView13;
-    TextView textView14;
-    TextView textView15;
-    TextView textView16;
-    TextView textView17;
-    TextView textView18;
-    TextView textView19;
-    TextView textView20;
+    TableRow tableRow1, tableRow2, tableRow3, tableRow4, tableRow5;
+    TextView textView1, textView2, textView3, textView4, textView5, textView6, textView7, textView8, textView9, textView10,
+    textView11, textView12, textView13, textView14, textView15, textView16, textView17, textView18, textView19, textView20;
 
     @Nullable
     @Override
@@ -125,6 +105,56 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        textView1 = (TextView) view.findViewById(R.id.textView1);
+        textView2 = (TextView) view.findViewById(R.id.textView2);
+        textView3 = (TextView) view.findViewById(R.id.textView3);
+        textView4 = (TextView) view.findViewById(R.id.textView4);
+        textView5 = (TextView) view.findViewById(R.id.textView5);
+        textView6 = (TextView) view.findViewById(R.id.textView6);
+        textView7 = (TextView) view.findViewById(R.id.textView7);
+        textView8 = (TextView) view.findViewById(R.id.textView8);
+        textView9 = (TextView) view.findViewById(R.id.textView9);
+        textView10 = (TextView) view.findViewById(R.id.textView10);
+        textView11 = (TextView) view.findViewById(R.id.textView11);
+        textView12 = (TextView) view.findViewById(R.id.textView12);
+        textView13 = (TextView) view.findViewById(R.id.textView13);
+        textView14 = (TextView) view.findViewById(R.id.textView14);
+        textView15 = (TextView) view.findViewById(R.id.textView15);
+        textView16 = (TextView) view.findViewById(R.id.textView16);
+        textView17 = (TextView) view.findViewById(R.id.textView17);
+        textView18 = (TextView) view.findViewById(R.id.textView18);
+        textView19 = (TextView) view.findViewById(R.id.textView19);
+        textView20 = (TextView) view.findViewById(R.id.textView20);
+
+
+        User user = new User("Tjalexander1", "alewik97@gmail.com", 15, "male", "IDFJJKdjk", "2020-04-29");
+        Users.add(user);
+        User user2 = new User("Tjalexander1", "alewik97@gmail.com", 25, "female", "IDFJJKdjk", "2020-04-29");
+        Users.add(user2);
+        User user3 = new User("Tjalexander1", "alewik97@gmail.com", 9, "other", "IDFJJKdjk", "2020-04-29");
+        Users.add(user3);
+        User user4 = new User("Tjalexander1", "alewik97@gmail.com", 69, "male", "IDFJJKdjk", "2020-04-29");
+        Users.add(user4);
+        User user5 = new User("Tjalexander1", "alewik97@gmail.com", 54, "other", "IDFJJKdjk", "2020-04-29");
+        Users.add(user5);
+        User user6 = new User("Tjalexander1", "alewik97@gmail.com", 30, "female", "IDFJJKdjk", "2020-04-29");
+        Users.add(user6);
+        User user7 = new User("Tjalexander1", "alewik97@gmail.com", 37, "female", "IDFJJKdjk", "2020-04-29");
+        Users.add(user7);
+        User user8 = new User("Tjalexander1", "alewik97@gmail.com", 82, "male", "IDFJJKdjk", "2020-04-29");
+        Users.add(user8);
+        User user9 = new User("Tjalexander1", "alewik97@gmail.com", 91, "other", "IDFJJKdjk", "2020-04-29");
+        Users.add(user9);
+        User user10 = new User("Tjalexander1", "alewik97@gmail.com", 23, "female", "IDFJJKdjk", "2020-04-29");
+        Users.add(user10);
+        User user11 = new User("Tjalexander1", "alewik97@gmail.com", 1, "male", "IDFJJKdjk", "2020-04-29");
+        Users.add(user11);
+        User user12 = new User("Tjalexander1", "alewik97@gmail.com", 65, "female", "IDFJJKdjk", "2020-04-29");
+        Users.add(user12);
+
+
+
         Location location = new Location("59.858562", "17.638927", "2020-04-29", 0, 0, 2, 0, 3, 0, 1, 1, 0, 2, "2020-04-31");
         Locations.add(location);
         Location location2 = new Location("59.858562", "17.638927", "2020-05-01", 1, 2, 1, 0, 3, 2, 1, 3, 2, 2, "2020-04-30");
@@ -165,7 +195,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             addAllSeries2();
             designSeriesb();
         }
-
+        countTable();
+        fillTable();
         return view;
     }
 
@@ -867,4 +898,67 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    public void countTable() {
+        for(User user: Users){
+            if(user.gender.equals("male")){
+                if(user.age >= 0 && user.age < 19){
+                    maleAge0To18 += 1;
+                }
+                if(user.age > 18 && user.age < 41){
+                    maleAge19To40 += 1;
+                }
+                if(user.age > 40 && user.age < 65){
+                    maleAge41To64 += 1;
+                }
+                if(user.age > 64){
+                    maleAge65Plus += 1;
+                }
+            }
+            if(user.gender.equals("female")){
+                if(user.age >= 0 && user.age < 19){
+                    femaleAge0To18 += 1;
+                }
+                if(user.age > 18 && user.age < 41){
+                    femaleAge19To40 += 1;
+                }
+                if(user.age > 40 && user.age < 65){
+                    femaleAge41To64 += 1;
+                }
+                if(user.age > 64){
+                    femaleAge65Plus += 1;
+                }
+            }
+            if(user.gender.equals("other")){
+                if(user.age >= 0 && user.age < 19){
+                    otherAge0To18 += 1;
+                }
+                if(user.age > 18 && user.age < 41){
+                    otherAge19To40 += 1;
+                }
+                if(user.age > 40 && user.age < 65){
+                    otherAge41To64 += 1;
+                }
+                if(user.age > 64){
+                    otherAge65Plus += 1;
+                }
+            }
+
+        }
+    }
+    public void fillTable() {
+        textView6.setText(String.valueOf(femaleAge0To18));
+        textView7.setText(String.valueOf(maleAge0To18));
+        textView8.setText(String.valueOf(otherAge0To18));
+        textView10.setText(String.valueOf(femaleAge19To40));
+        textView11.setText(String.valueOf(maleAge19To40));
+        textView12.setText(String.valueOf(otherAge19To40));
+        textView14.setText(String.valueOf(femaleAge41To64));
+        textView15.setText(String.valueOf(maleAge41To64));
+        textView16.setText(String.valueOf(otherAge41To64));
+        textView18.setText(String.valueOf(femaleAge65Plus));
+        textView19.setText(String.valueOf(maleAge65Plus));
+        textView20.setText(String.valueOf(otherAge65Plus));
+    }
+
 }
