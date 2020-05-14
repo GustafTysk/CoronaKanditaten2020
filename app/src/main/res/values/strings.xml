@@ -59,6 +59,12 @@
     <string name="invalid_gender">Invalid Gender, please select your gender</string>
     <string name="invalid_age">Invalid Age, please enter your age</string>
 
+    <string name="verify_email">Verify email</string>
+    <string name="verify_email_text">Enter verification code\nsent to your email</string>
+    <string name="hint_verification_code">Verification code</string>
+    <string name="btn_verify">Verify</string>
+    <string name="error_wrong_code">Wrong code</string>
+
     <string name="fail_create_user">Unable to create user</string>
     <string name="success_create_user">Successfully created new user</string>
 
@@ -141,9 +147,9 @@
 
     <string name="symptom_fever">Fever</string>
     <string name="symptom_cough">Cough</string>
-    <string name="symptom_breathing">Difficulty\nBreathing</string>
+    <string name="symptom_breathing">Difficulty Breathing</string>
     <string name="symptom_sore_throat">Sore Throat</string>
-    <string name="symptom_nasal_congestion">Nasal\nCongestion</string>
+    <string name="symptom_nasal_congestion">Nasal Congestion</string>
     <string name="symptom_runny_nose">Runny Nose</string>
     <string name="symptom_tiredness">Tiredness</string>
     <string name="symptom_headache">Headache</string>
