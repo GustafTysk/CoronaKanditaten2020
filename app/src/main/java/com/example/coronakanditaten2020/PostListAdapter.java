@@ -31,6 +31,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     private int lastPostion = -1;
     private int likes;
     String title;
+    String category;
     public ArrayList<Integer>idList = new ArrayList<Integer>();
 
     static class ViewHolder {
@@ -41,7 +42,9 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         TextView category;
         LinearLayout postTopSection;
         LinearLayout postBottomSection;
+        LinearLayout postWhole;
         Button postLikeButton;
+        Button postButtonRemove;
 
     }
 
@@ -59,7 +62,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         String timestamp = getItem(position).getTimestamp();
         String text = getItem(position).getText();
         likes = getItem(position).getLikes();
-        String category = getItem(position).getCategory();
+        category = getItem(position).getCategory();
         int id = getItem(position).getId();
         int parentId = getItem(position).getParentId();
 
@@ -76,8 +79,25 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             holder.category = (TextView) convertView.findViewById(R.id.postCategory);
             holder.text = (TextView) convertView.findViewById(R.id.postMessage);
             holder.likesShow = (TextView) convertView.findViewById(R.id.postLikes);
+            holder.postWhole = (LinearLayout) convertView.findViewById(R.id.postWhole);
             holder.postTopSection = (LinearLayout) convertView.findViewById(R.id.postTopSection);
             holder.postBottomSection = (LinearLayout) convertView.findViewById(R.id.postBottomSection);
+
+            if(getItem(position).getId() == 30){
+                holder.postButtonRemove = (Button) convertView.findViewById(R.id.postButtonRemove);
+                holder.postButtonRemove.setVisibility(convertView.VISIBLE);
+                holder.postButtonRemove.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        category = getItem(position).getCategory();
+                        getItem(position).setCategory("remove");
+                        category = getItem(position).getCategory();
+                        System.out.println(category);
+                        notifyDataSetChanged();
+                    }
+                });
+            }
+
             holder.postLikeButton = (Button) convertView.findViewById(R.id.postButtonLike);
             holder.postLikeButton.setOnClickListener(new View.OnClickListener(){
                 @Override
