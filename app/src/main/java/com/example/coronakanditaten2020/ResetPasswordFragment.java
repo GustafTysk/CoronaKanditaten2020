@@ -21,15 +21,27 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
     private EditText textEmail;
     private String EmailString;
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    private Button btnConfirmEmailAndSendCode;
+    private Button btnVerifyEmailAndSendCode;
+    private EditText verificationCodeView;
+    private String verificationCode;
+    private EditText newPasswordView;
+    private String newPassword;
+    private Button btnChangePassword;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reset_password, container, false);
-        btnConfirmEmailAndSendCode=(Button) view.findViewById(R.id.btnConfirmEmailAndSendCode);
-        btnConfirmEmailAndSendCode.setOnClickListener(this);
+        btnVerifyEmailAndSendCode =(Button) view.findViewById(R.id.btnVerifyEmailAndSendCode);
+        btnVerifyEmailAndSendCode.setOnClickListener(this);
+
+        verificationCodeView = (EditText) view.findViewById(R.id.verificationCodeCheck);
+        newPasswordView = (EditText) view.findViewById(R.id.newPassword);
+
+        btnChangePassword = (Button) view.findViewById(R.id.btnResetPassword);
 
         textEmail = (EditText) view.findViewById(R.id.emailToConfirm);
+
+
         return view;
     }
 
@@ -37,8 +49,9 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
 
-            case R.id.btnConfirmEmailAndSendCode:
-                EmailString=textEmail.getText().toString();
+            case R.id.btnVerifyEmailAndSendCode:
+                EmailString = textEmail.getText().toString();
+                showChangePasswordFields();
                 if (checkEmail(EmailString)) {
             Call<Boolean> SendPasswordCode = ((LoginActivity) getActivity()).datahandler.clientAPI.verifypassword(EmailString);
             SendPasswordCode.enqueue(new Callback<Boolean>() {
@@ -46,12 +59,13 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
                 public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                     if(!response.isSuccessful()){
                         Toast.makeText(getContext(),getString(R.string.error_with_server), Toast.LENGTH_SHORT).show();
-                        btnConfirmEmailAndSendCode.setText(R.string.btn_resend_code);
+                        btnVerifyEmailAndSendCode.setText(R.string.btn_resend_code);
 
 
                     }
                     else if(response.body()) {
                         Toast.makeText(getContext(),getString(R.string.sent_email_toast), Toast.LENGTH_SHORT).show();
+                        showChangePasswordFields();
 
                     }
                      else {
@@ -73,13 +87,19 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
                     textEmail.setError(getString(R.string.invalid_email));
 
                 }
+                break;
+            case R.id.btnResetPassword:
+                if(checkVerificationCode()) { //TODO bygg klart denna metod
+
+                    newPassword = newPasswordView.getText().toString();
+                    if (passwordOK(newPassword, newPasswordView)){
+                        changeUserPassword();//TODO Bygg klart denna metod,
+                    }
+                }
+                break;
 
     }
     }
-
-
-
-
 
     private boolean checkEmail(String email){
         if (email.matches(emailPattern))
@@ -92,6 +112,31 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
             textEmail.setError(getString(R.string.invalid_email));
             return false;
         }
+    }
+
+    public void showChangePasswordFields(){
+        verificationCodeView.setVisibility(View.VISIBLE);
+        newPasswordView.setVisibility(View.VISIBLE);
+        btnChangePassword.setVisibility(View.VISIBLE);
+    }
+
+    public boolean checkVerificationCode(){
+        //TODO Är koden korrekt?
+        return true;
+    }
+
+    public boolean passwordOK(String password, EditText editText){
+        if(password.length() >= 4){
+            return true;
+        }
+        else{
+            editText.setError(getString(R.string.invalid_password));
+        }
+        return false;
+    }
+
+    public void changeUserPassword(){
+        //TODO Ändra användarens lösenord till newPassword
     }
 
 }
