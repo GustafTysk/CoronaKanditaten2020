@@ -5,6 +5,7 @@ import java.util.Comparator;
 
 public class Post implements Comparable<Post> {
     String username;
+    String email;
     String title;
     String timestamp;
     String text;
@@ -14,8 +15,21 @@ public class Post implements Comparable<Post> {
     int parentId;
 
 
-    public Post(String username, String title, String timestamp, String text, int likes, String category, int id, int parentId) {
+    public Post(String username, String email, String title, String timestamp, String text, int likes, String category, int parentId) {
         this.username = username;
+        this.email = email;
+        this.title = title;
+        this.timestamp = timestamp;
+        this.text = text;
+        this.likes = likes;
+        this.category = category;
+        this.parentId = parentId;
+    }
+
+
+    public Post(String username, String email, String title, String timestamp, String text, int likes, String category, int id, int parentId) {
+        this.username = username;
+        this.email = email;
         this.title = title;
         this.timestamp = timestamp;
         this.text = text;
@@ -90,6 +104,14 @@ public class Post implements Comparable<Post> {
     }
     public void setParentId(int parentId) {
         this.parentId = parentId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String printInformation(){
