@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         datahandler.getserveruser();
         datahandler.getalllserverocations("");
         datahandler.getuserserverlocations();
+        datahandler.user = new User ("Testperson", "user@gmail.com", 25, "male", "password123", "25 jan 2019");
         setContentView(R.layout.activity_main);
 
             mySettingsFragment = new MySettingsFragment();

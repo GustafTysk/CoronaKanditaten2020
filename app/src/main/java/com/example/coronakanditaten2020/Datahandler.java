@@ -102,15 +102,15 @@ public class Datahandler {
 
         viewPosts = new ArrayList<>();
 
-        Post newPost = new Post("Person1", "title1", "23 jan", "I need help", 0, "help", 1, 0);
-        Post newPost2 = new Post("Person2", "title2", "24 jan", "Me too", 2, "help", 2, 0);
-        Post newPost3 = new Post("Person3", "title3", "25 jan", "Me same", 3, "help",3, 0);
-        Post newPost4 = new Post("Person4", "title4", "26 jan", "I need help", 0, "rec", 4, 0);
-        Post newPost5 = new Post("Person5", "title5", "27 jan", "Me too", 1, "rec", 5, 0);
-        Post newPost6 = new Post("Person6", "title6", "28 jan", "Me same", 0, "rec",6, 0);
-        Post newPost7 = new Post("Person7", "title7", "29 jan", "I need help", 4, "rec", 7, 0);
-        Post newPost8 = new Post("Person8", "title8", "30 jan", "Me too", 2, "rec", 8, 0);
-        Post newPost9 = new Post("Person9", "title9", "31 jan", "Me same",5, "help",9, 0);
+        Post newPost = new Post("Person1", "adasjkd@dsjkf.com", "title1", "23 jan", "I need help", 0, "help", 1, 0);
+        Post newPost2 = new Post("Person2", "sfdjkfjdsfl@fdk.com", "title2", "24 jan", "Me too", 2, "help", 2, 0);
+        Post newPost3 = new Post("Person3", "jdassl@dhd.se", "title3", "25 jan", "Me same", 3, "help",3, 0);
+        Post newPost4 = new Post("Person4", "sjdfds@fjdl.com", "title4", "26 jan", "I need help", 0, "rec", 4, 0);
+        Post newPost5 = new Post("Person5", "hddjd@dhd.com","title5", "27 jan", "Me too", 1, "rec", 5, 0);
+        Post newPost6 = new Post("Person6", "dsdlks@dkjd.se","title6", "28 jan", "Me same", 0, "rec",6, 0);
+        Post newPost7 = new Post("Person7", "jds@jd.se","title7", "29 jan", "I need help", 4, "rec", 7, 0);
+        Post newPost8 = new Post("Person8", "skdjdk@dkdl.com","title8", "30 jan", "Me too", 2, "rec", 8, 0);
+        Post newPost9 = new Post("Person9", "dskld@sklsd.se","title9", "31 jan", "Me same",5, "help",9, 0);
 
         viewPosts.add(newPost);
         viewPosts.add(newPost2);
