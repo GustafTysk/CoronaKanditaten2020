@@ -84,6 +84,7 @@
     <string name="page_name_start_page">Start page</string>
     <string name="log_out">Log Out</string>
     <string name="success_logout">Logged out successfully</string>
+    <string name="fail_logout">Could not Log Out, please try again later</string>
 
     // MY SETTINGS PAGE
     <string name="fragment_my_settings">Settings</string>

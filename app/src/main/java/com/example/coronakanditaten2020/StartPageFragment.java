@@ -48,7 +48,6 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        Intent intent = null;
         switch (v.getId()){
             case R.id.btnSettings:
                 ((MainActivity)getActivity()).setViewPager(0);
@@ -76,11 +75,24 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
                 ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_forum);
                 break;
             case R.id.btnLogout:
-                intent = new Intent(getContext(), LoginActivity.class);
-                Toast.makeText(getContext(), getString(R.string.success_logout), Toast.LENGTH_LONG);
+
+                if(logOut()) {
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity(), LoginActivity.class);
+                    getActivity().startActivity(intent);
+                    Toast.makeText(getContext(), getString(R.string.success_logout), Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(getContext(), getString(R.string.fail_logout), Toast.LENGTH_LONG).show();
+                }
                 break;
 
             default:
         }
+    }
+
+    public boolean logOut(){
+
+        return true;
     }
 }

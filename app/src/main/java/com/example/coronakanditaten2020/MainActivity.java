@@ -416,9 +416,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return;
     }
 
-
-
-
     @Override
     public void onLocationChanged(android.location.Location location) {
         currentLocation = new LatLng(location.getLatitude(),location.getLongitude());

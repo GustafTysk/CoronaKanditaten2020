@@ -126,13 +126,13 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
     public void removeUserLocations(){
         // TODO ta bort alla user locations
 
-        Toast.makeText(getContext(),getString(R.string.alert_toast_locations),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),getString(R.string.alert_toast_locations),Toast.LENGTH_LONG).show();
     }
 
     public void removeUserPosts(){
         // TODO ta bort alla user posts
 
-        Toast.makeText(getContext(),getString(R.string.alert_toast_posts),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),getString(R.string.alert_toast_posts),Toast.LENGTH_LONG).show();
     }
 
     public void deleteUser(){
