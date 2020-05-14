@@ -1,11 +1,9 @@
 package com.example.coronakanditaten2020;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -35,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Boolean passwordCorrect;
     private Boolean ageCorrect;
     private Boolean genderCorrect = false;
+    private Boolean emailVerified = false;
 
     private Button btnToLogin;
     private Button btnRegister;
@@ -45,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private String gender;
     private String password;
     private String timstamp;
+    private String verificationCode;
 
     private EditText textUsername;
     private EditText textEmail;
@@ -140,14 +140,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 password = textPassword.getText().toString();
                 checkPassword(password);
 
+                checkGender();
+
                 email = textEmail.getText().toString().trim();
                 checkEmail(email);
 
-                checkGender();
+                if(emailCorrect) {
+                    sendVerificationCodeToEmail();
+                    verifyEmailDialog(); // Verifies email
+                }
 
 
-
-                if(emailCorrect && passwordCorrect && usernameCorrect && ageCorrect && genderCorrect){
+                if(emailCorrect && passwordCorrect && usernameCorrect && ageCorrect && genderCorrect && emailVerified){
                     Date date = new Date();
                     timstamp=date.toString();
                     System.out.println(timstamp);
@@ -258,7 +262,41 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    public void sendVerificationCodeToEmail(){
+        String sentCode = "1234"; //TODO METOD FÖR ATT SKICKA EN KOD TILL MAILEN, TÄNKER ATT DEN MÅSTE BESTÅ AV 4 SIFFROR
+        verificationCode = sentCode;
+    }
 
+    public void verifyEmailDialog(){
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_verify_email);
+        dialog.setTitle(getString(R.string.verify_email));
+        dialog.setCancelable(true);
+
+        Button buttonVerify = (Button) dialog.findViewById(R.id.Accept);
+        buttonVerify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText EditText = dialog.findViewById(R.id.verificationEditText);
+                String EditTextValue = EditText.getText().toString();
+                if(EditTextValue.equals(verificationCode)){
+                    emailVerified = true;
+                    dialog.dismiss();
+                }
+                else{
+                    EditText.setError(getString(R.string.error_wrong_code));
+                }
+            }
+        });
+        Button buttonCancel = (Button) dialog.findViewById(R.id.Cancel);
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 
 
 }
