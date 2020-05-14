@@ -42,9 +42,9 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
         switch (key){
             case "notifications":
                 if (notificationsPreference.isChecked()){
-                    Toast.makeText(getContext(),"Notifications enabled", Toast.LENGTH_SHORT);
+                    Toast.makeText(getContext(),"Notifications enabled", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(getContext(),"Notifications disabled", Toast.LENGTH_SHORT);
+                    Toast.makeText(getContext(),"Notifications disabled", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "username":
@@ -116,7 +116,8 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
 
                     // TODO set USERS username = newUsername
                 }else{
-                    editTextPreference.setSummary(getString(R.string.invalid_username));
+                    editTextPreference.setSummary(getString(R.string.on_no_change_username));
+                    Toast.makeText(getContext(),getString(R.string.invalid_username), Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -125,13 +126,13 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
     public void removeUserLocations(){
         // TODO ta bort alla user locations
 
-        Toast.makeText(getContext(),getString(R.string.alert_toast_locations),Toast.LENGTH_SHORT);
+        Toast.makeText(getContext(),getString(R.string.alert_toast_locations),Toast.LENGTH_SHORT).show();
     }
 
     public void removeUserPosts(){
         // TODO ta bort alla user posts
 
-        Toast.makeText(getContext(),getString(R.string.alert_toast_posts),Toast.LENGTH_SHORT);
+        Toast.makeText(getContext(),getString(R.string.alert_toast_posts),Toast.LENGTH_SHORT).show();
     }
 
     public void deleteUser(){

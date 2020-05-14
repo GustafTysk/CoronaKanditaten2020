@@ -96,7 +96,9 @@
     <string name="summary_change_username">This is the name displayed in the Forum</string>
     <string name="title_dialog_change_username">Your username</string>
     <string name="on_changed_username">Your username is:  </string>
-    <string name="on_invalid_username">Enter new username</string>
+    <string name="on_no_change_username">Enter new username</string>
+    <string name="on_invalid_username">Invalid username, pick something else</string>
+
     <string name="title_remove_user_locations">Remove reported locations</string>
     <string name="summary_remove_user_locations">Removes all your reported locations from the database</string>
     <string name="title_remove_user_posts">Remove posts</string>
