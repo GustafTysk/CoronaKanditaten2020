@@ -31,7 +31,8 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     private int lastPostion = -1;
     private int likes;
     String title;
-    private Boolean hasLiked = false;
+    String category;
+    public ArrayList<Integer>idList = new ArrayList<Integer>();
 
     static class ViewHolder {
         TextView username;
@@ -41,7 +42,10 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         TextView category;
         LinearLayout postTopSection;
         LinearLayout postBottomSection;
+        LinearLayout postWhole;
         Button postLikeButton;
+        Button postButtonRemove;
+
     }
 
     public PostListAdapter(Context context, int resource, ArrayList<Post> objects) {
@@ -58,7 +62,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         String timestamp = getItem(position).getTimestamp();
         String text = getItem(position).getText();
         likes = getItem(position).getLikes();
-        String category = getItem(position).getCategory();
+        category = getItem(position).getCategory();
         int id = getItem(position).getId();
         int parentId = getItem(position).getParentId();
 
@@ -75,25 +79,50 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             holder.category = (TextView) convertView.findViewById(R.id.postCategory);
             holder.text = (TextView) convertView.findViewById(R.id.postMessage);
             holder.likesShow = (TextView) convertView.findViewById(R.id.postLikes);
+            holder.postWhole = (LinearLayout) convertView.findViewById(R.id.postWhole);
             holder.postTopSection = (LinearLayout) convertView.findViewById(R.id.postTopSection);
             holder.postBottomSection = (LinearLayout) convertView.findViewById(R.id.postBottomSection);
+
+            if(getItem(position).getId() == 30){
+                holder.postButtonRemove = (Button) convertView.findViewById(R.id.postButtonRemove);
+                holder.postButtonRemove.setVisibility(convertView.VISIBLE);
+                holder.postButtonRemove.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        category = getItem(position).getCategory();
+                        getItem(position).setCategory("remove");
+                        category = getItem(position).getCategory();
+                        System.out.println(category);
+                        notifyDataSetChanged();
+                    }
+                });
+            }
+
             holder.postLikeButton = (Button) convertView.findViewById(R.id.postButtonLike);
             holder.postLikeButton.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    //System.out.println("You have click like");
                     likes = getItem(position).getLikes();
-                    System.out.println(likes);
-                    hasLiked = true;
-                    likes = likes + 1;
-                    getItem(position).setLikes(likes);
-                    likes = getItem(position).getLikes();
-                    System.out.println(likes);
-                    title = getItem(position).getTitle();
-                    System.out.println(title);
+                    if(idList.contains(getItem(position).getId())){
+                        likes = likes - 1;
+                        getItem(position).setLikes(likes);
+                        likes = getItem(position).getLikes();
+                        title = getItem(position).getTitle();
+                        for (Integer int_test : idList){
+                            if(int_test == getItem(position).getId()){
+                                idList.remove(int_test);
+                            }
+                        }
+                    }
+                    else{
+                        likes = likes + 1;
+                        getItem(position).setLikes(likes);
+                        idList.add(getItem(position).getId());
+                    }
+
                     notifyDataSetChanged();
-                    System.out.println(position);
-                }
+                    }
+
                                                      });
             result = convertView;
             convertView.setTag(holder);
@@ -125,7 +154,6 @@ public class PostListAdapter extends ArrayAdapter<Post> {
                 (position > lastPostion) ? R.anim.load_down_anim : R.anim.load_up_anim);
         result.startAnimation(animation);
         lastPostion = position;
-
 
         return convertView;
     }

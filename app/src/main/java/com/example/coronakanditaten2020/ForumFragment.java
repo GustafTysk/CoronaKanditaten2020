@@ -21,7 +21,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,9 +28,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Header;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
 
 
 public class ForumFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
@@ -49,6 +45,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
     private TextView usernameShow;
     ArrayList<Post> topPost;
     private String currentCategory;
+    private String username;
 
     public ListView listView;
 
@@ -60,6 +57,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
     public ArrayList<Post>copyList;
     public ArrayList<Post>commentList;
     public ArrayList<Post>postList;
+
     private PostListAdapter adapter;
 
     @Nullable
@@ -71,10 +69,15 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
         btnMostLiked = (Button) view.findViewById(R.id.btnMostLiked);
         btnMostLiked.setOnClickListener(this);
-        btnFilterRec = (Button) view.findViewById(R.id.btnFilterRec);
+        btnFilterRec = (Button) view.findViewById(R.id.btnUserPosts);
         btnFilterRec.setOnClickListener(this);
         btnFilterAll = (Button) view.findViewById(R.id.btnFilterAll);
         btnFilterAll.setOnClickListener(this);
+
+        username = ((MainActivity)getActivity()).datahandler.user.getUsername();
+
+        usernameShow = (TextView) view.findViewById(R.id.usernameShow);
+        usernameShow.setText(username);
 
         messageButton = (Button) view.findViewById(R.id.messageButton);
         messageButton.setOnClickListener(this);
@@ -91,10 +94,14 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         postList = new ArrayList<>(topPost);
         copyList = new ArrayList<>(topPost);
 
+        Collections.reverse(postList);
+
         adapter = new PostListAdapter(getContext(), R.layout.adapter_view_layout, postList);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(this);
+
+        removePosts();
 
         searchFilter.addTextChangedListener(new TextWatcher() {
             @Override
@@ -135,17 +142,19 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         postList.clear();
         postList.add(thePost);
         getComments(thePost);
+        // getserverComments(thePost);
         adapter.notifyDataSetChanged();
 
     }
 
-    public void removeComments() {
-        postList.clear();
-        for (Post post: copyList) {
-            if(post.getParentId() == 0) {
-                postList.add(post);
+    public void removePosts() {
+        for (Post post: postList) {
+            if(post.getCategory() == "remove") {
+                postList.remove(post);
+                copyList.remove(post);
             }
         }
+        adapter.notifyDataSetChanged();
     }
 
     public void getComments(Post post) {
@@ -153,13 +162,13 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         // getserverComments(post);
 
         ArrayList<Post> tempPost= new ArrayList<>();
-        tempPost.add(new Post("Comment1", "comment1", "23 jan", "Hello1", 0, "comment", 10, 1));
-        tempPost.add(new Post("Comment2", "comment2", "23 jan", "Hello2", 0, "comment", 11, 2));
-        tempPost.add(new Post("Comment3", "comment3", "23 jan", "Hello3", 0, "comment", 12, 3));
-        tempPost.add(new Post("Comment4", "comment4", "23 jan", "Hello4", 0, "comment", 13, 2));
-        tempPost.add(new Post("Comment5", "comment5", "23 jan", "Hello5", 0, "comment", 14, 4));
-        tempPost.add(new Post("Comment6", "comment6", "23 jan", "Hello6", 0, "comment", 15, 1));
-        tempPost.add(new Post("Comment7", "comment7", "23 jan", "Hello7", 0, "comment", 16, 7));
+        tempPost.add(new Post("Comment1", "abc@sdfjk.com", "Comment1", "1 jan", "I agrre", 2, "comment", 1));
+        tempPost.add(new Post("Comment2", "dsadlsa@fskjd.com", "Comment2", "2 jan", "Interesting", 3, "comment", 2));
+        tempPost.add(new Post("Comment3", "adssl@fsdk.com", "Comment3", "3 jan", "Okay", 0, "comment", 3));
+        tempPost.add(new Post("Comment4", "fdsj@fmf.se", "Comment4", "4 jan", "I do not agree", 2, "comment", 2));
+        tempPost.add(new Post("Comment5", "sdksa@sdjk.se", "Comment5", "5 jan", "Okay okay", 5, "comment", 4));
+        tempPost.add(new Post("Comment6", "cdds@adksj.com", "Comment6", "6 jan", "I see", 6, "comment", 1));
+        tempPost.add(new Post("Comment7", "comdslsk@nskjd.se", "Comment7", "7 jan", "Okay", 0, "comment", 7));
 
         for (Post testPost : tempPost) {
             if(testPost.getParentId()==post.getId()){
@@ -176,21 +185,31 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         switch (v.getId()){
 
             case R.id.messageButton:
-                String username = "test";
+                String email = ((MainActivity)getActivity()).datahandler.user.getEmail();
                 String title = messageTitle.getText().toString();
-                String timestamp = "Timestamp";
+                String timestamp = "3 jan";
                 String message = messageInput.getText().toString();
-                ArrayList<String> likes = new ArrayList<String>();
-                likes.add("1");
                 if(thePostId != 0) {
-                    Post newWrittenPost = new Post(username, title, timestamp, message, 0, "help", 30, thePostParentId);
+                    Post newWrittenPost = new Post(username,email ,title, timestamp, message, 0, "comment", 30, thePostParentId);
                     postList.add(newWrittenPost);
                     copyList.add(newWrittenPost);
+                    //sendanswertoserver(newWrittenPost);
+
+
                 }
                 else{
-                    Post newWrittenPost = new Post(username, title, timestamp, message, 0, "help", 30, 0);
+                    Post newWrittenPost = new Post(username, email,title, timestamp, message, 0, "top", 30, 0);
                     System.out.println(newWrittenPost.printInformation());
+                    postList.clear();
+                    for(Post post : copyList){
+                        postList.add(post);
+                    }
                     postList.add(newWrittenPost);
+                    Collections.reverse(postList);
+                    copyList.add(newWrittenPost);
+                    // sendposttoserver(newWrittenPost);
+
+
                 }
                 adapter.notifyDataSetChanged();
 
@@ -203,17 +222,18 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
             case R.id.btnMostLiked:
                 postList.clear();
-                //run the statment under whhen you are connected to database
-                //postList=getmostliked()
-                for (Post post : copyList){
+                for(Post post : copyList){
                     postList.add(post);
                 }
                 Collections.sort(postList, Post.DESCENDING_COMPARATOR);
-
                 adapter.notifyDataSetChanged();
+                //run the statment under whhen you are connected to database
+                //postList=getmostliked()
+                //getmostliked();
+
                 break;
 
-            case R.id.btnFilterRec:
+            case R.id.btnUserPosts:
                 postList.clear();
                 for (Post post: copyList) {
                     postList.add(post);
@@ -235,6 +255,9 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 for (Post post: copyList) {
                     postList.add(post);
                 }
+                removePosts();
+
+                Collections.reverse(postList);
 
                 adapter.notifyDataSetChanged();
                 break;
@@ -254,6 +277,8 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 else {
                     ((MainActivity) getActivity()).datahandler.viewPosts = response.body();
                     postList = ((MainActivity) getActivity()).datahandler.viewPosts;
+                    Collections.sort(postList, Post.DESCENDING_COMPARATOR);
+
                     adapter.notifyDataSetChanged();
                     System.out.println("got mosts liked post");
                 }
@@ -278,6 +303,13 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 }
                 else {
                     commentList = response.body();
+
+//                    for (Post testPost : tempPost) {
+//                        if(testPost.getParentId()==post.getId()){
+//                            System.out.println("Hej");
+//                            postList.add(testPost);
+//                        }
+//                    }
                     postList = commentList;
                     adapter.notifyDataSetChanged();
                     System.out.println("got mosts liked post");
@@ -306,6 +338,9 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 else {
                     ((MainActivity) getActivity()).datahandler.viewPosts = response.body();
                     postList = ((MainActivity) getActivity()).datahandler.viewPosts;
+                    copyList = new ArrayList<>(topPost);
+                    postList.clear();
+
                     adapter.notifyDataSetChanged();
                     System.out.println("got mosts liked post");
                 }
@@ -333,7 +368,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 else {
                 ((MainActivity)getActivity()).datahandler.viewPosts=response.body();
                 postList=((MainActivity)getActivity()).datahandler.viewPosts;
-                adapter.notifyDataSetChanged();
+
                 System.out.println("got mosts liked post");
                 }
             }

@@ -1,7 +1,6 @@
 package com.example.coronakanditaten2020;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +30,8 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
         setPreferencesFromResource(R.xml.fragment_my_settings, rootKey);
 
         notificationsPreference = findPreference("notifications");
-        usernamePreference = findPreference("signature");
+        usernamePreference = findPreference("username");
+
         removeUserLocationsPreference = findPreference("remove_user_locations");
         removeUserLocationsPreference.setOnPreferenceClickListener(this);
         removeUserPostsPreference = findPreference("remove_user_posts");
@@ -46,11 +46,15 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
         switch (key){
             case "notifications":
                 if (notificationsPreference.isChecked()){
-                    Toast.makeText(getContext(),"Notifications enabled", Toast.LENGTH_SHORT);
+                    Toast.makeText(getContext(),"Notifications enabled", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(getContext(),"Notifications disabled", Toast.LENGTH_SHORT);
+                    Toast.makeText(getContext(),"Notifications disabled", Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case "username":
+                changeUsername("username");
+                break;
+
         }
     }
 
@@ -103,6 +107,24 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
         }
 
         return false;
+    }
+
+
+    private void changeUsername(String key){
+        if (key.equals("username")){
+            if (usernamePreference instanceof EditTextPreference){
+                EditTextPreference editTextPreference =  (EditTextPreference)usernamePreference;
+                if (editTextPreference.getText().trim().length() > 0){
+                    String newUsername = editTextPreference.getText();
+                    editTextPreference.setSummary(getString(R.string.on_changed_username) + editTextPreference.getText());
+
+                    // TODO set USERS username = newUsername
+                }else{
+                    editTextPreference.setSummary(getString(R.string.on_no_change_username));
+                    Toast.makeText(getContext(),getString(R.string.invalid_username), Toast.LENGTH_LONG).show();
+                }
+            }
+        }
     }
 
     public void removeUserLocations(){

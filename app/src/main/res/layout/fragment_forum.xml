@@ -38,7 +38,7 @@
                 android:layout_height="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnFilterRec" />
+                app:layout_constraintTop_toBottomOf="@+id/btnUserPosts" />
 
             <ListView
                 android:id="@+id/listview"
@@ -110,11 +110,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_most_liked"
-                app:layout_constraintEnd_toStartOf="@+id/btnFilterRec"
+                app:layout_constraintEnd_toStartOf="@+id/btnUserPosts"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <Button
-                android:id="@+id/btnFilterRec"
+                android:id="@+id/btnUserPosts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_recommended"
@@ -127,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_all"
-                app:layout_constraintStart_toEndOf="@+id/btnFilterRec"
+                app:layout_constraintStart_toEndOf="@+id/btnUserPosts"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 

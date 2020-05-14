@@ -59,16 +59,26 @@
     <string name="invalid_gender">Invalid Gender, please select your gender</string>
     <string name="invalid_age">Invalid Age, please enter your age</string>
 
+    <string name="verify_email">Verify email</string>
+    <string name="verify_email_text">Enter verification code\nsent to your email</string>
+    <string name="hint_verification_code">Verification code</string>
+    <string name="btn_verify">Verify</string>
+    <string name="error_wrong_code">Wrong code</string>
+
     <string name="fail_create_user">Unable to create user</string>
     <string name="success_create_user">Successfully created new user</string>
 
     // RESET PASSWORD PAGE
     <string name="page_name_reset_password">Reset Password</string>
-    <string name="btn_send_code">send confirmation code to email</string>
-    <string name="btn_resend_code">resend confirmation code to email</string>
-    <string name="sent_email_toast"> An code hase been sent to your email</string>
+    <string name="btn_send_code">Send verification code to email</string>
+    <string name="btn_resend_code">Resend verification code to email</string>
+    <string name="sent_email_toast"> Verification code has been sent to your email</string>
     <string name="hint_confirmation_code">Confirmation code</string>
     <string name="wrong_email">No user connected to this Email</string>
+
+    <string name="hint_new_password">New password</string>
+    <string name="btn_change_password">Change password</string>
+
 
     // START PAGE
     <string name="page_name_start_page">Start page</string>
@@ -84,6 +94,11 @@
     <string name="section_user">User</string>
     <string name="title_change_username">Change username</string>
     <string name="summary_change_username">This is the name displayed in the Forum</string>
+    <string name="title_dialog_change_username">Your username</string>
+    <string name="on_changed_username">Your username is:  </string>
+    <string name="on_no_change_username">Enter new username</string>
+    <string name="on_invalid_username">Invalid username, pick something else</string>
+
     <string name="title_remove_user_locations">Remove reported locations</string>
     <string name="summary_remove_user_locations">Removes all your reported locations from the database</string>
     <string name="title_remove_user_posts">Remove posts</string>
@@ -103,6 +118,7 @@
 
     <string name="section_help">Help</string>
     <string name="title_send_feedback">Send feedback</string>
+    <string name="summary_send_feedback">Report technical issues or suggest new features</string>
 
     // STATISTICS PAGE
     <string name="fragment_statistics">Statistics</string>
@@ -137,9 +153,9 @@
 
     <string name="symptom_fever">Fever</string>
     <string name="symptom_cough">Cough</string>
-    <string name="symptom_breathing">Difficulty\nBreathing</string>
+    <string name="symptom_breathing">Difficulty Breathing</string>
     <string name="symptom_sore_throat">Sore Throat</string>
-    <string name="symptom_nasal_congestion">Nasal\nCongestion</string>
+    <string name="symptom_nasal_congestion">Nasal Congestion</string>
     <string name="symptom_runny_nose">Runny Nose</string>
     <string name="symptom_tiredness">Tiredness</string>
     <string name="symptom_headache">Headache</string>

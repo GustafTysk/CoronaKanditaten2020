@@ -5,8 +5,8 @@ import android.provider.ContactsContract;
 public class User {
     private String username;
     private String email;
-    private int age;
-    private String gender;
+    int age;
+    String gender;
     private String password;
     private String timestamp;
 

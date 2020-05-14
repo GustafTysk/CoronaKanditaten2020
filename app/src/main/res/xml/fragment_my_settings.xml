@@ -24,10 +24,11 @@
         app:title="@string/section_user">
 
         <EditTextPreference
-            app:key="signature"
+            app:key="username"
+            android:dialogTitle="@string/title_dialog_change_username"
             app:title="@string/title_change_username"
             app:summary="@string/summary_change_username"
-            app:isPreferenceVisible="true"/>
+            />
 
         <Preference
             app:key="remove_user_locations"
@@ -52,8 +53,8 @@
 
         <Preference
             app:key="feedback"
-            app:summary="Report technical issues or suggest new features"
-            app:title="Send feedback"/>
+            app:summary="@string/summary_send_feedback"
+            app:title="@string/title_send_feedback"/>
 
     </PreferenceCategory>
 
