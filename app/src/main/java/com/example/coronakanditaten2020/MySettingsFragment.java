@@ -112,7 +112,7 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
                 EditTextPreference editTextPreference =  (EditTextPreference)usernamePreference;
                 if (editTextPreference.getText().trim().length() > 0){
                     String newUsername = editTextPreference.getText();
-                    editTextPreference.setSummary(getString(R.string.on_changed_username) + editTextPreference.getText());
+                    editTextPreference.setSummary(getString(R.string.on_changed_username) + "  " + editTextPreference.getText());
 
                     // TODO set USERS username = newUsername
                 }else{
