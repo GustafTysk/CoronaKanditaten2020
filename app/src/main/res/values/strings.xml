@@ -208,9 +208,7 @@
 
     <string name="help">Help and tasks </string>
     <string name="recommendation">Recommendations and warnings </string>
-
-
-
+    <string name="Resend_code">resend verification code</string>
 
 
 </resources>

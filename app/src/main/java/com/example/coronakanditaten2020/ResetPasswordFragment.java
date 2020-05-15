@@ -51,7 +51,6 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
 
             case R.id.btnVerifyEmailAndSendCode:
                 EmailString = textEmail.getText().toString();
-                showChangePasswordFields();
                 if (checkEmail(EmailString)) {
             Call<Boolean> SendPasswordCode = ((LoginActivity) getActivity()).datahandler.clientAPI.verifypassword(EmailString);
             SendPasswordCode.enqueue(new Callback<Boolean>() {
@@ -65,7 +64,9 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
                     }
                     else if(response.body()) {
                         Toast.makeText(getContext(),getString(R.string.sent_email_toast), Toast.LENGTH_SHORT).show();
+
                         showChangePasswordFields();
+                        btnVerifyEmailAndSendCode.setText(R.string.Resend_code);
 
                     }
                      else {
@@ -89,13 +90,15 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
                 }
                 break;
             case R.id.btnResetPassword:
-                if(checkVerificationCode()) { //TODO bygg klart denna metod
 
                     newPassword = newPasswordView.getText().toString();
                     if (passwordOK(newPassword, newPasswordView)){
-                        changeUserPassword();//TODO Bygg klart denna metod,
+                        changeUserPassword();
                     }
-                }
+                    else{
+
+                    }
+
                 break;
 
     }
@@ -120,10 +123,7 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
         btnChangePassword.setVisibility(View.VISIBLE);
     }
 
-    public boolean checkVerificationCode(){
-        //TODO Är koden korrekt?
-        return true;
-    }
+
 
     public boolean passwordOK(String password, EditText editText){
         if(password.length() >= 4){
@@ -136,7 +136,29 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
     }
 
     public void changeUserPassword(){
-        //TODO Ändra användarens lösenord till newPassword
+
+        Call<Boolean> changepassword= ((LoginActivity) getActivity()).datahandler.clientAPI.setpassword(EmailString,verificationCodeView.getText().toString(),newPassword);
+        changepassword.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getContext(),getString(R.string.error_with_server), Toast.LENGTH_SHORT).show();
+                }
+                else if(!response.body()){
+                    verificationCodeView.setError(getString(R.string.error_wrong_code));
+                }
+                else{
+                    Toast.makeText(getContext(),getString(R.string.page_name_reset_password), Toast.LENGTH_SHORT).show();
+                    ((LoginActivity) getActivity()).setViewPager(1);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+        });
+
     }
 
 }
