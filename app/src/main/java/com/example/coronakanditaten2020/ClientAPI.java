@@ -64,6 +64,9 @@ public interface ClientAPI {
     @DELETE("User/{email}/security")
     Call<Boolean> Deleteuser(@Header("authorization") String Auth,@Path("email") String email);
 
+    @PUT("newUsername/{email}/{newUsername}/security")
+    Call<Boolean> changeUserName(@Header("authorization") String Auth,@Path("email") String email,@Path("newUsername") String newUsername);
+
     @POST("User/ver/{email}")
     Call<Boolean> verifyemail(@Path("email") String email);
 
@@ -102,6 +105,12 @@ public interface ClientAPI {
 
     @POST("post/answer/{email}/security")
     Call<Boolean> creatanswerpost(@Header("authorization")String Auth, @Path("email") String email, @Body Post thePost);
+
+    @DELETE("post/deleteUserPosts/{email}/security")
+    Call<Boolean> deleteUserPosts(@Header("authorization")String Auth, @Path("email") String email);
+
+    @GET("post/search/{search}/security")
+    Call<ArrayList<Post>> GetPostBySearch(@Path("search") String search);
 
 
 
