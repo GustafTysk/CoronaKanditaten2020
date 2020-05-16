@@ -3,17 +3,23 @@ package com.example.coronakanditaten2020;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.applandeo.materialcalendarview.DatePicker;
+import com.applandeo.materialcalendarview.builders.DatePickerBuilder;
+import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
+import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -64,6 +70,11 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
     private Button btnTestChangeDay;
     private Button btnZoomInOnMe;
 
+    private com.applandeo.materialcalendarview.CalendarView cal;
+    private Calendar minDate = Calendar.getInstance(TimeZone.getDefault());
+    private Calendar maxDate = Calendar.getInstance(TimeZone.getDefault());
+    private TextView dateDisplayheatmap;
+
     private SeekBar seekBarheatmap;
     private int seekBarMaxValue; // get maximum value of the Seek bar
     private int seekbarValue;
@@ -89,7 +100,9 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
         seekBarheatmap = (SeekBar) view.findViewById(R.id.seekBarHeatmap);
         seekBarheatmap.setOnSeekBarChangeListener(this);
         seekBarMaxValue=seekBarheatmap.getMax();
-
+        dateDisplayheatmap = (TextView) view.findViewById(R.id.dateDisplayheatmap);
+        Date today = new Date();
+        dateDisplayheatmap.setText(convertDateToString(today));
 
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
                 getChildFragmentManager().findFragmentById(R.id.autocomplete_fragment);
@@ -141,8 +154,13 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
                 ((MainActivity) getActivity()).setViewPager(2);
                 break;*/
             case R.id.btnTestChangeDay:
-                mProvider.setWeightedData(((ArrayList)GenerateHeatMapCordsList( datahandler.getHeatmaplocations(),"2020-10-16", "placeholder")));
-                mOverlay.clearTileCache();
+                try {
+                    getCalendarPicker();
+                } catch (OutOfDateRangeException e) {
+                    e.printStackTrace();
+                }
+//                mProvider.setWeightedData(((ArrayList)GenerateHeatMapCordsList( datahandler.getHeatmaplocations(),"2020-10-16", "placeholder")));
+//                mOverlay.clearTileCache();
                 break;
 
         }
@@ -153,17 +171,15 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
         seekbarValue = progress;
         String dateString = convertDateToString(convertDayOfInterestToDate(seekbarValue));
         changeToDate(dateString);
-        Toast.makeText(getContext(),"Date of interest: "+ dateString, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-        Toast.makeText(getContext(),"SEEKBAR STARDED, PROGRESS = "+seekbarValue, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        Toast.makeText(getContext(),"SEEKBAR STOPPED, PROGRESS = "+seekbarValue, Toast.LENGTH_SHORT).show();
     }
 
     public Date convertDayOfInterestToDate(int dayOfInterestLast30Days){
@@ -200,8 +216,39 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
     public void changeToDate(String date){
                 mProvider.setWeightedData(((ArrayList) GenerateHeatMapCordsList(datahandler.getHeatmaplocations(), date, "placeholder")));
                 mOverlay.clearTileCache();
-            System.out.println("YES FOUND LOCATION ON DATE");
     }
+
+    public void getCalendarPicker() throws OutOfDateRangeException {
+        OnSelectDateListener listener = new OnSelectDateListener() {
+            @Override
+            public void onSelect(List<Calendar> calendars) {
+                String changeToDateString = null;
+
+                for (Calendar day: calendars){
+                    changeToDateString = convertDateToString(day.getTime());
+                }
+                if (changeToDateString != null) {
+                    changeToDate(changeToDateString);
+                }
+                else{
+                    Toast.makeText(getContext(),"No new date selected", Toast.LENGTH_LONG).show();
+                }
+            }
+        };
+        DatePickerBuilder builder = new DatePickerBuilder(getContext(), listener)
+                .pickerType(cal.ONE_DAY_PICKER).setMaximumDate(maxDate);
+
+        DatePicker datePicker = builder.build();
+        datePicker.show();
+    }
+
+//    public void setDaysAvailable(DatePickerBuilder builder, Location[] heatmapdates){
+//        List<Calendar> disabledDaysCalendars = new ArrayList<>();
+//        for(int i=1; i < heatmapdates.length; i++){
+//            builder.setDisabledDays()theatmapdates[i].date
+//        }
+//
+//    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -212,12 +259,6 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
         mOverlay = mGoogleMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sweden,4));
-
-
-        System.out.println("jajajaj");
-
-
-
     }
 
     @Override
@@ -273,9 +314,15 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
             }
         }
         if(!list.isEmpty()) {
+            dateDisplayheatmap.setText(date);
             return list;
         }
         else{
+            Toast toast = Toast.makeText(getContext(),"There are no reports for that date", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
+            toast.show();
+            dateDisplayheatmap.setText(date+"\nNo reports");
+
             return listReserve;
         }
 

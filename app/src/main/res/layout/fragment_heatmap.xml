@@ -110,6 +110,16 @@
         app:layout_constraintEnd_toStartOf="@+id/btnTestChangeDay"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btnTestChangeDay" />
+
+    <TextView
+        android:id="@+id/dateDisplayheatmap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/mapview"
+        app:layout_constraintTop_toBottomOf="@+id/autocomplete_fragment" />
 </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
