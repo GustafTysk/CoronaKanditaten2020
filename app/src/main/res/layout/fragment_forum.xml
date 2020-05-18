@@ -33,12 +33,22 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/searchFilter"
-                android:layout_width="match_parent"
+                android:id="@+id/searchInput"
                 android:layout_height="50dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="200dp"
+                app:layout_constraintEnd_toStartOf="@+id/btnFilterAll"
+                app:layout_constraintStart_toStartOf="@+id/btnMostLiked"
                 app:layout_constraintTop_toBottomOf="@+id/btnUserPosts" />
+
+            <Button
+                android:id="@+id/btnSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                app:layout_constraintBottom_toBottomOf="@id/searchInput"
+                app:layout_constraintStart_toEndOf="@+id/searchInput"
+                app:layout_constraintTop_toTopOf="@id/searchInput" />
+
 
             <ListView
                 android:id="@+id/listview"
@@ -49,16 +59,18 @@
                 app:layout_constraintBottom_toTopOf="@+id/messageTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/searchFilter" />
+                app:layout_constraintTop_toBottomOf="@id/searchInput" />
 
             <EditText
                 android:id="@+id/messageTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="8dp"
                 android:ems="10"
-                android:hint="@string/post_hint_title"
+                android:hint="Write title"
                 android:inputType="textPersonName"
+                android:background="@drawable/edittext_outline"
+                android:paddingLeft="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/messageInput"
                 app:layout_constraintEnd_toEndOf="@+id/messageInput"
                 app:layout_constraintStart_toStartOf="@+id/messageInput" />
@@ -66,13 +78,15 @@
             <EditText
                 android:id="@+id/messageInput"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginBottom="16dp"
                 android:ems="10"
-                android:gravity="start|top"
-                android:hint="@string/post_hint_message"
+
+                android:hint="Write message"
                 android:inputType="textMultiLine"
+                android:background="@drawable/edittext_outline"
+                android:paddingLeft="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -83,6 +97,9 @@
                 android:layout_marginStart="8dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/btn_post"
+                android:background="@drawable/button_selector"
+                android:textColor="@color/white"
+                android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/messageInput"
                 app:layout_constraintStart_toEndOf="@+id/messageInput"
                 app:layout_constraintTop_toTopOf="@+id/messageInput" />
@@ -110,6 +127,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_most_liked"
+                android:background="@drawable/button_selector_light"
+                android:textColor="@color/white"
+                android:padding="10dp"
+                android:layout_marginRight="20dp"
                 app:layout_constraintEnd_toStartOf="@+id/btnUserPosts"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -118,6 +139,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_recommended"
+                android:background="@drawable/button_selector_light"
+                android:textColor="@color/white"
+                android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="@+id/textView"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -127,6 +151,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_all"
+                android:background="@drawable/button_selector_light"
+                android:textColor="@color/white"
+                android:padding="10dp"
+                android:layout_marginLeft="20dp"
                 app:layout_constraintStart_toEndOf="@+id/btnUserPosts"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 

@@ -298,11 +298,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         dialog.setTitle(getString(R.string.verify_email));
         dialog.setCancelable(true);
 
+        TextView textView = dialog.findViewById(R.id.infoAndResend);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendVerificationCodeToEmail();
+            }
+        });
         Button buttonVerify = (Button) dialog.findViewById(R.id.Accept);
         buttonVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText EditText = dialog.findViewById(R.id.verificationEditText);
+
                 String EditTextValue = EditText.getText().toString();
                 Date date = new Date();
                 timstamp=date.toString();

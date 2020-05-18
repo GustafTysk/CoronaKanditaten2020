@@ -30,6 +30,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     private int mResource;
     private int lastPostion = -1;
     private int likes;
+    private ArrayList<Post> thePosts;
     String title;
     String category;
     public ArrayList<Integer>idList = new ArrayList<Integer>();
@@ -52,6 +53,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         super(context, resource, objects);
         this.mContext = context;
         this.mResource = resource;
+        this.thePosts = objects;
     }
 
     @NonNull
@@ -89,10 +91,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
                 holder.postButtonRemove.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        category = getItem(position).getCategory();
-                        getItem(position).setCategory("remove");
-                        category = getItem(position).getCategory();
-                        System.out.println(category);
+                        thePosts.remove(getItem(position));
                         notifyDataSetChanged();
                     }
                 });

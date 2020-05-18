@@ -33,13 +33,12 @@ import retrofit2.Response;
 public class ForumFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private Button messageButton;
-    private Button btnForumToStart;
-
     private Button btnMostLiked;
     private Button btnFilterRec;
     private Button btnFilterAll;
+    private Button btnSearch;
 
-    private EditText searchFilter;
+    private EditText searchInput;
     private EditText messageInput;
     private EditText messageTitle;
     private TextView usernameShow;
@@ -65,6 +64,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_forum, container, false);
 
+
         topPost =((MainActivity)getActivity()).datahandler.viewPosts;
 
         btnMostLiked = (Button) view.findViewById(R.id.btnMostLiked);
@@ -73,6 +73,8 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         btnFilterRec.setOnClickListener(this);
         btnFilterAll = (Button) view.findViewById(R.id.btnFilterAll);
         btnFilterAll.setOnClickListener(this);
+        btnSearch = (Button) view.findViewById(R.id.btnSearch);
+        btnSearch.setOnClickListener(this);
 
         username = ((MainActivity)getActivity()).datahandler.user.getUsername();
 
@@ -83,10 +85,11 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         messageButton.setOnClickListener(this);
 //        btnForumToStart = (Button) view.findViewById(R.id.btnForumToStart);
 //        btnForumToStart.setOnClickListener(this);
+
         messageInput = (EditText) view.findViewById(R.id.messageInput);
         messageTitle = (EditText) view.findViewById(R.id.messageTitle);
 
-        searchFilter = (EditText) view.findViewById(R.id.searchFilter);
+        searchInput = (EditText) view.findViewById(R.id.searchInput);
         listView = (ListView) view.findViewById(R.id.listview);
 
         currentCategory = "Help";
@@ -102,22 +105,6 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         listView.setOnItemClickListener(this);
 
         removePosts();
-
-        searchFilter.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                (ForumFragment.this).adapter.getFilter().filter(s.toString());
-
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
         return view;
     }
@@ -137,14 +124,15 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         thePostParentId = postList.get(thePostId).getParentId();
         //System.out.println(thePostId);
 
-        Post thePost = postList.get(thePostId);
-        System.out.println(thePost.printInformation());
-        postList.clear();
-        postList.add(thePost);
-        getComments(thePost);
+        if(thePostParentId == 0) {
+            Post thePost = postList.get(thePostId);
+            System.out.println(thePost.printInformation());
+            postList.clear();
+            postList.add(thePost);
+            getComments(thePost);
+        }
         // getserverComments(thePost);
         adapter.notifyDataSetChanged();
-
     }
 
     public void removePosts() {
@@ -253,12 +241,20 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             case R.id.btnFilterAll:
                 postList.clear();
                 for (Post post: copyList) {
-                    postList.add(post);
+                    if(post.parentId == 0){
+                        postList.add(post);
+                    }
                 }
                 removePosts();
 
                 Collections.reverse(postList);
 
+                adapter.notifyDataSetChanged();
+                break;
+
+            case R.id.btnSearch:
+                String inputsearch = searchInput.getText().toString();
+                //input search är det som användaren vill söka på.
                 adapter.notifyDataSetChanged();
                 break;
         }
