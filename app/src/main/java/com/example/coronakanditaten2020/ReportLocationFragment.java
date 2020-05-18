@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,6 +23,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -89,10 +92,11 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
     private Bundle savedInstance;
 
-    private Button btnRlToStart;
+    private ImageView reportLocationInfo;
     private Button btnRlToRs;
     private Button btnUpdateMyLocations;
     private Button btnAddLocation;
+
 
     private ImageButton setLocation1,setLocation2, setLocation3, setLocation4, setLocation5, setLocation6,
             setLocation7, setLocation8, setLocation9, setLocation10, setLocation11, setLocation12;
@@ -270,7 +274,18 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             Places.initialize(getContext(), "AIzaSyAdNZnteknM0VlU416q-b8ZEqRBjiFOiPA");
         }
 
+        reportLocationInfo = (ImageView) view.findViewById(R.id.reportLocationInfo);
+        reportLocationInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
 
+                alert.setTitle(getString(R.string.info_title_report_location));
+                alert.setMessage(getString(R.string.info_message_report_location));
+                alert.setNegativeButton(android.R.string.ok, null);
+                alert.show();
+            }
+        });
 
 
         return view;

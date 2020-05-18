@@ -124,4 +124,13 @@
         app:layout_constraintEnd_toEndOf="@+id/btnToRegister"
         app:layout_constraintStart_toStartOf="@+id/btnToRegister"
         app:layout_constraintTop_toBottomOf="@+id/btnToRegister" />
+
+    <Switch
+        android:id="@+id/switchDayNightMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Switch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
