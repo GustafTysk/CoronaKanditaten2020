@@ -32,7 +32,8 @@
         android:layout_marginBottom="5dp"
         android:background="@drawable/border"
         android:clickable="true"
-        android:text="@string/verify_email_text" />
+        android:text="@string/verify_email_text"
+        android:textColor="@color/colorText" />
 
 
     <EditText
