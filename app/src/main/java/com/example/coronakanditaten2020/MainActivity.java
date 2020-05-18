@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         text = spinner.getSelectedItem().toString();
         switch (view.getId()) {
             case R.id.diarrheaBox:
-                if(text.equals("Symptoms per day")){
+                if(text.equals(getString(R.string.per_day_symptoms))){
                     if (checked) {
                         statisticsFragment.showDiarrheaSeries();
                     } else {
@@ -249,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.runnyNoseBox:
-                if(text.equals("Symptoms per day")){
+                if(text.equals(getString(R.string.per_day_symptoms))){
                     if (checked) {
                         statisticsFragment.showRunnyNoseSeries();
                     } else {
@@ -265,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.tirednessBox:
-                if(text.equals("Symptoms per day")){
+                if(text.equals(getString(R.string.per_day_symptoms))){
                     if (checked) {
                         statisticsFragment.showTirednessSeries();
                     } else {
@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.feverBox:
-                if(text.equals("Symptoms per day")){
+                if(text.equals(getString(R.string.per_day_symptoms))){
                     if (checked) {
                         statisticsFragment.showFeverSeries();
                     } else {
@@ -297,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.throatBox:
-                if(text.equals("Symptoms per day")){
+                if(text.equals(getString(R.string.per_day_symptoms))){
                     if (checked) {
                         statisticsFragment.showThroatSeries();
                     } else {
@@ -313,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.nasalConBox:
-                if(text.equals("Symptoms per day")){
+                if(text.equals(getString(R.string.per_day_symptoms))){
                     if (checked) {
                         statisticsFragment.showNasalConSeries();
                     } else {
@@ -329,7 +329,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.coughBox:
-                if(text.equals("Symptoms per day")){
+                if(text.equals(getString(R.string.per_day_symptoms))){
 
                     if (checked) {
                         statisticsFragment.showCoughSeries();
@@ -346,7 +346,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.headacheBox:
-                if(text.equals("Symptoms per day")){
+                if(text.equals(getString(R.string.per_day_symptoms))){
                     if (checked) {
                         statisticsFragment.showHeadacheSeries();
                     } else {
@@ -362,7 +362,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.breathingDiffBox:
-                if(text.equals("Symptoms per day")){
+                if(text.equals(getString(R.string.per_day_symptoms))){
                     if (checked) {
                         statisticsFragment.showBreathingDiffSeries();
                     } else {
