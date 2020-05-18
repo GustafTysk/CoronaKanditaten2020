@@ -318,10 +318,7 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
             return list;
         }
         else{
-            Toast toast = Toast.makeText(getContext(),"There are no reports for that date", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
-            toast.show();
-            dateDisplayheatmap.setText(date+"\nNo reports");
+            dateDisplayheatmap.setText(date+"\n" + getString(R.string.no_reports));
 
             return listReserve;
         }

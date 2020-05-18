@@ -1,0 +1,230 @@
+<resources>
+
+    // VARIOUS
+    <string name="app_name">CoronaKanditaten2020</string>
+
+    <string name="your_location">Din Plats</string>
+    <string name="username">Användarnamn</string>
+    <string name="title">Titel</string>
+    <string name="timestamp">tid</string>
+    <string name="text">Text</string>
+    <string name="likes">Gillningar</string>
+    <string name="category">Kategori</string>
+    <string name="id">Id</string>
+    <string name="parent_id">ParentId</string>
+    <string name="selected_dates">Valda Datum</string>
+
+
+
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Lösenord</string>
+    <string name="error_with_server">Error med servern</string>
+    <string name="fail_connect_to_server">Kunde inte ansluta till servern</string>
+    <string name="no_back_action">Det finns ingen bakåt-funktion</string>
+
+    <string name="btn_cancel">Avbryt</string>
+
+
+    // LOGIN PAGE
+    <string name="btn_login">Logga in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Lösenord</string>
+    <string name="action_sign_in">Logga in</string>
+    <string name="action_sign_in_short">Logga in</string>
+    <string name="welcome">Välkommen</string>
+    <string name="forgot_password"><u>Glömt ditt lösenord? Klicka här</u></string>
+    <string name="invalid_email">Ogiltig Mail</string>
+    <string name="invalid_password">Lösenordet måste vara längre än fyra(4) karaktärer</string>
+    <string name="login_failed">Kunde inte logga in</string>
+
+    <string name="login_success">Loggat in</string>
+
+    <string name="btn_to_register_page">Registrera användare</string>
+
+
+
+
+    // REGISTER PAGE
+    <string name="page_name_register">Registrera användare</string>
+    <string name="hint_username">Användarnamn</string>
+    <string name="gender_male">Man</string>
+    <string name="gender_female">Kvinna</string>
+    <string name="gender_other">Annat</string>
+    <string name="hint_age">Ange födelsedatum</string>
+    <string name="btn_register">Registrera</string>
+    <string name="btn_to_login">Tillbaka till login</string>
+
+    <string name="invalid_username">Ogiltigt användarnamn, måste överstiga en(1) karaktär</string>
+
+    <string name="invalid_gender">Ogiltigt kön, ange kön tack</string>
+    <string name="invalid_age">Ogiltig ålder, ange ålder tack</string>
+
+    <string name="verify_email">Verifiera mail</string>
+    <string name="verify_email_text">Ange verifikationskod\nskickad till din mail.\n <i>Klicka här för att \nskicka ny kod.</i></string>
+    <string name="hint_verification_code">Verifikationskod</string>
+    <string name="btn_verify">Verifiera</string>
+    <string name="error_wrong_code">Fel kod</string>
+
+    <string name="fail_create_user">Kunde inte skapa användare</string>
+    <string name="success_create_user">Ny användare skapad</string>
+
+    // RESET PASSWORD PAGE
+    <string name="page_name_reset_password">Återställ lösenord</string>
+    <string name="btn_send_code">Skicka verifikationskod till mail</string>
+    <string name="btn_resend_code">Skicka ny verifikationskod</string>
+    <string name="sent_email_toast"> Verifikationskod skickad till din mail</string>
+    <string name="hint_confirmation_code">Verifikationskod</string>
+    <string name="wrong_email">Ingen användare kopplad till denna mail</string>
+
+    <string name="hint_new_password">Nytt lösenord</string>
+    <string name="btn_change_password">Ändra lösenord</string>
+
+
+    // START PAGE
+    <string name="page_name_start_page">Startsida</string>
+    <string name="log_out">Logga ut</string>
+    <string name="success_logout">Loggade ut</string>
+    <string name="fail_logout">Kunde inte logga ut, försök igen senare</string>
+
+    // MY SETTINGS PAGE
+    <string name="fragment_my_settings">Inställningar</string>
+
+    <string name="section_notifications">Notifikationer</string>
+    <string name="title_enable_notifications">Slå på notifikationer</string>
+
+    <string name="section_user">Användare</string>
+    <string name="title_change_username">Ändra användarnamn</string>
+    <string name="summary_change_username">Det är detta namn som syns i forumet</string>
+    <string name="title_dialog_change_username">Ditt användarnamn</string>
+    <string name="on_changed_username">Ditt användarnamn är: </string>
+    <string name="on_no_change_username">Ange nytt användarnamn</string>
+    <string name="on_invalid_username">Ogiltigt användarnamn, välj ett annat</string>
+
+    <string name="title_remove_user_locations">Radera raporterade platser</string>
+    <string name="summary_remove_user_locations">Raderar alla dina registrerade platser från databasen</string>
+    <string name="title_remove_user_posts">Radera inlägg</string>
+    <string name="summary_remove_user_posts">Raderar alla dina inlägg i forumet</string>
+    <string name="title_remove_user">Radera användare</string>
+    <string name="summary_remove_user">Raderar användare och raderar all din data</string>
+
+    <string name="alert_title_locations">Radera alla raporterade platser</string>
+    <string name="alert_message_locations">Är du säker på att du vill radera alla dina raporterade platser?</string>
+    <string name="alert_toast_locations">Platsdata raderad</string>
+    <string name="alert_title_posts">Radera inlägg</string>
+    <string name="alert_message_posts">Är du säker på att du vill radera all dina skrivna inlägg?</string>
+    <string name="alert_toast_posts">Inlägg raderade</string>
+    <string name="alert_title_user">Radera användare</string>
+    <string name="alert_message_user">Är du säker på att du vill radera din användare och all data?</string>
+
+
+    <string name="section_help">Hjälp</string>
+    <string name="title_send_feedback">Skicka återkoppling</string>
+    <string name="summary_send_feedback">Raportera tekniska problem eller kom med förslag på nya funktioner</string>
+
+    // STATISTICS PAGE
+    <string name="fragment_statistics">Statistik</string>
+
+    <string name="total_symptoms">Totala symtom</string>
+    <string name="per_day_symptoms">Symtom per dag</string>
+
+    <string name="age_years">Ålder (år)</string>
+    <string name="number_of_female_users">Kvinna</string>
+    <string name="number_of_male_users">Man</string>
+    <string name="number_of_other_users">Annan</string>
+    <string name="age_0_18">0-18</string>
+    <string name="age_19_40">19-40</string>
+    <string name="age_41_64">41-64</string>
+    <string name="age_over_65">65+</string>
+
+    <string-array name = "numbers">
+        <item>Totala symtom</item>
+        <item>Symtom per dag</item>
+    </string-array>
+
+    // HEATMAP PAGE
+    <string name="fragment_heatmap">Värmekarta</string>
+
+    <string name="btn_zoom_in_on_your_location">Zooma in på din plats</string>
+
+    <string name="no_reports">Inga rapporter</string>
+
+    // REPORT SYMPTOMS PAGE
+    <string name="fragment_report_symptoms">Rapportera symtom</string>
+
+    <string name="report_symptoms_information">Första steget är att ange dina nuvarande symtom. Detta gör du genom att klicka på de röda cirklarna undervarje symtom.
+        \n Antal röda cirklar:\n 0 = Inga symtom                               1 = Milda symtom \n 2 = Medelhöga symtom                     3 = Mycket symtom"</string>
+
+    <string name="symptom_fever">Feber</string>
+    <string name="symptom_cough">Hosta</string>
+    <string name="symptom_breathing">Andnings-\nsvårigheter</string>
+    <string name="symptom_sore_throat">Halsont</string>
+    <string name="symptom_nasal_congestion">Nästäppa</string>
+    <string name="symptom_runny_nose">Snuva</string>
+    <string name="symptom_tiredness">Trötthet</string>
+    <string name="symptom_headache">Huvudvärk</string>
+    <string name="symptom_diarrhea">Diarré</string>
+
+    <string name="dialog_fever">Fever is bad </string>
+    <string name="dialog_cough">Cough is bad </string>
+    <string name="dialog_breathing">Breathing is bad </string>
+    <string name="dialog_sore_throat">Sore Throat is bad </string>
+    <string name="dialog_nasal_congestion">Nasal Congestion is bad </string>
+    <string name="dialog_runny_nose">Runny Nose is bad </string>
+    <string name="dialog_tiredness">Tiredness is bad </string>
+    <string name="dialog_headache">Headache is bad </string>
+    <string name="dialog_diarrhea">Diarrhea is bad </string>
+
+    <string name="btn_clear">Rensa</string>
+    <string name="btn_next_page_rl">Nästa steg</string>
+
+    // REPORT LOCATION PAGE
+    <string name="fragment_report_location">Rapportera plats</string>
+    <string name="btn_update_locations">Ladda upp raporterade platser</string>
+    <string name="btn_previous_page_rs">Tillbaka till Rapportera Symtom</string>
+    <string name="btn_add_location">Lägg till ytterligare plats</string>
+    <string name="btn_commit_location">Ange plats</string>
+
+    <string name="no_locations_to_add">Inga platser att lägga till</string>'
+    <string name="fail_add_user_locations">Misslyckades med att ladda upp platser, försök igen senare</string>
+    <string name="success_add_user_locations">Laddade upp platser</string>
+
+    <string name="no_location_added">Ange plats för plats 1 innan du lägger till en ny</string>
+    <string name="max_number_of_locations_reached">Max antal platser tillagda</string>
+    <string name="already_empty_location">Fyll i tomma platser innan du lägger till en ny</string>
+
+    <string name="hint_location1">Plats 1</string>
+    <string name="hint_location2">Plats 2</string>
+    <string name="hint_location3">Plats 3</string>
+    <string name="hint_location4">Plats 4</string>
+    <string name="hint_location5">Plats 5</string>
+    <string name="hint_location6">Plats 6</string>
+    <string name="hint_location7">Plats 7</string>
+    <string name="hint_location8">Plats 8</string>
+    <string name="hint_location9">Plats 9</string>
+    <string name="hint_location10">Plats 10</string>
+    <string name="hint_location11">Plats 11</string>
+    <string name="hint_location12">Plats 12</string>
+
+    // FORUM PAGE
+    <string name="fragment_forum">Forum</string>
+
+    <string name="btn_most_liked">Mest gillade</string>
+    <string name="btn_recommended">Rek</string>
+    <string name="btn_all">Alla</string>
+    <string name="post_hint_title">Titel</string>
+    <string name="post_hint_message">Meddelande</string>
+    <string name="post_hint_username">Användarnamn</string>
+    <string name="btn_post">Inlägg</string>
+
+    <string name="fail_to_get_post">Misslyckades att hämta inlägg</string>
+    <string name="fail_to_add_post">Misslyckades med att lägga upp inlägg</string>
+    <string name="fail_to_add_like">Misslyckades att gilla inlägg</string>
+
+    <string name="success_to_get_most_liked_post">Mest gillade inlägget</string>
+
+    <string name="help">Hjälp</string>
+    <string name="recommendation">Rekommendationer och varningar </string>
+    <string name="Resend_code">Skicka ny verifikationskoden</string>
+
+
+</resources>
