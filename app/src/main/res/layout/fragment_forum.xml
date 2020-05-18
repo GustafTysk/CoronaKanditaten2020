@@ -158,6 +158,16 @@
                 app:layout_constraintStart_toEndOf="@+id/btnUserPosts"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+            <ImageView
+                android:id="@+id/forumInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView"
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="@+id/textView"
+                app:srcCompat="@drawable/info_i_v2_crop_new" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 <!--        </androidx.core.widget.NestedScrollView>-->

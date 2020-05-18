@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0C0C0C</color>
+    <color name="colorPrimaryDark">#010403</color>
+    <color name="colorAccent">#0E0E0E</color>
+    <color name="limeGreen">#000000</color>
+    <color name="red">#FF231E</color>
+    <color name="white">#FEFFFFFF</color>
+    <color name="white2">#33FFFFFF</color>
+
+    <color name="grey">#0A1647</color>
+
+    <color name="buttonEnd">#11635C</color>
+    <color name="buttonCenter">#16837A</color>
+    <color name="buttonStart">#11635C</color>
+
+    <color name="buttonEnd_light">#18988D</color>
+    <color name="buttonCenter_light">#1EBAAD</color>
+    <color name="buttonStart_light">#18988D</color>
+
+</resources>

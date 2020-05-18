@@ -179,6 +179,10 @@
 
     // REPORT LOCATION PAGE
     <string name="fragment_report_location">Report location</string>
+
+    <string name="info_title_report_location">Report location info title</string>
+    <string name="info_message_report_location">Report location info message</string>
+
     <string name="btn_update_locations">Upload locations to database</string>
     <string name="btn_previous_page_rs">Back to Report Symptoms</string>
     <string name="btn_add_location">Add another location</string>
@@ -207,6 +211,9 @@
 
     // FORUM PAGE
     <string name="fragment_forum">Forum</string>
+
+    <string name="info_title_forum">Forum info title</string>
+    <string name="info_message_forum">Forum info message</string>
 
     <string name="btn_most_liked">Most liked</string>
     <string name="btn_recommended">Rec</string>
