@@ -34,7 +34,7 @@ public class Datahandler {
     Credentials credentials;
     Retrofit retrofit;
     ClientAPI clientAPI;
-    String baseurl = "http://192.168.42.145:8080/tja/webapi/";
+    String baseurl = "http://192.168.42.145:8080/tjaa/webapi/";
     ArrayList<Post> topPost;
 
     public Datahandler() {
