@@ -88,10 +88,10 @@
         android:layout_width="132dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
-        android:hint="Location 2"
         android:background="@drawable/edittext_outline"
-        android:paddingTop="5dp"
+        android:hint="@string/hint_location2"
         android:paddingLeft="6dp"
+        android:paddingTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/textViewLocation1"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation1" />
 
@@ -133,10 +133,10 @@
         android:layout_width="132dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
-        android:hint="Location 3"
         android:background="@drawable/edittext_outline"
-        android:paddingTop="5dp"
+        android:hint="@string/hint_location3"
         android:paddingLeft="6dp"
+        android:paddingTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/textViewLocation2"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation2" />
 
@@ -178,10 +178,10 @@
         android:layout_width="132dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
-        android:hint="Location 4"
         android:background="@drawable/edittext_outline"
-        android:paddingTop="5dp"
+        android:hint="@string/hint_location4"
         android:paddingLeft="6dp"
+        android:paddingTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/textViewLocation3"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation3" />
 
@@ -223,10 +223,10 @@
         android:layout_width="132dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
-        android:hint="Location 5"
         android:background="@drawable/edittext_outline"
-        android:paddingTop="5dp"
+        android:hint="@string/hint_location5"
         android:paddingLeft="6dp"
+        android:paddingTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/textViewLocation4"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation4" />
 
@@ -268,10 +268,10 @@
         android:layout_width="132dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
-        android:hint="Location 6"
         android:background="@drawable/edittext_outline"
-        android:paddingTop="5dp"
+        android:hint="@string/hint_location6"
         android:paddingLeft="6dp"
+        android:paddingTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/textViewLocation5"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation5" />
 
@@ -313,10 +313,10 @@
         android:layout_width="132dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
-        android:hint="Location 7"
         android:background="@drawable/edittext_outline"
-        android:paddingTop="5dp"
+        android:hint="@string/hint_location7"
         android:paddingLeft="6dp"
+        android:paddingTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/textViewLocation6"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation6" />
 
@@ -359,10 +359,10 @@
         android:layout_width="132dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
-        android:hint="Location 8"
         android:background="@drawable/edittext_outline"
-        android:paddingTop="5dp"
+        android:hint="@string/hint_location8"
         android:paddingLeft="6dp"
+        android:paddingTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/textViewLocation7"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation7" />
 
@@ -405,10 +405,10 @@
         android:layout_width="132dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
-        android:hint="Location 9"
         android:background="@drawable/edittext_outline"
-        android:paddingTop="5dp"
+        android:hint="@string/hint_location9"
         android:paddingLeft="6dp"
+        android:paddingTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/textViewLocation8"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation8" />
 
@@ -451,10 +451,10 @@
         android:layout_width="132dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
-        android:hint="Location 10"
         android:background="@drawable/edittext_outline"
-        android:paddingTop="5dp"
+        android:hint="@string/hint_location10"
         android:paddingLeft="6dp"
+        android:paddingTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/textViewLocation9"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation9" />
 
@@ -497,10 +497,10 @@
         android:layout_width="132dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
-        android:hint="Location 11"
         android:background="@drawable/edittext_outline"
-        android:paddingTop="5dp"
+        android:hint="@string/hint_location11"
         android:paddingLeft="6dp"
+        android:paddingTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/textViewLocation10"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation10" />
 
@@ -543,10 +543,10 @@
         android:layout_width="132dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
-        android:hint="Location 12"
         android:background="@drawable/edittext_outline"
-        android:paddingTop="5dp"
+        android:hint="@string/hint_location12"
         android:paddingLeft="6dp"
+        android:paddingTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/textViewLocation11"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation11" />
 
@@ -629,10 +629,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewLocation1"
-        app:layout_constraintStart_toStartOf="@+id/textViewReportLocation"
-        app:layout_constraintTop_toBottomOf="@+id/textViewReportLocation"
-        app:srcCompat="@drawable/info_i_v2_crop_new" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewReportLocation"
+        app:layout_constraintStart_toEndOf="@+id/textViewReportLocation"
+        app:layout_constraintTop_toTopOf="@+id/textViewReportLocation"
+        app:srcCompat="@drawable/info_icon_32x32" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -103,7 +103,10 @@
 
     <SeekBar
         android:id="@+id/seekBarHeatmap"
-        style="@style/Widget.AppCompat.SeekBar"
+
+        android:tickMark="@drawable/seekbar_custom_tick"
+        android:progressDrawable="@drawable/seekbar_custom_progress"
+        android:thumb="@drawable/seekbar_custom_thumb"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:max="30"

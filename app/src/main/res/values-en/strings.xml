@@ -136,9 +136,9 @@
     <string name="number_of_female_users">Female</string>
     <string name="number_of_male_users">Male</string>
     <string name="number_of_other_users">Other</string>
-    <string name="age_0_18">0-18</string>
-    <string name="age_19_40">19-40</string>
-    <string name="age_41_64">41-64</string>
+    <string name="age_0_18">0–18</string>
+    <string name="age_19_40">19–40</string>
+    <string name="age_41_64">41–64</string>
     <string name="age_over_65">65+</string>
 
     <string-array name = "numbers">
