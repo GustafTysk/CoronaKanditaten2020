@@ -96,7 +96,7 @@ public interface ClientAPI {
     Call<ArrayList<Post>> GetOwnPosts(@Header("authorization") String Auth,@Path("email") String email);
 
     @GET("post/own/liked/{email}/security")
-    Call<ArrayList<Post>> GetOwnLikedPosts(@Header("authorization") String Auth,@Path("email") String email);
+    Call<ArrayList<Integer>> GetOwnLikedPosts(@Header("authorization") String Auth,@Path("email") String email);
 
     @POST("post/{email}/security")
     Call<Boolean> creatpost(@Header("authorization")String Auth, @Path("email") String email, @Body Post thePost);
