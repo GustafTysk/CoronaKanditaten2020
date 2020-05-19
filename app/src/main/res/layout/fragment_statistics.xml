@@ -323,9 +323,9 @@
             android:id="@+id/diarrheaBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint = "#000000"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:buttonTint="#000000"
             android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_diarrhea"
@@ -337,7 +337,8 @@
             android:id="@+id/runnyNoseBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint = "#32cd32"
+            android:layout_marginStart="50dp"
+            android:buttonTint="#32cd32"
             android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_runny_nose"
@@ -361,13 +362,14 @@
             android:id="@+id/tirednessBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:buttonTint="#ffff00"
-            android:layout_marginStart="32dp"
             android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_tiredness"
             android:textColor="@color/colorText"
             app:layout_constraintBaseline_toBaselineOf="@+id/runnyNoseBox"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/runnyNoseBox" />
 
         <CheckBox
@@ -379,11 +381,18 @@
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_breathing"
             android:textColor="@color/colorText"
-            app:layout_constraintBaseline_toBaselineOf="@+id/headacheBox"
-            app:layout_constraintStart_toStartOf="@+id/nasalConBox" />
+            app:layout_constraintBottom_toBottomOf="@+id/headacheBox"
+            app:layout_constraintStart_toStartOf="@+id/nasalConBox"
+            app:layout_constraintTop_toTopOf="@+id/headacheBox" /><![CDATA[
             app:layout_constraintBottom_toBottomOf="@+id/throatBox"
             app:layout_constraintStart_toStartOf="@+id/tirednessBox"
             app:layout_constraintTop_toTopOf="@+id/throatBox" />
+
+        app:layout_constraintBottom_toBottomOf="@+id/headacheBox"
+            app:layout_constraintStart_toStartOf="@+id/breathingDiffBox"
+            app:layout_constraintTop_toTopOf="@+id/headacheBox" />
+
+        ]]>
 
         <CheckBox
             android:id="@+id/nasalConBox"
@@ -394,11 +403,10 @@
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_nasal_congestion"
             android:textColor="@color/colorText"
-            app:layout_constraintBaseline_toBaselineOf="@+id/throatBox"
-            app:layout_constraintStart_toStartOf="@+id/tirednessBox" />
-            app:layout_constraintBottom_toBottomOf="@+id/headacheBox"
-            app:layout_constraintStart_toStartOf="@+id/breathingDiffBox"
-            app:layout_constraintTop_toTopOf="@+id/headacheBox" />
+            app:layout_constraintBottom_toBottomOf="@+id/throatBox"
+            app:layout_constraintStart_toStartOf="@+id/tirednessBox"
+            app:layout_constraintTop_toTopOf="@+id/throatBox"
+            app:layout_constraintVertical_bias="0.5" />
 
         <CheckBox
             android:id="@+id/feverBox"
