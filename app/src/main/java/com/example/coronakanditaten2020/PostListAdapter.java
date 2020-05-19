@@ -39,7 +39,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     Datahandler datahandler;
     String title;
     String category;
-    public ArrayList<Integer>idList = new ArrayList<Integer>();
+    public ArrayList<Integer>idList ;
 
     static class ViewHolder {
         TextView username;
@@ -93,14 +93,14 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             holder.postTopSection = (LinearLayout) convertView.findViewById(R.id.postTopSection);
             holder.postBottomSection = (LinearLayout) convertView.findViewById(R.id.postBottomSection);
 
-            if(getItem(position).getId() == 30){
+            if(getItem(position).getEmail()==datahandler.user.getEmail()){
                 holder.postButtonRemove = (Button) convertView.findViewById(R.id.postButtonRemove);
                 holder.postButtonRemove.setVisibility(convertView.VISIBLE);
                 holder.postButtonRemove.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        thePosts.remove(getItem(position));
-                        notifyDataSetChanged();
+
+                        deletepost(getItem(position),position);
                     }
                 });
             }
@@ -157,11 +157,11 @@ public class PostListAdapter extends ArrayAdapter<Post> {
 
 
 
-    public void likepost(Post post, int position){
-        Call<Boolean> likepost=datahandler.clientAPI.likePost(
+    public void unlikepost(Post post, int position){
+        Call<Boolean> unlikepost=datahandler.clientAPI.unlikePost(
                 datahandler.credentials.encrypt,
                 datahandler.credentials.Email,post.id);
-        likepost.enqueue(new Callback<Boolean>() {
+        unlikepost.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if(!response.isSuccessful()){
@@ -175,6 +175,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
                     for (Integer int_test : idList){
                         if(int_test == getItem(position).getId()){
                             idList.remove(int_test);
+                            datahandler.likeid.remove(int_test);
                         }
                     }
 
@@ -204,6 +205,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
                 else {
 
                     thePosts.remove(getItem(position));
+                    datahandler.viewPosts.remove(getItem(position));
                     notifyDataSetChanged();
 
 
@@ -217,11 +219,11 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         });
     }
 
-    public void unlikepost(Post post, int position){
-        Call<Boolean> likepost=datahandler.clientAPI.likePost(
+    public void likepost(Post post, int position){
+        Call<Boolean> likePost=datahandler.clientAPI.likePost(
                 datahandler.credentials.encrypt,
                 datahandler.credentials.Email,post.id);
-        likepost.enqueue(new Callback<Boolean>() {
+        likePost.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if(!response.isSuccessful()){
@@ -231,6 +233,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
                     likes = likes + 1;
                     getItem(position).setLikes(likes);
                     idList.add(getItem(position).getId());
+                    datahandler.likeid.add(getItem(position).getId());
 
                 }
             }

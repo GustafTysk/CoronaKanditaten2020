@@ -85,16 +85,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         datahandler.credentials=new Credentials("5fgg","frff");
-
+        //Put this on to work with database
        // datahandler.credentials=new Credentials(intent.getStringExtra("ema"),intent.getStringExtra("pass"));
         //System.out.println(datahandler.credentials.Email);
        // System.out.println(datahandler.credentials.Password);
-
+        //
         datahandler.getserveruserinfo("");
         datahandler.getTopPost(100);
         datahandler.getserveruser();
         datahandler.getalllserverocations("");
         datahandler.getuserserverlocations();
+        datahandler.setupplike();
         datahandler.user = new User ("Testperson", "user@gmail.com", 25, "male", "password123", "25 jan 2019");
         setContentView(R.layout.activity_main);
 
