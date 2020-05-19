@@ -56,8 +56,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
         btnLogin.setOnClickListener(this);
         btnToRegister = (Button) view.findViewById(R.id.btnToRegister);
         btnToRegister.setOnClickListener(this);
-        btnLoginToStartPage = (Button) view.findViewById(R.id.btnLoginToStartPage);
-        btnLoginToStartPage.setOnClickListener(this);
+        //btnLoginToStartPage = (Button) view.findViewById(R.id.btnLoginToStartPage);
+        //btnLoginToStartPage.setOnClickListener(this);
         textEmail = (EditText) view.findViewById(R.id.username);
         textPassword = (EditText) view.findViewById(R.id.password);
 
@@ -138,9 +138,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
             case R.id.btnToRegister:
                 intent = new Intent(getActivity(), RegisterActivity.class);
                 break;
+                /*
             case R.id.btnLoginToStartPage:
                 intent = new Intent(getActivity(),MainActivity.class);
                 break;
+                */
+
             case R.id.btnChangeLanguage:
                 changeLanguage();
 
