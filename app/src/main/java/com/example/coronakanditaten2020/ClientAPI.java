@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.internal.http.HttpHeaders;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -64,6 +65,9 @@ public interface ClientAPI {
     @DELETE("User/{email}/security")
     Call<Boolean> Deleteuser(@Header("authorization") String Auth,@Path("email") String email);
 
+    @PUT("newUsername/{email}/{newUsername}/security")
+    Call<Boolean> changeUserName(@Header("authorization") String Auth,@Path("email") String email,@Path("newUsername") String newUsername);
+
     @POST("User/ver/{email}")
     Call<Boolean> verifyemail(@Path("email") String email);
 
@@ -100,8 +104,25 @@ public interface ClientAPI {
     @POST("post/like/{email}/{likedid}/security")
     Call<Boolean> likePost(@Header("authorization")String Auth,@Path("email") String email, @Path("likedid") Integer likepostid);
 
+
+
     @POST("post/answer/{email}/security")
     Call<Boolean> creatanswerpost(@Header("authorization")String Auth, @Path("email") String email, @Body Post thePost);
+
+    @DELETE("post/deleteUserPosts/{email}/security")
+    Call<Boolean> deleteUserPosts(@Header("authorization")String Auth, @Path("email") String email);
+
+
+    @DELETE("post/delete/{email}/security")
+    Call<Boolean>  DeletePost(@Header("authorization")String Auth, @Path("email") String email,Post post);
+
+    @GET("post/search/{search}/security")
+    Call<ArrayList<Post>> GetPostBySearch(@Path("search") String search);
+
+    @DELETE("post/unlike/{email}/{unlikeid}/security")
+    Call<Boolean> unlikePost(@Header("authorization")String Auth,@Path("email") String email, @Path("likedid") Integer likepostid);
+
+
 
 
 

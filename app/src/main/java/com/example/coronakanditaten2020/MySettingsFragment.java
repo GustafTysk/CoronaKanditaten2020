@@ -1,6 +1,7 @@
 package com.example.coronakanditaten2020;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,10 @@ import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MySettingsFragment extends PreferenceFragmentCompat implements View.OnClickListener, SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener {
@@ -26,7 +31,8 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
         setPreferencesFromResource(R.xml.fragment_my_settings, rootKey);
 
         notificationsPreference = findPreference("notifications");
-        usernamePreference = findPreference("signature");
+        usernamePreference = findPreference("username");
+
         removeUserLocationsPreference = findPreference("remove_user_locations");
         removeUserLocationsPreference.setOnPreferenceClickListener(this);
         removeUserPostsPreference = findPreference("remove_user_posts");
@@ -41,11 +47,15 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
         switch (key){
             case "notifications":
                 if (notificationsPreference.isChecked()){
-                    Toast.makeText(getContext(),"Notifications enabled", Toast.LENGTH_SHORT);
+                    Toast.makeText(getContext(),"Notifications enabled", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(getContext(),"Notifications disabled", Toast.LENGTH_SHORT);
+                    Toast.makeText(getContext(),"Notifications disabled", Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case "username":
+                changeUsername("username");
+                break;
+
         }
     }
 
@@ -100,20 +110,151 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
         return false;
     }
 
-    public void removeUserLocations(){
-        // TODO ta bort alla user locations
 
-        Toast.makeText(getContext(),getString(R.string.alert_toast_locations),Toast.LENGTH_SHORT);
+    private void changeUsername(String key){
+        if (key.equals("username")){
+            if (usernamePreference instanceof EditTextPreference){
+                EditTextPreference editTextPreference =  (EditTextPreference)usernamePreference;
+                if (editTextPreference.getText().trim().length() > 0){
+                    String newUsername = editTextPreference.getText();
+                    editTextPreference.setSummary(getString(R.string.on_changed_username) + "  " + editTextPreference.getText());
+
+                    // TODO set USERS username = newUsername
+                }else{
+                    editTextPreference.setSummary(getString(R.string.on_no_change_username));
+                    Toast.makeText(getContext(),getString(R.string.invalid_username), Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
+
+    public void removeUserLocations(){
+
+        Call<Boolean> removelocations = ((MainActivity) getActivity()).datahandler.clientAPI.removeUserlocations(
+                ((MainActivity) getActivity()).datahandler.credentials.encrypt, ((MainActivity) getActivity()).datahandler.credentials.Email);
+        removelocations.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getContext(),getString(R.string.error_with_server),Toast.LENGTH_SHORT);
+                }
+
+                else{
+                    Toast.makeText(getContext(),getString(R.string.alert_toast_locations),Toast.LENGTH_SHORT);
+                    ((MainActivity) getActivity()).datahandler.Userlocations=null;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(getContext(),getString(R.string.fail_connect_to_server),Toast.LENGTH_SHORT);
+
+                ((MainActivity) getActivity()).datahandler.Userlocations=null;
+            }
+        });
+
+
+        Toast.makeText(getContext(),getString(R.string.alert_toast_locations),Toast.LENGTH_LONG).show();
     }
 
     public void removeUserPosts(){
-        // TODO ta bort alla user posts
+        Call<Boolean> removeuseposts=((MainActivity) getActivity()).datahandler.clientAPI.deleteUserPosts(((MainActivity) getActivity()).datahandler.credentials.encrypt,
+                ((MainActivity) getActivity()).datahandler.credentials.Email);
+        removeuseposts.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getContext(),getString(R.string.error_with_server),Toast.LENGTH_SHORT);
+                }
 
-        Toast.makeText(getContext(),getString(R.string.alert_toast_posts),Toast.LENGTH_SHORT);
+                else{
+                    Toast.makeText(getContext(),getString(R.string.alert_toast_posts),Toast.LENGTH_SHORT);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(getContext(),getString(R.string.fail_connect_to_server),Toast.LENGTH_SHORT);
+
+                ((MainActivity) getActivity()).datahandler.Userlocations=null;
+            }
+        });
+
+        Toast.makeText(getContext(),getString(R.string.alert_toast_posts),Toast.LENGTH_LONG).show();
+
     }
 
     public void deleteUser(){
-        // TODO ta bort user
+        Call<Boolean> removelocations = ((MainActivity) getActivity()).datahandler.clientAPI.removeUserlocations(
+                ((MainActivity) getActivity()).datahandler.credentials.encrypt, ((MainActivity) getActivity()).datahandler.credentials.Email);
+        removelocations.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getContext(),getString(R.string.error_with_server),Toast.LENGTH_SHORT);
+                }
+
+                else{
+
+                    ((MainActivity) getActivity()).datahandler.Userlocations=null;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(getContext(),getString(R.string.fail_connect_to_server),Toast.LENGTH_SHORT);
+
+            }
+        });
+
+        Call<Boolean> removeuseposts=((MainActivity) getActivity()).datahandler.clientAPI.deleteUserPosts(((MainActivity) getActivity()).datahandler.credentials.encrypt,
+                ((MainActivity) getActivity()).datahandler.credentials.Email);
+        removeuseposts.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getContext(),getString(R.string.error_with_server),Toast.LENGTH_SHORT);
+                }
+
+                else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(getContext(),getString(R.string.fail_connect_to_server),Toast.LENGTH_SHORT);
+
+            }
+        });
+
+        Call<Boolean> removeuser=((MainActivity) getActivity()).datahandler.clientAPI.Deleteuser(((MainActivity) getActivity()).datahandler.credentials.encrypt,
+                ((MainActivity) getActivity()).datahandler.credentials.Email);
+        removeuser.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getContext(),getString(R.string.error_with_server),Toast.LENGTH_SHORT);
+                }
+
+                else{
+                    Toast.makeText(getContext(),getString(R.string.alert_message_user),Toast.LENGTH_SHORT);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(getContext(),getString(R.string.fail_connect_to_server),Toast.LENGTH_SHORT);
+
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
     }
 
     @Override

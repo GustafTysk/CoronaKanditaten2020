@@ -5,23 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/grey">
+    android:background="@color/colorBackground">
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 <androidx.core.widget.NestedScrollView
 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey">
+    android:background="@color/colorBackground">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/locationImageMap"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/colorBackground"
     tools:context=".ReportLocationFragment">
 
     <TextView
@@ -31,6 +28,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/fragment_report_location"
         android:textAllCaps="true"
+        android:textColor="@color/colorTextTitle"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -628,6 +626,16 @@
         app:layout_constraintStart_toStartOf="@+id/textViewLocation1"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation12" />
 
+    <ImageView
+        android:id="@+id/reportLocationInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewLocation1"
+        app:layout_constraintStart_toStartOf="@+id/textViewReportLocation"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReportLocation"
+        app:srcCompat="@drawable/info_i_v2_crop_new" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
@@ -637,7 +645,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/quantum_grey400"
+            android:background="@color/colorBackgroundNavBar"
             app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
             app:menu="@menu/bottom_navigation_menu" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,10 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class PostListAdapter extends ArrayAdapter<Post> {
 
     private static final String tag = "PostListAdapter";
@@ -30,7 +35,10 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     private int mResource;
     private int lastPostion = -1;
     private int likes;
+    private ArrayList<Post> thePosts;
+    Datahandler datahandler;
     String title;
+    String category;
     public ArrayList<Integer>idList = new ArrayList<Integer>();
 
     static class ViewHolder {
@@ -41,14 +49,19 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         TextView category;
         LinearLayout postTopSection;
         LinearLayout postBottomSection;
+        LinearLayout postWhole;
         Button postLikeButton;
+        Button postButtonRemove;
 
     }
 
-    public PostListAdapter(Context context, int resource, ArrayList<Post> objects) {
+    public PostListAdapter(Context context, int resource, ArrayList<Post> objects, Datahandler datahandler) {
         super(context, resource, objects);
         this.mContext = context;
         this.mResource = resource;
+        this.thePosts = objects;
+        this.datahandler=datahandler;
+        idList=this.datahandler.likeid;
     }
 
     @NonNull
@@ -59,7 +72,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         String timestamp = getItem(position).getTimestamp();
         String text = getItem(position).getText();
         likes = getItem(position).getLikes();
-        String category = getItem(position).getCategory();
+        category = getItem(position).getCategory();
         int id = getItem(position).getId();
         int parentId = getItem(position).getParentId();
 
@@ -76,28 +89,32 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             holder.category = (TextView) convertView.findViewById(R.id.postCategory);
             holder.text = (TextView) convertView.findViewById(R.id.postMessage);
             holder.likesShow = (TextView) convertView.findViewById(R.id.postLikes);
+            holder.postWhole = (LinearLayout) convertView.findViewById(R.id.postWhole);
             holder.postTopSection = (LinearLayout) convertView.findViewById(R.id.postTopSection);
             holder.postBottomSection = (LinearLayout) convertView.findViewById(R.id.postBottomSection);
+
+            if(getItem(position).getId() == 30){
+                holder.postButtonRemove = (Button) convertView.findViewById(R.id.postButtonRemove);
+                holder.postButtonRemove.setVisibility(convertView.VISIBLE);
+                holder.postButtonRemove.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        thePosts.remove(getItem(position));
+                        notifyDataSetChanged();
+                    }
+                });
+            }
+
             holder.postLikeButton = (Button) convertView.findViewById(R.id.postButtonLike);
             holder.postLikeButton.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
                     likes = getItem(position).getLikes();
                     if(idList.contains(getItem(position).getId())){
-                        likes = likes - 1;
-                        getItem(position).setLikes(likes);
-                        likes = getItem(position).getLikes();
-                        title = getItem(position).getTitle();
-                        for (Integer int_test : idList){
-                            if(int_test == getItem(position).getId()){
-                                idList.remove(int_test);
-                            }
-                        }
+                        likepost(getItem(position), position);
                     }
                     else{
-                        likes = likes + 1;
-                        getItem(position).setLikes(likes);
-                        idList.add(getItem(position).getId());
+                        unlikepost(getItem(position), position);
                     }
 
                     notifyDataSetChanged();
@@ -137,4 +154,96 @@ public class PostListAdapter extends ArrayAdapter<Post> {
 
         return convertView;
     }
+
+
+
+    public void likepost(Post post, int position){
+        Call<Boolean> likepost=datahandler.clientAPI.likePost(
+                datahandler.credentials.encrypt,
+                datahandler.credentials.Email,post.id);
+        likepost.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getContext(), "failed to like", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    likes = likes - 1;
+                    getItem(position).setLikes(likes);
+                    likes = getItem(position).getLikes();
+                    title = getItem(position).getTitle();
+                    for (Integer int_test : idList){
+                        if(int_test == getItem(position).getId()){
+                            idList.remove(int_test);
+                        }
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(getContext(), "failed to conect to server", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+    }
+
+    public void deletepost(Post post, int position){
+        Call<Boolean> removepost=datahandler.clientAPI.DeletePost(
+                datahandler.credentials.encrypt,
+                datahandler.credentials.Email,post);
+        removepost.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getContext(), "failed to remove user", Toast.LENGTH_LONG).show();
+                    System.out.println(response);
+                }
+                else {
+
+                    thePosts.remove(getItem(position));
+                    notifyDataSetChanged();
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void unlikepost(Post post, int position){
+        Call<Boolean> likepost=datahandler.clientAPI.likePost(
+                datahandler.credentials.encrypt,
+                datahandler.credentials.Email,post.id);
+        likepost.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getContext(), "failed to like", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    likes = likes + 1;
+                    getItem(position).setLikes(likes);
+                    idList.add(getItem(position).getId());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(getContext(), "failed to conect to server", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+    }
+
+
+
 }

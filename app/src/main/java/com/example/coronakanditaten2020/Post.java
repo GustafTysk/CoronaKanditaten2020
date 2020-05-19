@@ -114,6 +114,7 @@ public class Post implements Comparable<Post> {
         this.email = email;
     }
 
+
     public String printInformation(){
         return ("Username: "+this.username + "\n" + "title: " + this.title + "\n" + "Timestamp: " + this.timestamp + "\n" +"Text: " + this.text + "\n" + "Likes: " + this.likes + "\n" + "Category: " + this.category + "\n"
         + "Id: "+ this.id +"\n" + "ParentId: "+ "\n" + this.parentId);

@@ -59,6 +59,12 @@
     <string name="invalid_gender">Invalid Gender, please select your gender</string>
     <string name="invalid_age">Invalid Age, please enter your age</string>
 
+    <string name="verify_email">Verify email</string>
+    <string name="verify_email_text">Enter verification code\nsent to your email.\n <i>Click here to \nsend a new code.</i></string>
+    <string name="hint_verification_code">Verification code</string>
+    <string name="btn_verify">Verify</string>
+    <string name="error_wrong_code">Wrong code</string>
+
     <string name="fail_create_user">Unable to create user</string>
     <string name="success_create_user">Successfully created new user</string>
 
@@ -78,6 +84,7 @@
     <string name="page_name_start_page">Start page</string>
     <string name="log_out">Log Out</string>
     <string name="success_logout">Logged out successfully</string>
+    <string name="fail_logout">Could not Log Out, please try again later</string>
 
     // MY SETTINGS PAGE
     <string name="fragment_my_settings">Settings</string>
@@ -88,6 +95,11 @@
     <string name="section_user">User</string>
     <string name="title_change_username">Change username</string>
     <string name="summary_change_username">This is the name displayed in the Forum</string>
+    <string name="title_dialog_change_username">Your username</string>
+    <string name="on_changed_username">Your username is:  </string>
+    <string name="on_no_change_username">Enter new username</string>
+    <string name="on_invalid_username">Invalid username, pick something else</string>
+
     <string name="title_remove_user_locations">Remove reported locations</string>
     <string name="summary_remove_user_locations">Removes all your reported locations from the database</string>
     <string name="title_remove_user_posts">Remove posts</string>
@@ -107,6 +119,7 @@
 
     <string name="section_help">Help</string>
     <string name="title_send_feedback">Send feedback</string>
+    <string name="summary_send_feedback">Report technical issues or suggest new features</string>
 
     // STATISTICS PAGE
     <string name="fragment_statistics">Statistics</string>
@@ -133,6 +146,8 @@
 
     <string name="btn_zoom_in_on_your_location">Zoom in on your location</string>
 
+    <string name="no_reports">No reports</string>
+
     // REPORT SYMPTOMS PAGE
     <string name="fragment_report_symptoms">Report symptoms</string>
 
@@ -141,9 +156,9 @@
 
     <string name="symptom_fever">Fever</string>
     <string name="symptom_cough">Cough</string>
-    <string name="symptom_breathing">Difficulty\nBreathing</string>
+    <string name="symptom_breathing">Difficulty Breathing</string>
     <string name="symptom_sore_throat">Sore Throat</string>
-    <string name="symptom_nasal_congestion">Nasal\nCongestion</string>
+    <string name="symptom_nasal_congestion">Nasal Congestion</string>
     <string name="symptom_runny_nose">Runny Nose</string>
     <string name="symptom_tiredness">Tiredness</string>
     <string name="symptom_headache">Headache</string>
@@ -164,6 +179,10 @@
 
     // REPORT LOCATION PAGE
     <string name="fragment_report_location">Report location</string>
+
+    <string name="info_title_report_location">Report location info title</string>
+    <string name="info_message_report_location">Report location info message</string>
+
     <string name="btn_update_locations">Upload locations to database</string>
     <string name="btn_previous_page_rs">Back to Report Symptoms</string>
     <string name="btn_add_location">Add another location</string>
@@ -177,8 +196,24 @@
     <string name="max_number_of_locations_reached">Maximum number of locations added</string>
     <string name="already_empty_location">Fill in empty location above before adding another one</string>
 
+    <string name="hint_location1">Location 1</string>
+    <string name="hint_location2">Location 2</string>
+    <string name="hint_location3">Location 3</string>
+    <string name="hint_location4">Location 4</string>
+    <string name="hint_location5">Location 5</string>
+    <string name="hint_location6">Location 6</string>
+    <string name="hint_location7">Location 7</string>
+    <string name="hint_location8">Location 8</string>
+    <string name="hint_location9">Location 9</string>
+    <string name="hint_location10">Location 10</string>
+    <string name="hint_location11">Location 11</string>
+    <string name="hint_location12">Location 12</string>
+
     // FORUM PAGE
     <string name="fragment_forum">Forum</string>
+
+    <string name="info_title_forum">Forum info title</string>
+    <string name="info_message_forum">Forum info message</string>
 
     <string name="btn_most_liked">Most liked</string>
     <string name="btn_recommended">Rec</string>
@@ -196,9 +231,7 @@
 
     <string name="help">Help and tasks </string>
     <string name="recommendation">Recommendations and warnings </string>
-
-
-
+    <string name="Resend_code">resend verification code</string>
 
 
 </resources>

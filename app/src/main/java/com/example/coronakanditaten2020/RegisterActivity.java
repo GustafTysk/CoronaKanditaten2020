@@ -1,11 +1,9 @@
 package com.example.coronakanditaten2020;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -35,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Boolean passwordCorrect;
     private Boolean ageCorrect;
     private Boolean genderCorrect = false;
+    private Boolean emailVerified = false;
 
     private Button btnToLogin;
     private Button btnRegister;
@@ -45,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private String gender;
     private String password;
     private String timstamp;
+    private String verificationCode;
 
     private EditText textUsername;
     private EditText textEmail;
@@ -100,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 cal.set(Calendar.YEAR, year);
                 cal.set(Calendar.MONTH, month);
                 cal.set(Calendar.DAY_OF_MONTH, day);
-                textViewDate = day + "/" + month + "/" + year;
+                textViewDate = year + "/" + month + "/" + day;
                 textAge.setText(textViewDate);
                 calculateAge(cal.getTimeInMillis());
             }
@@ -140,20 +140,28 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 password = textPassword.getText().toString();
                 checkPassword(password);
 
+                checkGender();
+
                 email = textEmail.getText().toString().trim();
                 checkEmail(email);
 
-                checkGender();
+                if(emailCorrect) {
+                    sendVerificationCodeToEmail();
+                    verifyEmailDialog(); // Verifies email
+                }
 
 
-
-                if(emailCorrect && passwordCorrect && usernameCorrect && ageCorrect && genderCorrect){
+                if(emailCorrect && passwordCorrect && usernameCorrect && ageCorrect && genderCorrect && emailVerified){
                     Date date = new Date();
                     timstamp=date.toString();
                     System.out.println(timstamp);
                     User newUser = new User(username,email,age,gender,password,timstamp);
+                    sendVerificationCodeToEmail();
+                    verifyEmailDialog();
                     Call<Boolean> createuser = datahandler.clientAPI.createuser(newUser);
                     createuser.enqueue(new Callback<Boolean>() {
+
+
                         @Override
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                             if(!response.isSuccessful() || !response.body()){
@@ -258,7 +266,109 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    public void sendVerificationCodeToEmail(){
+
+        Call<Boolean> veremail=datahandler.clientAPI.verifyemail(email);
+        veremail.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), getString(R.string.error_with_server), Toast.LENGTH_LONG).show();
+                    System.out.println(response);
+                }
+                else if(response.body()==false){
+                    Toast.makeText(getApplicationContext(), "failed to send email", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    verifyEmailDialog();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+    }
+
+    public void verifyEmailDialog(){
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_verify_email);
+        dialog.setTitle(getString(R.string.verify_email));
+        dialog.setCancelable(true);
+
+        TextView textView = dialog.findViewById(R.id.infoAndResend);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendVerificationCodeToEmail();
+            }
+        });
+        Button buttonVerify = (Button) dialog.findViewById(R.id.Accept);
+        buttonVerify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText EditText = dialog.findViewById(R.id.verificationEditText);
+
+                String EditTextValue = EditText.getText().toString();
+                Date date = new Date();
+                timstamp=date.toString();
+                System.out.println(timstamp);
+                User newUser = new User(username,email,age,gender,password,timstamp);
+                Call<Boolean> createuser = datahandler.clientAPI.createuser(newUser);
+                createuser.enqueue(new Callback<Boolean>() {
+
+
+                    @Override
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        if(!response.isSuccessful() || !response.body()){
+                            Toast.makeText(getApplicationContext(), getString(R.string.fail_create_user), Toast.LENGTH_LONG).show();
+                            System.out.println(response.toString());
+                        }
+                        else if(!response.body()) {
+                            EditText.setError(getString(R.string.error_wrong_code));
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), getString(R.string.success_create_user), Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            System.out.println(newUser.printInformation());
+                            emailCorrect = false;
+                            passwordCorrect = false;
+                            usernameCorrect = false;
+                            startActivity(intent);
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Boolean> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
+
+                    }
+                });
+            }
+        });
+        Button buttonCancel = (Button) dialog.findViewById(R.id.Cancel);
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 
 
 
-}
+
+
+
+
+
+    }
+
+
+

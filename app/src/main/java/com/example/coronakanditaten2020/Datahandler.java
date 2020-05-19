@@ -30,11 +30,12 @@ public class Datahandler {
     User user;
     ArrayList<Post> viewPosts;
     ArrayList<ArrayList> userinfo;
+    ArrayList<Integer> likeid= new ArrayList<Integer>();
 
     Credentials credentials;
     Retrofit retrofit;
     ClientAPI clientAPI;
-    String baseurl = "http://192.168.42.145:8080/tja/webapi/";
+    String baseurl = "http://192.168.42.145:8080/tjaaa/webapi/";
     ArrayList<Post> topPost;
 
     public Datahandler() {
@@ -83,18 +84,18 @@ public class Datahandler {
 
     void CreatDummylocations() {
 
-        heatmaplocations[0] = new Location("59.858565", "17.638927", "2020-10-15", 0, 0, 2, 0, 3, 0, 1, 1, 0, 2, "2020-10-17 10:30");
-        heatmaplocations[1] = new Location("59.858568", "17.638927", "2020-10-15", 1, 2, 3, 0, 2, 1, 1, 2, 1, 1, "2020-10-17 10:30");
-        heatmaplocations[2] = new Location("59.858561", "17.638927", "2020-10-15", 2, 2, 1, 0, 3, 2, 1, 3, 2, 2, "2020-10-17 10:30");
-        heatmaplocations[3] = new Location("59.858572", "17.638927", "2020-10-15", 3, 3, 2, 0, 1, 3, 1, 1, 0, 3, "2020-10-17 10:30");
-        heatmaplocations[4] = new Location("59.858522", "17.638927", "2020-10-16", 4, 0, 0, 3, 3, 2, 1, 2, 0, 2, "2020-10-17 10:30");
-        heatmaplocations[5] = new Location("59.858362", "17.638927", "2020-10-15", 5, 0, 3, 0, 2, 2, 1, 3, 1, 1, "2020-10-17 10:30");
-        heatmaplocations[6] = new Location("59.858462", "17.638927", "2020-10-15", 6, 2, 0, 1, 3, 1, 1, 1, 0, 0, "2020-10-17 10:30");
-        heatmaplocations[7] = new Location("59.858562", "17.638927", "2020-10-16", 7, 3, 0, 2, 1, 2, 1, 2, 0, 3, "2020-10-17 10:30");
-        heatmaplocations[8] = new Location("59.858762", "17.638927", "2020-10-15", 8, 0, 0, 2, 3, 1, 1, 3, 3, 2, "2020-10-17 10:30");
-        heatmaplocations[9] = new Location("59.858962", "17.638927", "2020-10-15", 9, 1, 2, 0, 0, 0, 1, 1, 0, 1, "2020-10-17 10:30");
+        heatmaplocations[0] = new Location("0", "0", "0", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "2020-10-17 10:30");
+        heatmaplocations[1] = new Location("58.858568", "17.638922", "2020-5-15", 1, 2, 3, 0, 2, 1, 1, 2, 1, 1, "2020-10-17 10:30");
+        heatmaplocations[2] = new Location("57.858531", "17.63937", "2020-5-11", 2, 2, 1, 0, 3, 2, 1, 3, 2, 2, "2020-10-17 10:30");
+        heatmaplocations[3] = new Location("56.858572", "17.638927", "2020-5-10", 3, 3, 2, 0, 1, 3, 1, 1, 0, 3, "2020-10-17 10:30");
+        heatmaplocations[4] = new Location("55.858522", "17.638947", "2020-5-13", 4, 0, 0, 3, 3, 2, 1, 2, 0, 2, "2020-10-17 10:30");
+        heatmaplocations[5] = new Location("54.858382", "17.638927", "2020-5-12", 5, 0, 3, 0, 2, 2, 1, 3, 1, 1, "2020-10-17 10:30");
+        heatmaplocations[6] = new Location("53.858462", "17.638927", "2020-4-28", 6, 2, 0, 1, 3, 1, 1, 1, 0, 0, "2020-10-17 10:30");
+        heatmaplocations[7] = new Location("52.85862", "17.6387", "2020-4-29", 7, 3, 0, 2, 1, 2, 1, 2, 0, 3, "2020-10-17 10:30");
+        heatmaplocations[8] = new Location("51.858762", "17.638927", "2020-4-30", 8, 0, 0, 2, 3, 1, 1, 3, 3, 2, "2020-10-17 10:30");
+        heatmaplocations[9] = new Location("50.85962", "17.63897", "2020-5-14", 9, 1, 2, 0, 0, 0, 1, 1, 0, 1, "2020-10-17 10:30");
         heatmaplocations[10] = new Location("59.856362", "17.638927", "2020-10-15", 10, 2, 1, 0, 3, 3, 1, 1, 0, 2, "2020-10-17 10:30");
-        heatmaplocations[11] = new Location("59.857462", "17.638927", "2020-10-15", 11, 3, 2, 0, 1, 0, 1, 1, 1, 3, "2020-10-17 10:30");
+        heatmaplocations[11] = new Location("59.857462", "17.638927", "2020-10-16", 11, 3, 2, 0, 1, 0, 1, 1, 1, 3, "2020-10-17 10:30");
 
     }
 

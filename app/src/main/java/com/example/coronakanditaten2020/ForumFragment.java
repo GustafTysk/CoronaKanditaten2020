@@ -1,5 +1,6 @@
 package com.example.coronakanditaten2020;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import android.text.Editable;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,13 +35,14 @@ import retrofit2.Response;
 public class ForumFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private Button messageButton;
-    private Button btnForumToStart;
-
     private Button btnMostLiked;
     private Button btnFilterRec;
     private Button btnFilterAll;
+    private Button btnSearch;
 
-    private EditText searchFilter;
+    private ImageView forumInfo;
+
+    private EditText searchInput;
     private EditText messageInput;
     private EditText messageTitle;
     private TextView usernameShow;
@@ -65,6 +68,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_forum, container, false);
 
+
         topPost =((MainActivity)getActivity()).datahandler.viewPosts;
 
         btnMostLiked = (Button) view.findViewById(R.id.btnMostLiked);
@@ -73,6 +77,8 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         btnFilterRec.setOnClickListener(this);
         btnFilterAll = (Button) view.findViewById(R.id.btnFilterAll);
         btnFilterAll.setOnClickListener(this);
+        btnSearch = (Button) view.findViewById(R.id.btnSearch);
+        btnSearch.setOnClickListener(this);
 
         username = ((MainActivity)getActivity()).datahandler.user.getUsername();
 
@@ -83,10 +89,11 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         messageButton.setOnClickListener(this);
 //        btnForumToStart = (Button) view.findViewById(R.id.btnForumToStart);
 //        btnForumToStart.setOnClickListener(this);
+
         messageInput = (EditText) view.findViewById(R.id.messageInput);
         messageTitle = (EditText) view.findViewById(R.id.messageTitle);
 
-        searchFilter = (EditText) view.findViewById(R.id.searchFilter);
+        searchInput = (EditText) view.findViewById(R.id.searchInput);
         listView = (ListView) view.findViewById(R.id.listview);
 
         currentCategory = "Help";
@@ -94,26 +101,27 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         postList = new ArrayList<>(topPost);
         copyList = new ArrayList<>(topPost);
 
-        adapter = new PostListAdapter(getContext(), R.layout.adapter_view_layout, postList);
+        Collections.reverse(postList);
+
+        adapter = new PostListAdapter(getContext(), R.layout.adapter_view_layout, postList, ((MainActivity)getActivity()).datahandler);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(this);
 
-        searchFilter.addTextChangedListener(new TextWatcher() {
+        forumInfo = (ImageView) view.findViewById(R.id.forumInfo);
+        forumInfo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
 
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                (ForumFragment.this).adapter.getFilter().filter(s.toString());
-
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-
+                alert.setTitle(getString(R.string.info_title_forum));
+                alert.setMessage(getString(R.string.info_message_forum));
+                alert.setNegativeButton(android.R.string.ok, null);
+                alert.show();
             }
         });
+
+        removePosts();
 
         return view;
     }
@@ -133,23 +141,21 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         thePostParentId = postList.get(thePostId).getParentId();
         //System.out.println(thePostId);
 
-        Post thePost = postList.get(thePostId);
-        System.out.println(thePost.printInformation());
-        postList.clear();
-        postList.add(thePost);
-        getComments(thePost);
-        // getserverComments(thePost);
-        adapter.notifyDataSetChanged();
-
+        if(thePostParentId == 0) {
+            Toast.makeText(getContext(), "post has no comments", Toast.LENGTH_LONG).show();
+        }
+        else{
+         getserverComments(postList.get(thePostId));}
     }
 
-    public void removeComments() {
-        postList.clear();
-        for (Post post: copyList) {
-            if(post.getParentId() == 0) {
-                postList.add(post);
+    public void removePosts() {
+        for (Post post: postList) {
+            if(post.getCategory() == "remove") {
+                postList.remove(post);
+                copyList.remove(post);
             }
         }
+        adapter.notifyDataSetChanged();
     }
 
     public void getComments(Post post) {
@@ -184,19 +190,17 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 String title = messageTitle.getText().toString();
                 String timestamp = "3 jan";
                 String message = messageInput.getText().toString();
-                if(thePostId != 0) {
-                    Post newWrittenPost = new Post(username,email ,title, timestamp, message, 0, "top", 30, thePostParentId);
-                    postList.add(newWrittenPost);
-                    copyList.add(newWrittenPost);
-                    //sendanswertoserver(newWrittenPost);
-
+                if(thePostParentId!= 0) {
+                    Post newWrittenPost = new Post(username,email ,title, timestamp, message, 0, "comment", 30, thePostParentId);
+                    sendanswertoserver(newWrittenPost);
                 }
+
                 else{
-                    Post newWrittenPost = new Post(username, email,title, timestamp, message, 0, "comment", 30, 0);
+                    Post newWrittenPost = new Post(username, email,title, timestamp, message, 0, "top", 30, 0);
                     System.out.println(newWrittenPost.printInformation());
-                    postList.add(newWrittenPost);
-                    copyList.add(newWrittenPost);
-                    // sendposttoserver(newWrittenPost);
+                    postList.clear();
+                    sendposttoserver(newWrittenPost);
+
 
                 }
                 adapter.notifyDataSetChanged();
@@ -210,9 +214,9 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
             case R.id.btnMostLiked:
                 postList.clear();
-                //run the statment under whhen you are connected to database
-                //postList=getmostliked()
+
                 getmostliked();
+
 
                 break;
 
@@ -234,11 +238,12 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 break;
 
             case R.id.btnFilterAll:
-                postList.clear();
-                for (Post post: copyList) {
-                    postList.add(post);
-                }
+                getuserpost();
+                break;
 
+            case R.id.btnSearch:
+                String inputsearch = searchInput.getText().toString();
+                //input search är det som användaren vill söka på.
                 adapter.notifyDataSetChanged();
                 break;
         }
@@ -255,6 +260,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                     Toast.makeText(getContext(), getString(R.string.fail_to_get_post), Toast.LENGTH_LONG).show();
                 }
                 else {
+                    postList.clear();
                     ((MainActivity) getActivity()).datahandler.viewPosts = response.body();
                     postList = ((MainActivity) getActivity()).datahandler.viewPosts;
                     Collections.sort(postList, Post.DESCENDING_COMPARATOR);
@@ -283,16 +289,10 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 }
                 else {
                     commentList = response.body();
-
-//                    for (Post testPost : tempPost) {
-//                        if(testPost.getParentId()==post.getId()){
-//                            System.out.println("Hej");
-//                            postList.add(testPost);
-//                        }
-//                    }
+                    ((MainActivity)getActivity()).datahandler.viewPosts=commentList;
                     postList = commentList;
                     adapter.notifyDataSetChanged();
-                    System.out.println("got mosts liked post");
+                    System.out.println("got comment posts");
                 }
             }
 
@@ -318,7 +318,6 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 else {
                     ((MainActivity) getActivity()).datahandler.viewPosts = response.body();
                     postList = ((MainActivity) getActivity()).datahandler.viewPosts;
-                    copyList = new ArrayList<>(topPost);
                     postList.clear();
 
                     adapter.notifyDataSetChanged();
@@ -334,32 +333,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         });
     }
 
-    public void GetOwnLikedPosts(){
-        Call<ArrayList<Post>> GetOwnLikedPosts=((MainActivity)getActivity()).datahandler.clientAPI.GetOwnLikedPosts(
-                ((MainActivity)getActivity()).datahandler.credentials.encrypt,
-                ((MainActivity)getActivity()).datahandler.credentials.Email);
-        GetOwnLikedPosts.enqueue(new Callback<ArrayList<Post>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
-                if(!response.isSuccessful()) {
-                    System.out.println(response);
-                    Toast.makeText(getContext(), getString(R.string.fail_to_get_post), Toast.LENGTH_LONG).show();
-                }
-                else {
-                ((MainActivity)getActivity()).datahandler.viewPosts=response.body();
-                postList=((MainActivity)getActivity()).datahandler.viewPosts;
 
-                System.out.println("got mosts liked post");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Post>> call, Throwable t) {
-                Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
-
-            }
-        });
-    }
 
     public void sendposttoserver(Post post){
         Call<Boolean> sendposttoserver=((MainActivity)getActivity()).datahandler.clientAPI.creatpost(
@@ -372,8 +346,10 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                     Toast.makeText(getContext(), getString(R.string.fail_to_get_post), Toast.LENGTH_LONG).show();
                 }
                 else{
+                    postList.clear();
                     ((MainActivity)getActivity()).datahandler.viewPosts.add(post);
                     postList=((MainActivity)getActivity()).datahandler.viewPosts;
+                    Collections.reverse(postList);
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -433,10 +409,29 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
     }
 
+    public void deletepost(Post post){
+        Call<Boolean> removepost=((MainActivity)getActivity()).datahandler.clientAPI.DeletePost(
+                ((MainActivity)getActivity()).datahandler.credentials.encrypt,
+                ((MainActivity)getActivity()).datahandler.credentials.Email,post);
+        removepost.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getContext(), "failed to remove user", Toast.LENGTH_LONG).show();
+                    System.out.println(response);
+                }
+                else {
 
 
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
 
+            }
+        });
+    }
 
 
 

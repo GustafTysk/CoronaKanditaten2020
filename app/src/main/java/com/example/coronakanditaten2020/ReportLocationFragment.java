@@ -4,13 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +23,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +33,7 @@ import com.applandeo.materialcalendarview.builders.DatePickerBuilder;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
 import com.example.coronakanditaten2020.R;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -34,6 +41,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
@@ -58,6 +72,8 @@ import retrofit2.http.Path;
 
 public class ReportLocationFragment extends Fragment  implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMapClickListener {
     private static final String TAG = "Fragment Statistics";
+    private static final int RESULT_OK = 2;
+    private static final int RESULT_CANCELED = 3;
     private ViewGroup containerThis;
     private com.applandeo.materialcalendarview.CalendarView cal;
     private Calendar minDate = Calendar.getInstance(TimeZone.getDefault());
@@ -76,10 +92,11 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
     private Bundle savedInstance;
 
-    private Button btnRlToStart;
+    private ImageView reportLocationInfo;
     private Button btnRlToRs;
     private Button btnUpdateMyLocations;
     private Button btnAddLocation;
+
 
     private ImageButton setLocation1,setLocation2, setLocation3, setLocation4, setLocation5, setLocation6,
             setLocation7, setLocation8, setLocation9, setLocation10, setLocation11, setLocation12;
@@ -108,11 +125,14 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     private final int Maxlocations=12;
 
 
-
     ArrayList<String> locationDateStrings=new  ArrayList<String>();
 
     private ArrayList<LatLng> locations;
     ArrayList<List<Calendar>> AllLocationDates=new ArrayList<List<Calendar>>();
+
+    int AUTOCOMPLETE_REQUEST_CODE = 1;
+    List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
+
 
     @Nullable
     @Override
@@ -248,6 +268,24 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         if(userLocations!=null){
             SetUppPage();
         }
+
+        if (!Places.isInitialized()) {
+            Places.initialize(getContext(), "AIzaSyAdNZnteknM0VlU416q-b8ZEqRBjiFOiPA");
+        }
+
+        reportLocationInfo = (ImageView) view.findViewById(R.id.reportLocationInfo);
+        reportLocationInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+
+                alert.setTitle(getString(R.string.info_title_report_location));
+                alert.setMessage(getString(R.string.info_message_report_location));
+                alert.setNegativeButton(android.R.string.ok, null);
+                alert.show();
+            }
+        });
+
 
         return view;
     }
@@ -412,13 +450,47 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
     void removelocation(){
         int decided=Collections.frequency(AlllocationDecided,true)-1;
+
+        System.out.println("gdgdsfdfdfszsjhdsf");
+
+        if(decided==0 && Collections.frequency(AlllocationVisible,true)-1<=0){
+            System.out.println();
+            System.out.println("gdgdsfgdsfgdsfgdsf");
+            textViewLocations.get(decided).setText("location "+(decided+1));
+            AlllocationDecided.set(decided,false);
+            locations.remove(currentLocationReport-1);
+            locations.add(null);
+            YourlocationsStrings.remove(currentLocationReport-1);
+            YourlocationsStrings.add("");
+            locationDateStrings.remove(currentLocationReport-1);
+            locationDateStrings.add(null);
+            AllLocationDates.remove(currentLocationReport-1);
+            locationDateStrings.add("");
+            return;
+
+        }
+        if(decided==-1 && Collections.frequency(AlllocationVisible,true)-1<=0){
+            System.out.println("gdgdsfdfdfszsjhdsf");
+            textViewLocations.get(decided+1).setText("location "+(decided+2));
+            AlllocationDecided.set(decided+1,false);
+            locations.remove(currentLocationReport-1);
+            locations.add(null);
+            YourlocationsStrings.remove(currentLocationReport-1);
+            YourlocationsStrings.add("");
+            locationDateStrings.remove(currentLocationReport-1);
+            locationDateStrings.add(null);
+            AllLocationDates.remove(currentLocationReport-1);
+            locationDateStrings.add("");
+            return;
+
+        }
         textViewLocations.get(decided).setVisibility(getView().GONE);
         setlocations.get(decided).setVisibility(getView().GONE);
         setCalandarlocations.get(decided).setVisibility(getView().GONE);
         btnRemoveLocations.get(decided).setVisibility(getView().GONE);
         AlllocationVisible.set(decided,false);
         AlllocationDecided.set(decided,false);
-        textViewLocations.get(decided).setText("location "+decided+1);
+        textViewLocations.get(decided).setText("location "+(decided+1));
 
 
         locations.remove(currentLocationReport-1);
@@ -456,6 +528,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         mMapView = (MapView) mapV.findViewById(R.id.mapViewReport);
         mMapView.onCreate(savedInstance);
 
+
+
+
         mMapView.getMapAsync(this);
         mapWindow = new PopupWindow(mapV, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         mapWindow.showAtLocation(mapV, Gravity.CENTER, 0, 0);
@@ -465,6 +540,8 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         mapWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         mMapView.onResume();
+
+
     }
 
     @Override
@@ -472,6 +549,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
         mGoogleMap = googleMap;
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
+
 
 
         if (locations.get(currentLocationReport-1)!= null) {
@@ -494,6 +572,8 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
         reportedLocation.setPosition(yourLocation);
     }
+
+
 
     public void getCalendarView(final Integer location) throws OutOfDateRangeException {
         OnSelectDateListener listener = new OnSelectDateListener() {

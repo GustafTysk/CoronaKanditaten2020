@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4db1ad</color>
+    <color name="colorPrimaryDark">#24a09b</color>
+
+    <color name="colorSecondary">#dfc5d2</color>
+
+    <color name="colorAccent">#6b3f5a</color>
+
+    <color name="colorBackground">#121212</color>
+
+    <color name="colorBackgroundNavBar">#4a2a41</color>
+
+    <color name="colorText">#FFFFFF</color>
+    <color name="colorTextTitle">#B5B6B5</color>
+    <color name="colorTextHint">#A3A2A2</color>
+
+    <color name="backgroundEditText">#B3686868</color>
+
+    <color name="limeGreen">#000000</color>
+    <color name="red">#FF231E</color>
+    <color name="white">#FEFFFFFF</color>
+    <color name="white2">#33FFFFFF</color>
+
+    <color name="grey">#0A1647</color>
+
+    <color name="buttonEnd">#00837b</color>
+    <color name="buttonCenter">#4db1ad</color>
+    <color name="buttonStart">#00837b</color>
+
+    <color name="buttonEnd_light">#24a09b</color>
+    <color name="buttonCenter_light">#80c7c5</color>
+    <color name="buttonStart_light">#24a09b</color>
+
+</resources>

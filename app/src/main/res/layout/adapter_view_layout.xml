@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/postWhole"
     >
 
     <LinearLayout
@@ -65,16 +66,41 @@
             android:text="Likes"
             />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Like"
-            android:id="@+id/postButtonLike"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             >
 
-        </Button>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Like"
+                android:id="@+id/postButtonLike"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:background="@drawable/button_selector_light"
+                android:textColor="@color/white"
+                android:padding="10dp"
+                > </Button>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Remove post"
+                android:id="@+id/postButtonRemove"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:background="@drawable/button_selector_light"
+                android:textColor="@color/white"
+                android:padding="10dp"
+                android:visibility="gone"
+
+                >
+            </Button>
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
 
