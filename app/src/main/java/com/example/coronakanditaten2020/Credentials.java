@@ -48,9 +48,7 @@ public class Credentials implements Parcelable {
     Credentials(String email, String password){
         this.Email=email;
         this.Password=password;
-        String enocde=Email+":"+Password;
-        byte[] bytes=enocde.getBytes();
-        encrypt= new String(android.util.Base64.encode(bytes, Base64.DEFAULT)).trim();
+        encrypt=Password;
 
     }
 

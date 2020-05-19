@@ -30,11 +30,12 @@ public class Datahandler {
     User user;
     ArrayList<Post> viewPosts;
     ArrayList<ArrayList> userinfo;
+    ArrayList<Integer> likeid= new ArrayList<Integer>();
 
     Credentials credentials;
     Retrofit retrofit;
     ClientAPI clientAPI;
-    String baseurl = "http://192.168.42.145:8080/tjaa/webapi/";
+    String baseurl = "http://192.168.42.145:8080/tjaaa/webapi/";
     ArrayList<Post> topPost;
 
     public Datahandler() {

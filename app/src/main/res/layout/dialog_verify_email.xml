@@ -46,7 +46,6 @@
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="5dp"
-        android:digits="1234567890"
         android:hint="@string/hint_verification_code"
         android:maxLength="4"
         android:minWidth="175dp"
