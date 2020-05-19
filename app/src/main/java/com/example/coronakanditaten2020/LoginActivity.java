@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-        datahandler=new Datahandler();
+        datahandler = new Datahandler();
         mViewPager = (NonSwipeableViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
         setViewPager(1);

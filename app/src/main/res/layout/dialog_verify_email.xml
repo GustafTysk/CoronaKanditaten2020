@@ -47,7 +47,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginBottom="5dp"
         android:hint="@string/hint_verification_code"
-        android:maxLength="4"
+        android:maxLength="6"
         android:minWidth="175dp"
         android:textAlignment="center" />
 
