@@ -142,6 +142,9 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
                 else{
                     Toast.makeText(getContext(),getString(R.string.alert_toast_locations),Toast.LENGTH_SHORT);
                     ((MainActivity) getActivity()).datahandler.Userlocations=null;
+                    ((MainActivity) getActivity()).reportLocationFragment.removealllocation();
+                    ((MainActivity) getActivity()).reportSymptomsFragment.resetsymtoms();
+
                 }
             }
 
