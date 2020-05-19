@@ -453,6 +453,21 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
         System.out.println("gdgdsfdfdfszsjhdsf");
 
+
+        if(decided==0 && Collections.frequency(AlllocationVisible,true)-1<=1){
+            System.out.println();
+            textViewLocations.get(decided).setText("location "+(decided+1));
+            AlllocationDecided.set(decided,false);
+            locations.remove(currentLocationReport-1);
+            locations.add(null);
+            YourlocationsStrings.remove(currentLocationReport-1);
+            YourlocationsStrings.add("");
+            locationDateStrings.remove(currentLocationReport-1);
+            locationDateStrings.add(null);
+            AllLocationDates.remove(currentLocationReport-1);
+            locationDateStrings.add("");
+            return;}
+
         if(decided==0 && Collections.frequency(AlllocationVisible,true)-1<=0){
             System.out.println();
             System.out.println("gdgdsfgdsfgdsfgdsf");
@@ -845,9 +860,28 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             currentLocationReport++;
             Counter2=0;
 
+
+        }
+        minDateTime=getoldestdate(AllLocationDates)-dateNumberOfDaysAgo;
+
+
+
+
+    }
+
+    public long getoldestdate( ArrayList<List<Calendar>> AllLocationDates){
+        long MinDate=Calendar.getInstance(TimeZone.getDefault()).getTimeInMillis();
+
+        for(List<Calendar> Cal:AllLocationDates){
+            for( Calendar co:Cal){
+                if(co.getTimeInMillis()<MinDate){
+                    MinDate=co.getTimeInMillis();
+                }
+
+            }
         }
 
-
+        return MinDate;
 
     }
 
@@ -953,6 +987,16 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             YourlocationsStrings.add("");
         }
 
+
+    }
+
+    public void removealllocation(){
+
+        for (int i=1; i<=numberOfLocationsSet();i++){
+            currentLocationReport=numberOfLocationsSet();
+            removelocation();
+        }
+        currentLocationReport=0;
 
     }
 }
