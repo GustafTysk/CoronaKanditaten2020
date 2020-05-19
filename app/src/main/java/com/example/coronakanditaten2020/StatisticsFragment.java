@@ -31,6 +31,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -81,10 +82,12 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private com.applandeo.materialcalendarview.CalendarView cal;
     private List<Calendar> calendars;
     private Calendar maxDate = Calendar.getInstance(TimeZone.getDefault());
+    private Date minDate;
     private Date minCalendarValue, maxCalendarValue;
     Date dateOfInterest;
     SimpleDateFormat sdf;
     String sdfDate;
+    ArrayList<Date> daysOfInterestArraylist = new ArrayList<>();
 
     //TABLE VIEW
     TableLayout tableLayout;
@@ -372,6 +375,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public Date createCalendar(int dayOfInterestLast60Days) {
         Date today = new Date();
+        System.out.println("idag" + today);
         calendarStat = (GregorianCalendar) Calendar.getInstance();
         calendarStat.setTime(today);
         calendarStat.add(Calendar.DAY_OF_MONTH, -dayOfInterestLast60Days);
@@ -388,6 +392,12 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdfDate = sdf.format(dateOfInterest);
         return sdfDate;
+    }
+
+    public static Calendar toCalendar(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal;
     }
 
     public void getCalendarView(final Integer location) throws OutOfDateRangeException {
@@ -407,6 +417,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                     addAllSeries2();
                     designSeriesb();
                 }
+                graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+                graph.getGridLabelRenderer().setHumanRounding(false);
                 graph.getViewport().setXAxisBoundsManual(true);
                 graph.getViewport().setMinX(minCalendarValue.getTime());
                 graph.getViewport().setMaxX(maxCalendarValue.getTime());
@@ -414,8 +426,10 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             }
         };
 
+        minDate = createCalendar(60);
+
         DatePickerBuilder builder = new DatePickerBuilder(getContext(), listener)
-                .pickerType(cal.RANGE_PICKER).setMaximumDate(maxDate);
+                .pickerType(cal.RANGE_PICKER).setMaximumDate(maxDate).setMinimumDate(toCalendar(minDate));
         if (calendars != null)
             builder.setSelectedDays(calendars);
 
@@ -470,7 +484,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             allRatingsDiarrhea.add(symptomCounter);
             symptomCounter = 0;
         }
-        System.out.println("allratingsdiarrhea" + allRatingsDiarrhea);
         return allRatingsDiarrhea;
     }
 
@@ -547,7 +560,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             }
             allRatingsTiredness.add(symptomCounter);
             symptomCounter = 0;
-            System.out.println("trött" + allRatingsTiredness);
         }
         return allRatingsTiredness;
     }
@@ -692,9 +704,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         ArrayList<DataPoint> dataPointsHeadache = new ArrayList<>();
         for(int i=59; i>=0; i--){
             dataPointsDiarrhea.add(new DataPoint(createCalendar(i), countForGraph2(i,allRatingsDiarrhea)));
-            System.out.println("datapointdiarrhea" + countForGraph2(i,allRatingsDiarrhea));
             dataPointsRunnyNose.add(new DataPoint(createCalendar(i), countForGraph2(i,allRatingsRunnyNose)));
-            System.out.println("datapointsrunnynose" + countForGraph2(i,allRatingsRunnyNose));
             dataPointsNasalCon.add(new DataPoint(createCalendar(i), countForGraph2(i,allRatingsNasalCon)));
             dataPointsBreathing.add(new DataPoint(createCalendar(i), countForGraph2(i,allRatingsBreathing)));
             dataPointsTiredness.add(new DataPoint(createCalendar(i), countForGraph2(i,allRatingsTiredness)));
@@ -724,8 +734,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     }
 
     public void designSeriesA() {
-        graph.getGridLabelRenderer().setHumanRounding(false);
         graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+        graph.getGridLabelRenderer().setHumanRounding(false);
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
         //graph.getViewport().setScrollable(true);
         graph.getViewport().setYAxisBoundsManual(true);
@@ -737,9 +747,11 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.setTitle(getString(R.string.per_day_symptoms));
         graph.setTitleTextSize(80);
 
-        graph.getLegendRenderer().setVisible(true);
-        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.MIDDLE);
-        graph.getLegendRenderer().setTextSize(35f);
+//        graph.getLegendRenderer().setVisible(true);
+//        graph.getLegendRenderer().setFixedPosition(0,0);
+//        graph.getLegendRenderer().setTextSize(35f);
+//        graph.getLegendRenderer().setBackgroundColor(Color.TRANSPARENT);
+
 
         series.setTitle(getString(R.string.symptom_diarrhea));
         series2.setTitle(getString(R.string.symptom_runny_nose));
@@ -773,19 +785,19 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public void designSeriesb() {
         //graph.getViewport().setScrollable(true);
-        graph.getGridLabelRenderer().setHumanRounding(false);
         graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+        graph.getGridLabelRenderer().setHumanRounding(false);
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
-        graph.getViewport().setMaxY(calculateHighestValB());
+        graph.getViewport().setMaxY(calculateHighestValB() + 1);
 
         graph.getGridLabelRenderer().setNumVerticalLabels(calculateHighestValB() + 1);
         graph.setTitle(getString(R.string.total_symptoms));
         graph.setTitleTextSize(80);
-        graph.getLegendRenderer().setVisible(true);
-        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.MIDDLE);
-        graph.getLegendRenderer().setTextSize(35f);
+//        graph.getLegendRenderer().setVisible(true);
+//        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.MIDDLE);
+//        graph.getLegendRenderer().setTextSize(35f);
 
         seriesb.setTitle(getString(R.string.symptom_diarrhea));
         series2b.setTitle(getString(R.string.symptom_runny_nose));
@@ -917,7 +929,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public void countTable() {
         for(User user: Users){
-            if(user.gender.equals("male")){
+            if(user.gender.equals(getString(R.string.gender_male))){
                 if(user.age >= 0 && user.age < 19){
                     maleAge0To18 += 1;
                 }
@@ -931,7 +943,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                     maleAge65Plus += 1;
                 }
             }
-            if(user.gender.equals("female")){
+            if(user.gender.equals(getString(R.string.gender_female))){
                 if(user.age >= 0 && user.age < 19){
                     femaleAge0To18 += 1;
                 }
@@ -945,7 +957,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                     femaleAge65Plus += 1;
                 }
             }
-            if(user.gender.equals("other")){
+            if(user.gender.equals(getString(R.string.gender_other))){
                 if(user.age >= 0 && user.age < 19){
                     otherAge0To18 += 1;
                 }

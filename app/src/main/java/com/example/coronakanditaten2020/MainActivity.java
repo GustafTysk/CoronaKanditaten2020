@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int MY_PERMISSIONS_REQUEST_COARSE_LOCATION = 1;
 
     public Datahandler datahandler = new Datahandler();
-    ArrayList<Location> test;
 
     MySettingsFragment mySettingsFragment;
 
