@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <style android:name="MySeekBar" >
+    <style android:name="seekBarHeatmap" >
         <item android:name="android:progressBackgroundTint">c</item>
         <item android:name="android:progressTint">#388e3c</item>
         <item android:name="android:colorControlActivated">#c51162</item>

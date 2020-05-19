@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:background="@color/colorBackground">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -14,11 +14,11 @@
 <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/colorBackground">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/colorBackground"
     tools:context=".MainActivity">
 
     <TextView
@@ -28,6 +28,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/fragment_statistics"
         android:textAllCaps="true"
+        android:textColor="@color/colorTextTitle"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,9 +100,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="Number of reported cases:"
-        android:textColor="@android:color/black"
+        android:textColor="@color/colorText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
@@ -126,7 +127,7 @@
                 android:background="#D3D3D3"
                 android:padding="10sp"
                 android:text="@string/age_years"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -135,7 +136,7 @@
                 android:gravity="center"
                 android:padding="10sp"
                 android:text="@string/number_of_female_users"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -145,7 +146,7 @@
                 android:gravity="center"
                 android:padding="10sp"
                 android:text="@string/number_of_male_users"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -154,7 +155,7 @@
                 android:gravity="center"
                 android:padding="10sp"
                 android:text="@string/number_of_other_users"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
         </TableRow>
 
         <TableRow
@@ -168,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10sp"
                 android:text="@string/age_0_18"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -176,14 +177,14 @@
                 android:layout_height="wrap_content"
                 android:background="#D3D3D3"
                 android:padding="10sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -191,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:background="#D3D3D3"
                 android:padding="10sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
         </TableRow>
 
@@ -207,14 +208,14 @@
                 android:background="#D3D3D3"
                 android:padding="10sp"
                 android:text="@string/age_19_40"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -222,14 +223,14 @@
                 android:layout_height="wrap_content"
                 android:background="#D3D3D3"
                 android:padding="10sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
         </TableRow>
 
@@ -244,7 +245,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10sp"
                 android:text="@string/age_41_64"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -252,14 +253,14 @@
                 android:layout_height="wrap_content"
                 android:background="#D3D3D3"
                 android:padding="10sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -267,7 +268,7 @@
                 android:layout_height="wrap_content"
                 android:background="#D3D3D3"
                 android:padding="10sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
         </TableRow>
 
@@ -283,14 +284,14 @@
                 android:background="#D3D3D3"
                 android:padding="10sp"
                 android:text="@string/age_over_65"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/textView19"
@@ -298,14 +299,14 @@
                 android:layout_height="wrap_content"
                 android:background="#D3D3D3"
                 android:padding="10sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/textView20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/colorText" />
 
         </TableRow>
 
@@ -328,6 +329,7 @@
             android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_diarrhea"
+            android:textColor="@color/colorText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -339,6 +341,7 @@
             android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_runny_nose"
+            android:textColor="@color/colorText"
             app:layout_constraintBaseline_toBaselineOf="@+id/diarrheaBox"
             app:layout_constraintStart_toEndOf="@+id/diarrheaBox" />
 
@@ -350,6 +353,7 @@
             android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_sore_throat"
+            android:textColor="@color/colorText"
             app:layout_constraintBaseline_toBaselineOf="@+id/feverBox"
             app:layout_constraintStart_toStartOf="@+id/runnyNoseBox" />
 
@@ -362,6 +366,7 @@
             android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_tiredness"
+            android:textColor="@color/colorText"
             app:layout_constraintBaseline_toBaselineOf="@+id/runnyNoseBox"
             app:layout_constraintStart_toEndOf="@+id/runnyNoseBox" />
 
@@ -373,6 +378,9 @@
             android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_breathing"
+            android:textColor="@color/colorText"
+            app:layout_constraintBaseline_toBaselineOf="@+id/headacheBox"
+            app:layout_constraintStart_toStartOf="@+id/nasalConBox" />
             app:layout_constraintBottom_toBottomOf="@+id/throatBox"
             app:layout_constraintStart_toStartOf="@+id/tirednessBox"
             app:layout_constraintTop_toTopOf="@+id/throatBox" />
@@ -385,6 +393,9 @@
             android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_nasal_congestion"
+            android:textColor="@color/colorText"
+            app:layout_constraintBaseline_toBaselineOf="@+id/throatBox"
+            app:layout_constraintStart_toStartOf="@+id/tirednessBox" />
             app:layout_constraintBottom_toBottomOf="@+id/headacheBox"
             app:layout_constraintStart_toStartOf="@+id/breathingDiffBox"
             app:layout_constraintTop_toTopOf="@+id/headacheBox" />
@@ -398,6 +409,7 @@
             android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_fever"
+            android:textColor="@color/colorText"
             app:layout_constraintStart_toStartOf="@+id/diarrheaBox"
             app:layout_constraintTop_toBottomOf="@+id/diarrheaBox" />
 
@@ -410,6 +422,7 @@
             android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_cough"
+            android:textColor="@color/colorText"
             app:layout_constraintStart_toStartOf="@+id/feverBox"
             app:layout_constraintTop_toBottomOf="@+id/feverBox" />
 
@@ -421,6 +434,7 @@
             android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_headache"
+            android:textColor="@color/colorText"
             app:layout_constraintBaseline_toBaselineOf="@+id/coughBox"
             app:layout_constraintStart_toStartOf="@+id/throatBox" />
 
@@ -436,7 +450,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/quantum_grey400"
+            android:background="@color/colorBackgroundNavBar"
             app:menu="@menu/bottom_navigation_menu"
             app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"/>
 

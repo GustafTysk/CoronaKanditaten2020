@@ -5,11 +5,11 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@color/grey"
     tools:context=".LoginActivity">
 
     <EditText
@@ -25,6 +25,7 @@
         android:inputType="textEmailAddress"
         android:paddingLeft="5dp"
         android:selectAllOnFocus="true"
+        android:textColor="@color/colorText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -103,11 +104,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/button_selector_light"
+        android:padding="10dp"
         android:text="To Start Page"
         android:textAllCaps="true"
-        android:background="@drawable/button_selector_light"
         android:textColor="@color/white"
-        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnToRegister"
@@ -130,7 +131,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Switch"
+        android:layout_marginBottom="24dp"
+        android:shadowColor="#9A8A8A"
+        android:text="Mode"
+        android:textColor="@color/colorText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/btnChangeLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/switchDayNightMode"
+        app:layout_constraintStart_toEndOf="@+id/switchDayNightMode"
+        app:layout_constraintTop_toTopOf="@+id/switchDayNightMode"
+        app:srcCompat="@drawable/flag_icon_48x48" />
 </androidx.constraintlayout.widget.ConstraintLayout>

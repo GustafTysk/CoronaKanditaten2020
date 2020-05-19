@@ -30,11 +30,12 @@ public class Datahandler {
     User user;
     ArrayList<Post> viewPosts;
     ArrayList<ArrayList> userinfo;
+    ArrayList<Integer> likeid= new ArrayList<Integer>();
 
     Credentials credentials;
     Retrofit retrofit;
     ClientAPI clientAPI;
-    String baseurl = "http://192.168.42.145:8080/tja/webapi/";
+    String baseurl = "http://192.168.42.145:8080/tjaaa/webapi/";
     ArrayList<Post> topPost;
 
     public Datahandler() {
@@ -235,6 +236,33 @@ public void getserveruserinfo(String timestamp){
 
             @Override
             public void onFailure(Call<ArrayList<Post>> call, Throwable t) {
+                System.out.println("failed to connect to server");
+            }
+        });
+    }
+
+
+    public void setupplike(){
+        Call<ArrayList<Integer>> getlikelist=clientAPI.GetOwnLikedPosts(credentials.encrypt,credentials.Email);
+        getlikelist.enqueue(new Callback<ArrayList<Integer>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Integer>> call, Response<ArrayList<Integer>> response) {
+
+                if(!response.isSuccessful()){
+                    System.out.println("there has been an error");
+                }
+                else{
+                    System.out.println(response.toString());
+                    likeid=response.body();
+
+                    System.out.println("created likeposts");
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Integer>> call, Throwable t) {
                 System.out.println("failed to connect to server");
             }
         });

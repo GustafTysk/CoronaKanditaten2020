@@ -17,7 +17,7 @@
                     android:id="@+id/scrollView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/grey"
+                    android:background="@color/colorBackground"
                     app:layout_anchor="@+id/scrollView"
                     app:layout_anchorGravity="center">
 
@@ -33,6 +33,7 @@
                                     android:layout_marginTop="16dp"
                                     android:text="@string/fragment_report_symptoms"
                                     android:textAllCaps="true"
+                                    android:textColor="@color/colorTextTitle"
                                     android:textSize="36sp"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +61,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/symptom_fever"
-                                    android:textColor="#000000"
+                                    android:textColor="@color/colorText"
                                     android:textSize="24sp"
                                     app:layout_constraintBottom_toTopOf="@+id/imageFever"
                                     app:layout_constraintStart_toStartOf="@+id/imageFever" />
@@ -70,7 +71,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/symptom_cough"
-                                    android:textColor="#000000"
+                                    android:textColor="@color/colorText"
                                     android:textSize="24sp"
                                     app:layout_constraintBottom_toTopOf="@+id/imageCough"
                                     app:layout_constraintStart_toStartOf="@+id/imageCough" />
@@ -81,7 +82,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/symptom_breathing"
                                     android:textAllCaps="false"
-                                    android:textColor="#000000"
+                                    android:textColor="@color/colorText"
                                     android:textSize="18sp"
                                     app:layout_constraintBottom_toTopOf="@+id/imageBreathingDifficulties"
                                     app:layout_constraintStart_toStartOf="@+id/imageBreathingDifficulties" />
@@ -91,7 +92,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/symptom_sore_throat"
-                                    android:textColor="#000000"
+                                    android:textColor="@color/colorText"
                                     android:textSize="24sp"
                                     app:layout_constraintBottom_toTopOf="@+id/imageSoreThroat"
                                     app:layout_constraintStart_toStartOf="@+id/imageSoreThroat" />
@@ -101,7 +102,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/symptom_nasal_congestion"
-                                    android:textColor="#000000"
+                                    android:textColor="@color/colorText"
                                     android:textSize="18sp"
                                     app:layout_constraintBottom_toTopOf="@+id/imageNasalCongestion"
                                     app:layout_constraintStart_toStartOf="@+id/imageNasalCongestion" />
@@ -111,7 +112,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/symptom_runny_nose"
-                                    android:textColor="#000000"
+                                    android:textColor="@color/colorText"
                                     android:textSize="24sp"
                                     app:layout_constraintBottom_toTopOf="@+id/imageRunnyNose"
                                     app:layout_constraintStart_toStartOf="@+id/imageRunnyNose" />
@@ -121,7 +122,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/symptom_tiredness"
-                                    android:textColor="#000000"
+                                    android:textColor="@color/colorText"
                                     android:textSize="24sp"
                                     app:layout_constraintBottom_toTopOf="@+id/imageTiredness"
                                     app:layout_constraintStart_toStartOf="@+id/imageTiredness" />
@@ -131,7 +132,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/symptom_headache"
-                                    android:textColor="#000000"
+                                    android:textColor="@color/colorText"
                                     android:textSize="24sp"
                                     app:layout_constraintBottom_toTopOf="@+id/imageHeadache"
                                     app:layout_constraintStart_toStartOf="@+id/imageHeadache" />
@@ -141,7 +142,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/symptom_diarrhea"
-                                    android:textColor="#000000"
+                                    android:textColor="@color/colorText"
                                     android:textSize="24sp"
                                     app:layout_constraintBottom_toTopOf="@+id/imageDiarrhea"
                                     app:layout_constraintStart_toStartOf="@+id/imageDiarrhea" />
@@ -598,7 +599,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="@color/quantum_grey400"
+                android:background="@color/colorBackgroundNavBar"
                 app:menu="@menu/bottom_navigation_menu"
                 app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"/>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -282,6 +282,18 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
 
     }
 
+    public void resetsymtoms(){
+        diarrheaRatingBar.setRating((float)0);
+        runnyNoseRatingBar.setRating((float)0);
+        nasalCongestionRatingBar.setRating((float)0);
+        headacheRatingBar.setRating((float)0);
+        SoreThroatRatingBar.setRating((float)0);
+        breathingRatingBar.setRating((float)0);
+        tirednessRatingBar.setRating((float)0);
+        coughRatingBar.setRating((float)0);
+        feverRatingBar.setRating((float)0);
+    }
+
 
 
 }

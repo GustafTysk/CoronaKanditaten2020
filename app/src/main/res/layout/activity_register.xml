@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey">
+    android:background="@color/colorBackground">
 
     <TextView
         android:id="@+id/textViewRegister"
@@ -13,6 +13,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/page_name_register"
         android:textAllCaps="true"
+        android:textColor="@color/colorTextTitle"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,6 +30,8 @@
         android:hint="@string/hint_username"
         android:inputType="textPersonName"
         android:paddingLeft="10dip"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewRegister" />
@@ -44,6 +47,8 @@
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
         android:paddingLeft="10dip"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"
         app:layout_constraintStart_toStartOf="@+id/textUsername"
         app:layout_constraintTop_toBottomOf="@+id/textUsername" />
 
@@ -63,21 +68,24 @@
             android:layout_height="match_parent"
             android:onClick="onRadioButtonClicked"
             android:text="@string/gender_male"
-            android:textAlignment="viewStart" />
+            android:textAlignment="viewStart"
+            android:textColor="@color/colorTextHint" />
 
         <RadioButton
             android:id="@+id/radio_female"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:onClick="onRadioButtonClicked"
-            android:text="@string/gender_female" />
+            android:text="@string/gender_female"
+            android:textColor="@color/colorTextHint" />
 
         <RadioButton
             android:id="@+id/radio_other"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:onClick="onRadioButtonClicked"
-            android:text="@string/gender_other" />
+            android:text="@string/gender_other"
+            android:textColor="@color/colorTextHint" />
     </RadioGroup>
 
     <TextView
@@ -92,6 +100,8 @@
         android:hint="@string/hint_age"
         android:inputType="numberSigned"
         android:paddingLeft="10dip"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/radioGroupGender"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupGender" />
@@ -107,6 +117,8 @@
         android:hint="@string/hint_password"
         android:inputType="textPassword"
         android:paddingLeft="10dip"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"
         app:layout_constraintStart_toStartOf="@+id/textAge"
         app:layout_constraintTop_toBottomOf="@+id/textAge" />
 

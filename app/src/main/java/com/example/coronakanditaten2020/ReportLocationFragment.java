@@ -133,7 +133,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     int AUTOCOMPLETE_REQUEST_CODE = 1;
     List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
 
-    Intent intent;
 
     @Nullable
     @Override
@@ -451,13 +450,62 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
     void removelocation(){
         int decided=Collections.frequency(AlllocationDecided,true)-1;
+
+        System.out.println("gdgdsfdfdfszsjhdsf");
+
+
+        if(decided==0 && Collections.frequency(AlllocationVisible,true)-1<=1){
+            System.out.println();
+            textViewLocations.get(decided).setText("location "+(decided+1));
+            AlllocationDecided.set(decided,false);
+            locations.remove(currentLocationReport-1);
+            locations.add(null);
+            YourlocationsStrings.remove(currentLocationReport-1);
+            YourlocationsStrings.add("");
+            locationDateStrings.remove(currentLocationReport-1);
+            locationDateStrings.add(null);
+            AllLocationDates.remove(currentLocationReport-1);
+            locationDateStrings.add("");
+            return;}
+
+        if(decided==0 && Collections.frequency(AlllocationVisible,true)-1<=0){
+            System.out.println();
+            System.out.println("gdgdsfgdsfgdsfgdsf");
+            textViewLocations.get(decided).setText("location "+(decided+1));
+            AlllocationDecided.set(decided,false);
+            locations.remove(currentLocationReport-1);
+            locations.add(null);
+            YourlocationsStrings.remove(currentLocationReport-1);
+            YourlocationsStrings.add("");
+            locationDateStrings.remove(currentLocationReport-1);
+            locationDateStrings.add(null);
+            AllLocationDates.remove(currentLocationReport-1);
+            locationDateStrings.add("");
+            return;
+
+        }
+        if(decided==-1 && Collections.frequency(AlllocationVisible,true)-1<=0){
+            System.out.println("gdgdsfdfdfszsjhdsf");
+            textViewLocations.get(decided+1).setText("location "+(decided+2));
+            AlllocationDecided.set(decided+1,false);
+            locations.remove(currentLocationReport-1);
+            locations.add(null);
+            YourlocationsStrings.remove(currentLocationReport-1);
+            YourlocationsStrings.add("");
+            locationDateStrings.remove(currentLocationReport-1);
+            locationDateStrings.add(null);
+            AllLocationDates.remove(currentLocationReport-1);
+            locationDateStrings.add("");
+            return;
+
+        }
         textViewLocations.get(decided).setVisibility(getView().GONE);
         setlocations.get(decided).setVisibility(getView().GONE);
         setCalandarlocations.get(decided).setVisibility(getView().GONE);
         btnRemoveLocations.get(decided).setVisibility(getView().GONE);
         AlllocationVisible.set(decided,false);
         AlllocationDecided.set(decided,false);
-        textViewLocations.get(decided).setText("location "+decided+1);
+        textViewLocations.get(decided).setText("location "+(decided+1));
 
 
         locations.remove(currentLocationReport-1);
@@ -517,15 +565,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         mGoogleMap = googleMap;
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
 
-        //------------------------------------TESTING SEARCH BAR-----------------------------------------
-        // Start the autocomplete intent.
-        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent = new Autocomplete.IntentBuilder(
-                AutocompleteActivityMode.OVERLAY, fields)
-                .build(getContext());
-        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
 
-        //-----------------------------------------------------------------------------------------------
 
         if (locations.get(currentLocationReport-1)!= null) {
             reportedLocation = googleMap.addMarker(new MarkerOptions()
@@ -547,26 +587,8 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
         reportedLocation.setPosition(yourLocation);
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
-        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
-            if (resultCode == AutocompleteActivity.RESULT_OK) {
-                Place place = Autocomplete.getPlaceFromIntent(data);
-                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    getActivity().finishAndRemoveTask(); //TODO NU STÄNGS HELA MAIN ACTIVITY... VET EJ HUR MAN STÄNGER BARA DENNA
-                }
-            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-                // TODO: Handle the error.
-                Status status = Autocomplete.getStatusFromIntent(data);
-                Log.i(TAG, status.getStatusMessage());
-                this.getActivity().finish();
-            } else if (resultCode == AutocompleteActivity.RESULT_CANCELED) {
-                this.getActivity().finish();
-            }
-        }
-    }
+
+
 
     public void getCalendarView(final Integer location) throws OutOfDateRangeException {
         OnSelectDateListener listener = new OnSelectDateListener() {
@@ -838,9 +860,28 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             currentLocationReport++;
             Counter2=0;
 
+
+        }
+        minDateTime=getoldestdate(AllLocationDates)-dateNumberOfDaysAgo;
+
+
+
+
+    }
+
+    public long getoldestdate( ArrayList<List<Calendar>> AllLocationDates){
+        long MinDate=Calendar.getInstance(TimeZone.getDefault()).getTimeInMillis();
+
+        for(List<Calendar> Cal:AllLocationDates){
+            for( Calendar co:Cal){
+                if(co.getTimeInMillis()<MinDate){
+                    MinDate=co.getTimeInMillis();
+                }
+
+            }
         }
 
-
+        return MinDate;
 
     }
 
@@ -946,6 +987,16 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             YourlocationsStrings.add("");
         }
 
+
+    }
+
+    public void removealllocation(){
+
+        for (int i=1; i<=numberOfLocationsSet();i++){
+            currentLocationReport=numberOfLocationsSet();
+            removelocation();
+        }
+        currentLocationReport=0;
 
     }
 }

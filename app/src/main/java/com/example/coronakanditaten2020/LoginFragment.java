@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,6 +43,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
     private TextView textViewGoToResetPassword;
 
     private Switch switchDayNightMode;
+    private ImageView btnChangeLanguage;
 
 
     @Nullable
@@ -78,6 +82,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
             }
         });
 
+        btnChangeLanguage = (ImageView) view.findViewById(R.id.btnChangeLanguage);
+        btnChangeLanguage.setOnClickListener(this);
+
         return view;
     }
 
@@ -100,6 +107,29 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
         }
     }
 
+    public void changeLanguage(){
+        Locale current = getResources().getConfiguration().locale;
+        System.out.println(current.getDisplayLanguage());
+        String languageToLoad;
+        Locale locale;
+        if (!current.getDisplayLanguage().equals("Swedish")){
+            languageToLoad  = "sv";
+
+        }else{
+            languageToLoad = "en";
+        }
+
+        locale = new Locale(languageToLoad);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getContext().getResources().updateConfiguration(config,getContext().getResources().getDisplayMetrics());
+
+        Intent intent = new Intent(getContext(), LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
     @Override
     public void onClick(View v) {
         Intent intent = null;
@@ -111,7 +141,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
             case R.id.btnLoginToStartPage:
                 intent = new Intent(getActivity(),MainActivity.class);
                 break;
+            case R.id.btnChangeLanguage:
+                changeLanguage();
 
+                break;
             case R.id.btnLogin:
                 Email=textEmail.getText().toString();
                 Password=textPassword.getText().toString();

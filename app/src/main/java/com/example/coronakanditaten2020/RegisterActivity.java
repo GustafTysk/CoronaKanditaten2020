@@ -274,6 +274,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if(!response.isSuccessful()){
                     Toast.makeText(getApplicationContext(), getString(R.string.error_with_server), Toast.LENGTH_LONG).show();
+                    System.out.println(response);
                 }
                 else if(response.body()==false){
                     Toast.makeText(getApplicationContext(), "failed to send email", Toast.LENGTH_LONG).show();

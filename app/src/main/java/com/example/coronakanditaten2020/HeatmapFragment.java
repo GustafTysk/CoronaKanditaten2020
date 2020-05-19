@@ -328,13 +328,30 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
 
     //this funcitons weights a point based on symtoms and date and number of Cords
 
-       private double GetLocationWeight(Location weightlocation, String date, int NummberOfCords ){
-        //write the functions to return weight
+       private double GetLocationWeight(Location weightlocation, String date, int NummberOfCords ) {
+           double weight = 0;
 
-        return 5.0;
+           weight += weightlocation.diarrheaRatingBar * 0.2;
+           weight += weightlocation.runnyNoseRatingBar * 1.0;
+           weight += weightlocation.breathingRatingBar * 2.0;
+           weight += weightlocation.coughRatingBar * 3.0;
+           weight += weightlocation.feverRatingBar * 3.0;
+           weight += weightlocation.headacheRatingBar * 0.8;
+           weight += weightlocation.throatRatingBar * 2.0;
+           weight += weightlocation.nasalCongestionRatingBar * 2.0;
+           weight += weightlocation.tirednessRatingBar * 0.1;
 
 
-       }
+           if (NummberOfCords > 1000000) {
+               weight= NummberOfCords/2.0;
+           }
+
+           return weight;
+           }
+
+
+
+
 
     //This function can be used to decide what type of location should be shown
     private boolean locationtype (Location location, String type){
