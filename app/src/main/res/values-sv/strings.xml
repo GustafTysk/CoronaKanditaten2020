@@ -54,13 +54,13 @@
     <string name="btn_register">Registrera</string>
     <string name="btn_to_login">Tillbaka till login</string>
 
-    <string name="invalid_username">Ogiltigt användarnamn, måste överstiga en(1) karaktär</string>
+    <string name="invalid_username">Ogiltigt användarnamn, måste överstiga ett tecken</string>
 
     <string name="invalid_gender">Ogiltigt kön, ange kön tack</string>
     <string name="invalid_age">Ogiltig ålder, ange ålder tack</string>
 
     <string name="verify_email">Verifiera mail</string>
-    <string name="verify_email_text">Ange verifikationskod\nskickad till din mail.\n <i>Klicka här för att \nskicka ny kod.</i></string>
+    <string name="verify_email_text">Ange verifikationskoden som\nskickats till din mail.\n<i>Klicka här för att\nskicka en ny kod.</i></string>
     <string name="hint_verification_code">Verifikationskod</string>
     <string name="btn_verify">Verifiera</string>
     <string name="error_wrong_code">Fel kod</string>
@@ -70,7 +70,7 @@
 
     // RESET PASSWORD PAGE
     <string name="page_name_reset_password">Återställ lösenord</string>
-    <string name="btn_send_code">Skicka verifikationskod till mail</string>
+    <string name="btn_send_code">Skicka verifikationskod</string>
     <string name="btn_resend_code">Skicka ny verifikationskod</string>
     <string name="sent_email_toast"> Verifikationskod skickad till din mail</string>
     <string name="hint_confirmation_code">Verifikationskod</string>
@@ -136,9 +136,9 @@
     <string name="number_of_female_users">Kvinna</string>
     <string name="number_of_male_users">Man</string>
     <string name="number_of_other_users">Annan</string>
-    <string name="age_0_18">0-18</string>
-    <string name="age_19_40">19-40</string>
-    <string name="age_41_64">41-64</string>
+    <string name="age_0_18">0–18</string>
+    <string name="age_19_40">19–40</string>
+    <string name="age_41_64">41–64</string>
     <string name="age_over_65">65+</string>
 
     <string-array name = "numbers">
@@ -156,8 +156,8 @@
     // REPORT SYMPTOMS PAGE
     <string name="fragment_report_symptoms">Rapportera symtom</string>
 
-    <string name="report_symptoms_information">Första steget är att ange dina nuvarande symtom. Detta gör du genom att klicka på de röda cirklarna undervarje symtom.
-        \n Antal röda cirklar:\n 0 = Inga symtom                               1 = Milda symtom \n 2 = Medelhöga symtom                     3 = Mycket symtom"</string>
+    <string name="report_symptoms_information">Ange graden av dina symtom.
+        \n 0: Inga symtom 1: Milda symtom \n 2: Medelhöga symtom 3: Allvarliga symtom"</string>
 
     <string name="symptom_fever">Feber</string>
     <string name="symptom_cough">Hosta</string>
