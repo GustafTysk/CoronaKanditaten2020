@@ -11,10 +11,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/open_sans"
+        android:includeFontPadding="false"
         android:text="@string/page_name_register"
         android:textAllCaps="true"
         android:textColor="@color/colorTextTitle"
-        android:textSize="36sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +28,9 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
         android:drawableLeft="@drawable/usericon"
+        android:drawablePadding="2dp"
         android:ems="12"
+        android:fontFamily="@font/open_sans"
         android:hint="@string/hint_username"
         android:inputType="textPersonName"
         android:paddingLeft="10dip"
@@ -43,10 +47,12 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/edittext_outline"
         android:drawableLeft="@drawable/emailicon"
+        android:drawablePadding="5dp"
         android:ems="12"
+        android:fontFamily="@font/open_sans"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
-        android:paddingLeft="10dip"
+        android:paddingLeft="10dp"
         android:textColor="@color/colorText"
         android:textColorHint="@color/colorTextHint"
         app:layout_constraintStart_toStartOf="@+id/textUsername"
@@ -54,11 +60,14 @@
 
     <RadioGroup
         android:id="@+id/radioGroupGender"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edittext_outline"
         android:orientation="horizontal"
+
+        android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/textEmail"
         app:layout_constraintStart_toStartOf="@+id/textEmail"
         app:layout_constraintTop_toBottomOf="@+id/textEmail">
 
@@ -67,6 +76,7 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:onClick="onRadioButtonClicked"
+            android:paddingLeft="2dp"
             android:text="@string/gender_male"
             android:textAlignment="viewStart"
             android:textColor="@color/colorTextHint" />
@@ -76,6 +86,7 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:onClick="onRadioButtonClicked"
+            android:paddingLeft="2dp"
             android:text="@string/gender_female"
             android:textColor="@color/colorTextHint" />
 
@@ -84,6 +95,7 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:onClick="onRadioButtonClicked"
+            android:paddingLeft="2dp"
             android:text="@string/gender_other"
             android:textColor="@color/colorTextHint" />
     </RadioGroup>
@@ -95,6 +107,7 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/edittext_outline"
         android:drawableLeft="@drawable/ageicon"
+        android:drawablePadding="5dp"
         android:ems="12"
         android:gravity="center_vertical"
         android:hint="@string/hint_age"
@@ -124,10 +137,11 @@
 
     <Button
         android:id="@+id/btnRegister"
-        android:layout_width="182dp"
-        android:layout_height="58dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/button_selector"
+        android:padding="10dp"
         android:text="@string/btn_register"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -136,21 +150,4 @@
         app:layout_constraintStart_toStartOf="@+id/textPassword"
         app:layout_constraintTop_toBottomOf="@+id/textPassword" />
 
-    <Button
-        android:id="@+id/btnToLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/button_selector_light"
-        android:padding="10dp"
-        android:text="@string/btn_to_login"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 </androidx.constraintlayout.widget.ConstraintLayout>

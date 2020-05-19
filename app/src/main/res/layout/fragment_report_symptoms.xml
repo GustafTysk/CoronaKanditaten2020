@@ -34,7 +34,7 @@
                                     android:text="@string/fragment_report_symptoms"
                                     android:textAllCaps="true"
                                     android:textColor="@color/colorTextTitle"
-                                    android:textSize="36sp"
+                                    android:textSize="30sp"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -44,14 +44,14 @@
                                     android:layout_width="346dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
-                                    android:background="@drawable/button_selector_light"
+                                    android:background="@drawable/edittext_outline"
                                     android:fontFamily="sans-serif"
                                     android:paddingBottom="5dp"
                                     android:text="@string/report_symptoms_information"
                                     android:textAlignment="center"
 
-                                    android:textColor="#FFFFFF"
-                                    android:textStyle="bold"
+                                    android:textColor="@color/colorText"
+                                    android:textStyle="normal"
                                     app:layout_constraintEnd_toEndOf="@+id/textViewReportSymptoms"
                                     app:layout_constraintStart_toStartOf="@+id/textViewReportSymptoms"
                                     app:layout_constraintTop_toBottomOf="@+id/textViewReportSymptoms" />
@@ -324,9 +324,11 @@
                                     style="@style/circleRating"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginBottom="16dp"
                                     android:numStars="3"
                                     android:stepSize="1"
                                     android:theme="@style/ratingBar"
+                                    app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="@+id/imageDiarrhea"
                                     app:layout_constraintTop_toBottomOf="@+id/imageDiarrhea" />
 
@@ -336,7 +338,7 @@
                                     android:layout_height="29dp"
                                     android:layout_marginStart="8dp"
                                     android:background="#00FFFFFF"
-                                    android:src="@drawable/info_i_v2_crop_new"
+                                    android:src="@drawable/info_icon_32x32"
                                     app:layout_constraintBottom_toBottomOf="@+id/textFever"
                                     app:layout_constraintStart_toEndOf="@+id/textFever"
                                     app:layout_constraintTop_toTopOf="@+id/textFever" />
@@ -347,7 +349,7 @@
                                     android:layout_height="29dp"
                                     android:layout_marginStart="8dp"
                                     android:background="#00FFFFFF"
-                                    android:src="@drawable/info_i_v2_crop_new"
+                                    android:src="@drawable/info_icon_32x32"
                                     app:layout_constraintBottom_toBottomOf="@+id/textCough"
                                     app:layout_constraintStart_toEndOf="@+id/textCough"
                                     app:layout_constraintTop_toTopOf="@+id/textCough" />
@@ -358,7 +360,7 @@
                                     android:layout_height="29dp"
                                     android:layout_marginStart="8dp"
                                     android:background="#00FFFFFF"
-                                    android:src="@drawable/info_i_v2_crop_new"
+                                    android:src="@drawable/info_icon_32x32"
                                     app:layout_constraintBottom_toBottomOf="@+id/textBreathingDifficulties"
                                     app:layout_constraintStart_toEndOf="@+id/textBreathingDifficulties"
                                     app:layout_constraintTop_toTopOf="@+id/textBreathingDifficulties"
@@ -370,8 +372,10 @@
                                     android:layout_height="29dp"
                                     android:layout_marginStart="8dp"
                                     android:background="#00FFFFFF"
-                                    android:src="@drawable/info_i_v2_crop_new"
+                                    android:src="@drawable/info_icon_32x32"
                                     app:layout_constraintBottom_toBottomOf="@+id/textSoreThroat"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.0"
                                     app:layout_constraintStart_toEndOf="@+id/textSoreThroat"
                                     app:layout_constraintTop_toTopOf="@+id/textSoreThroat" />
 
@@ -432,8 +436,11 @@
 
                                 <Button
                                     android:id="@+id/btnClearFeverRating"
-                                    android:layout_width="53dp"
-                                    android:layout_height="34dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginBottom="4dp"
                                     android:background="@drawable/button_selector"
                                     android:text="@string/btn_clear"
                                     android:textColor="@color/white"
@@ -446,8 +453,11 @@
 
                                 <Button
                                     android:id="@+id/btnClearCoughRating"
-                                    android:layout_width="53dp"
-                                    android:layout_height="34dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginBottom="4dp"
                                     android:background="@drawable/button_selector"
                                     android:text="@string/btn_clear"
                                     android:textColor="@color/white"
@@ -460,8 +470,11 @@
 
                                 <Button
                                     android:id="@+id/btnClearBreathingRating"
-                                    android:layout_width="53dp"
-                                    android:layout_height="34dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginBottom="4dp"
                                     android:background="@drawable/button_selector"
                                     android:text="@string/btn_clear"
                                     android:textColor="@color/white"
@@ -474,8 +487,11 @@
 
                                 <Button
                                     android:id="@+id/btnClearSoreThroatRating"
-                                    android:layout_width="53dp"
-                                    android:layout_height="34dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginBottom="4dp"
                                     android:background="@drawable/button_selector"
                                     android:text="@string/btn_clear"
                                     android:textColor="@color/white"
@@ -484,12 +500,16 @@
                                     app:layout_constraintBottom_toBottomOf="@+id/ratingBarSoreThroat"
                                     app:layout_constraintEnd_toEndOf="@+id/imageSoreThroat"
                                     app:layout_constraintStart_toEndOf="@+id/ratingBarSoreThroat"
-                                    app:layout_constraintTop_toTopOf="@+id/ratingBarSoreThroat" />
+                                    app:layout_constraintTop_toTopOf="@+id/ratingBarSoreThroat"
+                                    app:layout_constraintVertical_bias="0.5" />
 
                                 <Button
                                     android:id="@+id/btnClearNasalCongestionRating"
-                                    android:layout_width="53dp"
-                                    android:layout_height="34dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginBottom="4dp"
                                     android:background="@drawable/button_selector"
                                     android:text="@string/btn_clear"
                                     android:textColor="@color/white"
@@ -502,8 +522,11 @@
 
                                 <Button
                                     android:id="@+id/btnCleaarRunnyNoseRating"
-                                    android:layout_width="53dp"
-                                    android:layout_height="34dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginBottom="4dp"
                                     android:background="@drawable/button_selector"
                                     android:text="@string/btn_clear"
                                     android:textColor="@color/white"
@@ -516,8 +539,11 @@
 
                                 <Button
                                     android:id="@+id/btnClearTirednessRating"
-                                    android:layout_width="53dp"
-                                    android:layout_height="34dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginBottom="4dp"
                                     android:background="@drawable/button_selector"
                                     android:text="@string/btn_clear"
                                     android:textColor="@color/white"
@@ -530,8 +556,11 @@
 
                                 <Button
                                     android:id="@+id/btnClearHeadacheRating"
-                                    android:layout_width="53dp"
-                                    android:layout_height="34dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginBottom="4dp"
                                     android:background="@drawable/button_selector"
                                     android:text="@string/btn_clear"
                                     android:textColor="@color/white"
@@ -544,8 +573,11 @@
 
                                 <Button
                                     android:id="@+id/btnClearDiarrheaRating"
-                                    android:layout_width="53dp"
-                                    android:layout_height="34dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginBottom="4dp"
                                     android:background="@drawable/button_selector"
                                     android:text="@string/btn_clear"
                                     android:textColor="@color/white"
@@ -580,8 +612,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="32dp"
-                                    android:layout_marginBottom="8dp"
-                                    android:background="@drawable/button_selector_light"
+                                    android:layout_marginBottom="16dp"
+                                    android:background="@drawable/button_selector"
                                     android:padding="10dp"
                                     android:text="@string/btn_next_page_rl"
                                     android:textAllCaps="true"

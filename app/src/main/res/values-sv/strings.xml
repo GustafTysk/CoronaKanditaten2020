@@ -86,6 +86,11 @@
     <string name="success_logout">Loggade ut</string>
     <string name="fail_logout">Kunde inte logga ut, försök igen senare</string>
 
+    <string name="btn_report_symptom">Report\nsymptoms</string>
+    <string name="btn_heatmap">Heatmap</string>
+    <string name="btn_forum">Forum</string>
+    <string name="btn_statistics">Statistics</string>
+
     // MY SETTINGS PAGE
     <string name="fragment_my_settings">Inställningar</string>
 

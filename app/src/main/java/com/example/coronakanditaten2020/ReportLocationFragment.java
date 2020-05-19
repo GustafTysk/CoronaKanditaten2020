@@ -140,10 +140,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         containerThis = container;
         savedInstance = savedInstanceState;
         View view = inflater.inflate(R.layout.fragment_report_location, container, false);
-//        btnRlToStart = (Button) view.findViewById(R.id.btnRlToStart);
-//        btnRlToStart.setOnClickListener(this);
-        btnRlToRs = (Button) view.findViewById(R.id.btnRlToRs);
-        btnRlToRs.setOnClickListener(this);
+
         btnUpdateMyLocations = (Button) view.findViewById(R.id.btnUpdateMyLocations);
         btnUpdateMyLocations.setOnClickListener(this);
         btnAddLocation = (Button) view.findViewById(R.id.btnAddLocation);
@@ -300,13 +297,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     public void onClick(View v) {
 
         switch (v.getId()) {
-
-            case R.id.btnRlToRs:
-                ((MainActivity) getActivity()).setViewPager(4);
-                break;
-/*            case R.id.btnRlToStart:
-                ((MainActivity) getActivity()).setViewPager(1);
-                break;*/
             case R.id.btnAddLocation:
                 showNextLocationFragment(currentLocationReport, getView());
                 break;

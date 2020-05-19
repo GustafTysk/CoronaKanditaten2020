@@ -66,9 +66,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        btnToLogin = (Button) findViewById(R.id.btnToLogin);
         btnRegister = (Button) findViewById(R.id.btnRegister);
-        btnToLogin.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
 
         textEmail = (EditText) findViewById(R.id.textEmail);
@@ -126,10 +124,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         Intent intent = null;
 
         switch(view.getId()){
-            case R.id.btnToLogin:
-                intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-                break;
             case R.id.btnRegister:
                 //GET INFORMATION AND CREATE NEW USER
                 username = textUsername.getText().toString();

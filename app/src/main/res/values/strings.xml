@@ -52,7 +52,7 @@
     <string name="gender_other">Other</string>
     <string name="hint_age">Select date of birth</string>
     <string name="btn_register">Register</string>
-    <string name="btn_to_login">Back to Login</string>
+    <string name="btn_to_login">Return to \nlogin</string>
 
     <string name="invalid_username">Invalid Username, must exceed 1 character</string>
 
@@ -60,7 +60,7 @@
     <string name="invalid_age">Invalid Age, please enter your age</string>
 
     <string name="verify_email">Verify email</string>
-    <string name="verify_email_text">Enter verification code\nsent to your email.\n <i>Click here to \nsend a new code.</i></string>
+    <string name="verify_email_text">Enter the verification code\nthat was sent \nto your email.\n\n <i>Click here to \nsend a new code.</i></string>
     <string name="hint_verification_code">Verification code</string>
     <string name="btn_verify">Verify</string>
     <string name="error_wrong_code">Wrong code</string>
@@ -70,8 +70,8 @@
 
     // RESET PASSWORD PAGE
     <string name="page_name_reset_password">Reset Password</string>
-    <string name="btn_send_code">Send verification code to email</string>
-    <string name="btn_resend_code">Resend verification code to email</string>
+    <string name="btn_send_code">Send verification code</string>
+    <string name="btn_resend_code">Resend verification code</string>
     <string name="sent_email_toast"> Verification code has been sent to your email</string>
     <string name="hint_confirmation_code">Confirmation code</string>
     <string name="wrong_email">No user connected to this Email</string>
@@ -86,6 +86,10 @@
     <string name="success_logout">Logged out successfully</string>
     <string name="fail_logout">Could not Log Out, please try again later</string>
 
+    <string name="btn_report_symptom">Report\nsymptoms</string>
+    <string name="btn_heatmap">Heatmap</string>
+    <string name="btn_forum">Forum</string>
+    <string name="btn_statistics">Statistics</string>
     // MY SETTINGS PAGE
     <string name="fragment_my_settings">Settings</string>
 
@@ -151,8 +155,8 @@
     // REPORT SYMPTOMS PAGE
     <string name="fragment_report_symptoms">Report symptoms</string>
 
-    <string name="report_symptoms_information">The first step is to report the symptoms you are feeling right now. This is done by clicking on the circles below each symptom.
-        \n Number of red circles:\n 0 = No symptoms                               1 = Low symptoms \n 2 = Medium symptoms                     3 = High symptoms"</string>
+    <string name="report_symptoms_information">Please grade your symptoms
+        \n Number of red circles:\n 0 = No symptoms                               1 = Mild symptoms \n 2 = Moderate symptoms                     3 = Severe symptoms"</string>
 
     <string name="symptom_fever">Fever</string>
     <string name="symptom_cough">Cough</string>
