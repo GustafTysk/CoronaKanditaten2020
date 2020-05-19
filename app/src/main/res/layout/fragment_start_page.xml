@@ -11,7 +11,7 @@
         android:id="@+id/textViewStartPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/page_name_start_page"
         android:textAllCaps="true"
         android:textColor="@color/colorTextTitle"

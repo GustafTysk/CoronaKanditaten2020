@@ -30,7 +30,7 @@
                                     android:id="@+id/textViewReportSymptoms"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="16dp"
+                                    android:layout_marginTop="8dp"
                                     android:text="@string/fragment_report_symptoms"
                                     android:textAllCaps="true"
                                     android:textColor="@color/colorTextTitle"

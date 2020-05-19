@@ -19,7 +19,7 @@
         android:id="@+id/textViewHeatmap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/fragment_heatmap"
         android:textAllCaps="true"
         android:textColor="@color/colorTextTitle"
@@ -103,6 +103,7 @@
 
     <SeekBar
         android:id="@+id/seekBarHeatmap"
+        style="@style/Widget.AppCompat.SeekBar"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:max="30"
@@ -118,6 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:textColor="@color/colorTextHint"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/mapview"
         app:layout_constraintTop_toBottomOf="@+id/autocomplete_fragment" />
