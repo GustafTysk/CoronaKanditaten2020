@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/colorBackground"
     tools:context=".StartPageFragment">
 
     <TextView
@@ -14,6 +14,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/page_name_start_page"
         android:textAllCaps="true"
+        android:textColor="@color/colorTextTitle"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.46"
@@ -24,7 +25,7 @@
         android:id="@+id/btnStartToRs"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="48dp"
         android:background="@drawable/button_selector"
         android:drawableTop="@drawable/sickicon"
@@ -42,8 +43,7 @@
         android:id="@+id/btnStartToHeatmap"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/button_selector"
         android:drawableTop="@drawable/earthicon"
         android:paddingTop="10dp"
@@ -53,8 +53,6 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnStartToRs"
         app:layout_constraintTop_toTopOf="@+id/btnStartToRs" />
 
     <Button
@@ -78,7 +76,6 @@
         android:id="@+id/btnStartToForum"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/button_selector"
         android:drawableTop="@drawable/chaticon"
@@ -89,7 +86,6 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/btnStartToHeatmap"
-        app:layout_constraintStart_toEndOf="@+id/btnStartToStatistics"
         app:layout_constraintTop_toBottomOf="@+id/btnStartToHeatmap" />
 
     <Button
@@ -110,8 +106,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:background="@color/colorBackground"
         android:src="@drawable/settings_icon_32x32"
-        android:background="@color/grey"
         app:layout_constraintBottom_toBottomOf="@+id/textViewStartPage"
         app:layout_constraintStart_toEndOf="@+id/textViewStartPage"
         app:layout_constraintTop_toTopOf="@+id/textViewStartPage" />

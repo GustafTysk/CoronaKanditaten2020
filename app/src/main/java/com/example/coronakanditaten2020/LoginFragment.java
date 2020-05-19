@@ -1,19 +1,23 @@
 package com.example.coronakanditaten2020;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import retrofit2.Call;
@@ -27,12 +31,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
     private Button btnToRegister;
     private Button btnLoginToStartPage;
     boolean passwordCorrect;
+    private Boolean NightMode = false;
     String Password;
     String Email;
     EditText textPassword;
     EditText textEmail;
 
     private TextView textViewGoToResetPassword;
+
+    private Switch switchDayNightMode;
 
 
     @Nullable
@@ -53,9 +60,44 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
         textViewGoToResetPassword = (TextView) view.findViewById(R.id.textViewGoToResetPassword);
         textViewGoToResetPassword.setOnTouchListener(this);
 
-
+        switchDayNightMode = (Switch) view.findViewById(R.id.switchDayNightMode);
+        checkDayNightMode();
+        switchDayNightMode.setChecked(NightMode);
+        switchDayNightMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    // set night mode on
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                }
+                else {
+                    // night mode off
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                }
+            }
+        });
 
         return view;
+    }
+
+    public void checkDayNightMode(){
+        int nightModeFlags =
+                getContext().getResources().getConfiguration().uiMode &
+                        Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                NightMode = true;
+                break;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+                NightMode = false;
+                break;
+
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                NightMode = false;
+                break;
+        }
     }
 
     @Override

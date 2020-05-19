@@ -117,7 +117,7 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
                 EditTextPreference editTextPreference =  (EditTextPreference)usernamePreference;
                 if (editTextPreference.getText().trim().length() > 0){
                     String newUsername = editTextPreference.getText();
-                    editTextPreference.setSummary(getString(R.string.on_changed_username) + editTextPreference.getText());
+                    editTextPreference.setSummary(getString(R.string.on_changed_username) + "  " + editTextPreference.getText());
 
                     // TODO set USERS username = newUsername
                 }else{
@@ -154,6 +154,7 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
         });
 
 
+        Toast.makeText(getContext(),getString(R.string.alert_toast_locations),Toast.LENGTH_LONG).show();
     }
 
     public void removeUserPosts(){
@@ -179,6 +180,7 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
             }
         });
 
+        Toast.makeText(getContext(),getString(R.string.alert_toast_posts),Toast.LENGTH_LONG).show();
 
     }
 
