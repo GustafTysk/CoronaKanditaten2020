@@ -127,6 +127,7 @@
 
     // STATISTICS PAGE
     <string name="fragment_statistics">Statistics</string>
+    <string name="checkbox_explanation">Choose the symptoms you want to see above by checking/unchecking the checkboxes:</string>
 
     <string name="total_symptoms">Total symptoms</string>
     <string name="per_day_symptoms">Symptoms per day</string>

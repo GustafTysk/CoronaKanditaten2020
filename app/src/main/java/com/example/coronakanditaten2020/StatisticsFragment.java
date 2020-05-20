@@ -374,7 +374,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public Date createCalendar(int dayOfInterestLast60Days) {
         Date today = new Date();
-        System.out.println("idag" + today);
         calendarStat = (GregorianCalendar) Calendar.getInstance();
         calendarStat.setTime(today);
         calendarStat.add(Calendar.DAY_OF_MONTH, -dayOfInterestLast60Days);
@@ -403,10 +402,10 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         OnSelectDateListener listener = new OnSelectDateListener() {
             @Override
             public void onSelect(List<Calendar> calendars) {
-                noSelectedDates = false;
-                clearGraph();
                 minCalendarValue = calendars.get(0).getTime();
                 maxCalendarValue = calendars.get(calendars.size()-1).getTime();
+                noSelectedDates = false;
+                clearGraph();
 
                 if(series1exist == true){
                     addAllSeries1();
@@ -502,7 +501,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             allRatingsRunnyNose.add(symptomCounter);
             symptomCounter = 0;
         }
-        System.out.println("allratingsrunny" + allRatingsRunnyNose);
         return allRatingsRunnyNose;
     }
 
@@ -700,7 +698,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         ArrayList<DataPoint> dataPointsFever = new ArrayList<>();
         ArrayList<DataPoint> dataPointsCough = new ArrayList<>();
         ArrayList<DataPoint> dataPointsHeadache = new ArrayList<>();
-        for(int i=59; i>=0; i--){
+        for(int i = 59; i>=0; i--){
             dataPointsDiarrhea.add(new DataPoint(createCalendar(i), countForGraph2(i,allRatingsDiarrhea)));
             dataPointsRunnyNose.add(new DataPoint(createCalendar(i), countForGraph2(i,allRatingsRunnyNose)));
             dataPointsNasalCon.add(new DataPoint(createCalendar(i), countForGraph2(i,allRatingsNasalCon)));
@@ -739,6 +737,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(calculateHighestValA());
+//        graph.getViewport().setXAxisBoundsManual(true);
+//        graph.getViewport().setMinX(minCalendarValue.getTime());
+//        graph.getViewport().setMaxX(maxCalendarValue.getTime());
 
         graph.getGridLabelRenderer().setNumVerticalLabels(calculateHighestValA() + 1);
 
@@ -789,6 +790,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(calculateHighestValB() + 1);
+//        graph.getViewport().setXAxisBoundsManual(true);
+//        graph.getViewport().setMinX(minCalendarValue.getTime());
+//        graph.getViewport().setMaxX(maxCalendarValue.getTime());
 
         graph.getGridLabelRenderer().setNumVerticalLabels(calculateHighestValB() + 1);
         graph.setTitle(getString(R.string.total_symptoms));
@@ -906,6 +910,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
         if(text.equals(getString(R.string.per_day_symptoms))){
             createCalendar(60);
+            System.out.println("create" + createCalendar(60));
             clearGraph();
             makeGraphLines1();
             addAllSeries1();
@@ -927,8 +932,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public void countTable() {
         for(User user: Users){
-            System.out.println("jfjfjfkjkfdkdkdk");
-            System.out.println(getString(R.string.gender_male));
             if(user.gender.equals(getString(R.string.gender_male))){
                 if(user.age >= 0 && user.age < 19){
                     maleAge0To18 += 1;
