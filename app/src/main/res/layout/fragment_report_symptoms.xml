@@ -163,7 +163,7 @@
                                     android:layout_height="148dp"
                                     android:layout_marginTop="48dp"
                                     android:layout_marginEnd="8dp"
-                                    android:src="@drawable/fever"
+                                    android:src="@drawable/cough"
                                     app:layout_constraintEnd_toEndOf="@+id/textView2"
                                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -172,7 +172,7 @@
                                     android:layout_width="148dp"
                                     android:layout_height="148dp"
                                     android:layout_marginTop="48dp"
-                                    android:src="@drawable/fever"
+                                    android:src="@drawable/breathing"
                                     app:layout_constraintStart_toStartOf="@+id/imageFever"
                                     app:layout_constraintTop_toBottomOf="@+id/ratingBarFever" />
 
@@ -181,7 +181,7 @@
                                     android:layout_width="148dp"
                                     android:layout_height="148dp"
                                     android:layout_marginTop="48dp"
-                                    android:src="@drawable/fever"
+                                    android:src="@drawable/sorethroat"
                                     app:layout_constraintStart_toStartOf="@+id/imageCough"
                                     app:layout_constraintTop_toBottomOf="@+id/ratingBarCough" />
 
@@ -199,7 +199,7 @@
                                     android:layout_width="148dp"
                                     android:layout_height="148dp"
                                     android:layout_marginTop="48dp"
-                                    android:src="@drawable/fever"
+                                    android:src="@drawable/runnynose"
                                     app:layout_constraintStart_toStartOf="@+id/imageSoreThroat"
                                     app:layout_constraintTop_toBottomOf="@+id/ratingBarSoreThroat" />
 
