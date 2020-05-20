@@ -113,5 +113,26 @@
         app:layout_constraintStart_toEndOf="@+id/textViewStartPage"
         app:layout_constraintTop_toTopOf="@+id/textViewStartPage" />
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="201dp"
+        android:layout_height="171dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStartToStatistics"
+        app:layout_constraintVertical_bias="0.741"
+        app:srcCompat="@drawable/logo_transparent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="60dp"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewStartPage"
+        app:layout_constraintEnd_toStartOf="@+id/textViewStartPage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewStartPage"
+        app:srcCompat="@drawable/logo__icon_transparent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

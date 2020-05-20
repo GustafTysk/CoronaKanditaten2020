@@ -35,7 +35,7 @@ public class Datahandler {
     Credentials credentials;
     Retrofit retrofit;
     ClientAPI clientAPI;
-    String baseurl = "http://92.34.132.171/restAPI/webapi/";
+    String baseurl = "https://coronakandidaten2020.tech/restAPI/webapi/";
     ArrayList<Post> topPost;
 
     public Datahandler() {
