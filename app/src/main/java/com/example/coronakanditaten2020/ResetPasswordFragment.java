@@ -38,6 +38,7 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
         newPasswordView = (EditText) view.findViewById(R.id.newPassword);
 
         btnChangePassword = (Button) view.findViewById(R.id.btnResetPassword);
+        btnChangePassword.setOnClickListener(this);
 
         textEmail = (EditText) view.findViewById(R.id.emailToConfirm);
 
@@ -90,9 +91,10 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
                 }
                 break;
             case R.id.btnResetPassword:
-
+                System.out.println("button clicked");
                     newPassword = newPasswordView.getText().toString();
                     if (passwordOK(newPassword, newPasswordView)){
+                        System.out.println("password checked");
                         changeUserPassword();
                     }
                     else{
@@ -136,7 +138,7 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
     }
 
     public void changeUserPassword(){
-
+        System.out.println("kommer in");
         Call<Boolean> changepassword= ((LoginActivity) getActivity()).datahandler.clientAPI.setpassword(EmailString,verificationCodeView.getText().toString(),newPassword);
         changepassword.enqueue(new Callback<Boolean>() {
             @Override
@@ -155,7 +157,7 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
-
+                System.out.println(t);
             }
         });
 
