@@ -109,10 +109,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
 
     public void changeLanguage(){
         Locale current = getResources().getConfiguration().locale;
-        System.out.println(current.getDisplayLanguage());
         String languageToLoad;
         Locale locale;
-        if (!current.getDisplayLanguage().equals("Swedish")){
+        if (!current.getLanguage().equals("sv")){
             languageToLoad  = "sv";
 
         }else{
@@ -149,7 +148,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
                 Email=textEmail.getText().toString();
                 Password=textPassword.getText().toString();
                 ((LoginActivity)getActivity()).datahandler.credentials=new Credentials(Email,Password);
-                Call<Boolean> login=((LoginActivity)getActivity()).datahandler.clientAPI.login(((MainActivity)getActivity()).datahandler.credentials.encrypt,
+                Call<Boolean> login=((LoginActivity)getActivity()).datahandler.clientAPI.login(((LoginActivity)getActivity()).datahandler.credentials.encrypt,
                         ((LoginActivity)getActivity()).datahandler.credentials.Email,
                         ((LoginActivity)getActivity()).datahandler.credentials.Password);
                 login.enqueue(new Callback<Boolean>() {
