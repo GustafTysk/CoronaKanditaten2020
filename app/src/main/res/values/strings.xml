@@ -162,7 +162,7 @@
     <string name="symptom_cough">Cough</string>
     <string name="symptom_breathing">Difficulty-/nBreathing</string>
     <string name="symptom_sore_throat">Sore Throat</string>
-    <string name="symptom_nasal_congestion">Nasal-/nCongestion</string>
+    <string name="symptom_nasal_congestion">Nasal -/nCongestion</string>
     <string name="symptom_runny_nose">Runny Nose</string>
     <string name="symptom_tiredness">Tiredness</string>
     <string name="symptom_headache">Headache</string>
