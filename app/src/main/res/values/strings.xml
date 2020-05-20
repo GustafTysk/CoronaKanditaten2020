@@ -127,6 +127,7 @@
 
     // STATISTICS PAGE
     <string name="fragment_statistics">Statistics</string>
+    <string name="checkbox_explanation">Choose the symptoms you want to see above by checking/unchecking the checkboxes:</string>
 
     <string name="total_symptoms">Total symptoms</string>
     <string name="per_day_symptoms">Symptoms per day</string>
@@ -162,7 +163,7 @@
     <string name="symptom_cough">Cough</string>
     <string name="symptom_breathing">Difficulty-/nBreathing</string>
     <string name="symptom_sore_throat">Sore Throat</string>
-    <string name="symptom_nasal_congestion">Nasal-/nCongestion</string>
+    <string name="symptom_nasal_congestion">Nasal -/nCongestion</string>
     <string name="symptom_runny_nose">Runny Nose</string>
     <string name="symptom_tiredness">Tiredness</string>
     <string name="symptom_headache">Headache</string>

@@ -73,14 +73,14 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph1"
         android:layout_width="match_parent"
         android:layout_height="350dip"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:labelFor="@id/relativeLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/setCalendarLocation1" />
@@ -89,7 +89,7 @@
         android:id="@+id/setCalendarLocation1"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="12dp"
         android:background="@drawable/button_selector"
         android:src="@android:drawable/ic_menu_month"
         app:layout_constraintEnd_toStartOf="@+id/textViewStatistics"
@@ -106,10 +106,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/checkbox_explanation"
+        android:textColor="@color/colorText"
+        app:layout_constraintStart_toStartOf="@+id/relativeLayout"
+        app:layout_constraintTop_toBottomOf="@+id/graph1" />
+
     <TableLayout
         android:id="@+id/tableLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/edittext_outline"
+        android:divider="?android:attr/dividerHorizontal"
+        android:showDividers="middle"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -124,7 +137,6 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#D3D3D3"
                 android:padding="10sp"
                 android:text="@string/age_years"
                 android:textColor="@color/colorText" />
@@ -142,7 +154,6 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#D3D3D3"
                 android:gravity="center"
                 android:padding="10sp"
                 android:text="@string/number_of_male_users"
@@ -156,6 +167,11 @@
                 android:padding="10sp"
                 android:text="@string/number_of_other_users"
                 android:textColor="@color/colorText" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/grey" />
         </TableRow>
 
         <TableRow
@@ -175,7 +191,6 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#D3D3D3"
                 android:padding="10sp"
                 android:textColor="@color/colorText" />
 
@@ -190,7 +205,6 @@
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#D3D3D3"
                 android:padding="10sp"
                 android:textColor="@color/colorText" />
 
@@ -205,7 +219,6 @@
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#D3D3D3"
                 android:padding="10sp"
                 android:text="@string/age_19_40"
                 android:textColor="@color/colorText" />
@@ -221,7 +234,6 @@
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#D3D3D3"
                 android:padding="10sp"
                 android:textColor="@color/colorText" />
 
@@ -251,7 +263,6 @@
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#D3D3D3"
                 android:padding="10sp"
                 android:textColor="@color/colorText" />
 
@@ -266,7 +277,6 @@
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#D3D3D3"
                 android:padding="10sp"
                 android:textColor="@color/colorText" />
 
@@ -281,7 +291,6 @@
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#D3D3D3"
                 android:padding="10sp"
                 android:text="@string/age_over_65"
                 android:textColor="@color/colorText" />
@@ -297,7 +306,6 @@
                 android:id="@+id/textView19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#D3D3D3"
                 android:padding="10sp"
                 android:textColor="@color/colorText" />
 
@@ -314,17 +322,20 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="413dp"
-        android:layout_height="150dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/graph1">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/edittext_outline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tableLayout"
+        app:layout_constraintTop_toBottomOf="@+id/textView21">
 
         <CheckBox
             android:id="@+id/diarrheaBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:buttonTint="#000000"
             android:checked="true"
             android:onClick="onCheckboxClicked"
@@ -412,8 +423,8 @@
             android:id="@+id/feverBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="#ff0000"
             android:layout_marginTop="16dp"
+            android:buttonTint="#ff0000"
             android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_fever"
@@ -425,12 +436,14 @@
             android:id="@+id/coughBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="#333333"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:buttonTint="#333333"
             android:checked="true"
             android:onClick="onCheckboxClicked"
             android:text="@string/symptom_cough"
             android:textColor="@color/colorText"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/feverBox"
             app:layout_constraintTop_toBottomOf="@+id/feverBox" />
 

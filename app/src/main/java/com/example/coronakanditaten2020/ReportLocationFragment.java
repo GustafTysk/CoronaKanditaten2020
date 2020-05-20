@@ -315,19 +315,15 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 Call<Boolean> creatuserlocations = ((MainActivity) getActivity()).datahandler.clientAPI.createuserlocations(
                         ((MainActivity) getActivity()).datahandler.credentials.encrypt, ((MainActivity) getActivity()).datahandler.credentials.Email, userLocations);
 
-                if (((MainActivity) getActivity()).datahandler.Userlocations == null) {
+                if (((MainActivity) getActivity()).datahandler.Userlocations.size()==0) {
 
                     creatuserlocations.enqueue(new Callback<Boolean>() {
                         @Override
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                             if (!response.isSuccessful()) {
-                                System.out.println(userLocations.get(0).latitude + "latitude");
-                                System.out.println(userLocations.get(0).longitude + "long");
                                 Toast.makeText(getContext(), getString(R.string.fail_add_user_locations), Toast.LENGTH_LONG).show();
-                                System.out.println("tja");
                             } else {
                                 Toast.makeText(getContext(), getString(R.string.success_add_user_locations), Toast.LENGTH_LONG).show();
-                                System.out.println("yja");
                                 ((MainActivity) getActivity()).datahandler.Userlocations = userLocations;
                                 ((MainActivity) getActivity()).setViewPager(1);
 
@@ -350,6 +346,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                             if (!response.isSuccessful() || !response.body()) {
                                 Toast.makeText(getContext(), getString(R.string.fail_add_user_locations), Toast.LENGTH_LONG).show();
+                                System.out.println("sfdhfghfghsdfds");
 
                             } else {
 
