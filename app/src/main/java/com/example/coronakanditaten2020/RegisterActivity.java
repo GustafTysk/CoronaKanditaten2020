@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(RegisterActivity.this,
-                        R.style.Theme_AppCompat_DayNight_Dialog_MinWidth,
+                        R.style.MySpinnerDatePickerStyle,
                         onDateSetListener,year, month, day);
                 dialog.getDatePicker().setMaxDate(cal.getTimeInMillis());
                 dialog.show();
