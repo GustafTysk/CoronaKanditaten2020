@@ -109,10 +109,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
 
     public void changeLanguage(){
         Locale current = getResources().getConfiguration().locale;
-        System.out.println(current.getDisplayLanguage());
         String languageToLoad;
         Locale locale;
-        if (!current.getDisplayLanguage().equals("Swedish")){
+        if (!current.getLanguage().equals("sv")){
             languageToLoad  = "sv";
 
         }else{
