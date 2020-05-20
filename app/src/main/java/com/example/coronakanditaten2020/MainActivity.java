@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void setViewPager(int fragmentNumber){
-        mViewPager.setCurrentItem(fragmentNumber);
+        mViewPager.setCurrentItem(fragmentNumber,false);
     }
 
 
