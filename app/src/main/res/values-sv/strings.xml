@@ -128,6 +128,7 @@
 
     // STATISTICS PAGE
     <string name="fragment_statistics">Statistik</string>
+    <string name="checkbox_explanation">Väl de symtom du vill se ovan genom att markera/avmarkera kryssrutorna:</string>
 
     <string name="total_symptoms">Totala symtom</string>
     <string name="per_day_symptoms">Symtom per dag</string>
