@@ -414,7 +414,7 @@
                                             android:layout_height="148dp"
                                             android:layout_marginStart="8dp"
                                             android:layout_marginEnd="8dp"
-                                            android:src="@drawable/fever"
+                                            android:src="@drawable/nasal_cong"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toBottomOf="@+id/textNasalCongestion" />
@@ -570,7 +570,7 @@
                                             android:layout_height="148dp"
                                             android:layout_marginStart="8dp"
                                             android:layout_marginEnd="8dp"
-                                            android:src="@drawable/fever"
+                                            android:src="@drawable/tiredness"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toBottomOf="@+id/textTiredness" />
@@ -645,7 +645,7 @@
                                             android:layout_height="148dp"
                                             android:layout_marginStart="8dp"
                                             android:layout_marginEnd="8dp"
-                                            android:src="@drawable/fever"
+                                            android:src="@drawable/headache"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toBottomOf="@+id/textHeadache" />
@@ -723,7 +723,7 @@
                                             android:layout_height="148dp"
                                             android:layout_marginStart="8dp"
                                             android:layout_marginEnd="8dp"
-                                            android:src="@drawable/fever"
+                                            android:src="@drawable/diarrhea"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toBottomOf="@+id/textDiarrhea" />
