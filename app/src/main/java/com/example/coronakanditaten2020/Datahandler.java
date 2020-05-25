@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,7 +29,7 @@ public class Datahandler {
     ArrayList<Location> heatlocations;
     ArrayList<Location> Userlocations;
     User user;
-    ArrayList<Post> viewPosts;
+    ArrayList<Post> viewPosts=new ArrayList<Post>();
     ArrayList<ArrayList> userinfo;
     ArrayList<Integer> likeid= new ArrayList<Integer>();
 
@@ -39,9 +40,9 @@ public class Datahandler {
     ArrayList<Post> topPost;
 
     public Datahandler() {
-
+        likeid.add(0);
         CreatDummylocations();
-        CreateDummyTopPost();
+        //CreateDummyTopPost();
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(baseurl)
@@ -67,7 +68,7 @@ public class Datahandler {
     }
 
     public ArrayList<Post> getViewPosts() {
-        return viewPosts;
+        return viewPosts=new ArrayList<Post>();
     }
 
     public Retrofit getRetrofit() {
@@ -227,8 +228,11 @@ public void getserveruserinfo(String timestamp){
                 else{
                     System.out.println(response.toString());
                     viewPosts=response.body();
+                    //Collections.reverse(viewPosts);
 
-                    System.out.println("userinfos has succefully collected");
+
+
+                    System.out.println("userinfos has succefully collected "+"lenght"+viewPosts.size());
 
                 }
 

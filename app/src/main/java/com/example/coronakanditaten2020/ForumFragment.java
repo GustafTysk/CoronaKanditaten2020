@@ -3,8 +3,6 @@ package com.example.coronakanditaten2020;
 import android.app.AlertDialog;
 import android.os.Bundle;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,20 +23,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Path;
 
 
 public class ForumFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private Button messageButton;
     private Button btnMostLiked;
-    private Button btnFilterRec;
-    private Button btnFilterAll;
+    private Button btnRecent;
+    private Button btnMyPost;
     private Button btnSearch;
 
     private ImageView forumInfo;
@@ -61,23 +57,24 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
     public ArrayList<Post>copyList;
     public ArrayList<Post>commentList;
     public ArrayList<Post>postList;
+    public View view;
 
     private PostListAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_forum, container, false);
-
+        view = inflater.inflate(R.layout.fragment_forum, container, false);
 
         topPost =((MainActivity)getActivity()).datahandler.viewPosts;
+        System.out.println("post" + topPost);
 
         btnMostLiked = (Button) view.findViewById(R.id.btnMostLiked);
         btnMostLiked.setOnClickListener(this);
-        btnFilterRec = (Button) view.findViewById(R.id.btnUserPosts);
-        btnFilterRec.setOnClickListener(this);
-        btnFilterAll = (Button) view.findViewById(R.id.btnFilterAll);
-        btnFilterAll.setOnClickListener(this);
+        btnRecent = (Button) view.findViewById(R.id.btnRecent);
+        btnRecent.setOnClickListener(this);
+        btnMyPost = (Button) view.findViewById(R.id.btnMyPost);
+        btnMyPost.setOnClickListener(this);
         btnSearch = (Button) view.findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(this);
 
@@ -99,10 +96,10 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
         currentCategory = "Help";
 
-        postList = new ArrayList<>(topPost);
-        copyList = new ArrayList<>(topPost);
+        postList = topPost;
+        copyList = topPost;
 
-        Collections.reverse(postList);
+        //Collections.reverse(postList);
 
         adapter = new PostListAdapter(getContext(), R.layout.adapter_view_layout, postList, ((MainActivity)getActivity()).datahandler);
         listView.setAdapter(adapter);
@@ -122,7 +119,6 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             }
         });
 
-        removePosts();
 
         return view;
     }
@@ -217,13 +213,13 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
                 break;
 
-            case R.id.btnUserPosts:
-                gettop(50);
+            case R.id.btnRecent:
+                gettop(1);
 
 
                 break;
 
-            case R.id.btnFilterAll:
+            case R.id.btnMyPost:
                 getuserpost();
                 break;
 
@@ -236,7 +232,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
 
     public void getmostliked(){
-        Call<ArrayList<Post>> getmostliked=((MainActivity)getActivity()).datahandler.clientAPI.getMostlikedpost("");
+        Call<ArrayList<Post>> getmostliked=((MainActivity)getActivity()).datahandler.clientAPI.getMostlikedpost("475474");
         getmostliked.enqueue(new Callback<ArrayList<Post>>() {
             @Override
             public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
@@ -247,8 +243,11 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 else {
                     postList.clear();
                     ((MainActivity) getActivity()).datahandler.viewPosts = response.body();
-                    postList = ((MainActivity) getActivity()).datahandler.viewPosts;
-                    Collections.sort(postList, Post.DESCENDING_COMPARATOR);
+                    copyList = ((MainActivity) getActivity()).datahandler.viewPosts;
+                    for (Post post: copyList){
+                        postList.add(post);
+                    }
+                    System.out.println(postList.size());
 
                     adapter.notifyDataSetChanged();
                     System.out.println("got mosts liked post");
@@ -419,7 +418,10 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             else{
                 ((MainActivity)getActivity()).datahandler.viewPosts=response.body();
                 postList.clear();
-                postList= ((MainActivity)getActivity()).datahandler.viewPosts;
+                copyList= ((MainActivity)getActivity()).datahandler.viewPosts;
+                for (Post post: copyList){
+                    postList.add(post);
+                }
                 adapter.notifyDataSetChanged();
             }
 
@@ -430,7 +432,37 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             System.out.println("failed to connect to server");
         }
     });
+
+
 }
+
+    public void runwhenload(){
+        topPost =((MainActivity)getActivity()).datahandler.viewPosts;
+        postList = topPost;
+        copyList = topPost;
+
+        //Collections.reverse(postList);
+
+        adapter = new PostListAdapter(getContext(), R.layout.adapter_view_layout, postList, ((MainActivity)getActivity()).datahandler);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(this);
+
+        forumInfo = (ImageView) view.findViewById(R.id.forumInfo);
+        forumInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+
+                alert.setTitle(getString(R.string.info_title_forum));
+                alert.setMessage(getString(R.string.info_message_forum));
+                alert.setNegativeButton(android.R.string.ok, null);
+                alert.show();
+            }
+        });
+
+        removePosts();
+    }
 
 
 

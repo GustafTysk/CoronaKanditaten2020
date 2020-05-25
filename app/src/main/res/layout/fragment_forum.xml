@@ -40,9 +40,9 @@
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:textColor="@color/colorText"
-                app:layout_constraintEnd_toStartOf="@+id/btnFilterAll"
+                app:layout_constraintEnd_toStartOf="@+id/btnMyPost"
                 app:layout_constraintStart_toStartOf="@+id/btnMostLiked"
-                app:layout_constraintTop_toBottomOf="@+id/btnUserPosts" />
+                app:layout_constraintTop_toBottomOf="@+id/btnRecent" />
 
             <Button
                 android:id="@+id/btnSearch"
@@ -135,31 +135,31 @@
                 android:padding="10dp"
                 android:text="@string/btn_most_liked"
                 android:textColor="@color/white"
-                app:layout_constraintEnd_toStartOf="@+id/btnUserPosts"
+                app:layout_constraintEnd_toStartOf="@+id/btnRecent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <Button
-                android:id="@+id/btnUserPosts"
+                android:id="@+id/btnRecent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_selector_light"
                 android:padding="10dp"
-                android:text="@string/btn_recommended"
+                android:text="Most Recent"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="@+id/textView"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <Button
-                android:id="@+id/btnFilterAll"
+                android:id="@+id/btnMyPost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/button_selector_light"
                 android:padding="10dp"
-                android:text="User"
+                android:text="my posts"
                 android:textColor="@color/white"
-                app:layout_constraintStart_toEndOf="@+id/btnUserPosts"
+                app:layout_constraintStart_toEndOf="@+id/btnRecent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <ImageView

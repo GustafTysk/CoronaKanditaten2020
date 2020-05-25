@@ -152,34 +152,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     User newUser = new User(username,email,age,gender,password,timstamp);
                     sendVerificationCodeToEmail();
                     verifyEmailDialog();
-                    Call<Boolean> createuser = datahandler.clientAPI.createuser(newUser);
-                    createuser.enqueue(new Callback<Boolean>() {
-
-
-                        @Override
-                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                            if(!response.isSuccessful() || !response.body()){
-                               Toast.makeText(getApplicationContext(), getString(R.string.fail_create_user), Toast.LENGTH_LONG).show();
-                                System.out.println(response.toString());
-                            }
-                            else{
-                                Toast.makeText(getApplicationContext(), getString(R.string.success_create_user), Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                System.out.println(newUser.printInformation());
-                                emailCorrect = false;
-                                passwordCorrect = false;
-                                usernameCorrect = false;
-                                startActivity(intent);
-
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Boolean> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
-
-                        }
-                    });
                 }
 
                 break;
@@ -311,7 +283,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 timstamp=date.toString();
                 System.out.println(timstamp);
                 User newUser = new User(username,email,age,gender,password,timstamp);
-                Call<Boolean> createuser = datahandler.clientAPI.createuser(newUser);
+                Call<Boolean> createuser = datahandler.clientAPI.createuser(EditTextValue,newUser);
                 createuser.enqueue(new Callback<Boolean>() {
 
 

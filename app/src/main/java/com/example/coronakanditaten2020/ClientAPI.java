@@ -52,12 +52,10 @@ public interface ClientAPI {
     Call<Integer>  getNumberOfUsers(@Path("timestamp") String timestamp);
 
 
-    @POST("User")
-    Call<Boolean> createuser( @Body User user);
 
 
-    //@POST("User/{ver}")
-    //Call<Boolean> createuser( @Path("ver") String ver ,@Body User user);
+    @POST("User/{ver}")
+    Call<Boolean> createuser( @Path("ver") String ver ,@Body User user);
 
     @PUT("User/{email}/security")
     Call<Boolean> updateuser(@Header("authorization") String Auth,@Path("email") String email, @Body User user);
