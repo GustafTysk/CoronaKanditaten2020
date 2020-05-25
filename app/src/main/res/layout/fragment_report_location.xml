@@ -37,7 +37,7 @@
 
     <TextView
         android:id="@+id/textViewLocation1"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edittext_outline"
@@ -76,6 +76,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:src="@drawable/cancel_cross_48x48"
         app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +86,7 @@
 
     <TextView
         android:id="@+id/textViewLocation2"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -130,7 +131,7 @@
 
     <TextView
         android:id="@+id/textViewLocation3"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -175,7 +176,7 @@
 
     <TextView
         android:id="@+id/textViewLocation4"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -220,7 +221,7 @@
 
     <TextView
         android:id="@+id/textViewLocation5"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -265,7 +266,7 @@
 
     <TextView
         android:id="@+id/textViewLocation6"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -310,7 +311,7 @@
 <!--  _________________________________________________________________________________________  -->
     <TextView
         android:id="@+id/textViewLocation7"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -356,7 +357,7 @@
     <!--  _________________________________________________________________________________________  -->
     <TextView
         android:id="@+id/textViewLocation8"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -402,7 +403,7 @@
     <!--  _________________________________________________________________________________________  -->
     <TextView
         android:id="@+id/textViewLocation9"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -448,7 +449,7 @@
     <!--  _________________________________________________________________________________________  -->
     <TextView
         android:id="@+id/textViewLocation10"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -494,7 +495,7 @@
     <!--  _________________________________________________________________________________________  -->
     <TextView
         android:id="@+id/textViewLocation11"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -540,7 +541,7 @@
     <!--  _________________________________________________________________________________________  -->
     <TextView
         android:id="@+id/textViewLocation12"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -588,8 +589,8 @@
         android:id="@+id/btnUpdateMyLocations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/button_selector"
         android:padding="10dp"
         android:text="@string/btn_update_locations"
@@ -613,19 +614,6 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/btnRlToRs"
         app:layout_constraintEnd_toEndOf="parent" />-->
 
-    <Button
-        android:id="@+id/btnAddLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:drawableEnd="@drawable/plus_icon_48x48"
-        android:drawablePadding="10dp"
-        android:text="@string/btn_add_location"
-        app:layout_constraintEnd_toEndOf="@+id/textViewReportLocation"
-        app:layout_constraintHorizontal_bias="0.561"
-        app:layout_constraintStart_toStartOf="@+id/textViewReportLocation"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLocation12" />
-
     <TextView
         android:id="@+id/textView23"
         android:layout_width="0dp"
@@ -640,6 +628,16 @@
         app:layout_constraintEnd_toEndOf="@+id/textViewReportLocation"
         app:layout_constraintStart_toStartOf="@+id/textViewReportLocation"
         app:layout_constraintTop_toBottomOf="@+id/textViewReportLocation" />
+
+    <ImageView
+        android:id="@+id/btnAddLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewReportLocation"
+        app:layout_constraintStart_toStartOf="@+id/textViewReportLocation"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation12"
+        app:srcCompat="@drawable/plus_icon_48x48" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
