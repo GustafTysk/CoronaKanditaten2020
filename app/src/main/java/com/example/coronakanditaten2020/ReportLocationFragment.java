@@ -94,7 +94,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
     private Button btnRlToRs;
     private Button btnUpdateMyLocations;
-    private Button btnAddLocation;
+    private ImageView btnAddLocation;
 
 
     private ImageButton setLocation1,setLocation2, setLocation3, setLocation4, setLocation5, setLocation6,
@@ -142,7 +142,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
         btnUpdateMyLocations = (Button) view.findViewById(R.id.btnUpdateMyLocations);
         btnUpdateMyLocations.setOnClickListener(this);
-        btnAddLocation = (Button) view.findViewById(R.id.btnAddLocation);
+        btnAddLocation = (ImageView) view.findViewById(R.id.btnAddLocation);
         btnAddLocation.setOnClickListener(this);
 
         locations = new ArrayList<LatLng>();
