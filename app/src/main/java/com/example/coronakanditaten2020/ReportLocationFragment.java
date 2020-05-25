@@ -92,10 +92,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
     private Bundle savedInstance;
 
-    private ImageView reportLocationInfo;
     private Button btnRlToRs;
     private Button btnUpdateMyLocations;
-    private Button btnAddLocation;
+    private ImageView btnAddLocation;
 
 
     private ImageButton setLocation1,setLocation2, setLocation3, setLocation4, setLocation5, setLocation6,
@@ -143,7 +142,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
         btnUpdateMyLocations = (Button) view.findViewById(R.id.btnUpdateMyLocations);
         btnUpdateMyLocations.setOnClickListener(this);
-        btnAddLocation = (Button) view.findViewById(R.id.btnAddLocation);
+        btnAddLocation = (ImageView) view.findViewById(R.id.btnAddLocation);
         btnAddLocation.setOnClickListener(this);
 
         locations = new ArrayList<LatLng>();
@@ -269,20 +268,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         if (!Places.isInitialized()) {
             Places.initialize(getContext(), "AIzaSyAdNZnteknM0VlU416q-b8ZEqRBjiFOiPA");
         }
-
-        reportLocationInfo = (ImageView) view.findViewById(R.id.reportLocationInfo);
-        reportLocationInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-
-                alert.setTitle(getString(R.string.info_title_report_location));
-                alert.setMessage(getString(R.string.info_message_report_location));
-                alert.setNegativeButton(android.R.string.ok, null);
-                alert.show();
-            }
-        });
-
 
         return view;
     }
