@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             handleRequestPermission();
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        //datahandler.credentials=new Credentials("5fgg","frff");
+        datahandler.credentials=new Credentials("5fgg","frff");
         //Put this on to work with database
 //       datahandler.credentials=new Credentials(intent.getStringExtra("ema"),intent.getStringExtra("pass"));
 //       System.out.println(datahandler.credentials.Email);

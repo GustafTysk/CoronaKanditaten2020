@@ -127,9 +127,9 @@
     <string name="summary_send_feedback">Report technical issues or suggest new features</string>
 
     // STATISTICS PAGE
-    <string name="fragment_statistics">Statistics</string>
+    <string name="fragment_statistics"><u>Statistics</u></string>
     <string name="checkbox_explanation">Choose the symptoms you want to see above by checking/unchecking the checkboxes:</string>
-
+    <string name="number_of_reported_cases"><u>Number of reported cases</u></string>
     <string name="total_symptoms">Total symptoms</string>
     <string name="per_day_symptoms">Symptoms per day</string>
 
@@ -182,7 +182,7 @@
     <string name="dialog_diarrhea">Diarrhea is bad </string>
 
     <string name="btn_clear">Clear</string>
-    <string name="next_info">If you have completed reporting your symptoms, please press <b>NEXT STEP</b> to continue to Report Location</string>
+    <string name="next_info">If you have completed reporting your symptoms, please press <b>NEXT STEP</b> to continue to Report Location.</string>
     <string name="btn_next_page_rl">Next step</string>
 
     // REPORT LOCATION PAGE

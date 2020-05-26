@@ -14,12 +14,240 @@
 <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    android:requiresFadingEdge="horizontal"
+    android:fadingEdgeLength="80dp">
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/edittext_outline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewStatistics">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_outline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view">
+
+            <Spinner
+                android:id="@+id/spinner1"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph1"
+            android:layout_width="match_parent"
+            android:layout_height="350dip"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:labelFor="@id/relativeLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_selector"
+            app:layout_constraintTop_toBottomOf="@+id/graph1"
+            tools:layout_editor_absoluteX="-4dp" />
+
+        <ImageButton
+            android:id="@+id/setCalendarLocation1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/edittext_outline"
+            android:src="@drawable/black_calendar"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout12"
+            app:layout_constraintStart_toEndOf="@+id/constraintLayout12"
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout12" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="0dp"
+            android:layout_height="144dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/setCalendarLocation1">
+
+            <CheckBox
+                android:id="@+id/diarrheaBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:buttonTint="#000000"
+                android:checked="true"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/symptom_diarrhea"
+                android:textColor="@color/colorText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/runnyNoseBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:buttonTint="#32cd32"
+                android:checked="true"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/symptom_runny_nose"
+                android:textColor="@color/colorText"
+                app:layout_constraintBaseline_toBaselineOf="@+id/diarrheaBox"
+                app:layout_constraintStart_toEndOf="@+id/diarrheaBox" />
+
+            <CheckBox
+                android:id="@+id/throatBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#0000ff"
+                android:checked="true"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/symptom_sore_throat"
+                android:textColor="@color/colorText"
+                app:layout_constraintBaseline_toBaselineOf="@+id/feverBox"
+                app:layout_constraintEnd_toEndOf="@+id/runnyNoseBox"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/runnyNoseBox" />
+
+            <CheckBox
+                android:id="@+id/tirednessBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:buttonTint="#ffff00"
+                android:checked="true"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/symptom_tiredness"
+                android:textColor="@color/colorText"
+                app:layout_constraintBaseline_toBaselineOf="@+id/runnyNoseBox"
+                app:layout_constraintEnd_toEndOf="@+id/nasalConBox"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/nasalConBox" />
+
+            <CheckBox
+                android:id="@+id/breathingDiffBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#999999"
+                android:checked="true"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/symptom_breathing"
+                android:textColor="@color/colorText"
+                app:layout_constraintBottom_toBottomOf="@+id/headacheBox"
+                app:layout_constraintStart_toStartOf="@+id/nasalConBox"
+                app:layout_constraintTop_toTopOf="@+id/headacheBox" /><![CDATA[
+            app:layout_constraintBottom_toBottomOf="@+id/throatBox"
+            app:layout_constraintStart_toStartOf="@+id/tirednessBox"
+            app:layout_constraintTop_toTopOf="@+id/throatBox" />
+
+        app:layout_constraintBottom_toBottomOf="@+id/headacheBox"
+            app:layout_constraintStart_toStartOf="@+id/breathingDiffBox"
+            app:layout_constraintTop_toTopOf="@+id/headacheBox" />
+
+        ]]>
+
+            <CheckBox
+                android:id="@+id/nasalConBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#ff00ff"
+                android:checked="true"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/symptom_nasal_congestion"
+                android:textColor="@color/colorText"
+                app:layout_constraintBottom_toBottomOf="@+id/throatBox"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/runnyNoseBox"
+                app:layout_constraintTop_toTopOf="@+id/throatBox"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <CheckBox
+                android:id="@+id/feverBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:buttonTint="#ff0000"
+                android:checked="true"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/symptom_fever"
+                android:textColor="@color/colorText"
+                app:layout_constraintEnd_toEndOf="@+id/diarrheaBox"
+                app:layout_constraintHorizontal_bias="0.02"
+                app:layout_constraintStart_toStartOf="@+id/diarrheaBox"
+                app:layout_constraintTop_toBottomOf="@+id/diarrheaBox" />
+
+            <CheckBox
+                android:id="@+id/coughBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:buttonTint="#333333"
+                android:checked="true"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/symptom_cough"
+                android:textColor="@color/colorText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/feverBox"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/feverBox"
+                app:layout_constraintTop_toBottomOf="@+id/feverBox" />
+
+            <CheckBox
+                android:id="@+id/headacheBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#00ffff"
+                android:checked="true"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/symptom_headache"
+                android:textColor="@color/colorText"
+                app:layout_constraintBaseline_toBaselineOf="@+id/coughBox"
+                app:layout_constraintEnd_toEndOf="@+id/throatBox"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/throatBox" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textViewStatistics"
@@ -34,97 +262,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--<Button
-        android:id="@+id/btnStatisticsToStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Start Page"
-        android:textAllCaps="true"
-        android:textSize="18sp"
-        android:background="@drawable/button_selector_light"
-        android:textColor="@color/white"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
-
-    <Button
-        android:id="@+id/btnStatisticsToHeatmap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Heatmap"
-        android:textAllCaps="true"
-        android:textSize="18sp"
-        android:background="@drawable/button_selector_light"
-        android:textColor="@color/white"
-        android:padding="10dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnStatisticsToStart"
-        app:layout_constraintEnd_toEndOf="parent" />-->
-
-    <Spinner
-        android:id="@+id/spinner1"
-        style="@style/Widget.AppCompat.Spinner.Underlined"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graph1"
-        android:layout_width="match_parent"
-        android:layout_height="350dip"
-        android:layout_marginTop="16dp"
-        android:labelFor="@id/relativeLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setCalendarLocation1" />
-
-    <ImageButton
-        android:id="@+id/setCalendarLocation1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="12dp"
-        android:background="@drawable/button_selector"
-        android:src="@android:drawable/ic_menu_month"
-        app:layout_constraintEnd_toStartOf="@+id/textViewStatistics"
-        app:layout_constraintTop_toBottomOf="@+id/textViewStatistics" />
-
     <TextView
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Number of reported cases:"
+        android:text="@string/number_of_reported_cases"
         android:textColor="@color/colorText"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
-
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/checkbox_explanation"
-        android:textColor="@color/colorText"
-        app:layout_constraintStart_toStartOf="@+id/relativeLayout"
-        app:layout_constraintTop_toBottomOf="@+id/graph1" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
 
     <TableLayout
         android:id="@+id/tableLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edittext_outline"
         android:divider="?android:attr/dividerHorizontal"
         android:showDividers="middle"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView22">
 
@@ -168,10 +326,6 @@
                 android:text="@string/number_of_other_users"
                 android:textColor="@color/colorText" />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/grey" />
         </TableRow>
 
         <TableRow
@@ -319,148 +473,6 @@
         </TableRow>
 
     </TableLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/edittext_outline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tableLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textView21">
-
-        <CheckBox
-            android:id="@+id/diarrheaBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:buttonTint="#000000"
-            android:checked="true"
-            android:onClick="onCheckboxClicked"
-            android:text="@string/symptom_diarrhea"
-            android:textColor="@color/colorText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <CheckBox
-            android:id="@+id/runnyNoseBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:buttonTint="#32cd32"
-            android:checked="true"
-            android:onClick="onCheckboxClicked"
-            android:text="@string/symptom_runny_nose"
-            android:textColor="@color/colorText"
-            app:layout_constraintBaseline_toBaselineOf="@+id/diarrheaBox"
-            app:layout_constraintStart_toEndOf="@+id/diarrheaBox" />
-
-        <CheckBox
-            android:id="@+id/throatBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="#0000ff"
-            android:checked="true"
-            android:onClick="onCheckboxClicked"
-            android:text="@string/symptom_sore_throat"
-            android:textColor="@color/colorText"
-            app:layout_constraintBaseline_toBaselineOf="@+id/feverBox"
-            app:layout_constraintStart_toStartOf="@+id/runnyNoseBox" />
-
-        <CheckBox
-            android:id="@+id/tirednessBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:buttonTint="#ffff00"
-            android:checked="true"
-            android:onClick="onCheckboxClicked"
-            android:text="@string/symptom_tiredness"
-            android:textColor="@color/colorText"
-            app:layout_constraintBaseline_toBaselineOf="@+id/runnyNoseBox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/runnyNoseBox" />
-
-        <CheckBox
-            android:id="@+id/breathingDiffBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="#999999"
-            android:checked="true"
-            android:onClick="onCheckboxClicked"
-            android:text="@string/symptom_breathing"
-            android:textColor="@color/colorText"
-            app:layout_constraintBottom_toBottomOf="@+id/headacheBox"
-            app:layout_constraintStart_toStartOf="@+id/nasalConBox"
-            app:layout_constraintTop_toTopOf="@+id/headacheBox" /><![CDATA[
-            app:layout_constraintBottom_toBottomOf="@+id/throatBox"
-            app:layout_constraintStart_toStartOf="@+id/tirednessBox"
-            app:layout_constraintTop_toTopOf="@+id/throatBox" />
-
-        app:layout_constraintBottom_toBottomOf="@+id/headacheBox"
-            app:layout_constraintStart_toStartOf="@+id/breathingDiffBox"
-            app:layout_constraintTop_toTopOf="@+id/headacheBox" />
-
-        ]]>
-
-        <CheckBox
-            android:id="@+id/nasalConBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="#ff00ff"
-            android:checked="true"
-            android:onClick="onCheckboxClicked"
-            android:text="@string/symptom_nasal_congestion"
-            android:textColor="@color/colorText"
-            app:layout_constraintBottom_toBottomOf="@+id/throatBox"
-            app:layout_constraintStart_toStartOf="@+id/tirednessBox"
-            app:layout_constraintTop_toTopOf="@+id/throatBox"
-            app:layout_constraintVertical_bias="0.5" />
-
-        <CheckBox
-            android:id="@+id/feverBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:buttonTint="#ff0000"
-            android:checked="true"
-            android:onClick="onCheckboxClicked"
-            android:text="@string/symptom_fever"
-            android:textColor="@color/colorText"
-            app:layout_constraintStart_toStartOf="@+id/diarrheaBox"
-            app:layout_constraintTop_toBottomOf="@+id/diarrheaBox" />
-
-        <CheckBox
-            android:id="@+id/coughBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:buttonTint="#333333"
-            android:checked="true"
-            android:onClick="onCheckboxClicked"
-            android:text="@string/symptom_cough"
-            android:textColor="@color/colorText"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/feverBox"
-            app:layout_constraintTop_toBottomOf="@+id/feverBox" />
-
-        <CheckBox
-            android:id="@+id/headacheBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="#00ffff"
-            android:checked="true"
-            android:onClick="onCheckboxClicked"
-            android:text="@string/symptom_headache"
-            android:textColor="@color/colorText"
-            app:layout_constraintBaseline_toBaselineOf="@+id/coughBox"
-            app:layout_constraintStart_toStartOf="@+id/throatBox" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
