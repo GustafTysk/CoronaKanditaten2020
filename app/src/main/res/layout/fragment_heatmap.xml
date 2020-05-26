@@ -23,30 +23,42 @@
         android:text="@string/fragment_heatmap"
         android:textAllCaps="true"
         android:textColor="@color/colorTextTitle"
-        android:textSize="36sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <fragment
-        android:id="@+id/autocomplete_fragment"
-        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearFragmentConstraint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/edittext_outline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHeatmap" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewHeatmap">
 
+        <fragment
+            android:id="@+id/autocomplete_fragment"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapview"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="4dp"
         android:layout_marginBottom="128dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/autocomplete_fragment" />
+        app:layout_constraintTop_toBottomOf="@id/linearFragmentConstraint" />
 
     <!--<Button
         android:id="@+id/btnHeatmapToStart"
@@ -84,6 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/button_selector"
         android:padding="10dp"
         android:text="Change Day"
@@ -104,13 +117,15 @@
     <SeekBar
         android:id="@+id/seekBarHeatmap"
 
-        android:tickMark="@drawable/seekbar_custom_tick"
-        android:progressDrawable="@drawable/seekbar_custom_progress"
-        android:thumb="@drawable/seekbar_custom_thumb"
-        android:layout_width="280dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:max="30"
+        android:progressDrawable="@drawable/seekbar_custom_progress"
         android:rotation="180"
+        android:thumb="@drawable/seekbar_custom_thumb"
+        android:tickMark="@drawable/seekbar_custom_tick"
         app:layout_constraintBottom_toBottomOf="@+id/btnTestChangeDay"
         app:layout_constraintEnd_toStartOf="@+id/btnTestChangeDay"
         app:layout_constraintStart_toStartOf="parent"
@@ -125,7 +140,7 @@
         android:textColor="@color/colorTextHint"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/mapview"
-        app:layout_constraintTop_toBottomOf="@+id/autocomplete_fragment" />
+        app:layout_constraintTop_toBottomOf="@+id/linearFragmentConstraint" />
 </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

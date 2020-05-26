@@ -18,7 +18,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/colorBackground"
-                    app:layout_anchor="@+id/scrollView"
                     app:layout_anchorGravity="center">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -120,12 +119,13 @@
                                             android:id="@+id/btnFeverDialog"
                                             android:layout_width="30dp"
                                             android:layout_height="29dp"
-                                            android:layout_marginStart="8dp"
+                                            android:layout_marginEnd="8dp"
                                             android:background="#00FFFFFF"
                                             android:src="@drawable/info_i_v2_crop_new"
                                             app:layout_constraintBottom_toBottomOf="@+id/textFever"
-                                            app:layout_constraintStart_toEndOf="@+id/textFever"
-                                            app:layout_constraintTop_toTopOf="@+id/textFever" />
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintTop_toTopOf="@+id/textFever"
+                                            app:layout_constraintVertical_bias="0.0" />
 
                                         <Button
                                             android:id="@+id/btnClearFeverRating"
@@ -150,10 +150,14 @@
                                     android:id="@+id/constraintLayout3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginStart="4dp"
                                     android:layout_marginEnd="16dp"
                                     android:background="@drawable/edittext_outline"
                                     app:layout_constraintBottom_toBottomOf="@+id/constraintLayout4"
                                     app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="1.0"
+                                    app:layout_constraintStart_toEndOf="@+id/constraintLayout4"
+                                    app:layout_constraintTop_toTopOf="@+id/constraintLayout4"
                                     tools:context=".ReportSymptomsFragment">
 
                                         <TextView
@@ -196,11 +200,11 @@
                                             android:id="@+id/btnCoughDialog"
                                             android:layout_width="30dp"
                                             android:layout_height="29dp"
-                                            android:layout_marginStart="8dp"
+                                            android:layout_marginEnd="8dp"
                                             android:background="#00FFFFFF"
                                             android:src="@drawable/info_i_v2_crop_new"
                                             app:layout_constraintBottom_toBottomOf="@+id/textCough"
-                                            app:layout_constraintStart_toEndOf="@+id/textCough"
+                                            app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintTop_toTopOf="@+id/textCough" />
 
                                         <Button
@@ -225,11 +229,12 @@
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/constraintLayout7"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="16dp"
                                     android:layout_marginTop="16dp"
                                     android:background="@drawable/edittext_outline"
+                                    app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
                                     tools:context=".ReportSymptomsFragment">
@@ -274,13 +279,13 @@
                                             android:id="@+id/btnBreathingDialog"
                                             android:layout_width="30dp"
                                             android:layout_height="29dp"
-                                            android:layout_marginStart="8dp"
+                                            android:layout_marginEnd="8dp"
                                             android:background="#00FFFFFF"
                                             android:src="@drawable/info_i_v2_crop_new"
-                                            app:layout_constraintBottom_toBottomOf="@+id/textBreathingDifficulties"
-                                            app:layout_constraintStart_toEndOf="@+id/textBreathingDifficulties"
+                                            app:layout_constraintBottom_toTopOf="@+id/imageBreathingDifficulties"
+                                            app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintTop_toTopOf="@+id/textBreathingDifficulties"
-                                            app:layout_constraintVertical_bias="1.0" />
+                                            app:layout_constraintVertical_bias="0.0" />
 
                                         <Button
                                             android:id="@+id/btnClearBreathingRating"
@@ -304,10 +309,14 @@
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/constraintLayout10"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="0dp"
+                                    android:layout_marginStart="4dp"
                                     android:layout_marginEnd="16dp"
                                     android:background="@drawable/edittext_outline"
+                                    app:layout_constraintBottom_toBottomOf="@+id/constraintLayout7"
                                     app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="1.0"
+                                    app:layout_constraintStart_toEndOf="@+id/constraintLayout7"
                                     app:layout_constraintTop_toTopOf="@+id/constraintLayout7"
                                     tools:context=".ReportSymptomsFragment">
 
@@ -328,6 +337,7 @@
                                             android:layout_width="148dp"
                                             android:layout_height="148dp"
                                             android:layout_marginStart="8dp"
+                                            android:layout_marginTop="20dp"
                                             android:layout_marginEnd="8dp"
                                             android:src="@drawable/sorethroat"
                                             app:layout_constraintEnd_toEndOf="parent"
@@ -352,13 +362,11 @@
                                             android:id="@+id/btnSoreThroatDialog"
                                             android:layout_width="30dp"
                                             android:layout_height="29dp"
-                                            android:layout_marginStart="8dp"
+                                            android:layout_marginEnd="8dp"
                                             android:background="#00FFFFFF"
                                             android:src="@drawable/info_i_v2_crop_new"
                                             app:layout_constraintBottom_toBottomOf="@+id/textSoreThroat"
                                             app:layout_constraintEnd_toEndOf="parent"
-                                            app:layout_constraintHorizontal_bias="0.0"
-                                            app:layout_constraintStart_toEndOf="@+id/textSoreThroat"
                                             app:layout_constraintTop_toTopOf="@+id/textSoreThroat" />
 
                                         <Button
@@ -385,11 +393,12 @@
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/constraintLayout6"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="16dp"
                                     android:layout_marginTop="16dp"
                                     android:background="@drawable/edittext_outline"
+                                    app:layout_constraintEnd_toEndOf="@+id/constraintLayout7"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
                                     tools:context=".ReportSymptomsFragment">
@@ -411,7 +420,7 @@
                                             android:layout_height="148dp"
                                             android:layout_marginStart="8dp"
                                             android:layout_marginEnd="8dp"
-                                            android:src="@drawable/fever"
+                                            android:src="@drawable/nasal_cong"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toBottomOf="@+id/textNasalCongestion" />
@@ -433,13 +442,13 @@
                                             android:id="@+id/btnNasalCongestionDialog"
                                             android:layout_width="30dp"
                                             android:layout_height="29dp"
-                                            android:layout_marginStart="8dp"
+                                            android:layout_marginEnd="8dp"
                                             android:background="#00FFFFFF"
                                             android:src="@drawable/info_i_v2_crop_new"
                                             app:layout_constraintBottom_toBottomOf="@+id/textNasalCongestion"
-                                            app:layout_constraintStart_toEndOf="@+id/textNasalCongestion"
+                                            app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintTop_toTopOf="@+id/textNasalCongestion"
-                                            app:layout_constraintVertical_bias="1.0" />
+                                            app:layout_constraintVertical_bias="0.17000002" />
 
 
                                         <Button
@@ -464,10 +473,14 @@
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/constraintLayout11"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="0dp"
+                                    android:layout_marginStart="4dp"
                                     android:layout_marginEnd="16dp"
                                     android:background="@drawable/edittext_outline"
+                                    app:layout_constraintBottom_toBottomOf="@+id/constraintLayout6"
                                     app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="1.0"
+                                    app:layout_constraintStart_toEndOf="@+id/constraintLayout6"
                                     app:layout_constraintTop_toTopOf="@+id/constraintLayout6"
                                     tools:context=".ReportSymptomsFragment">
 
@@ -488,7 +501,7 @@
                                             android:layout_height="148dp"
                                             android:layout_marginStart="8dp"
                                             android:layout_marginEnd="8dp"
-                                            android:src="@drawable/fever"
+                                            android:src="@drawable/nose"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toBottomOf="@+id/textRunnyNose" />
@@ -510,10 +523,11 @@
                                             android:id="@+id/btnRunnyNoseDialog"
                                             android:layout_width="30dp"
                                             android:layout_height="29dp"
+                                            android:layout_marginEnd="8dp"
                                             android:background="#00FFFFFF"
                                             android:src="@drawable/info_i_v2_crop_new"
                                             app:layout_constraintBottom_toTopOf="@+id/imageRunnyNose"
-                                            app:layout_constraintStart_toEndOf="@+id/textRunnyNose"
+                                            app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintTop_toTopOf="@+id/textRunnyNose" />
 
                                         <Button
@@ -565,7 +579,7 @@
                                             android:layout_height="148dp"
                                             android:layout_marginStart="8dp"
                                             android:layout_marginEnd="8dp"
-                                            android:src="@drawable/fever"
+                                            android:src="@drawable/tiredness"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toBottomOf="@+id/textTiredness" />
@@ -587,11 +601,11 @@
                                             android:id="@+id/btnTirednessDialog"
                                             android:layout_width="30dp"
                                             android:layout_height="29dp"
-                                            android:layout_marginStart="8dp"
+                                            android:layout_marginEnd="8dp"
                                             android:background="#00FFFFFF"
                                             android:src="@drawable/info_i_v2_crop_new"
                                             app:layout_constraintBottom_toBottomOf="@+id/textTiredness"
-                                            app:layout_constraintStart_toEndOf="@+id/textTiredness"
+                                            app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintTop_toTopOf="@+id/textTiredness" />
 
                                         <Button
@@ -615,11 +629,16 @@
 
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/constraintLayout5"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginStart="4dp"
                                     android:layout_marginEnd="16dp"
                                     android:background="@drawable/edittext_outline"
+                                    app:layout_constraintBottom_toBottomOf="@+id/constraintLayout9"
                                     app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="1.0"
+                                    app:layout_constraintStart_toEndOf="@+id/constraintLayout9"
                                     app:layout_constraintTop_toTopOf="@+id/constraintLayout9"
                                     tools:context=".ReportSymptomsFragment">
 
@@ -640,7 +659,7 @@
                                             android:layout_height="148dp"
                                             android:layout_marginStart="8dp"
                                             android:layout_marginEnd="8dp"
-                                            android:src="@drawable/fever"
+                                            android:src="@drawable/headache"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toBottomOf="@+id/textHeadache" />
@@ -662,11 +681,11 @@
                                             android:id="@+id/btnHeadacheDialog"
                                             android:layout_width="30dp"
                                             android:layout_height="29dp"
-                                            android:layout_marginStart="8dp"
+                                            android:layout_marginEnd="8dp"
                                             android:background="#00FFFFFF"
                                             android:src="@drawable/info_i_v2_crop_new"
                                             app:layout_constraintBottom_toBottomOf="@+id/textHeadache"
-                                            app:layout_constraintStart_toEndOf="@+id/textHeadache"
+                                            app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintTop_toTopOf="@+id/textHeadache" />
 
                                         <Button
@@ -694,7 +713,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="16dp"
                                     android:layout_marginTop="16dp"
+                                    android:layout_marginBottom="64dp"
                                     android:background="@drawable/edittext_outline"
+                                    app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout9"
                                     tools:context=".ReportSymptomsFragment">
@@ -716,7 +737,7 @@
                                             android:layout_height="148dp"
                                             android:layout_marginStart="8dp"
                                             android:layout_marginEnd="8dp"
-                                            android:src="@drawable/fever"
+                                            android:src="@drawable/diarrhea"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintTop_toBottomOf="@+id/textDiarrhea" />
@@ -738,11 +759,11 @@
                                             android:id="@+id/btnDiarrheaDialog"
                                             android:layout_width="30dp"
                                             android:layout_height="29dp"
-                                            android:layout_marginStart="8dp"
+                                            android:layout_marginEnd="8dp"
                                             android:background="#00FFFFFF"
                                             android:src="@drawable/info_i_v2_crop_new"
                                             app:layout_constraintBottom_toBottomOf="@+id/textDiarrhea"
-                                            app:layout_constraintStart_toEndOf="@+id/textDiarrhea"
+                                            app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintTop_toTopOf="@+id/textDiarrhea" />
 
                                         <Button
@@ -767,10 +788,10 @@
 
                                 <Button
                                     android:id="@+id/btnRsToRl"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="16dp"
                                     android:background="@drawable/button_selector"
+                                    android:drawableEnd="@drawable/right_arrow_32x32"
                                     android:padding="10dp"
                                     android:text="@string/btn_next_page_rl"
                                     android:textAllCaps="true"
@@ -778,7 +799,25 @@
                                     android:textSize="18sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
-                                    app:layout_constraintEnd_toEndOf="parent" />
+                                    app:layout_constraintEnd_toEndOf="@+id/textView24"
+                                    app:layout_constraintStart_toStartOf="@+id/textView24" />
+
+                                <TextView
+                                    android:id="@+id/textView24"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="16dp"
+                                    android:background="@drawable/edittext_outline"
+                                    android:paddingStart="10dp"
+                                    android:paddingTop="5dp"
+                                    android:paddingBottom="5dp"
+                                    android:text="@string/next_info"
+                                    android:textAlignment="viewStart"
+                                    android:textColor="@color/colorText"
+                                    app:layout_constraintBottom_toTopOf="@+id/btnRsToRl"
+                                    app:layout_constraintEnd_toEndOf="@+id/constraintLayout5"
+                                    app:layout_constraintStart_toStartOf="@+id/constraintLayout5"
+                                    app:layout_constraintTop_toTopOf="@+id/constraintLayout2" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>

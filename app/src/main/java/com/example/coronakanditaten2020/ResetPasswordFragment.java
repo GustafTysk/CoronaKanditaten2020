@@ -138,7 +138,7 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
     }
 
     public void changeUserPassword(){
-        System.out.println("kommer in");
+        System.out.println(EmailString+verificationCodeView.getText().toString()+newPassword);
         Call<Boolean> changepassword= ((LoginActivity) getActivity()).datahandler.clientAPI.setpassword(EmailString,verificationCodeView.getText().toString(),newPassword);
         changepassword.enqueue(new Callback<Boolean>() {
             @Override

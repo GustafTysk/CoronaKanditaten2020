@@ -37,9 +37,9 @@
 
     <TextView
         android:id="@+id/textViewLocation1"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/edittext_outline"
         android:hint="@string/hint_location1"
         android:paddingLeft="6dp"
@@ -47,7 +47,7 @@
         android:scrollbars="vertical"
         android:textAlignment="textStart"
         app:layout_constraintStart_toStartOf="@+id/textViewReportLocation"
-        app:layout_constraintTop_toBottomOf="@+id/textViewReportLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
     <ImageButton
         android:id="@+id/setLocation1"
@@ -55,7 +55,7 @@
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/button_selector"
-        android:src="@android:drawable/ic_dialog_map"
+        android:src="@drawable/earthicon"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation1"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation1"
         app:layout_constraintTop_toTopOf="@+id/textViewLocation1" />
@@ -76,7 +76,8 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/cancel_cross_48x48"
         app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -85,7 +86,7 @@
 
     <TextView
         android:id="@+id/textViewLocation2"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -101,7 +102,7 @@
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/button_selector"
-        android:src="@android:drawable/ic_dialog_map"
+        android:src="@drawable/earthicon"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation2"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation2"
         app:layout_constraintTop_toTopOf="@+id/textViewLocation2" />
@@ -122,7 +123,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:src="@drawable/cancel_cross_48x48"
         app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation2"
         app:layout_constraintEnd_toEndOf="@+id/btnRemoveLocation1"
         app:layout_constraintStart_toEndOf="@+id/setCalendarLocation2"
@@ -130,7 +131,7 @@
 
     <TextView
         android:id="@+id/textViewLocation3"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -145,7 +146,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_dialog_map"
+        android:src="@drawable/earthicon"
         android:background="@drawable/button_selector"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation3"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation3"
@@ -167,7 +168,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:src="@drawable/cancel_cross_48x48"
         app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation3"
         app:layout_constraintEnd_toEndOf="@+id/btnRemoveLocation2"
         app:layout_constraintStart_toEndOf="@+id/setCalendarLocation3"
@@ -175,7 +176,7 @@
 
     <TextView
         android:id="@+id/textViewLocation4"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -190,7 +191,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_dialog_map"
+        android:src="@drawable/earthicon"
         android:background="@drawable/button_selector"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation4"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation4"
@@ -212,7 +213,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:src="@drawable/cancel_cross_48x48"
         app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation4"
         app:layout_constraintEnd_toEndOf="@+id/btnRemoveLocation3"
         app:layout_constraintStart_toEndOf="@+id/setCalendarLocation4"
@@ -220,7 +221,7 @@
 
     <TextView
         android:id="@+id/textViewLocation5"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -235,7 +236,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_dialog_map"
+        android:src="@drawable/earthicon"
         android:background="@drawable/button_selector"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation5"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation5"
@@ -257,7 +258,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:src="@drawable/cancel_cross_48x48"
         app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation5"
         app:layout_constraintEnd_toEndOf="@+id/btnRemoveLocation4"
         app:layout_constraintStart_toEndOf="@+id/setCalendarLocation5"
@@ -265,7 +266,7 @@
 
     <TextView
         android:id="@+id/textViewLocation6"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -280,7 +281,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_dialog_map"
+        android:src="@drawable/earthicon"
         android:background="@drawable/button_selector"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation6"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation6"
@@ -302,7 +303,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:src="@drawable/cancel_cross_48x48"
         app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation6"
         app:layout_constraintEnd_toEndOf="@+id/btnRemoveLocation5"
         app:layout_constraintStart_toEndOf="@+id/setCalendarLocation6"
@@ -310,7 +311,7 @@
 <!--  _________________________________________________________________________________________  -->
     <TextView
         android:id="@+id/textViewLocation7"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -325,7 +326,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_dialog_map"
+        android:src="@drawable/earthicon"
         android:background="@drawable/button_selector"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation7"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation7"
@@ -347,7 +348,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:src="@drawable/cancel_cross_48x48"
         app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation7"
         app:layout_constraintEnd_toEndOf="@+id/btnRemoveLocation6"
         app:layout_constraintStart_toEndOf="@+id/setCalendarLocation7"
@@ -356,7 +357,7 @@
     <!--  _________________________________________________________________________________________  -->
     <TextView
         android:id="@+id/textViewLocation8"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -371,7 +372,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_dialog_map"
+        android:src="@drawable/earthicon"
         android:background="@drawable/button_selector"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation8"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation8"
@@ -393,7 +394,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:src="@drawable/cancel_cross_48x48"
         app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation8"
         app:layout_constraintEnd_toEndOf="@+id/btnRemoveLocation7"
         app:layout_constraintStart_toEndOf="@+id/setCalendarLocation8"
@@ -402,7 +403,7 @@
     <!--  _________________________________________________________________________________________  -->
     <TextView
         android:id="@+id/textViewLocation9"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -417,7 +418,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_dialog_map"
+        android:src="@drawable/earthicon"
         android:background="@drawable/button_selector"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation9"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation9"
@@ -439,7 +440,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:src="@drawable/cancel_cross_48x48"
         app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation9"
         app:layout_constraintEnd_toEndOf="@+id/btnRemoveLocation8"
         app:layout_constraintStart_toEndOf="@+id/setCalendarLocation9"
@@ -448,7 +449,7 @@
     <!--  _________________________________________________________________________________________  -->
     <TextView
         android:id="@+id/textViewLocation10"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -463,7 +464,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_dialog_map"
+        android:src="@drawable/earthicon"
         android:background="@drawable/button_selector"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation10"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation10"
@@ -485,7 +486,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:src="@drawable/cancel_cross_48x48"
         app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation10"
         app:layout_constraintEnd_toEndOf="@+id/btnRemoveLocation9"
         app:layout_constraintStart_toEndOf="@+id/setCalendarLocation10"
@@ -494,7 +495,7 @@
     <!--  _________________________________________________________________________________________  -->
     <TextView
         android:id="@+id/textViewLocation11"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -509,7 +510,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_dialog_map"
+        android:src="@drawable/earthicon"
         android:background="@drawable/button_selector"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation11"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation11"
@@ -531,7 +532,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:src="@drawable/cancel_cross_48x48"
         app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation11"
         app:layout_constraintEnd_toEndOf="@+id/btnRemoveLocation10"
         app:layout_constraintStart_toEndOf="@+id/setCalendarLocation11"
@@ -540,7 +541,7 @@
     <!--  _________________________________________________________________________________________  -->
     <TextView
         android:id="@+id/textViewLocation12"
-        android:layout_width="132dp"
+        android:layout_width="126dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_outline"
@@ -555,8 +556,8 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_dialog_map"
         android:background="@drawable/button_selector"
+        android:src="@drawable/earthicon"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLocation12"
         app:layout_constraintStart_toEndOf="@+id/textViewLocation12"
         app:layout_constraintTop_toTopOf="@+id/textViewLocation12" />
@@ -577,7 +578,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:src="@drawable/cancel_cross_48x48"
         app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation12"
         app:layout_constraintEnd_toEndOf="@+id/btnRemoveLocation11"
         app:layout_constraintStart_toEndOf="@+id/setCalendarLocation12"
@@ -588,8 +589,8 @@
         android:id="@+id/btnUpdateMyLocations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/button_selector"
         android:padding="10dp"
         android:text="@string/btn_update_locations"
@@ -613,26 +614,30 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/btnRlToRs"
         app:layout_constraintEnd_toEndOf="parent" />-->
 
-    <Button
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_outline"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="@string/info_message_report_location"
+        android:textColor="@color/colorText"
+        app:layout_constraintEnd_toEndOf="@+id/textViewReportLocation"
+        app:layout_constraintStart_toStartOf="@+id/textViewReportLocation"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReportLocation" />
+
+    <ImageView
         android:id="@+id/btnAddLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/btn_add_location"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/textViewReportLocation"
-        app:layout_constraintHorizontal_bias="0.561"
         app:layout_constraintStart_toStartOf="@+id/textViewReportLocation"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLocation12" />
-
-    <ImageView
-        android:id="@+id/reportLocationInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewReportLocation"
-        app:layout_constraintStart_toEndOf="@+id/textViewReportLocation"
-        app:layout_constraintTop_toTopOf="@+id/textViewReportLocation"
-        app:srcCompat="@drawable/info_icon_32x32" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewLocation12"
+        app:srcCompat="@drawable/plus_icon_48x48" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -180,17 +180,20 @@
     <string name="dialog_diarrhea">Diarrhea is bad </string>
 
     <string name="btn_clear">Clear</string>
+    <string name="next_info">If you have completed reporting your symptoms, please press <b>NEXT STEP</b> to continue to Report Location</string>
     <string name="btn_next_page_rl">Next step</string>
 
     // REPORT LOCATION PAGE
     <string name="fragment_report_location">Report location</string>
 
     <string name="info_title_report_location">Report location info title</string>
-    <string name="info_message_report_location">Report location info message</string>
+    <string name="info_message_report_location">Please submit one or more of your previously visited locations the past two weeks by using the earth icon.
+        Please use the calendar icon to select dates at the location.
+    </string>
 
-    <string name="btn_update_locations">Upload locations to database</string>
+    <string name="btn_update_locations">Upload locations</string>
     <string name="btn_previous_page_rs">Back to Report Symptoms</string>
-    <string name="btn_add_location">Add another location</string>
+    <string name="btn_add_location">Add\nlocation</string>
     <string name="btn_commit_location">Set Location</string>
 
     <string name="no_locations_to_add">No locations to add</string>

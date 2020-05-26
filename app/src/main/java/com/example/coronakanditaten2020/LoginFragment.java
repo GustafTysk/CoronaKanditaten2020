@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
     EditText textEmail;
 
     private TextView textViewGoToResetPassword;
+    private ProgressBar loading;
 
     private Switch switchDayNightMode;
     private ImageView btnChangeLanguage;
@@ -63,6 +65,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
 
         textViewGoToResetPassword = (TextView) view.findViewById(R.id.textViewGoToResetPassword);
         textViewGoToResetPassword.setOnTouchListener(this);
+
+        loading = (ProgressBar) view.findViewById(R.id.loading);
 
         switchDayNightMode = (Switch) view.findViewById(R.id.switchDayNightMode);
         checkDayNightMode();
@@ -145,6 +149,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
 
                 break;
             case R.id.btnLogin:
+                loading.setVisibility(View.VISIBLE);
                 Email=textEmail.getText().toString();
                 Password=textPassword.getText().toString();
                 ((LoginActivity)getActivity()).datahandler.credentials=new Credentials(Email,Password);
@@ -154,6 +159,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
                 login.enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        loading.setVisibility(View.GONE);
                         if(response.isSuccessful()){
                             if (response.body()==true){
                                 Toast.makeText(getContext(),"logged in", Toast.LENGTH_SHORT).show();
@@ -177,8 +183,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
 
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
-
+                        loading.setVisibility(View.GONE);
                         Toast.makeText(getContext(),"failed to connect to server", Toast.LENGTH_SHORT).show();
+                        System.out.println(t);
                     }
                 });
 

@@ -70,6 +70,12 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
                 ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_report_symptoms);
                 break;
             case R.id.btnStartToForum:
+                if (((MainActivity)getActivity()).datahandler.viewPosts.size()!=0){
+                    ((MainActivity)getActivity()).setViewPager(6);
+                    ((MainActivity)getActivity()).forumFragment.setForumBottomNav();
+                    ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_forum);
+                    ((MainActivity)getActivity()).forumFragment.runwhenload();
+                }
                 ((MainActivity)getActivity()).setViewPager(6);
                 ((MainActivity)getActivity()).forumFragment.setForumBottomNav();
                 ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_forum);
