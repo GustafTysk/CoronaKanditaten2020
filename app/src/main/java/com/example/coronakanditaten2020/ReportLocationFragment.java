@@ -507,7 +507,10 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
     public void startReportLocationMap(){
         System.out.println("fdsfsdfdsf");
-        yourLocation = ((MainActivity) getActivity()).getCurrentLocation();
+
+            yourLocation = ((MainActivity) getActivity()).getCurrentLocation();
+
+
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View mapV = inflater.inflate(R.layout.report_location_map, null);

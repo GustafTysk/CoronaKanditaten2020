@@ -89,7 +89,7 @@
     <string name="btn_report_symptom">Report\nsymptoms</string>
     <string name="btn_heatmap">Heatmap</string>
     <string name="btn_forum">Forum</string>
-    <string name="btn_statistics">Statistics</string>
+    <string name="btn_statistics">Statistik</string>
 
     // MY SETTINGS PAGE
     <string name="fragment_my_settings">Inställningar</string>
@@ -127,9 +127,9 @@
     <string name="summary_send_feedback">Raportera tekniska problem eller kom med förslag på nya funktioner</string>
 
     // STATISTICS PAGE
-    <string name="fragment_statistics">Statistik</string>
+    <string name="fragment_statistics"><u>Statistik</u></string>
     <string name="checkbox_explanation">Väl de symtom du vill se ovan genom att markera/avmarkera kryssrutorna:</string>
-
+    <string name="number_of_reported_cases"><u>Antal reporterade fall</u></string>
     <string name="total_symptoms">Totala symtom</string>
     <string name="per_day_symptoms">Symtom per dag</string>
 
@@ -181,7 +181,7 @@
     <string name="dialog_diarrhea">Diarrhea is bad </string>
 
     <string name="btn_clear">Rensa</string>
-    <string name="next_info">If you have completed reporting your symptoms, please press <b>NEXT STEP</b> to continue to Report Location</string>
+    <string name="next_info">Om du är klar med att rapportera dina symtom, tryck på <b>NÄSTA STEG</b> för att fortsätta till Rapportera Plats.</string>
     <string name="btn_next_page_rl">Nästa steg</string>
 
     // REPORT LOCATION PAGE

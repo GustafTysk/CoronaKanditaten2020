@@ -64,20 +64,14 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private Spinner spinner;
     private ArrayAdapter<CharSequence> adapter;
     private boolean series1exist = false;
-    private boolean notCounted = true;
-    //String getDateForCountAllSymptoms;
 
     //ALLA SYMPTOM
-    private int diarrhea29, diarrhea30, diarrhea31, diarrhea32, runnyNose29, runnyNose30, runnyNose31, runnyNose32, nasalCongestion29, nasalCongestion30, nasalCongestion31,
-            nasalCongestion32, headache29, headache30, headache31, headache32, throat29, throat30, throat31, throat32, breathing29, breathing30, breathing31, breathing32,
-            tiredness29, tiredness30, tiredness31, tiredness32, cough29, cough30, cough31, cough32, fever29, fever30, fever31, fever32, largest, largest2, diarrhea, nasalCongestion,
-            breathing, headache, fever, cough, tiredness, runnyNose, throat, maleAge0To18, maleAge19To40, maleAge41To64, maleAge65Plus, femaleAge0To18, femaleAge19To40, femaleAge41To64,
+    private int largest, largest2, maleAge0To18, maleAge19To40, maleAge41To64, maleAge65Plus, femaleAge0To18, femaleAge19To40, femaleAge41To64,
             femaleAge65Plus, otherAge0To18, otherAge19To40, otherAge41To64, otherAge65Plus;
 
     //CALENDAR
-    private Boolean noSelectedDates = true;
+    private boolean noSelectedDates = true;
     private GregorianCalendar calendarStat;
-    private Date d1, d2, d3, d4;
     private ImageButton setCalendarLocation1;
     private com.applandeo.materialcalendarview.CalendarView cal;
     private List<Calendar> calendars;
@@ -90,8 +84,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     ArrayList<Date> daysOfInterestArraylist = new ArrayList<>();
 
     //TABLE VIEW
-    TableLayout tableLayout;
-    TableRow tableRow1, tableRow2, tableRow3, tableRow4, tableRow5;
     private TextView textView1, textView2, textView3, textView4, textView5, textView6, textView7, textView8, textView9, textView10,
     textView11, textView12, textView13, textView14, textView15, textView16, textView17, textView18, textView19, textView20;
 
@@ -115,6 +107,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         coughBox = (CheckBox) view.findViewById(R.id.coughBox);
         headacheBox = (CheckBox) view.findViewById(R.id.headacheBox);
         breathingDiffBox = (CheckBox) view.findViewById(R.id.breathingDiffBox);
+
 
         graph = (GraphView) view.findViewById(R.id.graph1);
 
@@ -208,6 +201,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         getSymptomValuesLast60DaysRunnyNose();
         getSymptomValuesLast60DaysThroat();
         getSymptomValuesLast60DaysTiredness();
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(createCalendar(59).getTime());
+        graph.getViewport().setMaxX(createCalendar(0).getTime());
 
         if(noSelectedDates == true) {
             createCalendar(60);
@@ -237,14 +233,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-/*            case R.id.btnStatisticsToHeatmap:
-                Toast.makeText(getActivity(), "Going to Heatmap", Toast.LENGTH_SHORT).show();
-                ((MainActivity) getActivity()).setViewPager(3);
-                break;
-            case R.id.btnStatisticsToStart:
-                Toast.makeText(getActivity(), "Going to Start Page", Toast.LENGTH_SHORT).show();
-                ((MainActivity) getActivity()).setViewPager(1);
-                break;*/
             case R.id.setCalendarLocation1:
                 try {
                     getCalendarView(1);
@@ -378,6 +366,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         calendarStat.setTime(today);
         calendarStat.add(Calendar.DAY_OF_MONTH, -dayOfInterestLast60Days);
         Date dateOfInterest = calendarStat.getTime();
+        System.out.println("Datejfdjdfjdj" + dateOfInterest);
         return dateOfInterest;
     }
 
@@ -415,8 +404,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                     addAllSeries2();
                     designSeriesb();
                 }
-                graph.getGridLabelRenderer().setNumHorizontalLabels(4);
-                graph.getGridLabelRenderer().setHumanRounding(false);
                 graph.getViewport().setXAxisBoundsManual(true);
                 graph.getViewport().setMinX(minCalendarValue.getTime());
                 graph.getViewport().setMaxX(maxCalendarValue.getTime());
@@ -668,6 +655,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             dataPointsCough.add(new DataPoint(createCalendar(i), allRatingsCough.get(i)));
             dataPointsHeadache.add(new DataPoint(createCalendar(i), allRatingsHeadache.get(i)));
         }
+
         DataPoint[] dpDiarrhea = new DataPoint[60];
         DataPoint[] dpRunnyNose = new DataPoint[60];
         DataPoint[] dpNasalCon = new DataPoint[60];
@@ -709,6 +697,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             dataPointsCough.add(new DataPoint(createCalendar(i), countForGraph2(i,allRatingsCough)));
             dataPointsHeadache.add(new DataPoint(createCalendar(i), countForGraph2(i,allRatingsHeadache)));
         }
+
         DataPoint[] dpDiarrhea = new DataPoint[60];
         DataPoint[] dpRunnyNose = new DataPoint[60];
         DataPoint[] dpNasalCon = new DataPoint[60];
@@ -733,7 +722,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.getGridLabelRenderer().setNumHorizontalLabels(4);
         graph.getGridLabelRenderer().setHumanRounding(false);
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-        //graph.getViewport().setScrollable(true);
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(calculateHighestValA());
@@ -745,12 +733,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
         graph.setTitle(getString(R.string.per_day_symptoms));
         graph.setTitleTextSize(80);
-
-//        graph.getLegendRenderer().setVisible(true);
-//        graph.getLegendRenderer().setFixedPosition(0,0);
-//        graph.getLegendRenderer().setTextSize(35f);
-//        graph.getLegendRenderer().setBackgroundColor(Color.TRANSPARENT);
-
 
         series.setTitle(getString(R.string.symptom_diarrhea));
         series2.setTitle(getString(R.string.symptom_runny_nose));
@@ -783,7 +765,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     }
 
     public void designSeriesb() {
-        //graph.getViewport().setScrollable(true);
         graph.getGridLabelRenderer().setNumHorizontalLabels(4);
         graph.getGridLabelRenderer().setHumanRounding(false);
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
@@ -797,9 +778,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.getGridLabelRenderer().setNumVerticalLabels(calculateHighestValB() + 1);
         graph.setTitle(getString(R.string.total_symptoms));
         graph.setTitleTextSize(80);
-//        graph.getLegendRenderer().setVisible(true);
-//        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.MIDDLE);
-//        graph.getLegendRenderer().setTextSize(35f);
 
         seriesb.setTitle(getString(R.string.symptom_diarrhea));
         series2b.setTitle(getString(R.string.symptom_runny_nose));
@@ -910,7 +888,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
         if(text.equals(getString(R.string.per_day_symptoms))){
             createCalendar(60);
-            System.out.println("create" + createCalendar(60));
             clearGraph();
             makeGraphLines1();
             addAllSeries1();
