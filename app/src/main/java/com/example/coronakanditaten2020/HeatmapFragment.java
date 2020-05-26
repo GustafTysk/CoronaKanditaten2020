@@ -69,11 +69,14 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
     private Button btnHeatmapToStart;
     private Button btnTestChangeDay;
     private Button btnZoomInOnMe;
+    public boolean setuppdone=false;
 
     private com.applandeo.materialcalendarview.CalendarView cal;
     private Calendar minDate = Calendar.getInstance(TimeZone.getDefault());
     private Calendar maxDate = Calendar.getInstance(TimeZone.getDefault());
     private TextView dateDisplayheatmap;
+    private Bundle  savedInstanceState;
+    private View view;
 
     private SeekBar seekBarheatmap;
     private int seekBarMaxValue; // get maximum value of the Seek bar
@@ -87,48 +90,51 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_heatmap, container, false);
-        btnTestChangeDay = (Button) view.findViewById(R.id.btnTestChangeDay);
-        btnTestChangeDay.setOnClickListener(this);
-        btnZoomInOnMe = (Button) view.findViewById(R.id.btnZoomInOnMe);
-        btnZoomInOnMe.setOnClickListener(this);
+        view = inflater.inflate(R.layout.fragment_heatmap, container, false);
+        savedInstanceState=savedInstanceState;
 
-        mMapView = (MapView) view.findViewById(R.id.mapview);
-        mMapView.onCreate(savedInstanceState);
-        mMapView.getMapAsync(this);
 
-        seekBarheatmap = (SeekBar) view.findViewById(R.id.seekBarHeatmap);
-        seekBarheatmap.setOnSeekBarChangeListener(this);
-        seekBarMaxValue=seekBarheatmap.getMax();
-        dateDisplayheatmap = (TextView) view.findViewById(R.id.dateDisplayheatmap);
-        Date today = new Date();
-        dateDisplayheatmap.setText(convertDateToString(today));
+            btnTestChangeDay = (Button) view.findViewById(R.id.btnTestChangeDay);
+            btnTestChangeDay.setOnClickListener(this);
+            btnZoomInOnMe = (Button) view.findViewById(R.id.btnZoomInOnMe);
+            btnZoomInOnMe.setOnClickListener(this);
 
-        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-                getChildFragmentManager().findFragmentById(R.id.autocomplete_fragment);
-        autocompleteFragment.setCountry("SE");
+            mMapView = (MapView) view.findViewById(R.id.mapview);
+            mMapView.onCreate(savedInstanceState);
+            mMapView.getMapAsync(this);
+
+            seekBarheatmap = (SeekBar) view.findViewById(R.id.seekBarHeatmap);
+            seekBarheatmap.setOnSeekBarChangeListener(this);
+            seekBarMaxValue = seekBarheatmap.getMax();
+            dateDisplayheatmap = (TextView) view.findViewById(R.id.dateDisplayheatmap);
+            Date today = new Date();
+            dateDisplayheatmap.setText(convertDateToString(today));
+
+            AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                    getChildFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+            autocompleteFragment.setCountry("SE");
 
 // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME,Place.Field.LAT_LNG));
+            autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
 
 // Set up a PlaceSelectionListener to handle the response.
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(Place place) {
-                // TODO: Get info about the selected place.
+            autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+                @Override
+                public void onPlaceSelected(Place place) {
+                    // TODO: Get info about the selected place.
 
-                LatLng selectlatlong=place.getLatLng();
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(selectlatlong,14));
+                    LatLng selectlatlong = place.getLatLng();
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(selectlatlong, 14));
 
-                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
-            }
+                    Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+                }
 
-            @Override
-            public void onError(Status status) {
-                // TODO: Handle the error.
-                Log.i(TAG, "An error occurred: " + status);
-            }
-        });
+                @Override
+                public void onError(Status status) {
+                    // TODO: Handle the error.
+                    Log.i(TAG, "An error occurred: " + status);
+                }
+            });
 
         //locationsArray = datahandler.getHeatmaplocations();
         return view;
@@ -253,10 +259,7 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        mProvider = new HeatmapTileProvider.Builder()
-                .weightedData((GenerateHeatMapCordsList( datahandler.getHeatmaplocations(),"2020-10-15", "placeholder")))
-                .build();
-        mOverlay = mGoogleMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
+
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sweden,4));
     }
@@ -296,20 +299,21 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
 
 
 
-    private ArrayList<WeightedLatLng> GenerateHeatMapCordsList(Location[] heatmaplocations, String date, String Type) {
+    private ArrayList<WeightedLatLng> GenerateHeatMapCordsList(ArrayList<Location> heatmaplocations, String date, String Type) {
         // OM DET INTE FINNS DATA FÖR DATUMET RETURN THIS MED EN SATT LOCATION
         ArrayList<WeightedLatLng> listReserve = new ArrayList<WeightedLatLng>();
-        listReserve.add(new WeightedLatLng(new LatLng(Double.valueOf(heatmaplocations[0].getLatitude()),Double.valueOf(heatmaplocations[0].getLongitude())),
-                GetLocationWeight(heatmaplocations[0],date,heatmaplocations.length)));
+        System.out.println(heatmaplocations.size());
+        listReserve.add(new WeightedLatLng(new LatLng(Double.valueOf(heatmaplocations.get(0).getLatitude()),Double.valueOf(heatmaplocations.get(0).getLongitude())),
+                GetLocationWeight(heatmaplocations.get(0),date,heatmaplocations.size())));
         //----------------------------------------------------------------------
         ArrayList<WeightedLatLng> list = new ArrayList<WeightedLatLng>();
         WeightedLatLng HeatCord;
-        for (int i = 0; i < heatmaplocations.length - 1; i++) {
+        for (int i = 0; i < heatmaplocations.size()- 1; i++) {
             System.out.println(i);
-            if(heatmaplocations[i].date.equals(date)){
+            if(heatmaplocations.get(i).date.equals(date)){
 
-                list.add(new WeightedLatLng(new LatLng(Double.valueOf(heatmaplocations[i].getLatitude()),Double.valueOf(heatmaplocations[i].getLongitude())),
-                                            GetLocationWeight(heatmaplocations[i],date,heatmaplocations.length)));
+                list.add(new WeightedLatLng(new LatLng(Double.valueOf(heatmaplocations.get(i).getLatitude()),Double.valueOf(heatmaplocations.get(i).getLongitude())),
+                                            GetLocationWeight(heatmaplocations.get(i),date,heatmaplocations.size())));
 
             }
         }
@@ -353,6 +357,8 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
 
 
 
+
+
     //This function can be used to decide what type of location should be shown
     private boolean locationtype (Location location, String type){
         if(true){
@@ -363,7 +369,23 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
         return false;
     }
 
+    public void setup(){
 
+
+
+
+        dateDisplayheatmap = (TextView) view.findViewById(R.id.dateDisplayheatmap);
+        Date today = new Date();
+        dateDisplayheatmap.setText(convertDateToString(today));
+        mProvider = new HeatmapTileProvider.Builder()
+                .weightedData((GenerateHeatMapCordsList( datahandler.getHeatmaplocations(),"2020-10-15", "placeholder")))
+                .build();
+        mOverlay = mGoogleMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
+
+
+
+        setuppdone=true;
+    }
 
 }
 
