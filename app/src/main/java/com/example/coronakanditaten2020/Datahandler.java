@@ -28,6 +28,7 @@ public class Datahandler {
     Location[] heatmaplocations = new Location[12];
     ArrayList<Location> heatlocations;
     ArrayList<Location> Userlocations;
+    boolean gotlocation=false;
     User user;
     ArrayList<Post> viewPosts=new ArrayList<Post>();
     ArrayList<ArrayList> userinfo;
@@ -36,7 +37,7 @@ public class Datahandler {
     Credentials credentials;
     Retrofit retrofit;
     ClientAPI clientAPI;
-    String baseurl = "http://130.243.233.0:9990/KandidatProjekt/webapi/"; //"https://coronakandidaten2020.tech/restAPI/webapi/";
+    String baseurl = "https://coronakandidaten2020.tech/restAPI/webapi/";
     ArrayList<Post> topPost;
 
     public Datahandler() {
@@ -51,8 +52,8 @@ public class Datahandler {
         clientAPI = retrofit.create(ClientAPI.class);
     }
 
-    public Location[] getHeatmaplocations() {
-        return heatmaplocations;
+    public ArrayList<Location> getHeatmaplocations() {
+        return heatlocations;
     }
 
     public ArrayList<Location> getHeatlocations() {
@@ -157,6 +158,7 @@ public class Datahandler {
                 }
                 Userlocations = response.body();
                 System.out.println("userlocations have been added");
+                gotlocation=true;
             }
 
             @Override

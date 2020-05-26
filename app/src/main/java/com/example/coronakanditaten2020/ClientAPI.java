@@ -93,7 +93,7 @@ public interface ClientAPI {
     @GET("post/own/{email}/security")
     Call<ArrayList<Post>> GetOwnPosts(@Header("authorization") String Auth,@Path("email") String email);
 
-    @GET("post/own/liked/{email}/security")
+    @GET("post/ownLikedIdArray/{email}/security")
     Call<ArrayList<Integer>> GetOwnLikedPosts(@Header("authorization") String Auth,@Path("email") String email);
 
     @POST("post/{email}/security")
@@ -117,8 +117,8 @@ public interface ClientAPI {
     @GET("post/search/{search}/security")
     Call<ArrayList<Post>> GetPostBySearch(@Path("search") String search);
 
-    @DELETE("post/unlike/{email}/{unlikeid}/security")
-    Call<Boolean> unlikePost(@Header("authorization")String Auth,@Path("email") String email, @Path("likedid") Integer likepostid);
+    @DELETE("post/unlike/{email}/{unlikedid}/security")
+    Call<Boolean> unlikePost(@Header("authorization")String Auth,@Path("email") String email, @Path("unlikedid") Integer unlikepostid);
 
 
 

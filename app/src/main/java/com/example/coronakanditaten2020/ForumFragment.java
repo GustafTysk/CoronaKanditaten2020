@@ -332,9 +332,11 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 }
                 else{
                     postList.clear();
+                    copyList= ((MainActivity)getActivity()).datahandler.viewPosts;
+                    for (Post post: copyList){
+                        postList.add(post);
+                    }
                     ((MainActivity)getActivity()).datahandler.viewPosts.add(response.body());
-                    postList=((MainActivity)getActivity()).datahandler.viewPosts;
-                    Collections.reverse(postList);
                     adapter.notifyDataSetChanged();
                 }
             }
