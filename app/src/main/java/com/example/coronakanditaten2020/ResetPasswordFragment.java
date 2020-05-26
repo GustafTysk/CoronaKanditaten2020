@@ -121,8 +121,11 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
 
     public void showChangePasswordFields(){
         verificationCodeView.setVisibility(View.VISIBLE);
+        verificationCodeView.startAnimation(((LoginActivity)getActivity()).fadeinanimation);
         newPasswordView.setVisibility(View.VISIBLE);
+        newPasswordView.startAnimation(((LoginActivity)getActivity()).fadeinanimation);
         btnChangePassword.setVisibility(View.VISIBLE);
+        btnChangePassword.startAnimation(((LoginActivity)getActivity()).fadeinanimation);
     }
 
 
