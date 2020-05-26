@@ -64,15 +64,13 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private Spinner spinner;
     private ArrayAdapter<CharSequence> adapter;
     private boolean series1exist = false;
-    private boolean notCounted = true;
-    //String getDateForCountAllSymptoms;
 
     //ALLA SYMPTOM
     private int largest, largest2, maleAge0To18, maleAge19To40, maleAge41To64, maleAge65Plus, femaleAge0To18, femaleAge19To40, femaleAge41To64,
             femaleAge65Plus, otherAge0To18, otherAge19To40, otherAge41To64, otherAge65Plus;
 
     //CALENDAR
-    private Boolean noSelectedDates = true;
+    private boolean noSelectedDates = true;
     private GregorianCalendar calendarStat;
     private ImageButton setCalendarLocation1;
     private com.applandeo.materialcalendarview.CalendarView cal;
@@ -203,6 +201,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         getSymptomValuesLast60DaysRunnyNose();
         getSymptomValuesLast60DaysThroat();
         getSymptomValuesLast60DaysTiredness();
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(createCalendar(59).getTime());
+        graph.getViewport().setMaxX(createCalendar(0).getTime());
 
         if(noSelectedDates == true) {
             createCalendar(60);
@@ -365,6 +366,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         calendarStat.setTime(today);
         calendarStat.add(Calendar.DAY_OF_MONTH, -dayOfInterestLast60Days);
         Date dateOfInterest = calendarStat.getTime();
+        System.out.println("Datejfdjdfjdj" + dateOfInterest);
         return dateOfInterest;
     }
 
@@ -402,8 +404,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                     addAllSeries2();
                     designSeriesb();
                 }
-                graph.getGridLabelRenderer().setNumHorizontalLabels(4);
-                graph.getGridLabelRenderer().setHumanRounding(false);
                 graph.getViewport().setXAxisBoundsManual(true);
                 graph.getViewport().setMinX(minCalendarValue.getTime());
                 graph.getViewport().setMaxX(maxCalendarValue.getTime());
@@ -655,6 +655,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             dataPointsCough.add(new DataPoint(createCalendar(i), allRatingsCough.get(i)));
             dataPointsHeadache.add(new DataPoint(createCalendar(i), allRatingsHeadache.get(i)));
         }
+
         DataPoint[] dpDiarrhea = new DataPoint[60];
         DataPoint[] dpRunnyNose = new DataPoint[60];
         DataPoint[] dpNasalCon = new DataPoint[60];
@@ -696,6 +697,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             dataPointsCough.add(new DataPoint(createCalendar(i), countForGraph2(i,allRatingsCough)));
             dataPointsHeadache.add(new DataPoint(createCalendar(i), countForGraph2(i,allRatingsHeadache)));
         }
+
         DataPoint[] dpDiarrhea = new DataPoint[60];
         DataPoint[] dpRunnyNose = new DataPoint[60];
         DataPoint[] dpNasalCon = new DataPoint[60];
