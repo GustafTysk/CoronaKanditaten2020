@@ -29,6 +29,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
+import java.util.Date;
+
+
 public class ForumFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private Button messageButton;
@@ -44,7 +47,6 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
     private EditText messageTitle;
     private TextView usernameShow;
     ArrayList<Post> topPost;
-    private String currentCategory;
     private String username;
 
     public ListView listView;
@@ -78,10 +80,8 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         btnSearch = (Button) view.findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(this);
 
-        username = ((MainActivity)getActivity()).datahandler.user.getUsername();
-
         usernameShow = (TextView) view.findViewById(R.id.usernameShow);
-        usernameShow.setText(username);
+        //usernameShow.setText(username);
 
         messageButton = (Button) view.findViewById(R.id.messageButton);
         messageButton.setOnClickListener(this);
@@ -93,8 +93,6 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
         searchInput = (EditText) view.findViewById(R.id.searchInput);
         listView = (ListView) view.findViewById(R.id.listview);
-
-        currentCategory = "Help";
 
         postList = topPost;
         copyList = topPost;
@@ -183,17 +181,20 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         switch (v.getId()){
 
             case R.id.messageButton:
+                ((MainActivity)getActivity()).datahandler.getserveruser();
+                username = ((MainActivity)getActivity()).datahandler.user.getUsername();
                 String email = ((MainActivity)getActivity()).datahandler.user.getEmail();
                 String title = messageTitle.getText().toString();
-                String timestamp = "3 jan";
+                Date date = new Date();
+                String timestamp=date.toString();
                 String message = messageInput.getText().toString();
                 if(thePostParentId!= 0) {
-                    Post newWrittenPost = new Post(username,email ,title, timestamp, message, 0, "comment", 30, thePostParentId);
+                    Post newWrittenPost = new Post(username,email ,title, timestamp, message, 0, "comment",0 , thePostParentId);
                     sendanswertoserver(newWrittenPost);
                 }
 
                 else{
-                    Post newWrittenPost = new Post(username, email,title, timestamp, message, 0, "top", 30, 0);
+                    Post newWrittenPost = new Post(username, email,title, timestamp, message, 0, "top", 0, 0);
                     System.out.println(newWrittenPost.printInformation());
 
                     sendposttoserver(newWrittenPost);
@@ -320,18 +321,18 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
 
     public void sendposttoserver(Post post){
-        Call<Boolean> sendposttoserver=((MainActivity)getActivity()).datahandler.clientAPI.creatpost(
+        Call<Post> sendposttoserver=((MainActivity)getActivity()).datahandler.clientAPI.creatpost(
                 ((MainActivity)getActivity()).datahandler.credentials.encrypt,
                 ((MainActivity)getActivity()).datahandler.credentials.Email,post);
-        sendposttoserver.enqueue(new Callback<Boolean>() {
+        sendposttoserver.enqueue(new Callback<Post>() {
             @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+            public void onResponse(Call<Post> call, Response<Post> response) {
                 if(!response.isSuccessful()){
                     Toast.makeText(getContext(), getString(R.string.fail_to_get_post), Toast.LENGTH_LONG).show();
                 }
                 else{
                     postList.clear();
-                    ((MainActivity)getActivity()).datahandler.viewPosts.add(post);
+                    ((MainActivity)getActivity()).datahandler.viewPosts.add(response.body());
                     postList=((MainActivity)getActivity()).datahandler.viewPosts;
                     Collections.reverse(postList);
                     adapter.notifyDataSetChanged();
@@ -339,7 +340,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             }
 
             @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
+            public void onFailure(Call<Post> call, Throwable t) {
                 Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
 
             }
@@ -347,23 +348,23 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
     }
 
     public void sendanswertoserver(Post post){
-        Call<Boolean> sendanswertoserver=((MainActivity)getActivity()).datahandler.clientAPI.creatanswerpost(
+        Call<Post> sendanswertoserver=((MainActivity)getActivity()).datahandler.clientAPI.creatanswerpost(
                 ((MainActivity)getActivity()).datahandler.credentials.encrypt,
                 ((MainActivity)getActivity()).datahandler.credentials.Email,post);
-        sendanswertoserver.enqueue(new Callback<Boolean>() {
+        sendanswertoserver.enqueue(new Callback<Post>() {
             @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+            public void onResponse(Call<Post> call, Response<Post> response) {
                 if(!response.isSuccessful()){
                     Toast.makeText(getContext(), getString(R.string.fail_to_add_post), Toast.LENGTH_LONG).show();
                 }
                 else {
-                    commentList.add(post);
+                    commentList.add(response.body());
                     adapter.notifyDataSetChanged();
                 }
             }
 
             @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
+            public void onFailure(Call<Post> call, Throwable t) {
                 Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
             }
         });
@@ -442,7 +443,8 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         copyList = topPost;
 
         //Collections.reverse(postList);
-
+        username = ((MainActivity)getActivity()).datahandler.user.getUsername();
+        usernameShow.setText(username);
         adapter = new PostListAdapter(getContext(), R.layout.adapter_view_layout, postList, ((MainActivity)getActivity()).datahandler);
         listView.setAdapter(adapter);
 

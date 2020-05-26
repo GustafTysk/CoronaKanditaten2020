@@ -97,7 +97,7 @@ public interface ClientAPI {
     Call<ArrayList<Integer>> GetOwnLikedPosts(@Header("authorization") String Auth,@Path("email") String email);
 
     @POST("post/{email}/security")
-    Call<Boolean> creatpost(@Header("authorization")String Auth, @Path("email") String email, @Body Post thePost);
+    Call<Post> creatpost(@Header("authorization")String Auth, @Path("email") String email, @Body Post thePost);
 
     @POST("post/like/{email}/{likedid}/security")
     Call<Boolean> likePost(@Header("authorization")String Auth,@Path("email") String email, @Path("likedid") Integer likepostid);
@@ -105,7 +105,7 @@ public interface ClientAPI {
 
 
     @POST("post/answer/{email}/security")
-    Call<Boolean> creatanswerpost(@Header("authorization")String Auth, @Path("email") String email, @Body Post thePost);
+    Call<Post> creatanswerpost(@Header("authorization")String Auth, @Path("email") String email, @Body Post thePost);
 
     @DELETE("post/deleteUserPosts/{email}/security")
     Call<Boolean> deleteUserPosts(@Header("authorization")String Auth, @Path("email") String email);
