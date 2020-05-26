@@ -149,30 +149,30 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         textView20 = (TextView) view.findViewById(R.id.textView20);
 
 
-        User user = new User("Tjalexander1", "alewik97@gmail.com", 15, "Man", "IDFJJKdjk", "2020-04-29");
-        Users.add(user);
-        User user2 = new User("Tjalexander1", "alewik97@gmail.com", 25, "Kvinna", "IDFJJKdjk", "2020-04-29");
-        Users.add(user2);
-        User user3 = new User("Tjalexander1", "alewik97@gmail.com", 9, "Annat", "IDFJJKdjk", "2020-04-29");
-        Users.add(user3);
-        User user4 = new User("Tjalexander1", "alewik97@gmail.com", 69, "Man", "IDFJJKdjk", "2020-04-29");
-        Users.add(user4);
-        User user5 = new User("Tjalexander1", "alewik97@gmail.com", 54, "Annat", "IDFJJKdjk", "2020-04-29");
-        Users.add(user5);
-        User user6 = new User("Tjalexander1", "alewik97@gmail.com", 30, "Kvinna", "IDFJJKdjk", "2020-04-29");
-        Users.add(user6);
-        User user7 = new User("Tjalexander1", "alewik97@gmail.com", 37, "Kvinna", "IDFJJKdjk", "2020-04-29");
-        Users.add(user7);
-        User user8 = new User("Tjalexander1", "alewik97@gmail.com", 82, "Man", "IDFJJKdjk", "2020-04-29");
-        Users.add(user8);
-        User user9 = new User("Tjalexander1", "alewik97@gmail.com", 91, "Annat", "IDFJJKdjk", "2020-04-29");
-        Users.add(user9);
-        User user10 = new User("Tjalexander1", "alewik97@gmail.com", 23, "Kvinna", "IDFJJKdjk", "2020-04-29");
-        Users.add(user10);
-        User user11 = new User("Tjalexander1", "alewik97@gmail.com", 1, "Man", "IDFJJKdjk", "2020-04-29");
-        Users.add(user11);
-        User user12 = new User("Tjalexander1", "alewik97@gmail.com", 65, "Kvinna", "IDFJJKdjk", "2020-04-29");
-        Users.add(user12);
+//        User user = new User("Tjalexander1", "alewik97@gmail.com", 15, "Man", "IDFJJKdjk", "2020-04-29");
+//        Users.add(user);
+//        User user2 = new User("Tjalexander1", "alewik97@gmail.com", 25, "Kvinna", "IDFJJKdjk", "2020-04-29");
+//        Users.add(user2);
+//        User user3 = new User("Tjalexander1", "alewik97@gmail.com", 9, "Annat", "IDFJJKdjk", "2020-04-29");
+//        Users.add(user3);
+//        User user4 = new User("Tjalexander1", "alewik97@gmail.com", 69, "Man", "IDFJJKdjk", "2020-04-29");
+//        Users.add(user4);
+//        User user5 = new User("Tjalexander1", "alewik97@gmail.com", 54, "Annat", "IDFJJKdjk", "2020-04-29");
+//        Users.add(user5);
+//        User user6 = new User("Tjalexander1", "alewik97@gmail.com", 30, "Kvinna", "IDFJJKdjk", "2020-04-29");
+//        Users.add(user6);
+//        User user7 = new User("Tjalexander1", "alewik97@gmail.com", 37, "Kvinna", "IDFJJKdjk", "2020-04-29");
+//        Users.add(user7);
+//        User user8 = new User("Tjalexander1", "alewik97@gmail.com", 82, "Man", "IDFJJKdjk", "2020-04-29");
+//        Users.add(user8);
+//        User user9 = new User("Tjalexander1", "alewik97@gmail.com", 91, "Annat", "IDFJJKdjk", "2020-04-29");
+//        Users.add(user9);
+//        User user10 = new User("Tjalexander1", "alewik97@gmail.com", 23, "Kvinna", "IDFJJKdjk", "2020-04-29");
+//        Users.add(user10);
+//        User user11 = new User("Tjalexander1", "alewik97@gmail.com", 1, "Man", "IDFJJKdjk", "2020-04-29");
+//        Users.add(user11);
+//        User user12 = new User("Tjalexander1", "alewik97@gmail.com", 65, "Kvinna", "IDFJJKdjk", "2020-04-29");
+//        Users.add(user12);
 
 
         Location location = new Location("59.858562", "17.638927", "2020-04-29", 0, 0, 2, 0, 3, 0, 1, 1, 0, 2, "2020-04-31");

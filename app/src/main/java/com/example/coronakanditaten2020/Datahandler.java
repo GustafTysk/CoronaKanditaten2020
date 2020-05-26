@@ -36,7 +36,7 @@ public class Datahandler {
     Credentials credentials;
     Retrofit retrofit;
     ClientAPI clientAPI;
-    String baseurl = "https://coronakandidaten2020.tech/restAPI/webapi/";
+    String baseurl = "http://130.243.233.0:9990/KandidatProjekt/webapi/"; //"https://coronakandidaten2020.tech/restAPI/webapi/";
     ArrayList<Post> topPost;
 
     public Datahandler() {
@@ -180,6 +180,7 @@ public class Datahandler {
                     user=response.body();
                     System.out.println(user.getEmail());
                     System.out.println("user has succefully collected");
+
 
                 }
             }

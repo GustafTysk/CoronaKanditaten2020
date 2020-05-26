@@ -65,4 +65,12 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
 }

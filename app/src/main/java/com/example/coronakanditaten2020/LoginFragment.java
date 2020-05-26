@@ -40,6 +40,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
     String Email;
     EditText textPassword;
     EditText textEmail;
+    User theuser;
 
     private TextView textViewGoToResetPassword;
     private ProgressBar loading;
@@ -162,6 +163,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
                         loading.setVisibility(View.GONE);
                         if(response.isSuccessful()){
                             if (response.body()==true){
+
                                 Toast.makeText(getContext(),"logged in", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getContext(), MainActivity.class);
                                 intent.putExtra("pass",Password);
