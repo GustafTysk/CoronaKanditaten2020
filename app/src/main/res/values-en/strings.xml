@@ -170,6 +170,7 @@
     <string name="symptom_tiredness">Tiredness</string>
     <string name="symptom_headache">Headache</string>
     <string name="symptom_diarrhea">Diarrhea</string>
+    <string name="symptom_sick">All sick</string>
 
     <string name="dialog_fever">Fever is bad </string>
     <string name="dialog_cough">Cough is bad </string>

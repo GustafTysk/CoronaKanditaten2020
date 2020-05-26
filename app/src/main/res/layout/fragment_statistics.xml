@@ -247,6 +247,17 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <CheckBox
+            android:id="@+id/allSickBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/symptom_sick"
+            android:onClick="onCheckboxClicked"
+            app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/setCalendarLocation1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView

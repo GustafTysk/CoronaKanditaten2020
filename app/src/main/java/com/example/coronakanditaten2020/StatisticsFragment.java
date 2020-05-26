@@ -44,30 +44,40 @@ import java.util.TimeZone;
 public class StatisticsFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private static final String TAG = "Fragment Statistics";
 
-    private Button btnStatisticsToStart;
-    private Button btnStatisticsToHeatmap;
     private ArrayList<Location> Locations = new ArrayList<>();
     private ArrayList<User> Users = new ArrayList<>();
-    private ArrayList<String> Dates = new ArrayList<>();
-    private HashSet<String> uniqueDates;
-    private ArrayList<String> uniqueArrayListDates;
-    private ArrayList<Integer> numberDates;
     private ArrayList<Integer> allRatingsDiarrhea, allRatingsRunnyNose, allRatingsNasalCon, allRatingsBreathing,
-            allRatingsTiredness, allRatingsHeadache, allRatingsFever, allRatingsCough, allRatingsThroat;
+            allRatingsTiredness, allRatingsHeadache, allRatingsFever, allRatingsCough, allRatingsThroat, allRatingsSick;
+    private DataPoint[] dpDiarrhea, dpRunnyNose, dpNasalCon, dpBreathing, dpTiredness, dpThroat, dpFever, dpCough, dpHeadache;
 
 
-    public CheckBox diarrheaBox, runnyNoseBox, nasalConBox, headacheBox, throatBox, breathingDiffBox, tirednessBox, coughBox, feverBox;
+    public CheckBox diarrheaBox, runnyNoseBox, nasalConBox, headacheBox, throatBox, breathingDiffBox, tirednessBox, coughBox, feverBox, allSickBox;
 
     //GRAPH AND SERIES
-    private GraphView graph;
-    private LineGraphSeries series, series2, series3, series4, series5, series6, series7, series8, series9, seriesb, series2b, series3b, series4b, series5b, series6b, series7b, series8b, series9b;
+    GraphView graph;
+    private LineGraphSeries series, series2, series3, series4, series5, series6, series7, series8, series9, series10,
+            seriesb, series2b, series3b, series4b, series5b, series6b, series7b, series8b, series9b, series10b;
     private Spinner spinner;
     private ArrayAdapter<CharSequence> adapter;
     private boolean series1exist = false;
 
+    //DATAPOINTS GRAPH
+    private ArrayList<DataPoint> dataPointsDiarrhea;
+    private ArrayList<DataPoint> dataPointsRunnyNose;
+    private ArrayList<DataPoint> dataPointsNasalCon;
+    private ArrayList<DataPoint> dataPointsBreathing;
+    private ArrayList<DataPoint> dataPointsTiredness;
+    private ArrayList<DataPoint> dataPointsThroat;
+    private ArrayList<DataPoint> dataPointsFever;
+    private ArrayList<DataPoint> dataPointsCough;
+    private ArrayList<DataPoint> dataPointsHeadache;
+
     //ALLA SYMPTOM
     private int largest, largest2, maleAge0To18, maleAge19To40, maleAge41To64, maleAge65Plus, femaleAge0To18, femaleAge19To40, femaleAge41To64,
             femaleAge65Plus, otherAge0To18, otherAge19To40, otherAge41To64, otherAge65Plus;
+
+    private String tempString;
+    private int symptomCounter;
 
     //CALENDAR
     private boolean noSelectedDates = true;
@@ -78,14 +88,13 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private Calendar maxDate = Calendar.getInstance(TimeZone.getDefault());
     private Date minDate;
     private Date minCalendarValue, maxCalendarValue;
-    Date dateOfInterest;
+    Date dateOfInterest, today;
     SimpleDateFormat sdf;
     String sdfDate;
-    ArrayList<Date> daysOfInterestArraylist = new ArrayList<>();
 
     //TABLE VIEW
-    private TextView textView1, textView2, textView3, textView4, textView5, textView6, textView7, textView8, textView9, textView10,
-    textView11, textView12, textView13, textView14, textView15, textView16, textView17, textView18, textView19, textView20;
+    private TextView textView6, textView7, textView8, textView10, textView11, textView12,
+            textView14, textView15, textView16, textView18, textView19, textView20;
 
     @Nullable
     @Override
@@ -93,10 +102,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         //((MainActivity)getActivity()).datahandler.heatlocations;
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_statistics, container, false);
-        /*btnStatisticsToStart = (Button) view.findViewById(R.id.btnStatisticsToStart);
-        btnStatisticsToStart.setOnClickListener(this);
-        btnStatisticsToHeatmap = (Button) view.findViewById(R.id.btnStatisticsToHeatmap);
-        btnStatisticsToHeatmap.setOnClickListener(this);*/
 
         diarrheaBox = (CheckBox) view.findViewById(R.id.diarrheaBox);
         runnyNoseBox = (CheckBox) view.findViewById(R.id.runnyNoseBox);
@@ -107,10 +112,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         coughBox = (CheckBox) view.findViewById(R.id.coughBox);
         headacheBox = (CheckBox) view.findViewById(R.id.headacheBox);
         breathingDiffBox = (CheckBox) view.findViewById(R.id.breathingDiffBox);
-
+        allSickBox = (CheckBox) view.findViewById(R.id.allSickBox);
 
         graph = (GraphView) view.findViewById(R.id.graph1);
-
         setCalendarLocation1 = (ImageButton) view.findViewById(R.id.setCalendarLocation1);
         setCalendarLocation1.setOnClickListener(this);
 
@@ -120,23 +124,15 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-        textView1 = (TextView) view.findViewById(R.id.textView1);
-        textView2 = (TextView) view.findViewById(R.id.textView2);
-        textView3 = (TextView) view.findViewById(R.id.textView3);
-        textView4 = (TextView) view.findViewById(R.id.textView4);
-        textView5 = (TextView) view.findViewById(R.id.textView5);
         textView6 = (TextView) view.findViewById(R.id.textView6);
         textView7 = (TextView) view.findViewById(R.id.textView7);
         textView8 = (TextView) view.findViewById(R.id.textView8);
-        textView9 = (TextView) view.findViewById(R.id.textView9);
         textView10 = (TextView) view.findViewById(R.id.textView10);
         textView11 = (TextView) view.findViewById(R.id.textView11);
         textView12 = (TextView) view.findViewById(R.id.textView12);
-        textView13 = (TextView) view.findViewById(R.id.textView13);
         textView14 = (TextView) view.findViewById(R.id.textView14);
         textView15 = (TextView) view.findViewById(R.id.textView15);
         textView16 = (TextView) view.findViewById(R.id.textView16);
-        textView17 = (TextView) view.findViewById(R.id.textView17);
         textView18 = (TextView) view.findViewById(R.id.textView18);
         textView19 = (TextView) view.findViewById(R.id.textView19);
         textView20 = (TextView) view.findViewById(R.id.textView20);
@@ -201,6 +197,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         getSymptomValuesLast60DaysRunnyNose();
         getSymptomValuesLast60DaysThroat();
         getSymptomValuesLast60DaysTiredness();
+        getSymptomValuesLast60DaysSick();
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinX(createCalendar(59).getTime());
         graph.getViewport().setMaxX(createCalendar(0).getTime());
@@ -359,19 +356,32 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     public void hideBreathingDiffSeries2() {
         graph.removeSeries(series9b);
     }
+    public void showAllSickSeries() {
+        graph.addSeries(series10);
+    }
+    public void hideAllSickSeries() {
+        graph.removeSeries(series10);
+        allSickBox.setChecked(false);
+    }
+    public void showAllSickSeries2() {
+        graph.addSeries(series10b);
+    }
+    public void hideAllSickSeries2() {
+        graph.removeSeries(series10b);
+        allSickBox.setChecked(false);
+    }
 
     public Date createCalendar(int dayOfInterestLast60Days) {
-        Date today = new Date();
+        today = new Date();
         calendarStat = (GregorianCalendar) Calendar.getInstance();
         calendarStat.setTime(today);
         calendarStat.add(Calendar.DAY_OF_MONTH, -dayOfInterestLast60Days);
-        Date dateOfInterest = calendarStat.getTime();
-        System.out.println("Datejfdjdfjdj" + dateOfInterest);
+        dateOfInterest = calendarStat.getTime();
         return dateOfInterest;
     }
 
     public String createCalendarSdf(int dayOfInterestLast60Days) {
-        Date today = new Date();
+        today = new Date();
         calendarStat = (GregorianCalendar) Calendar.getInstance();
         calendarStat.setTime(today);
         calendarStat.add(Calendar.DAY_OF_MONTH, -dayOfInterestLast60Days);
@@ -396,7 +406,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                 noSelectedDates = false;
                 clearGraph();
 
-                if(series1exist == true){
+                if(series1exist){
                     addAllSeries1();
                     designSeriesA();
                 }
@@ -410,7 +420,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
             }
         };
-
         minDate = createCalendar(60);
 
         DatePickerBuilder builder = new DatePickerBuilder(getContext(), listener)
@@ -455,8 +464,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public ArrayList<Integer> getSymptomValuesLast60DaysDiarrhea(){
         allRatingsDiarrhea = new ArrayList<>();
-        String tempString="";
-        int symptomCounter = 0;
+        tempString="";
+        symptomCounter = 0;
         for(int j = 0; j<60; j++){
             tempString = createCalendarSdf(j);
             for(int i = 0; i<Locations.size(); i++) {
@@ -474,8 +483,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public ArrayList<Integer> getSymptomValuesLast60DaysRunnyNose(){
         allRatingsRunnyNose = new ArrayList<>();
-        String tempString="";
-        int symptomCounter = 0;
+        tempString="";
+        symptomCounter = 0;
         for(int j = 0; j<60; j++){
             tempString = createCalendarSdf(j);
             for(int i = 0; i<Locations.size(); i++) {
@@ -493,8 +502,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public ArrayList<Integer> getSymptomValuesLast60DaysNasalCon(){
         allRatingsNasalCon = new ArrayList<>();
-        String tempString="";
-        int symptomCounter = 0;
+        tempString="";
+        symptomCounter = 0;
         for(int j = 0; j<60; j++){
             tempString = createCalendarSdf(j);
             for(int i = 0; i<Locations.size(); i++) {
@@ -512,8 +521,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public ArrayList<Integer> getSymptomValuesLast60DaysBreathing(){
         allRatingsBreathing = new ArrayList<>();
-        String tempString="";
-        int symptomCounter = 0;
+        tempString="";
+        symptomCounter = 0;
         for(int j = 0; j<60; j++){
             tempString = createCalendarSdf(j);
             for(int i = 0; i<Locations.size(); i++) {
@@ -531,8 +540,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public ArrayList<Integer> getSymptomValuesLast60DaysTiredness(){
         allRatingsTiredness = new ArrayList<>();
-        String tempString="";
-        int symptomCounter = 0;
+        tempString="";
+        symptomCounter = 0;
         for(int j = 0; j<60; j++){
             tempString = createCalendarSdf(j);
             for(int i = 0; i<Locations.size(); i++) {
@@ -550,8 +559,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public ArrayList<Integer> getSymptomValuesLast60DaysThroat(){
         allRatingsThroat = new ArrayList<>();
-        String tempString="";
-        int symptomCounter = 0;
+        tempString="";
+        symptomCounter = 0;
         for(int j = 0; j<60; j++){
             tempString = createCalendarSdf(j);
             for(int i = 0; i<Locations.size(); i++) {
@@ -569,8 +578,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public ArrayList<Integer> getSymptomValuesLast60DaysFever(){
         allRatingsFever = new ArrayList<>();
-        String tempString="";
-        int symptomCounter = 0;
+        tempString="";
+        symptomCounter = 0;
         for(int j = 0; j<60; j++){
             tempString = createCalendarSdf(j);
             for(int i = 0; i<Locations.size(); i++) {
@@ -588,8 +597,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public ArrayList<Integer> getSymptomValuesLast60DaysCough(){
         allRatingsCough = new ArrayList<>();
-        String tempString="";
-        int symptomCounter = 0;
+        tempString="";
+        symptomCounter = 0;
         for(int j = 0; j<60; j++){
             tempString = createCalendarSdf(j);
             for(int i = 0; i<Locations.size(); i++) {
@@ -607,8 +616,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public ArrayList<Integer> getSymptomValuesLast60DaysHeadache(){
         allRatingsHeadache = new ArrayList<>();
-        String tempString="";
-        int symptomCounter = 0;
+        tempString="";
+        symptomCounter = 0;
         for(int j = 0; j<60; j++){
             tempString = createCalendarSdf(j);
             for(int i = 0; i<Locations.size(); i++) {
@@ -624,6 +633,23 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         return allRatingsHeadache;
     }
 
+    public ArrayList<Integer> getSymptomValuesLast60DaysSick(){
+        allRatingsSick = new ArrayList<>();
+        tempString="";
+        symptomCounter = 0;
+        for(int j = 0; j<60; j++){
+            tempString = createCalendarSdf(j);
+            for(int i = 0; i<Locations.size(); i++) {
+                if(Locations.get(i).getDate().equals(tempString)){
+                    symptomCounter++;
+                }
+            }
+            allRatingsSick.add(symptomCounter);
+            symptomCounter = 0;
+        }
+        return allRatingsSick;
+    }
+
     public Integer countForGraph2(int countForGraph2, ArrayList<Integer> symptomList) {
         int countForCertainDay = 0;
         for(int i = 59; i>countForGraph2; i--){
@@ -635,15 +661,15 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
 
     public void makeGraphLines1(){
-        ArrayList<DataPoint> dataPointsDiarrhea = new ArrayList<>();
-        ArrayList<DataPoint> dataPointsRunnyNose = new ArrayList<>();
-        ArrayList<DataPoint> dataPointsNasalCon= new ArrayList<>();
-        ArrayList<DataPoint> dataPointsBreathing = new ArrayList<>();
-        ArrayList<DataPoint> dataPointsTiredness = new ArrayList<>();
-        ArrayList<DataPoint> dataPointsThroat = new ArrayList<>();
-        ArrayList<DataPoint> dataPointsFever = new ArrayList<>();
-        ArrayList<DataPoint> dataPointsCough = new ArrayList<>();
-        ArrayList<DataPoint> dataPointsHeadache = new ArrayList<>();
+        dataPointsDiarrhea = new ArrayList<>();
+        dataPointsRunnyNose = new ArrayList<>();
+        dataPointsNasalCon= new ArrayList<>();
+        dataPointsBreathing = new ArrayList<>();
+        dataPointsTiredness = new ArrayList<>();
+        dataPointsThroat = new ArrayList<>();
+        dataPointsFever = new ArrayList<>();
+        dataPointsCough = new ArrayList<>();
+        dataPointsHeadache = new ArrayList<>();
         for(int i=59; i>=0; i--){
             dataPointsDiarrhea.add(new DataPoint(createCalendar(i), allRatingsDiarrhea.get(i)));
             dataPointsRunnyNose.add(new DataPoint(createCalendar(i), allRatingsRunnyNose.get(i)));
@@ -655,16 +681,15 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             dataPointsCough.add(new DataPoint(createCalendar(i), allRatingsCough.get(i)));
             dataPointsHeadache.add(new DataPoint(createCalendar(i), allRatingsHeadache.get(i)));
         }
-
-        DataPoint[] dpDiarrhea = new DataPoint[60];
-        DataPoint[] dpRunnyNose = new DataPoint[60];
-        DataPoint[] dpNasalCon = new DataPoint[60];
-        DataPoint[] dpBreathing = new DataPoint[60];
-        DataPoint[] dpTiredness = new DataPoint[60];
-        DataPoint[] dpThroat = new DataPoint[60];
-        DataPoint[] dpFever = new DataPoint[60];
-        DataPoint[] dpCough = new DataPoint[60];
-        DataPoint[] dpHeadache = new DataPoint[60];
+        dpDiarrhea = new DataPoint[60];
+        dpRunnyNose = new DataPoint[60];
+        dpNasalCon = new DataPoint[60];
+        dpBreathing = new DataPoint[60];
+        dpTiredness = new DataPoint[60];
+        dpThroat = new DataPoint[60];
+        dpFever = new DataPoint[60];
+        dpCough = new DataPoint[60];
+        dpHeadache = new DataPoint[60];
         series = new LineGraphSeries<DataPoint>(dataPointsDiarrhea.toArray(dpDiarrhea));
         series2 = new LineGraphSeries<DataPoint>(dataPointsRunnyNose.toArray(dpRunnyNose));
         series3 = new LineGraphSeries<DataPoint>(dataPointsNasalCon.toArray(dpNasalCon));
@@ -676,16 +701,26 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         series9 = new LineGraphSeries<DataPoint>(dataPointsHeadache.toArray(dpHeadache));
     }
 
+    public void makeGraphLinesAllSick1() {
+        ArrayList<DataPoint> dataPointsSick = new ArrayList<>();
+        for(int i=59; i>=0; i--){
+            dataPointsSick.add(new DataPoint(createCalendar(i), allRatingsSick.get(i)));
+        }
+        DataPoint[] dpSick = new DataPoint[60];
+        series10 = new LineGraphSeries<DataPoint>(dataPointsSick.toArray(dpSick));
+    }
+
     public void makeGraphLines2(){
-        ArrayList<DataPoint> dataPointsDiarrhea = new ArrayList<>();
-        ArrayList<DataPoint> dataPointsRunnyNose = new ArrayList<>();
-        ArrayList<DataPoint> dataPointsNasalCon= new ArrayList<>();
-        ArrayList<DataPoint> dataPointsBreathing = new ArrayList<>();
-        ArrayList<DataPoint> dataPointsTiredness = new ArrayList<>();
-        ArrayList<DataPoint> dataPointsThroat = new ArrayList<>();
-        ArrayList<DataPoint> dataPointsFever = new ArrayList<>();
-        ArrayList<DataPoint> dataPointsCough = new ArrayList<>();
-        ArrayList<DataPoint> dataPointsHeadache = new ArrayList<>();
+        dataPointsDiarrhea = new ArrayList<>();
+        dataPointsRunnyNose = new ArrayList<>();
+        dataPointsNasalCon= new ArrayList<>();
+        dataPointsBreathing = new ArrayList<>();
+        dataPointsTiredness = new ArrayList<>();
+        dataPointsThroat = new ArrayList<>();
+        dataPointsFever = new ArrayList<>();
+        dataPointsCough = new ArrayList<>();
+        dataPointsHeadache = new ArrayList<>();
+
         for(int i = 59; i>=0; i--){
             dataPointsDiarrhea.add(new DataPoint(createCalendar(i), countForGraph2(i,allRatingsDiarrhea)));
             dataPointsRunnyNose.add(new DataPoint(createCalendar(i), countForGraph2(i,allRatingsRunnyNose)));
@@ -698,15 +733,16 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             dataPointsHeadache.add(new DataPoint(createCalendar(i), countForGraph2(i,allRatingsHeadache)));
         }
 
-        DataPoint[] dpDiarrhea = new DataPoint[60];
-        DataPoint[] dpRunnyNose = new DataPoint[60];
-        DataPoint[] dpNasalCon = new DataPoint[60];
-        DataPoint[] dpBreathing = new DataPoint[60];
-        DataPoint[] dpTiredness = new DataPoint[60];
-        DataPoint[] dpThroat = new DataPoint[60];
-        DataPoint[] dpFever = new DataPoint[60];
-        DataPoint[] dpCough = new DataPoint[60];
-        DataPoint[] dpHeadache = new DataPoint[60];
+        dpDiarrhea = new DataPoint[60];
+        dpRunnyNose = new DataPoint[60];
+        dpNasalCon = new DataPoint[60];
+        dpBreathing = new DataPoint[60];
+        dpTiredness = new DataPoint[60];
+        dpThroat = new DataPoint[60];
+        dpFever = new DataPoint[60];
+        dpCough = new DataPoint[60];
+        dpHeadache = new DataPoint[60];
+
         seriesb = new LineGraphSeries<DataPoint>(dataPointsDiarrhea.toArray(dpDiarrhea));
         series2b = new LineGraphSeries<DataPoint>(dataPointsRunnyNose.toArray(dpRunnyNose));
         series3b = new LineGraphSeries<DataPoint>(dataPointsNasalCon.toArray(dpNasalCon));
@@ -716,6 +752,16 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         series7b = new LineGraphSeries<DataPoint>(dataPointsFever.toArray(dpFever));
         series8b = new LineGraphSeries<DataPoint>(dataPointsCough.toArray(dpCough));
         series9b = new LineGraphSeries<DataPoint>(dataPointsHeadache.toArray(dpHeadache));
+
+    }
+
+    public void makeGraphLinesAllSick2() {
+        ArrayList<DataPoint> dataPointsSick = new ArrayList<>();
+        for(int i = 59; i>=0; i--){
+            dataPointsSick.add(new DataPoint(createCalendar(i), countForGraph2(i, allRatingsSick)));
+        }
+        DataPoint[] dpSick = new DataPoint[60];
+        series10b = new LineGraphSeries<DataPoint>(dataPointsSick.toArray(dpSick));
     }
 
     public void designSeriesA() {
@@ -725,24 +771,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(calculateHighestValA());
-//        graph.getViewport().setXAxisBoundsManual(true);
-//        graph.getViewport().setMinX(minCalendarValue.getTime());
-//        graph.getViewport().setMaxX(maxCalendarValue.getTime());
-
         graph.getGridLabelRenderer().setNumVerticalLabels(calculateHighestValA() + 1);
-
         graph.setTitle(getString(R.string.per_day_symptoms));
         graph.setTitleTextSize(80);
-
-        series.setTitle(getString(R.string.symptom_diarrhea));
-        series2.setTitle(getString(R.string.symptom_runny_nose));
-        series3.setTitle(getString(R.string.symptom_tiredness));
-        series4.setTitle(getString(R.string.symptom_fever));
-        series5.setTitle(getString(R.string.symptom_sore_throat));
-        series6.setTitle(getString(R.string.symptom_nasal_congestion));
-        series7.setTitle(getString(R.string.symptom_cough));
-        series8.setTitle(getString(R.string.symptom_headache));
-        series9.setTitle(getString(R.string.symptom_breathing));
         series.setColor(Color.BLACK);
         series2.setColor(Color.GREEN);
         series3.setColor(Color.YELLOW);
@@ -752,15 +783,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         series7.setColor(Color.DKGRAY);
         series8.setColor(Color.CYAN);
         series9.setColor(Color.GRAY);
-        series.setDrawDataPoints(true);
-        series2.setDrawDataPoints(true);
-        series3.setDrawDataPoints(true);
-        series4.setDrawDataPoints(true);
-        series5.setDrawDataPoints(true);
-        series6.setDrawDataPoints(true);
-        series7.setDrawDataPoints(true);
-        series8.setDrawDataPoints(true);
-        series9.setDrawDataPoints(true);
 
     }
 
@@ -771,23 +793,11 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(calculateHighestValB() + 1);
-//        graph.getViewport().setXAxisBoundsManual(true);
-//        graph.getViewport().setMinX(minCalendarValue.getTime());
-//        graph.getViewport().setMaxX(maxCalendarValue.getTime());
 
         graph.getGridLabelRenderer().setNumVerticalLabels(calculateHighestValB() + 1);
         graph.setTitle(getString(R.string.total_symptoms));
         graph.setTitleTextSize(80);
 
-        seriesb.setTitle(getString(R.string.symptom_diarrhea));
-        series2b.setTitle(getString(R.string.symptom_runny_nose));
-        series3b.setTitle(getString(R.string.symptom_tiredness));
-        series4b.setTitle(getString(R.string.symptom_fever));
-        series5b.setTitle(getString(R.string.symptom_sore_throat));
-        series6b.setTitle(getString(R.string.symptom_nasal_congestion));
-        series7b.setTitle(getString(R.string.symptom_cough));
-        series8b.setTitle(getString(R.string.symptom_headache));
-        series9b.setTitle(getString(R.string.symptom_breathing));
         seriesb.setColor(Color.BLACK);
         series2b.setColor(Color.GREEN);
         series3b.setColor(Color.YELLOW);
@@ -797,15 +807,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         series7b.setColor(Color.DKGRAY);
         series8b.setColor(Color.CYAN);
         series9b.setColor(Color.GRAY);
-        seriesb.setDrawDataPoints(true);
-        series2b.setDrawDataPoints(true);
-        series3b.setDrawDataPoints(true);
-        series4b.setDrawDataPoints(true);
-        series5b.setDrawDataPoints(true);
-        series6b.setDrawDataPoints(true);
-        series7b.setDrawDataPoints(true);
-        series8b.setDrawDataPoints(true);
-        series9b.setDrawDataPoints(true);
     }
 
     public Integer calculateHighestValA() {
@@ -836,6 +837,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         }
         if(Collections.max(allRatingsHeadache) > largest) {
             largest = Collections.max(allRatingsHeadache);
+        }
+        if(Collections.max(allRatingsSick) > largest) {
+            largest = Collections.max(allRatingsSick);
         }
         return largest;
     }
@@ -869,6 +873,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         if(countForGraph2(0,allRatingsHeadache) > largest) {
             largest2 = countForGraph2(0,allRatingsHeadache);
         }
+        if(countForGraph2(0,allRatingsSick) > largest) {
+            largest2 = countForGraph2(0,allRatingsSick);
+        }
         return largest2;
     }
 
@@ -884,12 +891,14 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         throatBox.setChecked(true);
         breathingDiffBox.setChecked(true);
         headacheBox.setChecked(true);
+        allSickBox.setChecked(false);
         noSelectedDates = true;
 
         if(text.equals(getString(R.string.per_day_symptoms))){
             createCalendar(60);
             clearGraph();
             makeGraphLines1();
+            makeGraphLinesAllSick1();
             addAllSeries1();
             designSeriesA();
         }
@@ -897,6 +906,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             createCalendar(60);
             clearGraph();
             makeGraphLines2();
+            makeGraphLinesAllSick2();
             addAllSeries2();
             designSeriesb();
         }

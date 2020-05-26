@@ -169,6 +169,7 @@
     <string name="symptom_tiredness">Trötthet</string>
     <string name="symptom_headache">Huvudvärk</string>
     <string name="symptom_diarrhea">Diarré</string>
+    <string name="symptom_sick">Alla sjuka</string>
 
     <string name="dialog_fever">Fever is bad </string>
     <string name="dialog_cough">Cough is bad </string>
