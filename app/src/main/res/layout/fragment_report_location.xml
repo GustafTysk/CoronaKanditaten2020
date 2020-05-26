@@ -73,14 +73,15 @@
 
     <ImageButton
         android:id="@+id/btnRemoveLocation1"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/cancel_cross_48x48"
         app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/setCalendarLocation1"
         app:layout_constraintTop_toTopOf="@+id/setCalendarLocation1" />
 

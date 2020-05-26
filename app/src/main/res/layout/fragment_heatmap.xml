@@ -106,10 +106,10 @@
 
     <Button
         android:id="@+id/btnZoomInOnMe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/btn_zoom_in_on_your_location"
+        android:drawableStart="@drawable/gps_your_location_32x32"
         app:layout_constraintBottom_toBottomOf="@+id/mapview"
         app:layout_constraintEnd_toEndOf="@+id/mapview"
         app:layout_constraintStart_toStartOf="@+id/mapview" />
