@@ -206,7 +206,7 @@ public void getserveruserinfo(String timestamp){
                 else{
                     System.out.println(response.toString());
                     userinfo=response.body();
-
+                    System.out.println("userinfo"+userinfo);
                     System.out.println("userinfos has succefully collected");
 
                 }
