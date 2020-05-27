@@ -62,6 +62,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
 
 import retrofit2.Call;
@@ -307,6 +308,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                             if (!response.isSuccessful()) {
                                 Toast.makeText(getContext(), getString(R.string.fail_add_user_locations), Toast.LENGTH_LONG).show();
+                                System.out.println(response.toString());
                             } else {
                                 Toast.makeText(getContext(), getString(R.string.success_add_user_locations), Toast.LENGTH_LONG).show();
                                 ((MainActivity) getActivity()).datahandler.Userlocations = userLocations;
@@ -331,7 +333,8 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                             if (!response.isSuccessful() || !response.body()) {
                                 Toast.makeText(getContext(), getString(R.string.fail_add_user_locations), Toast.LENGTH_LONG).show();
-                                System.out.println("sfdhfghfghsdfds");
+                                System.out.println(response.toString());
+                                System.out.println("lllllllll");
 
                             } else {
 
@@ -341,6 +344,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
                                         if (!response.isSuccessful()) {
                                             Toast.makeText(getContext(), getString(R.string.fail_add_user_locations), Toast.LENGTH_LONG).show();
+                                            System.out.println(response.toString());
                                         } else {
                                             Toast.makeText(getContext(), getString(R.string.success_add_user_locations), Toast.LENGTH_LONG).show();
 
@@ -507,9 +511,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
     public void startReportLocationMap(){
         System.out.println("fdsfsdfdsf");
-
-            yourLocation = ((MainActivity) getActivity()).getCurrentLocation();
-
+        if(((MainActivity) requireActivity()).getCurrentLocation() != null){
+            yourLocation = ((MainActivity) requireActivity()).getCurrentLocation();
+        }
 
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -787,6 +791,8 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
 
     void SetUppPage(){
+        System.out.println("yjyjyyjyjy");
+        System.out.println(userLocations.size());
         ArrayList<Location> uniclocations=getunicLocation(userLocations);
         int Counter1=0;
         int Counter2=0;
