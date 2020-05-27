@@ -31,5 +31,17 @@
     <color name="buttonEnd_light">#009088</color>
     <color name="buttonCenter_light">#4fb1ad</color>
     <color name="buttonStart_light">#009088</color>
+    
+    <color name="graph_red">#FF0000</color>
+    <color name="graph_orange">#F26B31</color>
+    <color name="graph_light_blue">#97E1F4</color>
+    <color name="graph_blue">#2552F4</color>
+    <color name="graph_purple">#9E36E4</color>
+    <color name="graph_pink">#FF42D1</color>
+    <color name="graph_turquoise">#13C4C1</color>
+    <color name="graph_dark_purple">#93049A</color>
+    <color name="graph_brown">#A45518</color>
+
+
 
 </resources>
