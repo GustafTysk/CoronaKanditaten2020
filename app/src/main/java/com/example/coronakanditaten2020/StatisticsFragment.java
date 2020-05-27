@@ -96,6 +96,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private TextView textView6, textView7, textView8, textView10, textView11, textView12,
             textView14, textView15, textView16, textView18, textView19, textView20;
 
+
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -136,6 +139,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         textView18 = (TextView) view.findViewById(R.id.textView18);
         textView19 = (TextView) view.findViewById(R.id.textView19);
         textView20 = (TextView) view.findViewById(R.id.textView20);
+
+
 
 
 //        User user = new User("Tjalexander1", "alewik97@gmail.com", 15, "Man", "IDFJJKdjk", "2020-04-29");
@@ -703,11 +708,13 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public void makeGraphLinesAllSick1() {
         ArrayList<DataPoint> dataPointsSick = new ArrayList<>();
+        int purple = getContext().getResources().getColor(R.color.graph_purple);
         for(int i=59; i>=0; i--){
             dataPointsSick.add(new DataPoint(createCalendar(i), allRatingsSick.get(i)));
         }
         DataPoint[] dpSick = new DataPoint[60];
         series10 = new LineGraphSeries<DataPoint>(dataPointsSick.toArray(dpSick));
+        series10.setColor(purple);
     }
 
     public void makeGraphLines2(){
@@ -757,11 +764,13 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public void makeGraphLinesAllSick2() {
         ArrayList<DataPoint> dataPointsSick = new ArrayList<>();
+        int purple = getContext().getResources().getColor(R.color.graph_purple);
         for(int i = 59; i>=0; i--){
             dataPointsSick.add(new DataPoint(createCalendar(i), countForGraph2(i, allRatingsSick)));
         }
         DataPoint[] dpSick = new DataPoint[60];
         series10b = new LineGraphSeries<DataPoint>(dataPointsSick.toArray(dpSick));
+        series10b.setColor(purple);
     }
 
     public void designSeriesA() {
@@ -774,16 +783,26 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.getGridLabelRenderer().setNumVerticalLabels(calculateHighestValA() + 1);
         graph.setTitle(getString(R.string.per_day_symptoms));
         graph.setTitleTextSize(80);
-        series.setColor(Color.BLACK);
-        series2.setColor(Color.GREEN);
-        series3.setColor(Color.YELLOW);
-        series4.setColor(Color.RED);
-        series5.setColor(Color.BLUE);
-        series6.setColor(Color.MAGENTA);
-        series7.setColor(Color.DKGRAY);
-        series8.setColor(Color.CYAN);
-        series9.setColor(Color.GRAY);
 
+        int orange = getContext().getResources().getColor(R.color.graph_orange);
+        int darkPurple = getContext().getResources().getColor(R.color.graph_dark_purple);
+        int brown = getContext().getResources().getColor(R.color.graph_brown);
+        int red = getContext().getResources().getColor(R.color.graph_red);
+        int blue = getContext().getResources().getColor(R.color.graph_blue);
+        int turquoise = getContext().getResources().getColor(R.color.graph_turquoise);
+        int purple = getContext().getResources().getColor(R.color.graph_purple);
+        int lightBlue = getContext().getResources().getColor(R.color.graph_light_blue);
+        int pink = getContext().getResources().getColor(R.color.graph_pink);
+
+        series.setColor(orange);
+        series2.setColor(darkPurple);
+        series3.setColor(brown);
+        series4.setColor(red);
+        series5.setColor(blue);
+        series6.setColor(turquoise);
+        series7.setColor(purple);
+        series8.setColor(lightBlue);
+        series9.setColor(pink);
     }
 
     public void designSeriesb() {
@@ -798,15 +817,24 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         graph.setTitle(getString(R.string.total_symptoms));
         graph.setTitleTextSize(80);
 
-        seriesb.setColor(Color.BLACK);
-        series2b.setColor(Color.GREEN);
-        series3b.setColor(Color.YELLOW);
-        series4b.setColor(Color.RED);
-        series5b.setColor(Color.BLUE);
-        series6b.setColor(Color.MAGENTA);
-        series7b.setColor(Color.DKGRAY);
-        series8b.setColor(Color.CYAN);
-        series9b.setColor(Color.GRAY);
+        int orange = getContext().getResources().getColor(R.color.graph_orange);
+        int darkPurple = getContext().getResources().getColor(R.color.graph_dark_purple);
+        int brown = getContext().getResources().getColor(R.color.graph_brown);
+        int red = getContext().getResources().getColor(R.color.graph_red);
+        int blue = getContext().getResources().getColor(R.color.graph_blue);
+        int turquoise = getContext().getResources().getColor(R.color.graph_turquoise);
+        int purple = getContext().getResources().getColor(R.color.graph_purple);
+        int lightBlue = getContext().getResources().getColor(R.color.graph_light_blue);
+        int pink = getContext().getResources().getColor(R.color.graph_pink);
+        seriesb.setColor(orange);
+        series2b.setColor(darkPurple);
+        series3b.setColor(brown);
+        series4b.setColor(red);
+        series5b.setColor(blue);
+        series6b.setColor(turquoise);
+        series7b.setColor(purple);
+        series8b.setColor(lightBlue);
+        series9b.setColor(pink);
     }
 
     public Integer calculateHighestValA() {
