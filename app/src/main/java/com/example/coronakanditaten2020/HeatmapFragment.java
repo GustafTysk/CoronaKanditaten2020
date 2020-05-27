@@ -56,7 +56,7 @@ import java.util.TimeZone;
 
 public class HeatmapFragment extends Fragment implements OnMapReadyCallback, View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private static final String TAG = "Fragment Statistics";
-    private LatLng yourCurrentLocation;
+    private LatLng yourCurrentLocation = new LatLng(59.8, 17.63);
     private LatLng sweden = new LatLng(62.3875,16.325556);
     private MapView mMapView;
     private GoogleMap mGoogleMap;
@@ -77,6 +77,7 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
     private TextView dateDisplayheatmap;
     private Bundle  savedInstanceState;
     private View view;
+    private ArrayList<Location> heatLocations;
 
     private SeekBar seekBarheatmap;
     private int seekBarMaxValue; // get maximum value of the Seek bar
@@ -150,7 +151,11 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnZoomInOnMe:
-                yourCurrentLocation = ((MainActivity) getActivity()).getCurrentLocation();
+                if(((MainActivity) getActivity()).getCurrentLocation() != null){
+                    yourCurrentLocation = ((MainActivity) getActivity()).getCurrentLocation();
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourCurrentLocation,14));
+                    break;
+                }
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourCurrentLocation,14));
                 break;
 /*            case R.id.btnHeatmapToStart:
@@ -207,6 +212,11 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
         return dateString;
     }
 
+    public String convertStringPrintToDataFormat(String string){
+        String[] parts = string.split("-");
+        return parts[2]+"-"+parts[1]+"-"+parts[0];
+    }
+
 //    public boolean checkIfReportsOnDate(String date){
 //        for(int i =0; i < locationsArray.length; i++){
 //            if(locationsArray[i].date.equals(date)){
@@ -220,7 +230,7 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
 //    }
 
     public void changeToDate(String date){
-                mProvider.setWeightedData(((ArrayList) GenerateHeatMapCordsList(datahandler.getHeatmaplocations(), date, "placeholder")));
+                mProvider.setWeightedData(((ArrayList) GenerateHeatMapCordsList(heatLocations, date, "placeholder")));
                 mOverlay.clearTileCache();
     }
 
@@ -300,20 +310,22 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
 
 
     private ArrayList<WeightedLatLng> GenerateHeatMapCordsList(ArrayList<Location> heatmaplocations, String date, String Type) {
+        String compareString = convertStringPrintToDataFormat(date);
+        System.out.println(compareString);
         // OM DET INTE FINNS DATA FÖR DATUMET RETURN THIS MED EN SATT LOCATION
         ArrayList<WeightedLatLng> listReserve = new ArrayList<WeightedLatLng>();
-        System.out.println(heatmaplocations.size());
+
         listReserve.add(new WeightedLatLng(new LatLng(Double.valueOf(heatmaplocations.get(0).getLatitude()),Double.valueOf(heatmaplocations.get(0).getLongitude())),
-                GetLocationWeight(heatmaplocations.get(0),date,heatmaplocations.size())));
+                GetLocationWeight(heatmaplocations.get(0),compareString,heatmaplocations.size())));
         //----------------------------------------------------------------------
         ArrayList<WeightedLatLng> list = new ArrayList<WeightedLatLng>();
         WeightedLatLng HeatCord;
         for (int i = 0; i < heatmaplocations.size()- 1; i++) {
-            System.out.println(i);
-            if(heatmaplocations.get(i).date.equals(date)){
 
+            if(heatmaplocations.get(i).date.equals(compareString)){
+                System.out.println("Inne i for if");
                 list.add(new WeightedLatLng(new LatLng(Double.valueOf(heatmaplocations.get(i).getLatitude()),Double.valueOf(heatmaplocations.get(i).getLongitude())),
-                                            GetLocationWeight(heatmaplocations.get(i),date,heatmaplocations.size())));
+                                            GetLocationWeight(heatmaplocations.get(i),compareString,heatmaplocations.size())));
 
             }
         }
@@ -369,8 +381,8 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
         return false;
     }
 
-    public void setup(){
-
+    public void setup(ArrayList<Location> heatlocations){
+        heatLocations=heatlocations;
 
 
 
@@ -378,7 +390,7 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
         Date today = new Date();
         dateDisplayheatmap.setText(convertDateToString(today));
         mProvider = new HeatmapTileProvider.Builder()
-                .weightedData((GenerateHeatMapCordsList( datahandler.getHeatmaplocations(),"2020-10-15", "placeholder")))
+                .weightedData((GenerateHeatMapCordsList( heatLocations,"2020-10-15", "placeholder")))
                 .build();
         mOverlay = mGoogleMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
 

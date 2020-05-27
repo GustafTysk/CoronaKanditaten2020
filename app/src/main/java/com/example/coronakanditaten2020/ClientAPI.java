@@ -22,8 +22,8 @@ import retrofit2.http.Path;
 public interface ClientAPI {
 
     //location resources
-    @GET("location/{regtime}")
-    Call<ArrayList<Location>> getAlllocations(@Path("regtime") String regtime);
+    @GET("location/{timestamp}")
+    Call<ArrayList<Location>> getAlllocations(@Path("timestamp") String timestamp);
 
     @GET("location/{email}/user/security")
     Call<ArrayList<Location>> getuserlocations(@Header("authorization") String Auth, @Path("email") String email);
@@ -34,7 +34,7 @@ public interface ClientAPI {
     @PUT("location/{email}/user/security")
     Call<String> updateuserlocation(@Header("authorization") String Auth,@Path("email") String email, @Body ArrayList<Location> userlocation);
 
-    @DELETE("location/{email}/user/security")
+    @POST("location/{email}/deluser/security")
     Call<Boolean> removeUserlocations(@Header("authorization") String Auth,@Path("email") String email);
 
     //User resources

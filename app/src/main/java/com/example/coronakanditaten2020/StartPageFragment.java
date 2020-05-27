@@ -56,12 +56,13 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
             case R.id.btnStartToHeatmap:
                 if(((MainActivity)getActivity()).datahandler.gotlocation==true){
                     if ( !((MainActivity) getActivity()).heatmapFragment.setuppdone){
-                        ((MainActivity) getActivity()).heatmapFragment.setup();
+
+                        ((MainActivity) getActivity()).heatmapFragment.setup(((MainActivity) getActivity()).datahandler.getHeatmaplocations());
                     }
-                    ((MainActivity) getActivity()).heatmapFragment.setup();
+                   else{
                     ((MainActivity)getActivity()).setViewPager(3);
                     ((MainActivity)getActivity()).heatmapFragment.setHeatmapBottomNav();
-                    ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_heatmap);}
+                    ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_heatmap);}}
                 break;
             case R.id.btnStartToStatistics:
                 ((MainActivity)getActivity()).setViewPager(2);

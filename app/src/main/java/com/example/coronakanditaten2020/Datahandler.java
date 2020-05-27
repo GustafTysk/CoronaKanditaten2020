@@ -56,9 +56,7 @@ public class Datahandler {
         return heatlocations;
     }
 
-    public ArrayList<Location> getHeatlocations() {
-        return heatlocations;
-    }
+
 
     public ArrayList<Location> getUserlocations() {
         return Userlocations;
@@ -129,15 +127,19 @@ public class Datahandler {
 
 
     public void getalllserverocations(String regtime) {
-        Call<ArrayList<Location>> getAlllocations = clientAPI.getAlllocations(regtime);
+        Call<ArrayList<Location>> getAlllocations = clientAPI.getAlllocations("tjo");
         getAlllocations.enqueue(new Callback<ArrayList<Location>>() {
             @Override
             public void onResponse(Call<ArrayList<Location>> call, Response<ArrayList<Location>> response) {
                 if (!response.isSuccessful()) {
-                    System.out.println(response.message());
+                    System.out.println("tjtojttjo");
+                    System.out.println(response.toString());
 
                 }
+                else{
                 heatlocations = response.body();
+                gotlocation=true;
+                System.out.println("heatlocation size" +heatlocations.size());}
             }
 
             @Override
@@ -158,7 +160,8 @@ public class Datahandler {
                 }
                 Userlocations = response.body();
                 System.out.println("userlocations have been added");
-                gotlocation=true;
+                System.out.println(Userlocations.size());
+
             }
 
             @Override
@@ -175,7 +178,8 @@ public class Datahandler {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(!response.isSuccessful()){
-                    System.out.println("there has been an error");
+                    System.out.println("there has ");
+                    System.out.println(response.toString());
                 }
                 else{
                     System.out.println(response.toString());
@@ -201,7 +205,8 @@ public void getserveruserinfo(String timestamp){
             @Override
             public void onResponse(Call<ArrayList<ArrayList>> call, Response<ArrayList<ArrayList>> response) {
                 if(!response.isSuccessful()){
-                    System.out.println("there has been an error");
+                    System.out.println("there has been an error 11");
+                    System.out.println(response.toString());
                 }
                 else{
                     System.out.println(response.toString());
@@ -227,6 +232,7 @@ public void getserveruserinfo(String timestamp){
             public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
                 if(!response.isSuccessful()){
                     System.out.println("there has been an error");
+                    System.out.println(response.toString());
                 }
                 else{
                     System.out.println(response.toString());
@@ -256,6 +262,7 @@ public void getserveruserinfo(String timestamp){
             public void onResponse(Call<ArrayList<Integer>> call, Response<ArrayList<Integer>> response) {
 
                 if(!response.isSuccessful()){
+                    System.out.println(response.toString());
                     System.out.println("there has been an error");
                 }
                 else{
