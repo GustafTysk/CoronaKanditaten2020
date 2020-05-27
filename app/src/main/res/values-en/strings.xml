@@ -172,15 +172,14 @@
     <string name="symptom_diarrhea">Diarrhea</string>
     <string name="symptom_sick">All sick</string>
 
-    <string name="dialog_fever">Fever is bad </string>
-    <string name="dialog_cough">Cough is bad </string>
-    <string name="dialog_breathing">Breathing is bad </string>
-    <string name="dialog_sore_throat">Sore Throat is bad </string>
-    <string name="dialog_nasal_congestion">Nasal Congestion is bad </string>
-    <string name="dialog_runny_nose">Runny Nose is bad </string>
-    <string name="dialog_tiredness">Tiredness is bad </string>
-    <string name="dialog_headache">Headache is bad </string>
-    <string name="dialog_diarrhea">Diarrhea is bad </string>
+    <string name="dialog_cough">The typical cough for the Corona virus often involves a dry, prolonged cough</string>
+    <string name="dialog_breathing">Often involves breathing difficulties. One of the more common symptoms is feeling a shortness of breath</string>
+    <string name="dialog_sore_throat">Involves having pain or irritation in the throat which often is prominent when swallowing</string>
+    <string name="dialog_nasal_congestion">Nasal congestion means that the mucous membranes have swollen and common symptoms are that you have a harder time breathing through your nose.</string>
+    <string name="dialog_runny_nose">Having a runny nose involves an infection that affects the upper respiratory tract, in other words the mucous membranes of the nose, throat and sinuses</string>
+    <string name="dialog_tiredness">A feeling of unusual tiredness and exhaustion</string>
+    <string name="dialog_headache">Headache may appear as a sharper or a more throbbing pain. It can located to a specific region or radiate all across your head</string>
+    <string name="dialog_diarrhea">Means loose and watering stools and probably you need to visit the toilet several times in a short time. Common symptoms are tremors and a bloated feeling</string>
 
     <string name="btn_clear">Clear</string>
     <string name="next_info">If you have completed reporting your symptoms, please press <b>NEXT STEP</b> to continue to Report Location.</string>
@@ -243,6 +242,7 @@
     <string name="help">Help and tasks </string>
     <string name="recommendation">Recommendations and warnings </string>
     <string name="Resend_code">resend verification code</string>
+    <string name="dialog_fever" translatable="false">Fever is defined as a higher body temperature than normal. Some of the more common symptoms are feelings of exhaustion and you might also feel colder than usual</string>
 
 
 </resources>

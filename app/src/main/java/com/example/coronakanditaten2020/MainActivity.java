@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        System.out.println(datahandler.credentials.Email);
        System.out.println(datahandler.credentials.Password);
         //
-        datahandler.getserveruserinfo("");
+        datahandler.getserveruserinfo("5765765");
         datahandler.getTopPost(1);
         datahandler.getserveruser();
         datahandler.getalllserverocations("");

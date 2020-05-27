@@ -171,15 +171,12 @@
     <string name="symptom_diarrhea">Diarrhea</string>
     <string name="symptom_sick">All sick</string>
 
-    <string name="dialog_fever">Fever is bad </string>
-    <string name="dialog_cough">Cough is bad </string>
-    <string name="dialog_breathing">Breathing is bad </string>
-    <string name="dialog_sore_throat">Sore Throat is bad </string>
-    <string name="dialog_nasal_congestion">Nasal Congestion is bad </string>
-    <string name="dialog_runny_nose">Runny Nose is bad </string>
-    <string name="dialog_tiredness">Tiredness is bad </string>
-    <string name="dialog_headache">Headache is bad </string>
-    <string name="dialog_diarrhea">Diarrhea is bad </string>
+    <string name="dialog_fever" translatable="false">Feber defineras som en högre kroppstemperatur än normalt. Några av av de vanligare symtomen är känslor av utmattning och det är vanligt att känna sig kallare</string>
+    <string name="dialog_cough" translatable="false">The typical cough for the Corona virus often involves a dry, prolonged cough</string>
+    <string name="dialog_nasal_congestion" translatable="false">Nasal congestion means that the mucous membranes have swollen and common symptoms are that you have a harder time breathing through your nose.</string>
+    <string name="dialog_runny_nose" translatable="false">Having a runny nose involves an infection that affects the upper respiratory tract, in other words the mucous membranes of the nose, throat and sinuses</string>
+    <string name="dialog_headache" translatable="false">Headache may appear as a sharper or a more throbbing pain. It can located to a specific region or radiate all across your head</string>
+    <string name="dialog_diarrhea" translatable="false">Means loose and watering stools and probably you need to visit the toilet several times in a short time. Common symptoms are tremors and a bloated feeling</string>
 
     <string name="btn_clear">Clear</string>
     <string name="next_info">If you have completed reporting your symptoms, please press <b>NEXT STEP</b> to continue to Report Location.</string>
@@ -242,6 +239,9 @@
     <string name="help">Help and tasks </string>
     <string name="recommendation">Recommendations and warnings </string>
     <string name="Resend_code">resend verification code</string>
+    <string name="dialog_sore_throat" translatable="false">Involves having pain or irritation in the throat which often is prominent when swallowing</string>
+    <string name="dialog_breathing" translatable="false">Often involves breathing difficulties. One of the more common symptoms is feeling a shortness of breath</string>
+    <string name="dialog_tiredness" translatable="false">A feeling of unusual tiredness and exhaustion</string>
 
 
 </resources>
