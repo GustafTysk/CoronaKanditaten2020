@@ -16,6 +16,7 @@
         <!--            android:layout_height="match_parent"-->
         <!--            android:background="@color/white">-->
 
+        <!--        </androidx.core.widget.NestedScrollView>-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -39,15 +40,23 @@
                 android:id="@+id/searchInput"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edittext_outline"
                 android:textColor="@color/colorText"
+                android:paddingLeft="10dp"
+                android:hint="Write search topic"
                 app:layout_constraintEnd_toStartOf="@+id/btnMyPost"
                 app:layout_constraintStart_toStartOf="@+id/btnMostLiked"
                 app:layout_constraintTop_toBottomOf="@+id/btnRecent" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8.5dp"
+                android:background="@drawable/button_selector"
+                android:padding="8dp"
+                android:src="@drawable/searchwhite2"
                 android:text="Search"
                 app:layout_constraintBottom_toBottomOf="@id/searchInput"
                 app:layout_constraintStart_toEndOf="@+id/searchInput"
@@ -59,6 +68,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 app:layout_constraintBottom_toTopOf="@+id/messageTitle"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -124,14 +134,14 @@
                 android:text="@string/post_hint_username"
                 app:layout_constraintBottom_toTopOf="@+id/messageButton"
                 app:layout_constraintEnd_toEndOf="@+id/messageButton"
-                app:layout_constraintStart_toStartOf="@+id/messageButton" />
+                app:layout_constraintStart_toEndOf="@+id/messageTitle" />
 
             <Button
                 android:id="@+id/btnMostLiked"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/button_selector_light"
+                android:background="@drawable/button_selector"
                 android:padding="10dp"
                 android:text="@string/btn_most_liked"
                 android:textColor="@color/white"
@@ -142,7 +152,7 @@
                 android:id="@+id/btnRecent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_selector_light"
+                android:background="@drawable/button_selector"
                 android:padding="10dp"
                 android:text="Most Recent"
                 android:textColor="@color/white"
@@ -155,7 +165,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:background="@drawable/button_selector_light"
+                android:background="@drawable/button_selector"
                 android:padding="10dp"
                 android:text="my posts"
                 android:textColor="@color/white"
@@ -174,7 +184,7 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <!--        </androidx.core.widget.NestedScrollView>-->
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
