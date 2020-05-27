@@ -147,9 +147,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         btnAddLocation.setOnClickListener(this);
 
         locations = new ArrayList<LatLng>();
-        if(((MainActivity)getActivity()).datahandler.Userlocations!=null){
-            userLocations=((MainActivity)getActivity()).datahandler.Userlocations;
-        }
 
         // SET ALL LOCATION MAP IMAGE BUTTONS
         setLocation1 = (ImageButton) view.findViewById(R.id.setLocation1);
@@ -262,9 +259,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         Creatlists();
         hideAllButFirstLocationFragment(getView());
 
-        if(userLocations!=null){
-            SetUppPage();
-        }
+
 
         if (!Places.isInitialized()) {
             Places.initialize(getContext(), "AIzaSyAdNZnteknM0VlU416q-b8ZEqRBjiFOiPA");

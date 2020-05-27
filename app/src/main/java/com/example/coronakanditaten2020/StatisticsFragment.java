@@ -46,9 +46,12 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     private ArrayList<Location> Locations = new ArrayList<>();
     private ArrayList<User> Users = new ArrayList<>();
-    private ArrayList<Integer> allRatingsDiarrhea, allRatingsRunnyNose, allRatingsNasalCon, allRatingsBreathing,
-            allRatingsTiredness, allRatingsHeadache, allRatingsFever, allRatingsCough, allRatingsThroat, allRatingsSick;
+    private ArrayList<Integer> allRatingsDiarrhea=new ArrayList<Integer>(), allRatingsRunnyNose=new ArrayList<Integer>(),
+            allRatingsNasalCon=new ArrayList<Integer>(), allRatingsBreathing=new ArrayList<Integer>(),
+            allRatingsTiredness=new ArrayList<Integer>(), allRatingsHeadache=new ArrayList<Integer>(),
+            allRatingsFever=new ArrayList<Integer>(), allRatingsCough=new ArrayList<Integer>(), allRatingsThroat=new ArrayList<Integer>(), allRatingsSick=new ArrayList<Integer>();
     private DataPoint[] dpDiarrhea, dpRunnyNose, dpNasalCon, dpBreathing, dpTiredness, dpThroat, dpFever, dpCough, dpHeadache;
+    private ArrayList<ArrayList> userInfo;
 
 
     public CheckBox diarrheaBox, runnyNoseBox, nasalConBox, headacheBox, throatBox, breathingDiffBox, tirednessBox, coughBox, feverBox, allSickBox;
@@ -77,7 +80,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             femaleAge65Plus, otherAge0To18, otherAge19To40, otherAge41To64, otherAge65Plus;
 
     private String tempString;
-    private int symptomCounter;
+    private ArrayList<Integer> Symtomcounter=new ArrayList<Integer>();
 
     //CALENDAR
     private boolean noSelectedDates = true;
@@ -91,6 +94,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     Date dateOfInterest, today;
     SimpleDateFormat sdf;
     String sdfDate;
+    View view;
 
     //TABLE VIEW
     private TextView textView6, textView7, textView8, textView10, textView11, textView12,
@@ -102,10 +106,21 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //((MainActivity)getActivity()).datahandler.heatlocations;
-        super.onCreate(savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_statistics, container, false);
 
+        super.onCreate(savedInstanceState);
+        view = inflater.inflate(R.layout.fragment_statistics, container, false);
+        return view;
+    }
+
+    public void setStatisticsBottomNav(){
+        ((MainActivity) requireActivity()).bottomNav = (BottomNavigationView) getView().findViewById(R.id.bottom_navigation);
+        ((MainActivity) requireActivity()).bottomNav.setOnNavigationItemSelectedListener(((MainActivity) getActivity()).navListener);
+        ((MainActivity) requireActivity()).bottomNav.getMenu().findItem(R.id.nav_statistics).setChecked(true);
+
+    }
+
+    public void setupstatistik(){
+        System.out.println("started setupp");
         diarrheaBox = (CheckBox) view.findViewById(R.id.diarrheaBox);
         runnyNoseBox = (CheckBox) view.findViewById(R.id.runnyNoseBox);
         tirednessBox = (CheckBox) view.findViewById(R.id.tirednessBox);
@@ -139,70 +154,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         textView18 = (TextView) view.findViewById(R.id.textView18);
         textView19 = (TextView) view.findViewById(R.id.textView19);
         textView20 = (TextView) view.findViewById(R.id.textView20);
-
-
-
-
-//        User user = new User("Tjalexander1", "alewik97@gmail.com", 15, "Man", "IDFJJKdjk", "2020-04-29");
-//        Users.add(user);
-//        User user2 = new User("Tjalexander1", "alewik97@gmail.com", 25, "Kvinna", "IDFJJKdjk", "2020-04-29");
-//        Users.add(user2);
-//        User user3 = new User("Tjalexander1", "alewik97@gmail.com", 9, "Annat", "IDFJJKdjk", "2020-04-29");
-//        Users.add(user3);
-//        User user4 = new User("Tjalexander1", "alewik97@gmail.com", 69, "Man", "IDFJJKdjk", "2020-04-29");
-//        Users.add(user4);
-//        User user5 = new User("Tjalexander1", "alewik97@gmail.com", 54, "Annat", "IDFJJKdjk", "2020-04-29");
-//        Users.add(user5);
-//        User user6 = new User("Tjalexander1", "alewik97@gmail.com", 30, "Kvinna", "IDFJJKdjk", "2020-04-29");
-//        Users.add(user6);
-//        User user7 = new User("Tjalexander1", "alewik97@gmail.com", 37, "Kvinna", "IDFJJKdjk", "2020-04-29");
-//        Users.add(user7);
-//        User user8 = new User("Tjalexander1", "alewik97@gmail.com", 82, "Man", "IDFJJKdjk", "2020-04-29");
-//        Users.add(user8);
-//        User user9 = new User("Tjalexander1", "alewik97@gmail.com", 91, "Annat", "IDFJJKdjk", "2020-04-29");
-//        Users.add(user9);
-//        User user10 = new User("Tjalexander1", "alewik97@gmail.com", 23, "Kvinna", "IDFJJKdjk", "2020-04-29");
-//        Users.add(user10);
-//        User user11 = new User("Tjalexander1", "alewik97@gmail.com", 1, "Man", "IDFJJKdjk", "2020-04-29");
-//        Users.add(user11);
-//        User user12 = new User("Tjalexander1", "alewik97@gmail.com", 65, "Kvinna", "IDFJJKdjk", "2020-04-29");
-//        Users.add(user12);
-
-
-        Location location = new Location("59.858562", "17.638927", "2020-04-29", 0, 0, 2, 0, 3, 0, 1, 1, 0, 2, "2020-04-31");
-        Locations.add(location);
-        Location location2 = new Location("59.858562", "17.638927", "2020-05-01", 1, 2, 1, 0, 3, 2, 1, 3, 2, 2, "2020-04-30");
-        Locations.add(location2);
-        Location location3 = new Location("59.858562", "17.638927", "2020-05-02", 2, 2, 1, 0, 3, 2, 1, 3, 2, 2, "2020-04-30");
-        Locations.add(location3);
-        Location location4 = new Location("59.858562", "17.638927", "2020-04-29", 3, 3, 2, 0, 1, 3, 1, 1, 0, 3, "2020-04-31");
-        Locations.add(location4);
-        Location location5 = new Location("59.858562", "17.638927", "2020-04-30", 4, 0, 0, 3, 3, 2, 1, 2, 0, 2, "2020-04-30");
-        Locations.add(location5);
-        Location location6 = new Location("59.858562", "17.638927", "2020-04-30", 5, 0, 3, 0, 2, 2, 1, 3, 1, 1, "2020-04-29");
-        Locations.add(location6);
-        Location location7 = new Location("59.858562", "17.638927", "2020-05-01", 6, 2, 0, 1, 3, 1, 1, 1, 0, 0, "2020-04-29");
-        Locations.add(location7);
-        Location location8 = new Location("59.858562", "17.638927", "2020-04-30", 7, 3, 0, 2, 1, 2, 1, 2, 0, 3, "2020-04-30");
-        Locations.add(location8);
-        Location location9 = new Location("59.858562", "17.638927", "2020-04-29", 8, 0, 0, 2, 3, 1, 1, 3, 3, 2, "2020-04-29");
-        Locations.add(location9);
-        Location location10 = new Location("59.858562", "17.638927", "2020-05-01", 9, 1, 2, 0, 0, 0, 1, 1, 0, 1, "2020-04-29");
-        Locations.add(location10);
-        Location location11 = new Location("59.858562", "17.638927", "2020-04-29", 10, 2, 1, 0, 3, 3, 1, 1, 0, 2, "2020-04-30");
-        Locations.add(location11);
-        Location location12 = new Location("59.858562", "17.638927", "2020-05-01", 11, 3, 2, 0, 1, 0, 1, 1, 1, 3, "2020-04-29");
-        Locations.add(location12);
-        getSymptomValuesLast60DaysDiarrhea();
-        getSymptomValuesLast60DaysBreathing();
-        getSymptomValuesLast60DaysCough();
-        getSymptomValuesLast60DaysHeadache();
-        getSymptomValuesLast60DaysFever();
-        getSymptomValuesLast60DaysNasalCon();
-        getSymptomValuesLast60DaysRunnyNose();
-        getSymptomValuesLast60DaysThroat();
-        getSymptomValuesLast60DaysTiredness();
-        getSymptomValuesLast60DaysSick();
+        userInfo=((MainActivity)getActivity()).datahandler.userinfo;
+        Locations=((MainActivity)getActivity()).datahandler.getHeatmaplocations();
+        getAllSymptomValuesLast60DaysSick();
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinX(createCalendar(59).getTime());
         graph.getViewport().setMaxX(createCalendar(0).getTime());
@@ -220,17 +174,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             addAllSeries2();
             designSeriesb();
         }
+        System.out.println("setupp count");
         countTable();
-        fillTable();
-        return view;
-    }
-
-    public void setStatisticsBottomNav(){
-        ((MainActivity) requireActivity()).bottomNav = (BottomNavigationView) getView().findViewById(R.id.bottom_navigation);
-        ((MainActivity) requireActivity()).bottomNav.setOnNavigationItemSelectedListener(((MainActivity) getActivity()).navListener);
-        ((MainActivity) requireActivity()).bottomNav.getMenu().findItem(R.id.nav_statistics).setChecked(true);
-
-    }
+        fillTable();    }
 
     @Override
     public void onClick(View v) {
@@ -393,6 +339,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         dateOfInterest = calendarStat.getTime();
         sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdfDate = sdf.format(dateOfInterest);
+        System.out.println(sdfDate);
         return sdfDate;
     }
 
@@ -467,195 +414,55 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     }
 
 
-    public ArrayList<Integer> getSymptomValuesLast60DaysDiarrhea(){
-        allRatingsDiarrhea = new ArrayList<>();
-        tempString="";
-        symptomCounter = 0;
-        for(int j = 0; j<60; j++){
-            tempString = createCalendarSdf(j);
-            for(int i = 0; i<Locations.size(); i++) {
-                if(Locations.get(i).getDate().equals(tempString)){
-                    if(Locations.get(i).getDiarrheaRatingBar() > 0){
-                        symptomCounter++;
-                    }
-                }
-            }
-            allRatingsDiarrhea.add(symptomCounter);
-            symptomCounter = 0;
-        }
-        return allRatingsDiarrhea;
-    }
 
-    public ArrayList<Integer> getSymptomValuesLast60DaysRunnyNose(){
-        allRatingsRunnyNose = new ArrayList<>();
-        tempString="";
-        symptomCounter = 0;
-        for(int j = 0; j<60; j++){
-            tempString = createCalendarSdf(j);
-            for(int i = 0; i<Locations.size(); i++) {
-                if(Locations.get(i).getDate().equals(tempString)){
-                    if(Locations.get(i).getRunnyNoseRatingBar() > 0){
-                        symptomCounter++;
-                    }
-                }
-            }
-            allRatingsRunnyNose.add(symptomCounter);
-            symptomCounter = 0;
-        }
-        return allRatingsRunnyNose;
-    }
 
-    public ArrayList<Integer> getSymptomValuesLast60DaysNasalCon(){
-        allRatingsNasalCon = new ArrayList<>();
-        tempString="";
-        symptomCounter = 0;
-        for(int j = 0; j<60; j++){
-            tempString = createCalendarSdf(j);
-            for(int i = 0; i<Locations.size(); i++) {
-                if(Locations.get(i).getDate().equals(tempString)){
-                    if(Locations.get(i).getNasalCongestionRatingBar() > 0){
-                        symptomCounter++;
-                    }
-                }
-            }
-            allRatingsNasalCon.add(symptomCounter);
-            symptomCounter = 0;
-        }
-        return allRatingsNasalCon;
-    }
+    public void getAllSymptomValuesLast60DaysSick(){
 
-    public ArrayList<Integer> getSymptomValuesLast60DaysBreathing(){
-        allRatingsBreathing = new ArrayList<>();
         tempString="";
-        symptomCounter = 0;
-        for(int j = 0; j<60; j++){
-            tempString = createCalendarSdf(j);
-            for(int i = 0; i<Locations.size(); i++) {
-                if(Locations.get(i).getDate().equals(tempString)){
-                    if(Locations.get(i).getBreathingRatingBar() > 0){
-                        symptomCounter++;
-                    }
-                }
-            }
-            allRatingsBreathing.add(symptomCounter);
-            symptomCounter = 0;
+        for(int i=0; i<10;i++){
+            Symtomcounter.add(0);
         }
-        return allRatingsBreathing;
-    }
 
-    public ArrayList<Integer> getSymptomValuesLast60DaysTiredness(){
-        allRatingsTiredness = new ArrayList<>();
-        tempString="";
-        symptomCounter = 0;
         for(int j = 0; j<60; j++){
             tempString = createCalendarSdf(j);
             for(int i = 0; i<Locations.size(); i++) {
-                if(Locations.get(i).getDate().equals(tempString)){
-                    if(Locations.get(i).getTirednessRatingBar() > 0){
-                        symptomCounter++;
-                    }
+                String convert=convertStringPrintToDataFormat(Locations.get(i).getDate());
+                System.out.println(convert+"sdfsdfsdfdsfsdfdsfsdfsdf");
+                System.out.println(tempString);
+                if(convert.equals(tempString)){
+                    System.out.println("ffffffffff");
+                    Symtomcounter.set(9,Symtomcounter.get(9)+1);
+                    if(Locations.get(i).getHeadacheRatingBar() > 0) Symtomcounter.set(0,Symtomcounter.get(0)+1);
+                    if(Locations.get(i).getCoughRatingBar() > 0) Symtomcounter.set(1,Symtomcounter.get(1)+1);
+                    if(Locations.get(i).getFeverRatingBar() > 0) Symtomcounter.set(2,Symtomcounter.get(2)+1);
+                    if(Locations.get(i).getThroatRatingBar() > 0) Symtomcounter.set(3,Symtomcounter.get(3)+1);
+                    if(Locations.get(i).getTirednessRatingBar() > 0) Symtomcounter.set(4,Symtomcounter.get(4)+1);
+                    if(Locations.get(i).getBreathingRatingBar() > 0) Symtomcounter.set(5,Symtomcounter.get(5)+1);
+                    if(Locations.get(i).getNasalCongestionRatingBar() > 0) Symtomcounter.set(6,Symtomcounter.get(6)+1);
+                    if(Locations.get(i).getRunnyNoseRatingBar() > 0) Symtomcounter.set(7,Symtomcounter.get(7)+1);
+                    if(Locations.get(i).diarrheaRatingBar > 0) Symtomcounter.set(8,Symtomcounter.get(8)+1);
                 }
-            }
-            allRatingsTiredness.add(symptomCounter);
-            symptomCounter = 0;
-        }
-        return allRatingsTiredness;
-    }
 
-    public ArrayList<Integer> getSymptomValuesLast60DaysThroat(){
-        allRatingsThroat = new ArrayList<>();
-        tempString="";
-        symptomCounter = 0;
-        for(int j = 0; j<60; j++){
-            tempString = createCalendarSdf(j);
-            for(int i = 0; i<Locations.size(); i++) {
-                if(Locations.get(i).getDate().equals(tempString)){
-                    if(Locations.get(i).getThroatRatingBar() > 0){
-                        symptomCounter++;
-                    }
-                }
             }
-            allRatingsThroat.add(symptomCounter);
-            symptomCounter = 0;
+            allRatingsSick.add( Symtomcounter.get(9));
+            allRatingsDiarrhea.add( Symtomcounter.get(8));
+            allRatingsRunnyNose.add( Symtomcounter.get(7));
+            allRatingsNasalCon.add( Symtomcounter.get(6));
+            allRatingsBreathing.add( Symtomcounter.get(5));
+            allRatingsTiredness.add( Symtomcounter.get(4));
+            allRatingsThroat.add( Symtomcounter.get(3));
+            allRatingsFever.add( Symtomcounter.get(2));
+            allRatingsCough.add( Symtomcounter.get(1));
+            allRatingsHeadache.add( Symtomcounter.get(0));
+            for(int i=0; i<10;i++){
+                Symtomcounter.set(i,0);
+            }
         }
-        return allRatingsThroat;
-    }
 
-    public ArrayList<Integer> getSymptomValuesLast60DaysFever(){
-        allRatingsFever = new ArrayList<>();
-        tempString="";
-        symptomCounter = 0;
-        for(int j = 0; j<60; j++){
-            tempString = createCalendarSdf(j);
-            for(int i = 0; i<Locations.size(); i++) {
-                if(Locations.get(i).getDate().equals(tempString)){
-                    if(Locations.get(i).getFeverRatingBar() > 0){
-                        symptomCounter++;
-                    }
-                }
-            }
-            allRatingsFever.add(symptomCounter);
-            symptomCounter = 0;
-        }
-        return allRatingsFever;
-    }
-
-    public ArrayList<Integer> getSymptomValuesLast60DaysCough(){
-        allRatingsCough = new ArrayList<>();
-        tempString="";
-        symptomCounter = 0;
-        for(int j = 0; j<60; j++){
-            tempString = createCalendarSdf(j);
-            for(int i = 0; i<Locations.size(); i++) {
-                if(Locations.get(i).getDate().equals(tempString)){
-                    if(Locations.get(i).getCoughRatingBar() > 0){
-                        symptomCounter++;
-                    }
-                }
-            }
-            allRatingsCough.add(symptomCounter);
-            symptomCounter = 0;
-        }
-        return allRatingsCough;
-    }
-
-    public ArrayList<Integer> getSymptomValuesLast60DaysHeadache(){
-        allRatingsHeadache = new ArrayList<>();
-        tempString="";
-        symptomCounter = 0;
-        for(int j = 0; j<60; j++){
-            tempString = createCalendarSdf(j);
-            for(int i = 0; i<Locations.size(); i++) {
-                if(Locations.get(i).getDate().equals(tempString)){
-                    if(Locations.get(i).getHeadacheRatingBar() > 0){
-                        symptomCounter++;
-                    }
-                }
-            }
-            allRatingsHeadache.add(symptomCounter);
-            symptomCounter = 0;
-        }
-        return allRatingsHeadache;
-    }
-
-    public ArrayList<Integer> getSymptomValuesLast60DaysSick(){
-        allRatingsSick = new ArrayList<>();
-        tempString="";
-        symptomCounter = 0;
-        for(int j = 0; j<60; j++){
-            tempString = createCalendarSdf(j);
-            for(int i = 0; i<Locations.size(); i++) {
-                if(Locations.get(i).getDate().equals(tempString)){
-                    symptomCounter++;
-                }
-            }
-            allRatingsSick.add(symptomCounter);
-            symptomCounter = 0;
-        }
-        return allRatingsSick;
     }
 
     public Integer countForGraph2(int countForGraph2, ArrayList<Integer> symptomList) {
+
         int countForCertainDay = 0;
         for(int i = 59; i>countForGraph2; i--){
             countForCertainDay = countForCertainDay + symptomList.get(i);
@@ -932,6 +739,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         }
         else{
             createCalendar(60);
+            System.out.println("sdfsdfsdfssdfsdfrgdthgsethseth");
             clearGraph();
             makeGraphLines2();
             makeGraphLinesAllSick2();
@@ -946,51 +754,34 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     }
 
     public void countTable() {
-        for(User user: Users){
-            if(user.gender.equals(getString(R.string.gender_male))){
-                if(user.age >= 0 && user.age < 19){
-                    maleAge0To18 += 1;
-                }
-                if(user.age > 18 && user.age < 41){
-                    maleAge19To40 += 1;
-                }
-                if(user.age > 40 && user.age < 65){
-                    maleAge41To64 += 1;
-                }
-                if(user.age > 64){
-                    maleAge65Plus += 1;
-                }
+        System.out.println(userInfo.size()+"userinfo size");
+        for(ArrayList user: userInfo){
+            int age=Integer.parseInt((String) user.get(1));
+            System.out.println(age+"fdsdfsdfsdf");
+            String gender=(String)user.get(0);
+            System.out.println(gender+"dfasfasdfhahacv");
+
+            if(gender.equals(getString(R.string.gender_male))){
+                if(age >= 0 && age < 19) maleAge0To18 += 1;
+                if(age > 18 && age < 41) maleAge19To40 += 1;
+                if(age > 40 && age < 65) maleAge41To64 += 1;
+                if(age > 64) maleAge65Plus += 1;
             }
-            if(user.gender.equals(getString(R.string.gender_female))){
-                if(user.age >= 0 && user.age < 19){
-                    femaleAge0To18 += 1;
-                }
-                if(user.age > 18 && user.age < 41){
-                    femaleAge19To40 += 1;
-                }
-                if(user.age > 40 && user.age < 65){
-                    femaleAge41To64 += 1;
-                }
-                if(user.age > 64){
-                    femaleAge65Plus += 1;
-                }
+            if(gender.equals(getString(R.string.gender_female))){
+                if(age >= 0 && age < 19)femaleAge0To18 += 1;
+                if(age > 18 && age < 41)femaleAge19To40 += 1;
+                if(age > 40 && age < 65)femaleAge41To64 += 1;
+                if(age > 64)femaleAge65Plus += 1;
             }
-            if(user.gender.equals(getString(R.string.gender_other))){
-                if(user.age >= 0 && user.age < 19){
-                    otherAge0To18 += 1;
-                }
-                if(user.age > 18 && user.age < 41){
-                    otherAge19To40 += 1;
-                }
-                if(user.age > 40 && user.age < 65){
-                    otherAge41To64 += 1;
-                }
-                if(user.age > 64){
-                    otherAge65Plus += 1;
-                }
-            }
+            if(gender.equals(getString(R.string.gender_other))){
+                if(age >= 0 && age < 19)otherAge0To18 += 1;
+                if(age > 18 && age < 41)otherAge19To40 += 1;
+                if(age > 40 && age < 65)otherAge41To64 += 1;
+                if(age > 64) otherAge65Plus += 1;
+
 
         }
+    }
     }
     public void fillTable() {
         textView6.setText(String.valueOf(femaleAge0To18));
@@ -1005,6 +796,11 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         textView18.setText(String.valueOf(femaleAge65Plus));
         textView19.setText(String.valueOf(maleAge65Plus));
         textView20.setText(String.valueOf(otherAge65Plus));
+    }
+    public String convertStringPrintToDataFormat(String string){
+        System.out.println();
+        String[] parts = string.split("-");
+        return parts[2]+"-"+"0"+(Integer.parseInt(parts[1])+1)+"-"+parts[0];
     }
 
 }

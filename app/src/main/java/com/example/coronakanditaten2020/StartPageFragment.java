@@ -22,6 +22,9 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
     private Button btnStartToForum;
     private Button btnLogout;
     private ImageButton btnSettings;
+    boolean setuprs=false;
+    boolean setupstat=false;
+    boolean setuppdone=false;
 
     @Nullable
     @Override
@@ -55,24 +58,41 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.btnStartToHeatmap:
                 if(((MainActivity)getActivity()).datahandler.gotlocation==true){
-                    if ( !((MainActivity) getActivity()).heatmapFragment.setuppdone){
+                    if ( !setuppdone){
 
                         ((MainActivity) getActivity()).heatmapFragment.setup(((MainActivity) getActivity()).datahandler.getHeatmaplocations());
+                        setuppdone=true;
                     }
-                   else{
+
                     ((MainActivity)getActivity()).setViewPager(3);
                     ((MainActivity)getActivity()).heatmapFragment.setHeatmapBottomNav();
-                    ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_heatmap);}}
+                    ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_heatmap);}
                 break;
             case R.id.btnStartToStatistics:
+                System.out.println("yays2222y");
+                if(((MainActivity)getActivity()).datahandler.gotuserinfo &&((MainActivity)getActivity()).datahandler.gotlocation){
+                    System.out.println("yay2233331313sy");
+                    if (!setupstat){
+                        System.out.println("yaysy");
+                    ((MainActivity)getActivity()).statisticsFragment.setupstatistik();
+                    setupstat=true;
+                    }
                 ((MainActivity)getActivity()).setViewPager(2);
                 ((MainActivity)getActivity()).statisticsFragment.setStatisticsBottomNav();
-                ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_statistics);
+                ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_statistics);}
                 break;
             case R.id.btnStartToRs:
-                ((MainActivity)getActivity()).setViewPager(4);
-                ((MainActivity)getActivity()).reportSymptomsFragment.setReportSymptomsBottomNav();
-                ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_report_symptoms);
+                if(((MainActivity)getActivity()).datahandler.gotUserlocation){
+                    if(((MainActivity)getActivity()).datahandler.Userlocations.size()>=0 && !setuprs){
+                        ((MainActivity)getActivity()).reportLocationFragment.userLocations=((MainActivity)getActivity()).datahandler.Userlocations;
+                        ((MainActivity)getActivity()).reportSymptomsFragment.SetuppUsersymtoms();
+                        ((MainActivity)getActivity()).reportLocationFragment.SetUppPage();
+                        setuprs=true;
+                    }
+                    ((MainActivity)getActivity()).setViewPager(4);
+                    ((MainActivity)getActivity()).reportSymptomsFragment.setReportSymptomsBottomNav();
+                    ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_report_symptoms);
+                }
                 break;
             case R.id.btnStartToForum:
                 if (((MainActivity)getActivity()).datahandler.viewPosts.size()!=0 && ((MainActivity)getActivity()).datahandler.user!=null){

@@ -99,7 +99,7 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
         diarrheaRatingBar = (RatingBar) view.findViewById(R.id.ratingBarDiarrhea);
         btnClearDiarrheaRating = (Button) view.findViewById(R.id.btnClearDiarrheaRating);
         btnClearDiarrheaRating.setOnClickListener(this);
-        SetuppUsersymtoms();
+
 
         return view;
     }

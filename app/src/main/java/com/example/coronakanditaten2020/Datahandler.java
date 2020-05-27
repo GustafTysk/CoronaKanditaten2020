@@ -28,10 +28,13 @@ public class Datahandler {
     Location[] heatmaplocations = new Location[12];
     ArrayList<Location> heatlocations;
     ArrayList<Location> Userlocations;
+    boolean gotUserlocation=false;
     boolean gotlocation=false;
+    boolean gotuserinfo=false;
     User user;
     ArrayList<Post> viewPosts=new ArrayList<Post>();
     ArrayList<ArrayList> userinfo;
+
     ArrayList<Integer> likeid= new ArrayList<Integer>();
 
     Credentials credentials;
@@ -42,8 +45,6 @@ public class Datahandler {
 
     public Datahandler() {
         likeid.add(0);
-        CreatDummylocations();
-        //CreateDummyTopPost();
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(baseurl)
@@ -159,8 +160,9 @@ public class Datahandler {
                     System.out.println(response.code());
                 }
                 Userlocations = response.body();
-                System.out.println("userlocations have been added");
-                System.out.println(Userlocations.size());
+                System.out.println("userlocations have been added"+ Userlocations.size());
+                gotUserlocation=true;
+
 
             }
 
@@ -210,9 +212,10 @@ public void getserveruserinfo(String timestamp){
                 }
                 else{
                     System.out.println(response.toString());
-                    userinfo=response.body();
-                    System.out.println("userinfo"+userinfo);
+                    userinfo= response.body();
+                    System.out.println("userinfo"+userinfo.size());
                     System.out.println("userinfos has succefully collected");
+                    gotuserinfo=true;
 
                 }
             }

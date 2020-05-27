@@ -69,7 +69,6 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
     private Button btnHeatmapToStart;
     private Button btnTestChangeDay;
     private Button btnZoomInOnMe;
-    public boolean setuppdone=false;
 
     private com.applandeo.materialcalendarview.CalendarView cal;
     private Calendar minDate = Calendar.getInstance(TimeZone.getDefault());
@@ -396,7 +395,6 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
 
 
 
-        setuppdone=true;
     }
 
 }
