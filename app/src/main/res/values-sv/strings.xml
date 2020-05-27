@@ -171,15 +171,10 @@
     <string name="symptom_diarrhea">Diarré</string>
     <string name="symptom_sick">Alla sjuka</string>
 
-    <string name="dialog_fever">Fever is bad </string>
-    <string name="dialog_cough">Cough is bad </string>
-    <string name="dialog_breathing">Breathing is bad </string>
-    <string name="dialog_sore_throat">Sore Throat is bad </string>
-    <string name="dialog_nasal_congestion">Nasal Congestion is bad </string>
-    <string name="dialog_runny_nose">Runny Nose is bad </string>
-    <string name="dialog_tiredness">Tiredness is bad </string>
-    <string name="dialog_headache">Headache is bad </string>
-    <string name="dialog_diarrhea">Diarrhea is bad </string>
+    <string name="dialog_nasal_congestion">Innebär att slemhinnorna har svullnat och vanliga symtom är att du har svårare att andas genom näsan.</string>
+    <string name="dialog_runny_nose">Innebär en infektion som drabbar övre luftvägarna, alltså slemhinnorna i näsa, hals samt bihålorna. Vanliga symtom är trötthet, halsont och lätt feber</string>
+    <string name="dialog_headache">"Huvudvärk kan vara skarp eller trubbig smärta som är beläget till en specifik region eller över hela huvudet. "</string>
+    <string name="dialog_diarrhea">"Innebär lös och vattning avföring och förmodligen behöver du uppsöka toaletten flera gånger på kort tid. Vanliga symtom är skakningar, en känsla av uppblåsthet och gaser i magen.   "</string>
 
     <string name="btn_clear">Rensa</string>
     <string name="next_info">Om du är klar med att rapportera dina symtom, tryck på <b>NÄSTA STEG</b> för att fortsätta till Rapportera Plats.</string>
@@ -242,6 +237,11 @@
     <string name="help">Hjälp</string>
     <string name="recommendation">Rekommendationer och varningar </string>
     <string name="Resend_code">Skicka ny verifikationskoden</string>
+    <string name="dialog_fever" translatable="false">Feber defineras som en högre kroppstemperatur än normalt. Några av av de vanligare symtomen är känslor av utmattning och det är vanligt att känna sig kalll</string>
+    <string name="dialog_cough" translatable="false">Den typiska hostan för corona-viruset är en torr, utdragen hosta</string>
+    <string name="dialog_breathing" translatable="false">"Innebär ofta att det är svårare att andas och vanliga symtom är att man känner sig lätttare andfådd. "</string>
+    <string name="dialog_sore_throat" translatable="false">Innebär smärta eller irration i  halsen vilket ofta är framträdande vid sväljning</string>
+    <string name="dialog_tiredness" translatable="false">En känsla av utmattning och trötthet</string>
 
 
 </resources>
