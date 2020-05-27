@@ -226,7 +226,7 @@
     <string name="post_hint_title">Titel</string>
     <string name="post_hint_message">Meddelande</string>
     <string name="post_hint_username">Användarnamn</string>
-    <string name="btn_post">Inlägg</string>
+    <string name="btn_post">Skicka</string>
 
     <string name="fail_to_get_post">Misslyckades att hämta inlägg</string>
     <string name="fail_to_add_post">Misslyckades med att lägga upp inlägg</string>
@@ -243,5 +243,9 @@
     <string name="dialog_sore_throat" translatable="false">Innebär smärta eller irration i  halsen vilket ofta är framträdande vid sväljning</string>
     <string name="dialog_tiredness" translatable="false">En känsla av utmattning och trötthet</string>
 
-
+    <string name="write_title">Skriv titel</string>
+    <string name="write_message">Skriv meddelande</string>
+    <string name="most_recent">Nyaste</string>
+    <string name="my_posts">Mina inlägg</string>
+    <string name="write_search_topic">Skriv sökämne</string>
 </resources>

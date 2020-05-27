@@ -244,5 +244,9 @@
     <string name="Resend_code">resend verification code</string>
     <string name="dialog_fever" translatable="false">Fever is defined as a higher body temperature than normal. Some of the more common symptoms are feelings of exhaustion and you might also feel colder than usual</string>
 
-
+    <string name="write_title">Write title</string>
+    <string name="write_message">Write message</string>
+    <string name="most_recent">Most recent</string>
+    <string name="my_posts">My posts</string>
+    <string name="write_search_topic">Write search topic</string>
 </resources>

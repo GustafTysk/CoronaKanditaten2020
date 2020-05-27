@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,7 +39,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
     private Button btnMostLiked;
     private Button btnRecent;
     private Button btnMyPost;
-    private Button btnSearch;
+    private ImageButton btnSearch;
 
     private ImageView forumInfo;
 
@@ -77,7 +78,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         btnRecent.setOnClickListener(this);
         btnMyPost = (Button) view.findViewById(R.id.btnMyPost);
         btnMyPost.setOnClickListener(this);
-        btnSearch = (Button) view.findViewById(R.id.btnSearch);
+        btnSearch = (ImageButton) view.findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(this);
 
         usernameShow = (TextView) view.findViewById(R.id.usernameShow);

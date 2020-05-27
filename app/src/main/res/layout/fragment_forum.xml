@@ -17,11 +17,15 @@
         <!--            android:background="@color/white">-->
 
         <!--        </androidx.core.widget.NestedScrollView>-->
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout13"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="60dp"
-            android:background="@color/colorBackground">
+            android:background="@color/colorBackground"
+            app:layout_anchor="@+id/constraintLayout13"
+            app:layout_anchorGravity="center">
 
 
             <TextView
@@ -42,11 +46,12 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/edittext_outline"
-                android:textColor="@color/colorText"
+                android:hint="@string/write_search_topic"
                 android:paddingLeft="10dp"
-                android:hint="Write search topic"
+                android:textColor="@color/colorText"
                 app:layout_constraintEnd_toStartOf="@+id/btnMyPost"
-                app:layout_constraintStart_toStartOf="@+id/btnMostLiked"
+                app:layout_constraintHorizontal_bias="0.92"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnRecent" />
 
             <ImageButton
@@ -59,6 +64,8 @@
                 android:src="@drawable/searchwhite2"
                 android:text="Search"
                 app:layout_constraintBottom_toBottomOf="@id/searchInput"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/searchInput"
                 app:layout_constraintTop_toTopOf="@id/searchInput" />
 
@@ -81,8 +88,8 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/edittext_outline"
-                android:ems="10"
-                android:hint="Write title"
+                android:ems="9"
+                android:hint="@string/write_title"
                 android:inputType="textPersonName"
                 android:paddingLeft="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/messageInput"
@@ -97,8 +104,8 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/edittext_outline"
 
-                android:ems="10"
-                android:hint="Write message"
+                android:ems="9"
+                android:hint="@string/write_message"
                 android:inputType="textMultiLine"
                 android:paddingLeft="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -108,7 +115,7 @@
                 android:id="@+id/messageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="12dp"
                 android:background="@drawable/button_selector"
                 android:fontFamily="sans-serif"
                 android:padding="10dp"
@@ -134,13 +141,13 @@
                 android:text="@string/post_hint_username"
                 app:layout_constraintBottom_toTopOf="@+id/messageButton"
                 app:layout_constraintEnd_toEndOf="@+id/messageButton"
-                app:layout_constraintStart_toEndOf="@+id/messageTitle" />
+                app:layout_constraintStart_toStartOf="@+id/messageButton" />
 
             <Button
                 android:id="@+id/btnMostLiked"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/button_selector"
                 android:padding="10dp"
                 android:text="@string/btn_most_liked"
@@ -154,20 +161,20 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_selector"
                 android:padding="10dp"
-                android:text="Most Recent"
+                android:text="@string/most_recent"
                 android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="@+id/textView"
-                app:layout_constraintStart_toStartOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <Button
                 android:id="@+id/btnMyPost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="16dp"
                 android:background="@drawable/button_selector"
                 android:padding="10dp"
-                android:text="my posts"
+                android:text="@string/my_posts"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toEndOf="@+id/btnRecent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />

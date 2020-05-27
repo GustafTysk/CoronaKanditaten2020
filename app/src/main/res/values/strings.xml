@@ -243,5 +243,12 @@
     <string name="dialog_breathing" translatable="false">Often involves breathing difficulties. One of the more common symptoms is feeling a shortness of breath</string>
     <string name="dialog_tiredness" translatable="false">A feeling of unusual tiredness and exhaustion</string>
 
+    <string name="write_title">Write title</string>
+    <string name="write_message">Write message</string>
+    <string name="most_recent">Most recent</string>
+    <string name="my_posts">My posts</string>
+    <string name="write_search_topic">Write search topic</string>
+
+
 
 </resources>
