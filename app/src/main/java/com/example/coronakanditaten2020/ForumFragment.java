@@ -62,6 +62,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
     public ArrayList<Post>postList;
     public View view;
 
+
     private PostListAdapter adapter;
 
     @Nullable
@@ -132,16 +133,25 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
 
         long postId = id;
-        thePostId = (int) postId;
-        String theCategory = postList.get(thePostId).getCategory();
-        thePostParentId = postList.get(thePostId).getParentId();
-        //System.out.println(thePostId);
-
-        if(thePostParentId == 0) {
-            Toast.makeText(getContext(), "post has no comments", Toast.LENGTH_LONG).show();
+        int postIdInt = (int) postId;
+        thePostId = postList.get(postIdInt).getId();
+        System.out.println(thePostId);
+        if(adapter.selectedItem == position) {
+            adapter.selectedItem = -1;
         }
         else{
-         getserverComments(postList.get(thePostId));}
+            adapter.selectedItem = position;
+        }
+        Post thePost;
+        for (Post post : postList) {
+            if(post.getId()==thePostId){
+                thePost = post;
+                getserverComments(thePost);
+
+            }
+        }
+
+        adapter.notifyDataSetChanged();
     }
 
     public void removePosts() {
@@ -154,27 +164,6 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         adapter.notifyDataSetChanged();
     }
 
-    public void getComments(Post post) {
-        //run this to get get commants att commantslist
-        // getserverComments(post);
-
-        ArrayList<Post> tempPost= new ArrayList<>();
-        tempPost.add(new Post("Comment1", "abc@sdfjk.com", "Comment1", "1 jan", "I agrre", 2, "comment", 1));
-        tempPost.add(new Post("Comment2", "dsadlsa@fskjd.com", "Comment2", "2 jan", "Interesting", 3, "comment", 2));
-        tempPost.add(new Post("Comment3", "adssl@fsdk.com", "Comment3", "3 jan", "Okay", 0, "comment", 3));
-        tempPost.add(new Post("Comment4", "fdsj@fmf.se", "Comment4", "4 jan", "I do not agree", 2, "comment", 2));
-        tempPost.add(new Post("Comment5", "sdksa@sdjk.se", "Comment5", "5 jan", "Okay okay", 5, "comment", 4));
-        tempPost.add(new Post("Comment6", "cdds@adksj.com", "Comment6", "6 jan", "I see", 6, "comment", 1));
-        tempPost.add(new Post("Comment7", "comdslsk@nskjd.se", "Comment7", "7 jan", "Okay", 0, "comment", 7));
-
-        for (Post testPost : tempPost) {
-            if(testPost.getParentId()==post.getId()){
-                System.out.println("Hej");
-                postList.add(testPost);
-            }
-        }
-        tempPost.clear();
-    }
 
 
     @Override
@@ -189,8 +178,9 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 Date date = new Date();
                 String timestamp=date.toString();
                 String message = messageInput.getText().toString();
-                if(thePostParentId!= 0) {
-                    Post newWrittenPost = new Post(username,email ,title, timestamp, message, 0, "comment",0 , thePostParentId);
+                System.out.println(thePostParentId);
+                if(adapter.selectedItem != -1) {
+                    Post newWrittenPost = new Post(username,email ,title, timestamp, message, 0, "comment",0 , thePostId);
                     sendanswertoserver(newWrittenPost);
                 }
 
@@ -274,9 +264,16 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                     Toast.makeText(getContext(), getString(R.string.fail_to_get_post), Toast.LENGTH_LONG).show();
                 }
                 else {
+                    postList.clear();
+                    if (commentList != null){
+                        commentList.clear();
+                    }
                     commentList = response.body();
-                    ((MainActivity)getActivity()).datahandler.viewPosts=commentList;
-                    postList = commentList;
+                   // ((MainActivity)getActivity()).datahandler.viewPosts=commentList;
+                    postList.add(post);
+                    for (Post post: commentList){
+                        postList.add(post);
+                    }
                     adapter.notifyDataSetChanged();
                     System.out.println("got comment posts");
                 }
@@ -302,12 +299,15 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                     Toast.makeText(getContext(), getString(R.string.fail_to_get_post), Toast.LENGTH_LONG).show();
                 }
                 else {
+
                     ((MainActivity) getActivity()).datahandler.viewPosts = response.body();
-                    postList = ((MainActivity) getActivity()).datahandler.viewPosts;
                     postList.clear();
+                    copyList = ((MainActivity) getActivity()).datahandler.viewPosts;
+                    for (Post post: copyList){
+                        postList.add(post);
+                    }
 
                     adapter.notifyDataSetChanged();
-                    System.out.println("got mosts liked post");
                 }
             }
 
@@ -426,6 +426,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 for (Post post: copyList){
                     postList.add(post);
                 }
+                adapter.selectedItem = -1;
                 adapter.notifyDataSetChanged();
             }
 

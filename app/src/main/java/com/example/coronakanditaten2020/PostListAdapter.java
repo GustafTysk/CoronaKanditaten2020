@@ -39,7 +39,8 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     Datahandler datahandler;
     String title;
     String category;
-    public ArrayList<Integer>idList ;
+    public ArrayList<Integer>idList;
+    public int selectedItem = -1;
 
     static class ViewHolder {
         TextView username;
@@ -152,6 +153,18 @@ public class PostListAdapter extends ArrayAdapter<Post> {
 
             holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline);
             holder.postBottomSection.setBackgroundResource(R.drawable.edittext_outline);
+        }
+
+        if(position == selectedItem) {
+            holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline_selected);
+            holder.postBottomSection.setBackgroundResource(R.drawable.edittext_outline_selected);
+
+        }
+        else {
+            holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline);
+            holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline);
+
+
         }
 
         Animation animation = AnimationUtils.loadAnimation(mContext,
