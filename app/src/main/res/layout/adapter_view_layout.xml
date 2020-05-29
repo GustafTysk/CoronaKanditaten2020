@@ -73,30 +73,39 @@
             >
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="Like"
                 android:id="@+id/postButtonLike"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/button_selector"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:background="@drawable/button_selector_light"
-                android:textColor="@color/white"
-                android:padding="10dp"
-                > </Button>
+                android:padding="5dp"
+                android:text="Like"
+                android:textColor="@color/white"></Button>
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:text="Remove post"
                 android:id="@+id/postButtonRemove"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:background="@drawable/button_selector_light"
+                android:background="@drawable/button_selector"
                 android:textColor="@color/white"
-                android:padding="10dp"
+                android:padding="5dp"
+                android:layout_margin="8dp"
                 android:visibility="gone"
-
                 >
             </Button>
+            <TextView
+                android:id="@+id/postTimestamp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""
+                android:textSize="12dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="bottom"
+                />
 
         </LinearLayout>
 
