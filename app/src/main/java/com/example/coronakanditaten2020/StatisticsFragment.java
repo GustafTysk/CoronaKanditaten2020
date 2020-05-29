@@ -756,24 +756,24 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     public void countTable() {
         System.out.println(userInfo.size()+"userinfo size");
         for(ArrayList user: userInfo){
-            int age=Integer.parseInt((String) user.get(1));
+            int age=Integer.parseInt((String) user.get(0));
             System.out.println(age+"fdsdfsdfsdf");
-            String gender=(String)user.get(0);
+            String gender=(String)user.get(1);
             System.out.println(gender+"dfasfasdfhahacv");
 
-            if(gender.equals(getString(R.string.gender_male))){
+            if(gender.equals("male")){
                 if(age >= 0 && age < 19) maleAge0To18 += 1;
                 if(age > 18 && age < 41) maleAge19To40 += 1;
                 if(age > 40 && age < 65) maleAge41To64 += 1;
                 if(age > 64) maleAge65Plus += 1;
             }
-            if(gender.equals(getString(R.string.gender_female))){
+            if(gender.equals("female")){
                 if(age >= 0 && age < 19)femaleAge0To18 += 1;
                 if(age > 18 && age < 41)femaleAge19To40 += 1;
                 if(age > 40 && age < 65)femaleAge41To64 += 1;
                 if(age > 64)femaleAge65Plus += 1;
             }
-            if(gender.equals(getString(R.string.gender_other))){
+            if(gender.equals("other")){
                 if(age >= 0 && age < 19)otherAge0To18 += 1;
                 if(age > 18 && age < 41)otherAge19To40 += 1;
                 if(age > 40 && age < 65)otherAge41To64 += 1;

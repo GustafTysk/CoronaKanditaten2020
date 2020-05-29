@@ -323,7 +323,7 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
 
             if(heatmaplocations.get(i).date.equals(compareString)){
                 System.out.println("Inne i for if");
-                list.add(new WeightedLatLng(new LatLng(Double.valueOf(heatmaplocations.get(i).getLatitude()),Double.valueOf(heatmaplocations.get(i).getLongitude())),
+                list.add(new WeightedLatLng(new LatLng(Double.valueOf(heatmaplocations.get(i).getLongitude()),Double.valueOf(heatmaplocations.get(i).getLatitude())),
                                             GetLocationWeight(heatmaplocations.get(i),compareString,heatmaplocations.size())));
 
             }
