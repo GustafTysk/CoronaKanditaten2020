@@ -51,7 +51,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             allRatingsTiredness=new ArrayList<Integer>(), allRatingsHeadache=new ArrayList<Integer>(),
             allRatingsFever=new ArrayList<Integer>(), allRatingsCough=new ArrayList<Integer>(), allRatingsThroat=new ArrayList<Integer>(), allRatingsSick=new ArrayList<Integer>();
     private DataPoint[] dpDiarrhea, dpRunnyNose, dpNasalCon, dpBreathing, dpTiredness, dpThroat, dpFever, dpCough, dpHeadache;
-    private ArrayList<ArrayList> userInfo;
+    private ArrayList<ArrayList<String>> userInfo;
 
 
     public CheckBox diarrheaBox, runnyNoseBox, nasalConBox, headacheBox, throatBox, breathingDiffBox, tirednessBox, coughBox, feverBox, allSickBox;

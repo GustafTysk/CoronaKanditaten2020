@@ -33,14 +33,14 @@ public class Datahandler {
     boolean gotuserinfo=false;
     User user;
     ArrayList<Post> viewPosts=new ArrayList<Post>();
-    ArrayList<ArrayList> userinfo;
+    ArrayList<ArrayList<String>> userinfo;
 
     ArrayList<Integer> likeid= new ArrayList<Integer>();
 
     Credentials credentials;
     Retrofit retrofit;
     ClientAPI clientAPI;
-    String baseurl = "https://coronakandidaten2020.tech/restAPI/webapi/";
+    String baseurl = "http://130.243.233.254:9990/KandidatProjekt/webapi/"; //"https://coronakandidaten2020.tech/restAPI/webapi/";
     ArrayList<Post> topPost;
 
     public Datahandler() {
@@ -202,10 +202,10 @@ public class Datahandler {
     }
 
 public void getserveruserinfo(String timestamp){
-        Call<ArrayList<ArrayList>> getuserinfo=clientAPI.GetUserinfo(timestamp);
-        getuserinfo.enqueue(new Callback<ArrayList<ArrayList>>() {
+        Call<ArrayList<ArrayList<String>>> getuserinfo=clientAPI.GetUserinfo(timestamp);
+        getuserinfo.enqueue(new Callback<ArrayList<ArrayList<String>>>() {
             @Override
-            public void onResponse(Call<ArrayList<ArrayList>> call, Response<ArrayList<ArrayList>> response) {
+            public void onResponse(Call<ArrayList<ArrayList<String>>> call, Response<ArrayList<ArrayList<String>>> response) {
                 if(!response.isSuccessful()){
                     System.out.println("there has been an error 11");
                     System.out.println(response.toString());
@@ -221,7 +221,7 @@ public void getserveruserinfo(String timestamp){
             }
 
             @Override
-            public void onFailure(Call<ArrayList<ArrayList>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<ArrayList<String>>> call, Throwable t) {
                 System.out.println("failed to connect to server");
 
             }

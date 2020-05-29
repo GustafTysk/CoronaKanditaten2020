@@ -46,7 +46,7 @@ public interface ClientAPI {
     Call<User> getuser(@Header("authorization") String Auth, @Path("email") String email);
 
     @GET ("User/info/{timestamp}")
-    Call <ArrayList<ArrayList>> GetUserinfo(@Path("timestamp") String timestamp);
+    Call <ArrayList<ArrayList<String>>>GetUserinfo(@Path("timestamp") String timestamp);
 
     @GET ("User/num/{timestamp}")
     Call<Integer>  getNumberOfUsers(@Path("timestamp") String timestamp);
@@ -112,7 +112,7 @@ public interface ClientAPI {
 
 
     @DELETE("post/delete/{email}/security")
-    Call<Boolean>  DeletePost(@Header("authorization")String Auth, @Path("email") String email,Post post);
+    Call<Boolean>  DeletePost(@Header("authorization")String Auth, @Path("email") String email, @Body Post post);
 
     @GET("post/search/{search}/security")
     Call<ArrayList<Post>> GetPostBySearch(@Path("search") String search);

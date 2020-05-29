@@ -48,6 +48,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         TextView text;
         TextView likesShow;
         TextView category;
+        TextView postTimestamp;
         LinearLayout postTopSection;
         LinearLayout postBottomSection;
         LinearLayout postWhole;
@@ -90,7 +91,8 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             holder.category = (TextView) convertView.findViewById(R.id.postCategory);
             holder.text = (TextView) convertView.findViewById(R.id.postMessage);
             holder.likesShow = (TextView) convertView.findViewById(R.id.postLikes);
-            holder.postWhole = (LinearLayout) convertView.findViewById(R.id.postWhole);
+            holder.postTimestamp = (TextView) convertView.findViewById(R.id.postTimestamp);
+
             holder.postTopSection = (LinearLayout) convertView.findViewById(R.id.postTopSection);
             holder.postBottomSection = (LinearLayout) convertView.findViewById(R.id.postBottomSection);
 
@@ -142,18 +144,19 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         holder.category.setText(category);
         holder.text.setText(text);
         holder.likesShow.setText("Likes: " + likes);
+        holder.postTimestamp.setText(timestamp);
 
 
-        if(category == "comment") {
-            holder.category.setText("Comment");
-            holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline_comment);
-            holder.postBottomSection.setBackgroundResource(R.drawable.edittext_outline_comment);
-        }
-        else{
-
-            holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline);
-            holder.postBottomSection.setBackgroundResource(R.drawable.edittext_outline);
-        }
+//        if(parentId != 0) {
+//            holder.category.setText("Comment");
+//            holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline_comment);
+//            holder.postBottomSection.setBackgroundResource(R.drawable.edittext_outline_comment);
+//        }
+//        else{
+//
+//            holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline);
+//            holder.postBottomSection.setBackgroundResource(R.drawable.edittext_outline);
+//        }
 
         if(position == selectedItem) {
             holder.postTopSection.setBackgroundResource(R.drawable.edittext_outline_selected);
@@ -211,6 +214,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     }
 
     public void deletepost(Post post, int position){
+        System.out.println("vad är post " + post + " vad är position " + position);
         Call<Boolean> removepost=datahandler.clientAPI.DeletePost(
                 datahandler.credentials.encrypt,
                 datahandler.credentials.Email,post);
