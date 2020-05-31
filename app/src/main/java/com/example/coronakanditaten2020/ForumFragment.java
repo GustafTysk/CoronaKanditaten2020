@@ -338,6 +338,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                         postList.add(post);
                     }
                     ((MainActivity)getActivity()).datahandler.viewPosts.add(response.body());
+                    adapter.datahandler.viewPosts.add(response.body());
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -362,6 +363,8 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 }
                 else {
                     commentList.add(response.body());
+                    ((MainActivity)getActivity()).datahandler.viewPosts.add(response.body());
+                    adapter.datahandler.viewPosts.add(response.body());
                     adapter.notifyDataSetChanged();
                 }
             }

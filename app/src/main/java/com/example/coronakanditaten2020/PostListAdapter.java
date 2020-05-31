@@ -222,13 +222,14 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if(!response.isSuccessful()){
-                    Toast.makeText(getContext(), "failed to remove user", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "failed to remove user post", Toast.LENGTH_LONG).show();
                     System.out.println(response);
                 }
                 else {
 
                     thePosts.remove(getItem(position));
-                    datahandler.viewPosts.remove(getItem(position));
+                    System.out.println(datahandler.viewPosts.get(position).email);
+                    datahandler.viewPosts.remove(position);
                     notifyDataSetChanged();
 
 

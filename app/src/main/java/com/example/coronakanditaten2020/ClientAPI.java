@@ -31,7 +31,7 @@ public interface ClientAPI {
     @POST("location/{email}/user/security")
     Call<Boolean> createuserlocations(@Header("authorization") String Auth, @Path("email") String email, @Body ArrayList<Location> userlocation);
 
-    @PUT("location/{email}/user/security")
+    @POST("location/{email}/userup/security")
     Call<String> updateuserlocation(@Header("authorization") String Auth,@Path("email") String email, @Body ArrayList<Location> userlocation);
 
     @POST("location/{email}/deluser/security")
@@ -57,13 +57,13 @@ public interface ClientAPI {
     @POST("User/{ver}")
     Call<Boolean> createuser( @Path("ver") String ver ,@Body User user);
 
-    @PUT("User/{email}/security")
+    @POST("User/up/{email}/security")
     Call<Boolean> updateuser(@Header("authorization") String Auth,@Path("email") String email, @Body User user);
 
-    @DELETE("User/{email}/security")
+    @DELETE("User/del/{email}/security")
     Call<Boolean> Deleteuser(@Header("authorization") String Auth,@Path("email") String email);
 
-    @PUT("newUsername/{email}/{newUsername}/security")
+    @POST("newUsername/{email}/{newUsername}/security")
     Call<Boolean> changeUserName(@Header("authorization") String Auth,@Path("email") String email,@Path("newUsername") String newUsername);
 
     @POST("User/ver/{email}")
@@ -72,7 +72,7 @@ public interface ClientAPI {
     @POST("User/password/{email}")
     Call<Boolean> verifypassword(@Path("email") String email);
 
-    @PUT("User/password/{email}/{ver}/{password}")
+    @POST("User/password/{email}/{ver}/{password}")
     Call<Boolean> setpassword(@Path("email") String email,@Path("ver") String ver,@Path("password") String password);
 
 
@@ -107,17 +107,17 @@ public interface ClientAPI {
     @POST("post/answer/{email}/security")
     Call<Post> creatanswerpost(@Header("authorization")String Auth, @Path("email") String email, @Body Post thePost);
 
-    @DELETE("post/deleteUserPosts/{email}/security")
+    @POST("post/deleteUserPosts/{email}/security")
     Call<Boolean> deleteUserPosts(@Header("authorization")String Auth, @Path("email") String email);
 
 
-    @DELETE("post/delete/{email}/security")
+    @POST("post/delete/{email}/security")
     Call<Boolean>  DeletePost(@Header("authorization")String Auth, @Path("email") String email, @Body Post post);
 
-    @GET("post/search/{search}/security")
+    @GET("post/search/{search}")
     Call<ArrayList<Post>> GetPostBySearch(@Path("search") String search);
 
-    @DELETE("post/unlike/{email}/{unlikedid}/security")
+    @POST("post/unlike/{email}/{unlikedid}/security")
     Call<Boolean> unlikePost(@Header("authorization")String Auth,@Path("email") String email, @Path("unlikedid") Integer unlikepostid);
 
 
