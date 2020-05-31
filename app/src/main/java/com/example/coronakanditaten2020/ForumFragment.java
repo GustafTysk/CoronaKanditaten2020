@@ -381,6 +381,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
 
     public void  Search(String search){
+        System.out.println(search);
         Call<ArrayList<Post>> GetPostBySearch=((MainActivity)getActivity()).datahandler.clientAPI.GetPostBySearch(search);
         GetPostBySearch.enqueue(new Callback<ArrayList<Post>>() {
             @Override
@@ -396,9 +397,12 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                         Toast.makeText(getContext(), "did not find posts", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    postList.clear();
                     ((MainActivity)getActivity()).datahandler.viewPosts=response.body();
-                    postList= ((MainActivity)getActivity()).datahandler.viewPosts;
+                    postList.clear();
+                    copyList= ((MainActivity)getActivity()).datahandler.viewPosts;
+                    for (Post post: copyList){
+                        postList.add(post);
+                    }
                     adapter.notifyDataSetChanged();
 
 
