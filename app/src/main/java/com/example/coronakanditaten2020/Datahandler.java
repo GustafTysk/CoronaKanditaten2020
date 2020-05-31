@@ -40,7 +40,7 @@ public class Datahandler {
     Credentials credentials;
     Retrofit retrofit;
     ClientAPI clientAPI;
-    String baseurl = "https://coronakandidaten2020.tech/restAPI/webapi/";
+    String baseurl = "http://192.168.42.145:8080/tjaaa/webapi/";
     ArrayList<Post> topPost;
 
     public Datahandler() {
@@ -161,6 +161,12 @@ public class Datahandler {
                 }
                 Userlocations = response.body();
                 System.out.println("userlocations have been added"+ Userlocations.size());
+                for(Location lo: Userlocations){
+                    System.out.println("long" + lo.longitude +" lat "+lo.latitude+
+                            " diarrie" +lo.diarrheaRatingBar + " runny"+lo.getRunnyNoseRatingBar()+ lo.getNasalCongestionRatingBar()+" nasal "
+                    + lo.getBreathingRatingBar() +" brething "+lo.getTirednessRatingBar()+ " tiered "+ lo.getThroatRatingBar()+ " throat "+ lo.getFeverRatingBar()+ "fever "
+                    + lo.getCoughRatingBar() + "coaugh"+ lo.getHeadacheRatingBar()+" head ");
+                }
                 gotUserlocation=true;
 
 

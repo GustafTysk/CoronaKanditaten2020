@@ -284,6 +284,12 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             case R.id.btnUpdateMyLocations:
 
                 userLocations = creatuserlocations(((MainActivity) getActivity()).reportSymptomsFragment.getratings());
+                for(Location lo: userLocations){
+                    System.out.println("long" + lo.longitude +" lat "+lo.latitude+
+                            " diarrie" +lo.diarrheaRatingBar + " runny"+lo.getRunnyNoseRatingBar()+ lo.getNasalCongestionRatingBar()+" nasal "
+                            + lo.getBreathingRatingBar() +" brething "+lo.getTirednessRatingBar()+ " tiered "+ lo.getThroatRatingBar()+ " throat "+ lo.getFeverRatingBar()+ "fever "
+                            + lo.getCoughRatingBar() + "coaugh"+ lo.getHeadacheRatingBar()+" head ");
+                }
 
                 if (userLocations.size() == 0) {
                     Toast.makeText(getContext(), "no locations to add", Toast.LENGTH_LONG).show();
@@ -308,6 +314,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                                 Toast.makeText(getContext(), getString(R.string.success_add_user_locations), Toast.LENGTH_LONG).show();
                                 ((MainActivity) getActivity()).datahandler.Userlocations = userLocations;
                                 ((MainActivity) getActivity()).setViewPager(1);
+                                ((MainActivity) getActivity()).datahandler.getalllserverocations("sdfsdfs");
 
 
                             }
@@ -350,7 +357,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                                             System.out.println(textViewLocation2.getVisibility());
                                             ((MainActivity) getActivity()).datahandler.Userlocations = userLocations;
                                             ((MainActivity) getActivity()).setViewPager(1);
-                                            System.out.println();
+                                            ((MainActivity) getActivity()).datahandler.getalllserverocations("sdfsdfs");
 
                                         }
                                     }
@@ -487,7 +494,10 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         locationDateStrings.add(null);
         AllLocationDates.remove(currentLocationReport-1);
         locationDateStrings.add("");
+        System.out.println("sfsdfsdfs<jfdghDFSH");
         for(int i=0; i<decided; i++){
+            System.out.println(textViewLocations.get(i).getText().toString());
+            System.out.println(YourlocationsStrings.get(i)+"kk");
             textViewLocations.get(i).setText(YourlocationsStrings.get(i));
         }
 
@@ -757,7 +767,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         String lotstring;
         String tempday;
         int counter=0;
+        System.out.println(locations.size());
         for (LatLng thelocation:locations){
+            if(thelocation!=null){
             if(AllLocationDates.get(counter)!=null && thelocation!=null){
                 System.out.println("fdsfsdf");
 
@@ -769,13 +781,14 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                     latstring=lat.toString();
                     lot=thelocation.longitude;
                     lotstring=lot.toString();
-                    tempday=day.get(Calendar.DAY_OF_MONTH)+"-"+(day.get(Calendar.MONTH)-
-                            +1)+"-"+day.get(Calendar.YEAR);
+                    System.out.println((day.get(Calendar.MONTH)+1)+"kolkllklklkl");
+                    System.out.println((day.get(Calendar.DAY_OF_MONTH))+" thithtiht");
+                    tempday=(day.get(Calendar.DAY_OF_MONTH))+"-"+(day.get(Calendar.MONTH)+1)+"-"+day.get(Calendar.YEAR);
 
                     returnlocations.add(new Location(latstring,lotstring,tempday,
                             ratings[0],ratings[1],ratings[2],ratings[3],ratings[4],ratings[5],ratings[6],ratings[7],ratings[8],date.toString()));
 
-                }}
+                }}}
             counter++;
         }
 
@@ -799,13 +812,16 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         List<Address> addresses;
 
         for(Location Alocation:uniclocations){
+            System.out.println(Alocation.latitude+"setupppage lat");
+            System.out.println(Alocation.longitude+"setupppage long");
 
-            templatlong=new LatLng(Double.valueOf(Alocation.latitude), Double.valueOf(Alocation.longitude));
+            templatlong=new LatLng(Double.valueOf(Alocation.latitude), Double.valueOf(Alocation.longitude));;
             locations.set(Counter1,templatlong);
             try {
                 addresses = geocoder.getFromLocation(templatlong.latitude, templatlong.longitude, 1);
                 if(addresses.size()>0){
-                textViewLocations.get(Counter1).setText(addresses.get(0).getAddressLine(0));}
+                textViewLocations.get(Counter1).setText(addresses.get(0).getAddressLine(0));
+                YourlocationsStrings.set(Counter1,addresses.get(0).getAddressLine(0));}
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -815,10 +831,11 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 if(Alocation.longitude.equals(datlocation.longitude)&& Alocation.latitude.equals(datlocation.latitude)){
                     theday=datlocation.getDate().split("-");
 
-                    tempCalender.set((int)Integer.parseInt(theday[2]),(int)Integer.parseInt(theday[1])+1,(int)Integer.parseInt(theday[0]));
+                    tempCalender.set((int)Integer.parseInt(theday[2]),(int)Integer.parseInt(theday[1]),(int)Integer.parseInt(theday[0]));
+                    System.out.println(((int)Integer.parseInt(theday[1]))+"totototto");
 
                     AllLocationDates.get(Counter1).add(Calendar.getInstance(TimeZone.getDefault()));
-                    AllLocationDates.get(Counter1).get(Counter2).set((int)Integer.parseInt(theday[2]),(int)Integer.parseInt(theday[1])+1,(int)Integer.parseInt(theday[0]));
+                    AllLocationDates.get(Counter1).get(Counter2).set((int)Integer.parseInt(theday[2]),(int)Integer.parseInt(theday[1])-1,(int)Integer.parseInt(theday[0]));
                     Counter2++;
 
                 }

@@ -213,7 +213,11 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
 
     public String convertStringPrintToDataFormat(String string){
         String[] parts = string.split("-");
-        return parts[2]+"-"+parts[1]+"-"+parts[0];
+        int werid=Integer.parseInt(parts[1]);
+
+
+
+        return parts[2]+"-"+(werid)+"-"+parts[0];
     }
 
 //    public boolean checkIfReportsOnDate(String date){
@@ -319,11 +323,13 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
         //----------------------------------------------------------------------
         ArrayList<WeightedLatLng> list = new ArrayList<WeightedLatLng>();
         WeightedLatLng HeatCord;
+        System.out.println( heatmaplocations.size()+"kkkk");
         for (int i = 0; i < heatmaplocations.size()- 1; i++) {
+            System.out.println(compareString+ "   "+heatmaplocations.get(i).date+"    sdfsdfsdfsdfsdfds");
 
             if(heatmaplocations.get(i).date.equals(compareString)){
                 System.out.println("Inne i for if");
-                list.add(new WeightedLatLng(new LatLng(Double.valueOf(heatmaplocations.get(i).getLongitude()),Double.valueOf(heatmaplocations.get(i).getLatitude())),
+                list.add(new WeightedLatLng(new LatLng(Double.valueOf(heatmaplocations.get(i).getLatitude()),Double.valueOf(heatmaplocations.get(i).getLongitude())),
                                             GetLocationWeight(heatmaplocations.get(i),compareString,heatmaplocations.size())));
 
             }
@@ -389,7 +395,7 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
         Date today = new Date();
         dateDisplayheatmap.setText(convertDateToString(today));
         mProvider = new HeatmapTileProvider.Builder()
-                .weightedData((GenerateHeatMapCordsList( heatLocations,"2020-10-15", "placeholder")))
+                .weightedData((GenerateHeatMapCordsList( heatLocations,convertDateToString(today), "placeholder")))
                 .build();
         mOverlay = mGoogleMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
 

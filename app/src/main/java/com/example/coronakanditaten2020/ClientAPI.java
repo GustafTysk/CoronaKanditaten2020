@@ -34,7 +34,7 @@ public interface ClientAPI {
     @POST("location/{email}/userup/security")
     Call<String> updateuserlocation(@Header("authorization") String Auth,@Path("email") String email, @Body ArrayList<Location> userlocation);
 
-    @POST("location/{email}/deluser/security")
+    @POST("location/{email}/userdel/security")
     Call<Boolean> removeUserlocations(@Header("authorization") String Auth,@Path("email") String email);
 
     //User resources
@@ -60,7 +60,7 @@ public interface ClientAPI {
     @POST("User/up/{email}/security")
     Call<Boolean> updateuser(@Header("authorization") String Auth,@Path("email") String email, @Body User user);
 
-    @DELETE("User/del/{email}/security")
+    @POST("User/del/{email}/security")
     Call<Boolean> Deleteuser(@Header("authorization") String Auth,@Path("email") String email);
 
     @POST("newUsername/{email}/{newUsername}/security")

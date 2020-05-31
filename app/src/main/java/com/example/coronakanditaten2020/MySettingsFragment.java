@@ -238,10 +238,13 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if(!response.isSuccessful()){
                     Toast.makeText(getContext(),getString(R.string.error_with_server),Toast.LENGTH_SHORT);
+                    System.out.println(response.toString());
                 }
 
                 else{
-                    Toast.makeText(getContext(),getString(R.string.alert_message_user),Toast.LENGTH_SHORT);
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                    System.out.println(response.toString());
 
                 }
             }
@@ -249,6 +252,7 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements View
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
                 Toast.makeText(getContext(),getString(R.string.fail_connect_to_server),Toast.LENGTH_SHORT);
+                System.out.println(t);
 
                 Intent intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);

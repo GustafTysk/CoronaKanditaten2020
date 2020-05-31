@@ -19,6 +19,7 @@ public class Location {
     int feverRatingBar;
     private String regTime;
 
+
     public Location(String latitude, String longitude, String date, int id, int diarrheaRatingBar, int runnyNoseRatingBar, int nasalCongestionRatingBar, int headacheRatingBar, int throatRatingBar, int breathingRatingBar, int tirednessRatingBar, int coughRatingBar, int feverRatingBar, String regTime) {
         this.latitude = latitude;
         this.longitude = longitude;
@@ -35,6 +36,7 @@ public class Location {
         this.feverRatingBar = feverRatingBar;
         this.regTime = regTime;
     }
+
     public Location(String latitude, String longitude, String date, int diarrheaRatingBar, int runnyNoseRatingBar, int nasalCongestionRatingBar, int headacheRatingBar, int throatRatingBar, int breathingRatingBar, int tirednessRatingBar, int coughRatingBar, int feverRatingBar, String regTime) {
         this.latitude = latitude;
         this.longitude = longitude;
@@ -50,6 +52,7 @@ public class Location {
         this.feverRatingBar = feverRatingBar;
         this.regTime = regTime;
     }
+
 
     public String getLatitude() {
         return latitude;
