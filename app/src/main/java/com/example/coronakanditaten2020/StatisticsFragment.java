@@ -801,8 +801,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         System.out.println();
         String[] parts = string.split("-");
         if((Integer.parseInt(parts[1])+1)<10){
-        return (Integer.parseInt(parts[2])+1)+"-"+"0"+(Integer.parseInt(parts[1]))+"-"+parts[0];}
-        return (Integer.parseInt(parts[2])+1)+"-"+(Integer.parseInt(parts[1])+1)+"-"+parts[0];
+        return (Integer.parseInt(parts[2]))+"-"+"0"+(Integer.parseInt(parts[1]))+"-"+parts[0];}
+        return (Integer.parseInt(parts[2]))+"-"+(Integer.parseInt(parts[1]))+"-"+parts[0];
     }
 
 }

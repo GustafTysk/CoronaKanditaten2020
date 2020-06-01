@@ -1,6 +1,7 @@
 package com.example.coronakanditaten2020;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -36,6 +37,7 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.maps.android.heatmaps.Gradient;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 import com.google.maps.android.heatmaps.WeightedLatLng;
 
@@ -314,7 +316,6 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
 
     private ArrayList<WeightedLatLng> GenerateHeatMapCordsList(ArrayList<Location> heatmaplocations, String date, String Type) {
         String compareString = convertStringPrintToDataFormat(date);
-        System.out.println(compareString);
         // OM DET INTE FINNS DATA FÖR DATUMET RETURN THIS MED EN SATT LOCATION
         ArrayList<WeightedLatLng> listReserve = new ArrayList<WeightedLatLng>();
 
@@ -323,12 +324,10 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
         //----------------------------------------------------------------------
         ArrayList<WeightedLatLng> list = new ArrayList<WeightedLatLng>();
         WeightedLatLng HeatCord;
-        System.out.println( heatmaplocations.size()+"kkkk");
+
         for (int i = 0; i < heatmaplocations.size()- 1; i++) {
-            System.out.println(compareString+ "   "+heatmaplocations.get(i).date+"    sdfsdfsdfsdfsdfds");
 
             if(heatmaplocations.get(i).date.equals(compareString)){
-                System.out.println("Inne i for if");
                 list.add(new WeightedLatLng(new LatLng(Double.valueOf(heatmaplocations.get(i).getLatitude()),Double.valueOf(heatmaplocations.get(i).getLongitude())),
                                             GetLocationWeight(heatmaplocations.get(i),compareString,heatmaplocations.size())));
 
@@ -361,6 +360,7 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
            weight += weightlocation.throatRatingBar * 2.0;
            weight += weightlocation.nasalCongestionRatingBar * 2.0;
            weight += weightlocation.tirednessRatingBar * 0.1;
+           weight /= 100;
 
 
            if (NummberOfCords > 1000000) {
@@ -390,11 +390,25 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
         heatLocations=heatlocations;
 
 
+        int[] colors = {
+                Color.GREEN,    // green(0-50)
+                Color.YELLOW,    // yellow(51-100)
+                Color.rgb(255,165,0), //Orange(101-150)
+                Color.RED,              //red(151-200)
+                Color.rgb(153,50,204), //dark orchid(201-300)
+                Color.rgb(165,42,42) //brown(301-500)
+        };
+        float[] startpoints = {
+                0.1F, 0.3F, 0.4F, 0.5F, 0.7F, 1.0F
+        };
+        Gradient gradient = new Gradient(colors,startpoints);
 
         dateDisplayheatmap = (TextView) view.findViewById(R.id.dateDisplayheatmap);
         Date today = new Date();
         dateDisplayheatmap.setText(convertDateToString(today));
         mProvider = new HeatmapTileProvider.Builder()
+                .radius(20)
+                .gradient(gradient)
                 .weightedData((GenerateHeatMapCordsList( heatLocations,convertDateToString(today), "placeholder")))
                 .build();
         mOverlay = mGoogleMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
