@@ -171,7 +171,6 @@ public class ReportSymptomsFragment extends Fragment implements View.OnClickList
                 ((MainActivity)getActivity()).reportLocationFragment.setReportLocationBottomNav();
                 totalSeverityCount = countAllRatings();
 
-                System.out.println(totalSeverityCount);
                 totalSeverityCount = 0;
                 break;
 /*

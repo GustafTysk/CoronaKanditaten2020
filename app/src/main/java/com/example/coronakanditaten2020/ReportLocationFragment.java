@@ -284,12 +284,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             case R.id.btnUpdateMyLocations:
 
                 userLocations = creatuserlocations(((MainActivity) getActivity()).reportSymptomsFragment.getratings());
-                for(Location lo: userLocations){
-                    System.out.println("long" + lo.longitude +" lat "+lo.latitude+
-                            " diarrie" +lo.diarrheaRatingBar + " runny"+lo.getRunnyNoseRatingBar()+ lo.getNasalCongestionRatingBar()+" nasal "
-                            + lo.getBreathingRatingBar() +" brething "+lo.getTirednessRatingBar()+ " tiered "+ lo.getThroatRatingBar()+ " throat "+ lo.getFeverRatingBar()+ "fever "
-                            + lo.getCoughRatingBar() + "coaugh"+ lo.getHeadacheRatingBar()+" head ");
-                }
+
 
                 if (userLocations.size() == 0) {
                     Toast.makeText(getContext(), "no locations to add", Toast.LENGTH_LONG).show();
@@ -309,7 +304,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                             if (!response.isSuccessful()) {
                                 Toast.makeText(getContext(), getString(R.string.fail_add_user_locations), Toast.LENGTH_LONG).show();
-                                System.out.println(response.toString());
                             } else {
                                 Toast.makeText(getContext(), getString(R.string.success_add_user_locations), Toast.LENGTH_LONG).show();
                                 ((MainActivity) getActivity()).datahandler.Userlocations = userLocations;
@@ -322,7 +316,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
                         @Override
                         public void onFailure(Call<Boolean> call, Throwable t) {
-                            System.out.println(t);
                             Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
 
                         }
@@ -335,8 +328,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                             if (!response.isSuccessful() || !response.body()) {
                                 Toast.makeText(getContext(), getString(R.string.fail_add_user_locations), Toast.LENGTH_LONG).show();
-                                System.out.println(response.toString());
-                                System.out.println("lllllllll");
 
                             } else {
 
@@ -346,15 +337,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
                                         if (!response.isSuccessful()) {
                                             Toast.makeText(getContext(), getString(R.string.fail_add_user_locations), Toast.LENGTH_LONG).show();
-                                            System.out.println(response.toString());
                                         } else {
                                             Toast.makeText(getContext(), getString(R.string.success_add_user_locations), Toast.LENGTH_LONG).show();
 
-                                            System.out.println("sdfdsfds");
-                                            System.out.println(AlllocationDecided.get(2));
-                                            System.out.println(AlllocationVisible.get(2));
-                                            System.out.println(textViewLocation2.getText());
-                                            System.out.println(textViewLocation2.getVisibility());
                                             ((MainActivity) getActivity()).datahandler.Userlocations = userLocations;
                                             ((MainActivity) getActivity()).setViewPager(1);
                                             ((MainActivity) getActivity()).datahandler.getalllserverocations("sdfsdfs");
@@ -364,7 +349,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
                                     @Override
                                     public void onFailure(Call<Boolean> call, Throwable t) {
-                                        System.out.println(t);
                                         Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
 
                                     }
@@ -377,7 +361,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
                         @Override
                         public void onFailure(Call<Boolean> call, Throwable t) {
-                            System.out.println(t);
                             Toast.makeText(getContext(), getString(R.string.fail_connect_to_server), Toast.LENGTH_LONG).show();
 
                         }
@@ -386,7 +369,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         }
 
             for(int i=0 ; i<setlocations.size() ;  i++ ){
-                System.out.println("setlcoatioN"+setlocations.get(i).getId()+"button"+ v.getId());
 
                 if(setlocations.get(i).getId()==v.getId()){
 
@@ -429,11 +411,9 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     void removelocation(){
         int decided=Collections.frequency(AlllocationDecided,true)-1;
 
-        System.out.println("gdgdsfdfdfszsjhdsf");
 
 
         if(decided==0 && Collections.frequency(AlllocationVisible,true)-1<=1){
-            System.out.println();
             textViewLocations.get(decided).setText("location "+(decided+1));
             AlllocationDecided.set(decided,false);
             locations.remove(currentLocationReport-1);
@@ -447,8 +427,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             return;}
 
         if(decided==0 && Collections.frequency(AlllocationVisible,true)-1<=0){
-            System.out.println();
-            System.out.println("gdgdsfgdsfgdsfgdsf");
             textViewLocations.get(decided).setText("location "+(decided+1));
             AlllocationDecided.set(decided,false);
             locations.remove(currentLocationReport-1);
@@ -463,7 +441,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
         }
         if(decided==-1 && Collections.frequency(AlllocationVisible,true)-1<=0){
-            System.out.println("gdgdsfdfdfszsjhdsf");
             textViewLocations.get(decided+1).setText("location "+(decided+2));
             AlllocationDecided.set(decided+1,false);
             locations.remove(currentLocationReport-1);
@@ -494,10 +471,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         locationDateStrings.add(null);
         AllLocationDates.remove(currentLocationReport-1);
         locationDateStrings.add("");
-        System.out.println("sfsdfsdfs<jfdghDFSH");
         for(int i=0; i<decided; i++){
-            System.out.println(textViewLocations.get(i).getText().toString());
-            System.out.println(YourlocationsStrings.get(i)+"kk");
             textViewLocations.get(i).setText(YourlocationsStrings.get(i));
         }
 
@@ -515,7 +489,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
     }
 
     public void startReportLocationMap(){
-        System.out.println("fdsfsdfdsf");
         if(((MainActivity) requireActivity()).getCurrentLocation() != null){
             yourLocation = ((MainActivity) requireActivity()).getCurrentLocation();
         }
@@ -566,7 +539,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 .title(getString(R.string.your_location))
                 .draggable(true));
         googleMap.setOnMapClickListener(this);
-        System.out.println(locations.get(currentLocationReport));
 
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yourLocation, 15));
         reportedLocation.setPosition(yourLocation);
@@ -686,9 +658,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
             if(AlllocationVisible.get(currentLocationReport)) {
                 hasEmptyLocation = true;
             }
-            System.out.println(numberOfLocationsSet()+"nummber of locations set");
-            System.out.println(currentLocationReport + "currentlcoation report");
-            System.out.println(!AlllocationDecided.get(currentLocationReport));
             if(numberOfLocationsSet() >=locationsvisible ) {
                 textViewLocations.get(locationsvisible).setVisibility(v.VISIBLE);
                 setlocations.get(locationsvisible).setVisibility(v.VISIBLE);
@@ -726,7 +695,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());;
         List<Address> addresses;
         try {
-            System.out.println();
             addresses = geocoder.getFromLocation(yourLocation.latitude, yourLocation.longitude, 1);
             yourLocationString = addresses.get(0).getAddressLine(0);
         } catch (IOException e) {
@@ -738,7 +706,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                 if (YourlocationsStrings.get(location-1) != "") {
                     textViewLocations.get(location-1).setText(YourlocationsStrings.get(location-1));
                 }
-                System.out.println((AlllocationDecided.get(location-1)));
 
 
                     locations.set(location-1,reportedLocation.getPosition());
@@ -767,22 +734,17 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         String lotstring;
         String tempday;
         int counter=0;
-        System.out.println(locations.size());
         for (LatLng thelocation:locations){
             if(thelocation!=null){
             if(AllLocationDates.get(counter)!=null && thelocation!=null){
-                System.out.println("fdsfsdf");
 
                 for(Calendar day:AllLocationDates.get(counter)){
 
 
                     lat=thelocation.latitude;
-                    System.out.println(thelocation.latitude+"latidude");
                     latstring=lat.toString();
                     lot=thelocation.longitude;
                     lotstring=lot.toString();
-                    System.out.println((day.get(Calendar.MONTH)+1)+"kolkllklklkl");
-                    System.out.println((day.get(Calendar.DAY_OF_MONTH))+" thithtiht");
                     tempday=(day.get(Calendar.DAY_OF_MONTH))+"-"+(day.get(Calendar.MONTH)+1)+"-"+day.get(Calendar.YEAR);
 
                     returnlocations.add(new Location(latstring,lotstring,tempday,
@@ -799,8 +761,7 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
 
 
     void SetUppPage(){
-        System.out.println("yjyjyyjyjy");
-        System.out.println(userLocations.size());
+
         ArrayList<Location> uniclocations=getunicLocation(userLocations);
         int Counter1=0;
         int Counter2=0;
@@ -812,8 +773,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
         List<Address> addresses;
 
         for(Location Alocation:uniclocations){
-            System.out.println(Alocation.latitude+"setupppage lat");
-            System.out.println(Alocation.longitude+"setupppage long");
 
             templatlong=new LatLng(Double.valueOf(Alocation.latitude), Double.valueOf(Alocation.longitude));;
             locations.set(Counter1,templatlong);
@@ -832,7 +791,6 @@ public class ReportLocationFragment extends Fragment  implements OnMapReadyCallb
                     theday=datlocation.getDate().split("-");
 
                     tempCalender.set((int)Integer.parseInt(theday[2]),(int)Integer.parseInt(theday[1]),(int)Integer.parseInt(theday[0]));
-                    System.out.println(((int)Integer.parseInt(theday[1]))+"totototto");
 
                     AllLocationDates.get(Counter1).add(Calendar.getInstance(TimeZone.getDefault()));
                     AllLocationDates.get(Counter1).get(Counter2).set((int)Integer.parseInt(theday[2]),(int)Integer.parseInt(theday[1])-1,(int)Integer.parseInt(theday[0]));

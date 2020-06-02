@@ -86,8 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //datahandler.credentials=new Credentials("5fgg","frff");
         //Put this on to work with database
        datahandler.credentials=new Credentials(intent.getStringExtra("ema"),intent.getStringExtra("pass"));
-       System.out.println(datahandler.credentials.Email);
-       System.out.println(datahandler.credentials.Password);
+
         //
         datahandler.getserveruserinfo("5765765");
         datahandler.getTopPost(1);
@@ -229,118 +228,76 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onCheckboxClicked(View view) {
         checked = ((CheckBox) view).isChecked();
         spinner = (Spinner) findViewById(R.id.spinner1);
-        text = spinner.getSelectedItem().toString();
+
         switch (view.getId()) {
             case R.id.diarrheaBox:
-                if(text.equals(getString(R.string.per_day_symptoms))){
+
                     if (checked) {
-                        statisticsFragment.showDiarrheaSeries();
                         statisticsFragment.hideAllSickSeries();
+                        statisticsFragment.showDiarrheaSeries();
                     } else {
                         statisticsFragment.hideDiarrheaSeries();
                     }
-                }
-                else{
-                    if (checked) {
-                        statisticsFragment.showDiarrheaSeries2();
-                        statisticsFragment.hideAllSickSeries2();
-                    } else {
-                        statisticsFragment.hideDiarrheaSeries2();
-                    }
-                }
+
                 break;
             case R.id.runnyNoseBox:
-                if(text.equals(getString(R.string.per_day_symptoms))){
+
                     if (checked) {
                         statisticsFragment.hideAllSickSeries();
                         statisticsFragment.showRunnyNoseSeries();
                     } else {
                         statisticsFragment.hideRunnyNoseSeries();
                     }
-                }
-                else{
-                    if (checked) {
-                        statisticsFragment.hideAllSickSeries2();
-                        statisticsFragment.showRunnyNoseSeries2();
-                    } else {
-                        statisticsFragment.hideRunnyNoseSeries2();
-                    }
-                }
+
+
+
                 break;
             case R.id.tirednessBox:
-                if(text.equals(getString(R.string.per_day_symptoms))){
+
                     if (checked) {
                         statisticsFragment.hideAllSickSeries();
                         statisticsFragment.showTirednessSeries();
                     } else {
                         statisticsFragment.hideTirednessSeries();
                     }
-                }
-                else{
-                    if (checked) {
-                        statisticsFragment.hideAllSickSeries2();
-                        statisticsFragment.showTirednessSeries2();
-                    } else {
-                        statisticsFragment.hideTirednessSeries2();
-                    }
-                }
+
+
                 break;
             case R.id.feverBox:
-                if(text.equals(getString(R.string.per_day_symptoms))){
+
                     if (checked) {
                         statisticsFragment.hideAllSickSeries();
                         statisticsFragment.showFeverSeries();
                     } else {
                         statisticsFragment.hideFeverSeries();
-                    }
-                }
-                else{
-                    if (checked) {
-                        statisticsFragment.hideAllSickSeries2();
-                        statisticsFragment.showFeverSeries2();
-                    } else {
-                        statisticsFragment.hideFeverSeries2();
-                    }
-                }
+                     }
+
+
+
                 break;
+
             case R.id.throatBox:
-                if(text.equals(getString(R.string.per_day_symptoms))){
+
                     if (checked) {
                         statisticsFragment.hideAllSickSeries();
                         statisticsFragment.showThroatSeries();
                     } else {
                         statisticsFragment.hideThroatSeries();
                     }
-                }
-                else{
-                    if (checked) {
-                        statisticsFragment.hideAllSickSeries2();
-                        statisticsFragment.showThroatSeries2();
-                    } else {
-                        statisticsFragment.hideThroatSeries2();
-                    }
-                }
+
                 break;
             case R.id.nasalConBox:
-                if(text.equals(getString(R.string.per_day_symptoms))){
+
                     if (checked) {
                         statisticsFragment.hideAllSickSeries();
                         statisticsFragment.showNasalConSeries();
                     } else {
                         statisticsFragment.hideNasalConSeries();
                     }
-                }
-                else{
-                    if (checked) {
-                        statisticsFragment.hideAllSickSeries2();
-                        statisticsFragment.showNasalConSeries2();
-                    } else {
-                        statisticsFragment.hideNasalConSeries2();
-                    }
-                }
+
+
                 break;
             case R.id.coughBox:
-                if(text.equals(getString(R.string.per_day_symptoms))){
 
                     if (checked) {
                         statisticsFragment.hideAllSickSeries();
@@ -348,56 +305,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } else {
                         statisticsFragment.hideCoughSeries();
                     }
-                }
-                else{
-                    if (checked) {
-                        statisticsFragment.hideAllSickSeries2();
-                        statisticsFragment.showCoughSeries2();
-                    } else {
-                        statisticsFragment.hideCoughSeries2();
-                    }
-                }
+
+
                 break;
             case R.id.headacheBox:
-                if(text.equals(getString(R.string.per_day_symptoms))){
+
                     if (checked) {
                         statisticsFragment.hideAllSickSeries();
                         statisticsFragment.showHeadacheSeries();
                     } else {
                         statisticsFragment.hideHeadacheSeries();
                     }
-                }
-                else{
-                    if (checked) {
-                        statisticsFragment.hideAllSickSeries2();
-                        statisticsFragment.showHeadacheSeries2();
-                    } else {
-                        statisticsFragment.hideHeadacheSeries2();
-                    }
-                }
+
                 break;
             case R.id.breathingDiffBox:
-                if(text.equals(getString(R.string.per_day_symptoms))){
+
                     if (checked) {
                         statisticsFragment.hideAllSickSeries();
                         statisticsFragment.showBreathingDiffSeries();
                     } else {
                         statisticsFragment.hideBreathingDiffSeries();
                     }
-                }
-                else{
-                    if (checked) {
-                        statisticsFragment.hideAllSickSeries2();
-                        statisticsFragment.showBreathingDiffSeries2();
-                    } else {
-                        statisticsFragment.hideBreathingDiffSeries2();
-                    }
-                }
+
+
                 break;
             case R.id.allSickBox:
-                if(text.equals(getString(R.string.per_day_symptoms))) {
+
                     if (checked) {
-                        statisticsFragment.graph.removeAllSeries();
+
                         statisticsFragment.showAllSickSeries();
                         statisticsFragment.diarrheaBox.setChecked(false);
                         statisticsFragment.nasalConBox.setChecked(false);
@@ -409,7 +344,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         statisticsFragment.breathingDiffBox.setChecked(false);
                         statisticsFragment.headacheBox.setChecked(false);
                     } else {
-                        statisticsFragment.addAllSeries1();
+
                         statisticsFragment.diarrheaBox.setChecked(true);
                         statisticsFragment.nasalConBox.setChecked(true);
                         statisticsFragment.runnyNoseBox.setChecked(true);
@@ -422,35 +357,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         statisticsFragment.hideAllSickSeries();
                     }
                 }
-                else {
-                    if (checked) {
-                        statisticsFragment.clearGraph();
-                        statisticsFragment.showAllSickSeries2();
-                        statisticsFragment.diarrheaBox.setChecked(false);
-                        statisticsFragment.nasalConBox.setChecked(false);
-                        statisticsFragment.runnyNoseBox.setChecked(false);
-                        statisticsFragment.feverBox.setChecked(false);
-                        statisticsFragment.coughBox.setChecked(false);
-                        statisticsFragment.tirednessBox.setChecked(false);
-                        statisticsFragment.throatBox.setChecked(false);
-                        statisticsFragment.breathingDiffBox.setChecked(false);
-                        statisticsFragment.headacheBox.setChecked(false);
-                    } else {
-                        statisticsFragment.addAllSeries2();
-                        statisticsFragment.diarrheaBox.setChecked(true);
-                        statisticsFragment.nasalConBox.setChecked(true);
-                        statisticsFragment.runnyNoseBox.setChecked(true);
-                        statisticsFragment.feverBox.setChecked(true);
-                        statisticsFragment.coughBox.setChecked(true);
-                        statisticsFragment.tirednessBox.setChecked(true);
-                        statisticsFragment.throatBox.setChecked(true);
-                        statisticsFragment.breathingDiffBox.setChecked(true);
-                        statisticsFragment.headacheBox.setChecked(true);
-                        statisticsFragment.hideAllSickSeries2();
 
-                    }
-                }
-        }
     }
     @Override
     public void onClick(View v) {
@@ -495,14 +402,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
-        System.out.println("BRAPPPPAPAPAPA");
+
         reportLocationFragment.onActivityResult(requestCode,resultCode,data);
     }
 
     @Override
     public void onLocationChanged(android.location.Location location) {
         currentLocation = new LatLng(location.getLatitude(),location.getLongitude());
-        System.out.println(currentLocation);
+
     }
 
     @Override

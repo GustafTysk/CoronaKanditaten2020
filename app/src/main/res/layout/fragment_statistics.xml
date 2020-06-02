@@ -52,7 +52,6 @@
                 style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="4dp"
@@ -62,17 +61,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/graph1"
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/linechart"
             android:layout_width="match_parent"
             android:layout_height="350dip"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:labelFor="@id/relativeLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"></com.github.mikephil.charting.charts.LineChart>
 
         <View
             android:id="@+id/view"
@@ -80,19 +76,8 @@
             android:layout_height="2dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/button_selector"
-            app:layout_constraintTop_toBottomOf="@+id/graph1"
+            app:layout_constraintTop_toBottomOf="@+id/linechart"
             tools:layout_editor_absoluteX="-4dp" />
-
-        <ImageButton
-            android:id="@+id/setCalendarLocation1"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/edittext_outline"
-            android:src="@drawable/black_calendar"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout12"
-            app:layout_constraintStart_toEndOf="@+id/constraintLayout12"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout12" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/relativeLayout"
@@ -105,7 +90,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/setCalendarLocation1">
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout12">
 
             <CheckBox
                 android:id="@+id/diarrheaBox"
@@ -252,15 +237,15 @@
             android:id="@+id/allSickBox"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:buttonTint="@color/graph_purple"
             android:background="@drawable/edittext_outline"
+            android:buttonTint="@color/colorText"
             android:onClick="onCheckboxClicked"
             android:paddingRight="5dp"
             android:text="@string/symptom_sick"
-            app:layout_constraintBottom_toBottomOf="@+id/setCalendarLocation1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/setCalendarLocation1" />
+            app:layout_constraintTop_toBottomOf="@+id/linechart" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView

@@ -71,7 +71,6 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         view = inflater.inflate(R.layout.fragment_forum, container, false);
 
         topPost =((MainActivity)getActivity()).datahandler.viewPosts;
-        System.out.println("post" + topPost);
 
         btnMostLiked = (Button) view.findViewById(R.id.btnMostLiked);
         btnMostLiked.setOnClickListener(this);
@@ -135,7 +134,6 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         long postId = id;
         int postIdInt = (int) postId;
         thePostId = postList.get(postIdInt).getId();
-        System.out.println(thePostId);
         if(adapter.selectedItem == position) {
             adapter.selectedItem = -1;
         }
@@ -178,7 +176,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 Date date = new Date();
                 String timestamp=date.toString();
                 String message = messageInput.getText().toString();
-                System.out.println(thePostParentId);
+
                 if(adapter.selectedItem != -1) {
                     Post newWrittenPost = new Post(username,email ,title, timestamp, message, 0, "comment",0 , thePostId);
                     sendanswertoserver(newWrittenPost);
@@ -186,7 +184,6 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
                 else{
                     Post newWrittenPost = new Post(username, email,title, timestamp, message, 0, "top", 0, 0);
-                    System.out.println(newWrittenPost.printInformation());
 
                     sendposttoserver(newWrittenPost);
 
@@ -229,7 +226,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             @Override
             public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
                 if(!response.isSuccessful()) {
-                    System.out.println(response);
+
                     Toast.makeText(getContext(), getString(R.string.fail_to_get_post), Toast.LENGTH_LONG).show();
                 }
                 else {
@@ -239,10 +236,10 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                     for (Post post: copyList){
                         postList.add(post);
                     }
-                    System.out.println(postList.size());
+
 
                     adapter.notifyDataSetChanged();
-                    System.out.println("got mosts liked post");
+
                 }
             }
 
@@ -260,7 +257,6 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             @Override
             public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
                 if(!response.isSuccessful()) {
-                    System.out.println(response);
                     Toast.makeText(getContext(), getString(R.string.fail_to_get_post), Toast.LENGTH_LONG).show();
                 }
                 else {
@@ -275,7 +271,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                         postList.add(post);
                     }
                     adapter.notifyDataSetChanged();
-                    System.out.println("got comment posts");
+
                 }
             }
 
@@ -295,7 +291,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
             @Override
             public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
                 if(!response.isSuccessful()) {
-                    System.out.println(response);
+
                     Toast.makeText(getContext(), getString(R.string.fail_to_get_post), Toast.LENGTH_LONG).show();
                 }
                 else {
@@ -381,14 +377,12 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
 
     public void  Search(String search){
-        System.out.println(search);
         Call<ArrayList<Post>> GetPostBySearch=((MainActivity)getActivity()).datahandler.clientAPI.GetPostBySearch(search);
         GetPostBySearch.enqueue(new Callback<ArrayList<Post>>() {
             @Override
             public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
                 if(!response.isSuccessful()){
                     Toast.makeText(getContext(), "failed to seearch", Toast.LENGTH_LONG).show();
-                    System.out.println(response);
                 }
 
                 else{
@@ -424,7 +418,6 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         @Override
         public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
             if(!response.isSuccessful()){
-                System.out.println("there has been an error");
             }
             else{
                 ((MainActivity)getActivity()).datahandler.viewPosts=response.body();
@@ -441,7 +434,6 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
 
         @Override
         public void onFailure(Call<ArrayList<Post>> call, Throwable t) {
-            System.out.println("failed to connect to server");
         }
     });
 
