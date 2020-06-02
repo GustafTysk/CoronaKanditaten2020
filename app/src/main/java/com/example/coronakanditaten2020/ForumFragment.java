@@ -134,12 +134,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
         long postId = id;
         int postIdInt = (int) postId;
         thePostId = postList.get(postIdInt).getId();
-        if(adapter.selectedItem == position) {
-            adapter.selectedItem = -1;
-        }
-        else{
-            adapter.selectedItem = position;
-        }
+
         Post thePost;
         for (Post post : postList) {
             if(post.getId()==thePostId){
@@ -147,6 +142,12 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                 getserverComments(thePost);
 
             }
+        }
+        if(adapter.selectedItem == position) {
+            adapter.selectedItem = -1;
+        }
+        else{
+            adapter.selectedItem = 0;
         }
 
         adapter.notifyDataSetChanged();
@@ -236,6 +237,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                     for (Post post: copyList){
                         postList.add(post);
                     }
+                    Collections.reverse(postList);
 
 
                     adapter.notifyDataSetChanged();
@@ -302,6 +304,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                     for (Post post: copyList){
                         postList.add(post);
                     }
+                    Collections.reverse(postList);
 
                     adapter.notifyDataSetChanged();
                 }
@@ -328,12 +331,13 @@ public class ForumFragment extends Fragment implements View.OnClickListener, Ada
                     Toast.makeText(getContext(), getString(R.string.fail_to_get_post), Toast.LENGTH_LONG).show();
                 }
                 else{
+                    ((MainActivity)getActivity()).datahandler.viewPosts.add(response.body());
                     postList.clear();
                     copyList= ((MainActivity)getActivity()).datahandler.viewPosts;
-                    for (Post post: copyList){
-                        postList.add(post);
+                    for (Post postloop: copyList) {
+                        postList.add(postloop);
                     }
-                    ((MainActivity)getActivity()).datahandler.viewPosts.add(response.body());
+                    //((MainActivity)getActivity()).datahandler.viewPosts.add(response.body());
                     adapter.datahandler.viewPosts.add(response.body());
                     adapter.notifyDataSetChanged();
                 }
