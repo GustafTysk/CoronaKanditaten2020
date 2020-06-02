@@ -133,20 +133,16 @@ public class Datahandler {
             @Override
             public void onResponse(Call<ArrayList<Location>> call, Response<ArrayList<Location>> response) {
                 if (!response.isSuccessful()) {
-                    System.out.println("tjtojttjo");
-                    System.out.println(response.toString());
 
                 }
                 else{
                 heatlocations = response.body();
-                gotlocation=true;
-                System.out.println("heatlocation size" +heatlocations.size());}
+                gotlocation=true; }
             }
 
             @Override
             public void onFailure(Call<ArrayList<Location>> call, Throwable t) {
 
-                System.out.println("errror");
             }
         });
     }
@@ -157,10 +153,8 @@ public class Datahandler {
             @Override
             public void onResponse(Call<ArrayList<Location>> call, Response<ArrayList<Location>> response) {
                 if (!response.isSuccessful()) {
-                    System.out.println(response.code());
                 }
                 Userlocations = response.body();
-                System.out.println("userlocations have been added"+ Userlocations.size());
                 gotUserlocation=true;
 
 
@@ -169,7 +163,6 @@ public class Datahandler {
             @Override
             public void onFailure(Call<ArrayList<Location>> call, Throwable t) {
 
-                System.out.println(t);
             }
         });
     }
@@ -180,14 +173,12 @@ public class Datahandler {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(!response.isSuccessful()){
-                    System.out.println("there has ");
-                    System.out.println(response.toString());
+
                 }
                 else{
-                    System.out.println(response.toString());
+
                     user=response.body();
-                    System.out.println(user.getEmail());
-                    System.out.println("user has succefully collected");
+
 
 
                 }
@@ -195,7 +186,6 @@ public class Datahandler {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                System.out.println("failed to connect to server");
 
             }
         });
@@ -207,14 +197,9 @@ public void getserveruserinfo(String timestamp){
             @Override
             public void onResponse(Call<ArrayList<ArrayList<String>>> call, Response<ArrayList<ArrayList<String>>> response) {
                 if(!response.isSuccessful()){
-                    System.out.println("there has been an error 11");
-                    System.out.println(response.toString());
                 }
                 else{
-                    System.out.println(response.toString());
                     userinfo= response.body();
-                    System.out.println("userinfo"+userinfo.size());
-                    System.out.println("userinfos has succefully collected");
                     gotuserinfo=true;
 
                 }
@@ -222,7 +207,6 @@ public void getserveruserinfo(String timestamp){
 
             @Override
             public void onFailure(Call<ArrayList<ArrayList<String>>> call, Throwable t) {
-                System.out.println("failed to connect to server");
 
             }
         });
@@ -234,17 +218,13 @@ public void getserveruserinfo(String timestamp){
             @Override
             public void onResponse(Call<ArrayList<Post>> call, Response<ArrayList<Post>> response) {
                 if(!response.isSuccessful()){
-                    System.out.println("there has been an error");
-                    System.out.println(response.toString());
                 }
                 else{
-                    System.out.println(response.toString());
                     viewPosts=response.body();
                     //Collections.reverse(viewPosts);
 
 
 
-                    System.out.println("userinfos has succefully collected "+"lenght"+viewPosts.size());
 
                 }
 
@@ -252,7 +232,6 @@ public void getserveruserinfo(String timestamp){
 
             @Override
             public void onFailure(Call<ArrayList<Post>> call, Throwable t) {
-                System.out.println("failed to connect to server");
             }
         });
     }
@@ -265,14 +244,13 @@ public void getserveruserinfo(String timestamp){
             public void onResponse(Call<ArrayList<Integer>> call, Response<ArrayList<Integer>> response) {
 
                 if(!response.isSuccessful()){
-                    System.out.println(response.toString());
-                    System.out.println("there has been an error");
+
                 }
                 else{
-                    System.out.println(response.toString());
+
                     likeid=response.body();
 
-                    System.out.println("created likeposts");
+
 
                 }
 
@@ -280,7 +258,7 @@ public void getserveruserinfo(String timestamp){
 
             @Override
             public void onFailure(Call<ArrayList<Integer>> call, Throwable t) {
-                System.out.println("failed to connect to server");
+
             }
         });
     }

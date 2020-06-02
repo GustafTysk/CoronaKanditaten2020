@@ -69,11 +69,10 @@ public class StartPageFragment extends Fragment implements View.OnClickListener 
                     ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.nav_heatmap);}
                 break;
             case R.id.btnStartToStatistics:
-                System.out.println("yays2222y");
+
                 if(((MainActivity)getActivity()).datahandler.gotuserinfo &&((MainActivity)getActivity()).datahandler.gotlocation){
-                    System.out.println("yay2233331313sy");
+
                     if (!setupstat){
-                        System.out.println("yaysy");
                     ((MainActivity)getActivity()).statisticsFragment.setupstatistik();
                     setupstat=true;
                     }

@@ -116,14 +116,14 @@ public class PostListAdapter extends ArrayAdapter<Post> {
                 @Override
                 public void onClick(View v) {
                     likes = getItem(position).getLikes();
-                    System.out.println(datahandler.likeid);
-                    System.out.println(getItem(position).getId());
+
+
                     if(datahandler.likeid.contains(getItem(position).getId())){
-                        System.out.println("Du har unliked");
+
                         unlikepost(getItem(position), position,getItem(position).getId());
                     }
                     else{
-                        System.out.println("Du har liked");
+
                         likepost(getItem(position), position, getItem(position).getId());
                     }
 
@@ -184,7 +184,7 @@ public class PostListAdapter extends ArrayAdapter<Post> {
         Call<Boolean> unlikepost=datahandler.clientAPI.unlikePost(
                 datahandler.credentials.encrypt,
                 datahandler.credentials.Email, (Integer) id);
-        System.out.println(id);
+
         unlikepost.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -214,7 +214,6 @@ public class PostListAdapter extends ArrayAdapter<Post> {
     }
 
     public void deletepost(Post post, int position){
-        System.out.println("vad är post " + post + " vad är position " + position);
         Call<Boolean> removepost=datahandler.clientAPI.DeletePost(
                 datahandler.credentials.encrypt,
                 datahandler.credentials.Email,post);
@@ -223,12 +222,10 @@ public class PostListAdapter extends ArrayAdapter<Post> {
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if(!response.isSuccessful()){
                     Toast.makeText(getContext(), "failed to remove user post", Toast.LENGTH_LONG).show();
-                    System.out.println(response);
                 }
                 else {
 
                     thePosts.remove(getItem(position));
-                    System.out.println(datahandler.viewPosts.get(position).email);
                     datahandler.viewPosts.remove(position);
                     notifyDataSetChanged();
 
