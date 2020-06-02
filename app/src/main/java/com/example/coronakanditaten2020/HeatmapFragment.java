@@ -276,7 +276,7 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
         mGoogleMap = googleMap;
 
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sweden,4));
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sweden,5));
     }
 
     @Override
@@ -399,7 +399,7 @@ public class HeatmapFragment extends Fragment implements OnMapReadyCallback, Vie
                 Color.rgb(165,42,42) //brown(301-500)
         };
         float[] startpoints = {
-                0.1F, 0.3F, 0.4F, 0.5F, 0.7F, 1.0F
+                0.1F, 0.5F, 0.7F, 0.8F, 0.9F, 1.0F
         };
         Gradient gradient = new Gradient(colors,startpoints);
 
